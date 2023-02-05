@@ -35,11 +35,11 @@ const EmbedGalleryImage = styled('img')({
     objectFit: 'cover'
 });
 
-export interface Props {
+export interface EmbedGalleryProps {
     embed: Embed;
 }
 
-export const EmbedGallery = ({ embed }: Props) => {
+export const EmbedGallery = ({ embed }: EmbedGalleryProps) => {
     const images = embed.image?.images ?? [];
 
     return (

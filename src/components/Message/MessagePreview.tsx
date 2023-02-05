@@ -59,11 +59,11 @@ const ExtrasContainer = styled('div')({
     }
 });
 
-export interface Props {
+export interface MessagePreviewProps {
     message: Message;
 }
 
-export const MessagePreview = ({ message }: Props) => (
+export const MessagePreview = ({ message }: MessagePreviewProps) => (
     <Container>
         <MessageHeader
             username={message.author.name}

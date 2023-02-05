@@ -36,11 +36,11 @@ const AuthorNameLink = styled(AuthorNameNormal.withComponent('a'))({
     }
 });
 
-export interface Props {
+export interface EmbedAuthorProps {
     embed: Embed;
 }
 
-export const EmbedAuthor = ({ embed: { author } }: Props) => (
+export const EmbedAuthor = ({ embed: { author } }: EmbedAuthorProps) => (
     <Container>
         {author.iconUrl && <AuthorImage src={author.iconUrl} alt="Author image" />}
         {author.name && (author.url ? <Fragment>

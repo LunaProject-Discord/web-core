@@ -42,11 +42,11 @@ const FooterSeparator = styled('span')({
     display: 'inline-block'
 });
 
-export interface Props {
+export interface EmbedFooterProps {
     embed: Embed;
 }
 
-export const EmbedFooter = ({ embed: { image, footer, timestamp } }: Props) => (
+export const EmbedFooter = ({ embed: { image, footer, timestamp } }: EmbedFooterProps) => (
     <Container thumbnail={Boolean(image?.thumbnail)}>
         {footer.iconUrl && (<FooterImage src={footer.iconUrl} alt="Footer image" />)}
         <FooterText>

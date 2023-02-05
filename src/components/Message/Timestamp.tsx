@@ -1,8 +1,8 @@
 import React from 'react';
 import { formatTimestamp } from '../../utils';
 
-export interface Props {
+export interface EmbedTimestampProps {
     timestamp: Date;
 }
 
-export const EmbedTimestamp = ({ timestamp }: Props) => (<span>{formatTimestamp(timestamp)}</span>);
+export const EmbedTimestamp = ({ timestamp }: EmbedTimestampProps) => (<span>{formatTimestamp(timestamp)}</span>);

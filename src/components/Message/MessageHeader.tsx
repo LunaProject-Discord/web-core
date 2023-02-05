@@ -85,14 +85,14 @@ const BotTag = styled('span')(({ theme }) => ({
     borderRadius: 3
 }));
 
-export interface Props {
+export interface MessageHeaderProps {
     username?: string;
     avatarUrl?: string;
     timestamp?: Date;
     badge?: string | null;
 }
 
-export const MessageHeader = ({ username, avatarUrl, timestamp, badge }: Props) => {
+export const MessageHeader = ({ username, avatarUrl, timestamp, badge }: MessageHeaderProps) => {
     const theme = useTheme();
 
     let info = [

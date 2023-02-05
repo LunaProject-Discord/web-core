@@ -12,3 +12,16 @@ export const Preview = ({ message }: Props) => (
         <MessagePreview message={message} />
     </MessageContainer>
 );
+
+export * from './Attachment';
+export * from './Author';
+export * from './Clock';
+export * from './Field';
+export * from './Footer';
+export * from './Gallery';
+export * from './MessageContainer';
+export * from './MessageHeader';
+export * from './MessagePreview';
+export * from './RichEmbed';
+export * from './RichEmbedContainer';
+export * from './Timestamp';

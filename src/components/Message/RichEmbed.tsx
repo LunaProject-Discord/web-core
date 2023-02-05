@@ -89,11 +89,11 @@ const EmbedThumbnail = styled('img')({
     borderRadius: 4
 });
 
-export interface Props {
+export interface RichEmbedProps {
     embed: Embed;
 }
 
-export const RichEmbed = ({ embed }: Props) => {
+export const RichEmbed = ({ embed }: RichEmbedProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
 

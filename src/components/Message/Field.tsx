@@ -29,12 +29,12 @@ const FieldValue = styled('div')(({ theme }) => ({
     }
 }));
 
-export interface Props {
+export interface EmbedFieldProps {
     embed: Embed;
     field: Field;
 }
 
-export const EmbedField = ({ embed, field }: Props) => (
+export const EmbedField = ({ embed, field }: EmbedFieldProps) => (
     <Container style={{ gridColumn: getFieldGridColumn(field, embed) }}>
         <FieldName>
             <Markdown content={field.name} type="embed-header" />
