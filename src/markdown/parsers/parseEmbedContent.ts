@@ -1,0 +1,46 @@
+import {
+    autolink,
+    blockQuote,
+    codeBlock,
+    customEmoji,
+    emoji,
+    emote,
+    emphasis,
+    escape,
+    inlineCode,
+    lineBreak,
+    link,
+    mention,
+    newline,
+    paragraph,
+    spoiler,
+    strikethrough,
+    strong,
+    text,
+    underline,
+    url
+} from '../rules';
+import { createParser } from './createParser';
+
+export const parseEmbedContent = createParser({
+    autolink,
+    blockQuote,
+    codeBlock,
+    customEmoji,
+    emoji,
+    emote,
+    emphasis,
+    escape,
+    inlineCode,
+    lineBreak,
+    link,
+    mention,
+    newline,
+    paragraph,
+    spoiler,
+    strikethrough,
+    strong,
+    text,
+    underline,
+    url
+});
