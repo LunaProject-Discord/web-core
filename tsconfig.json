@@ -22,6 +22,11 @@
         "noImplicitThis": true,
         "strictNullChecks": true,
         "downlevelIteration": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
         "types": [
             "node"
         ],
@@ -39,6 +44,7 @@
         }
     },
     "include": [
+        "next-env.d.ts",
         "src/**/*"
     ],
     "exclude": [
