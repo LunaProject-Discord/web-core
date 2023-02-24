@@ -4,9 +4,14 @@ export const PATTERN_DATE = 'yyyy/MM/dd';
 export const PATTERN_TIME = 'HH:ss';
 export const PATTERN_DATETIME = `${PATTERN_DATE} ${PATTERN_TIME}`;
 
-export const format = (date: Date | number | string, pattern = PATTERN_DATETIME) => formatDateFns(
+export const format = (
+    date: Date | number | string,
+    pattern = PATTERN_DATETIME,
+    options?: Parameters<typeof formatDateFns>[2]
+) => formatDateFns(
     typeof date === 'string' ? new Date(date) : date,
-    pattern
+    pattern,
+    options
 );
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
