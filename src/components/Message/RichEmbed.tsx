@@ -134,7 +134,7 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
                 </EmbedDescription>}
                 {fields.length > 0 && <EmbedFields>
                     {fields.map((field, i) => (
-                        <EmbedField key={i} field={field} embed={embed} />
+                        <EmbedField key={field._id ?? i} field={field} embed={embed} />
                     ))}
                 </EmbedFields>}
                 {images.length > 1 ? (
