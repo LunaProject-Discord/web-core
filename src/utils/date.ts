@@ -1,7 +1,7 @@
 import { format as formatDateFns, getDate, getMonth, getYear, isValid } from 'date-fns';
 
 export const PATTERN_DATE = 'yyyy/MM/dd';
-export const PATTERN_TIME = 'HH:ss';
+export const PATTERN_TIME = 'HH:mm';
 export const PATTERN_DATETIME = `${PATTERN_DATE} ${PATTERN_TIME}`;
 
 export const format = (
