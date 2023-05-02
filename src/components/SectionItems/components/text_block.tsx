@@ -26,6 +26,7 @@ export const ItemTextBlockTypography = styled(
     ),
     { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'variant' && prop !== 'disabled' }
 )<ItemTextBlockTypographyProps>(({ theme, variant, disabled }) => ({
+    ...theme.typography[variant === 'primary' ? 'body1' : 'body2'],
     width: '100%',
     textAlign: 'start',
     textOverflow: 'ellipsis',
