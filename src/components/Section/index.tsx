@@ -18,12 +18,8 @@ export const SectionContent = styled(Box)(({ theme }) => ({
 
 export const SectionTitle = styled(
     (props: TypographyProps) => <Typography variant="h5" {...props} />
-)<TypographyProps>({
-    userSelect: 'none'
-});
+)<TypographyProps>();
 
 export const SectionParagraph = styled(
     (props: TypographyProps) => <Typography variant="body1" {...props} />
-)<TypographyProps>({
-    userSelect: 'none'
-});
+)<TypographyProps>();

@@ -2,17 +2,9 @@
 
 import { Radio } from '@mui/material';
 import React from 'react';
-import {
-    ButtonItemRoot,
-    ItemDisabledProps,
-    ItemIcon,
-    ItemIconProps,
-    ItemRowContainer,
-    ItemTextBlock,
-    ItemTextBlockProps
-} from './index';
+import { ButtonItemRoot, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
 
-export interface RadioItemProps<T> extends ItemTextBlockProps, ItemIconProps, ItemDisabledProps {
+export interface RadioItemProps<T> extends ItemProps {
     name: string;
     value: T;
     selected: T;
@@ -22,16 +14,20 @@ export interface RadioItemProps<T> extends ItemTextBlockProps, ItemIconProps, It
 export const RadioItem = <T, >(
     {
         icon,
+        iconSx,
         primary,
         secondary,
+        primaryTypographyProps,
+        secondaryTypographyProps,
         name,
         value,
         selected,
         setSelected,
-        disabled
+        disabled,
+        sx
     }: RadioItemProps<T>
 ) => (
-    <ButtonItemRoot onClick={() => setSelected(value)} disabled={disabled}>
+    <ButtonItemRoot onClick={() => setSelected(value)} disabled={disabled} sx={sx}>
         <ItemRowContainer>
             <Radio
                 name={name}
@@ -52,8 +48,14 @@ export const RadioItem = <T, >(
                     }
                 }}
             />
-            <ItemIcon icon={icon} />
-            <ItemTextBlock primary={primary} secondary={secondary} disabled={disabled} />
+            <ItemIcon icon={icon} iconSx={iconSx} />
+            <ItemTextBlock
+                primary={primary}
+                secondary={secondary}
+                primaryTypographyProps={primaryTypographyProps}
+                secondaryTypographyProps={secondaryTypographyProps}
+                disabled={disabled}
+            />
         </ItemRowContainer>
     </ButtonItemRoot>
 );

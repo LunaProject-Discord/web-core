@@ -3,36 +3,46 @@
 import { OutlinedInput } from '@mui/material';
 import React from 'react';
 import {
-    ItemDisabledProps,
     ItemFormContainer,
     ItemIcon,
-    ItemIconProps,
+    ItemProps,
     ItemRoot,
     ItemRowContainer,
     ItemTextBlock,
-    ItemTextBlockProps,
     ItemVariableProps
 } from './index';
 
-export interface TextFieldProps extends ItemTextBlockProps, ItemIconProps, ItemDisabledProps, ItemVariableProps<string> {
+export interface TextFieldProps extends ItemProps, ItemVariableProps<string> {
     minLength?: number;
     maxLength?: number;
 }
 
-export const TextFieldItem = ({
-                                  icon,
-                                  primary,
-                                  secondary,
-                                  value,
-                                  setValue,
-                                  minLength,
-                                  maxLength,
-                                  disabled
-                              }: TextFieldProps) => (
-    <ItemRoot>
+export const TextFieldItem = (
+    {
+        icon,
+        iconSx,
+        primary,
+        secondary,
+        primaryTypographyProps,
+        secondaryTypographyProps,
+        value,
+        setValue,
+        minLength,
+        maxLength,
+        disabled,
+        sx
+    }: TextFieldProps
+) => (
+    <ItemRoot sx={sx}>
         <ItemRowContainer size={secondary ? 'medium' : 'small'}>
-            <ItemIcon icon={icon} />
-            <ItemTextBlock primary={primary} secondary={secondary} disabled={disabled} />
+            <ItemIcon icon={icon} iconSx={iconSx} />
+            <ItemTextBlock
+                primary={primary}
+                secondary={secondary}
+                primaryTypographyProps={primaryTypographyProps}
+                secondaryTypographyProps={secondaryTypographyProps}
+                disabled={disabled}
+            />
         </ItemRowContainer>
         <ItemFormContainer>
             <OutlinedInput

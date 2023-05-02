@@ -2,18 +2,9 @@
 
 import { Checkbox, Switch, switchClasses } from '@mui/material';
 import React from 'react';
-import {
-    ButtonItemRoot,
-    ItemDisabledProps,
-    ItemFormContainer,
-    ItemIcon,
-    ItemIconProps,
-    ItemRowContainer,
-    ItemTextBlock,
-    ItemTextBlockProps
-} from './index';
+import { ButtonItemRoot, ItemFormContainer, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
 
-export interface SwitchItemProps extends ItemTextBlockProps, ItemIconProps, ItemDisabledProps {
+export interface SwitchItemProps extends ItemProps {
     checked: boolean;
     setChecked: (checked: boolean) => void;
     defaultChecked?: boolean;
@@ -22,18 +13,28 @@ export interface SwitchItemProps extends ItemTextBlockProps, ItemIconProps, Item
 export const SwitchItem = (
     {
         icon,
+        iconSx,
         primary,
         secondary,
+        primaryTypographyProps,
+        secondaryTypographyProps,
         checked,
         setChecked,
         defaultChecked,
-        disabled
+        disabled,
+        sx
     }: SwitchItemProps
 ) => (
-    <ButtonItemRoot onClick={() => setChecked(!checked)} disabled={disabled}>
+    <ButtonItemRoot onClick={() => setChecked(!checked)} disabled={disabled} sx={sx}>
         <ItemRowContainer>
-            <ItemIcon icon={icon} />
-            <ItemTextBlock primary={primary} secondary={secondary} disabled={disabled} />
+            <ItemIcon icon={icon} iconSx={iconSx} />
+            <ItemTextBlock
+                primary={primary}
+                secondary={secondary}
+                primaryTypographyProps={primaryTypographyProps}
+                secondaryTypographyProps={secondaryTypographyProps}
+                disabled={disabled}
+            />
             <ItemFormContainer sx={{ mr: -.75 }}>
                 <Switch
                     checked={checked}
@@ -52,15 +53,19 @@ export const SwitchItem = (
 export const CheckItem = (
     {
         icon,
+        iconSx,
         primary,
         secondary,
+        primaryTypographyProps,
+        secondaryTypographyProps,
         checked,
         setChecked,
         defaultChecked,
-        disabled
+        disabled,
+        sx
     }: SwitchItemProps
 ) => (
-    <ButtonItemRoot onClick={() => setChecked(!checked)} disabled={disabled}>
+    <ButtonItemRoot onClick={() => setChecked(!checked)} disabled={disabled} sx={sx}>
         <ItemRowContainer>
             <Checkbox
                 checked={checked}
@@ -80,8 +85,14 @@ export const CheckItem = (
                     }
                 }}
             />
-            <ItemIcon icon={icon} />
-            <ItemTextBlock primary={primary} secondary={secondary} disabled={disabled} />
+            <ItemIcon icon={icon} iconSx={iconSx} />
+            <ItemTextBlock
+                primary={primary}
+                secondary={secondary}
+                primaryTypographyProps={primaryTypographyProps}
+                secondaryTypographyProps={secondaryTypographyProps}
+                disabled={disabled}
+            />
         </ItemRowContainer>
     </ButtonItemRoot>
 );

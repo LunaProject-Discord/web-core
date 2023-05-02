@@ -3,38 +3,48 @@
 import React from 'react';
 import { NumberField } from '../NumberField';
 import {
-    ItemDisabledProps,
     ItemFormContainer,
     ItemIcon,
-    ItemIconProps,
+    ItemProps,
     ItemRoot,
     ItemRowContainer,
     ItemTextBlock,
-    ItemTextBlockProps,
     ItemVariableProps
 } from './index';
 
-export interface NumberFieldItemProps extends ItemTextBlockProps, ItemIconProps, ItemDisabledProps, ItemVariableProps<number> {
+export interface NumberFieldItemProps extends ItemProps, ItemVariableProps<number> {
     step?: number;
     min?: number;
     max?: number;
 }
 
-export const NumberFieldItem = ({
-                                    icon,
-                                    primary,
-                                    secondary,
-                                    value,
-                                    setValue,
-                                    step,
-                                    min,
-                                    max,
-                                    disabled
-                                }: NumberFieldItemProps) => (
-    <ItemRoot>
+export const NumberFieldItem = (
+    {
+        icon,
+        iconSx,
+        primary,
+        secondary,
+        primaryTypographyProps,
+        secondaryTypographyProps,
+        value,
+        setValue,
+        step,
+        min,
+        max,
+        disabled,
+        sx
+    }: NumberFieldItemProps
+) => (
+    <ItemRoot sx={sx}>
         <ItemRowContainer size={secondary ? 'medium' : 'small'}>
-            <ItemIcon icon={icon} />
-            <ItemTextBlock primary={primary} secondary={secondary} disabled={disabled} />
+            <ItemIcon icon={icon} iconSx={iconSx} />
+            <ItemTextBlock
+                primary={primary}
+                secondary={secondary}
+                primaryTypographyProps={primaryTypographyProps}
+                secondaryTypographyProps={secondaryTypographyProps}
+                disabled={disabled}
+            />
         </ItemRowContainer>
         <ItemFormContainer>
             <NumberField

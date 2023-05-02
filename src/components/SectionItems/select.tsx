@@ -4,36 +4,44 @@ import { MenuItem } from '@mui/material';
 import React, { ReactNode } from 'react';
 import { Select } from '../Select';
 import {
-    ItemDisabledProps,
     ItemFormContainer,
     ItemIcon,
-    ItemIconProps,
+    ItemProps,
     ItemRoot,
     ItemRowContainer,
     ItemTextBlock,
-    ItemTextBlockProps,
     ItemVariableProps
 } from './index';
 
-export interface SelectItemProps<T> extends ItemTextBlockProps, ItemIconProps, ItemDisabledProps, ItemVariableProps<T> {
+export interface SelectItemProps<T> extends ItemProps, ItemVariableProps<T> {
     choices: ({ value: T; children?: ReactNode; })[];
 }
 
 export const SelectItem = <T, >(
     {
         icon,
+        iconSx,
         primary,
         secondary,
+        primaryTypographyProps,
+        secondaryTypographyProps,
         value,
         setValue,
         choices,
-        disabled
+        disabled,
+        sx
     }: SelectItemProps<T>
 ) => (
-    <ItemRoot>
+    <ItemRoot sx={sx}>
         <ItemRowContainer size={secondary ? 'medium' : 'small'}>
-            <ItemIcon icon={icon} />
-            <ItemTextBlock primary={primary} secondary={secondary} disabled={disabled} />
+            <ItemIcon icon={icon} iconSx={iconSx} />
+            <ItemTextBlock
+                primary={primary}
+                secondary={secondary}
+                primaryTypographyProps={primaryTypographyProps}
+                secondaryTypographyProps={secondaryTypographyProps}
+                disabled={disabled}
+            />
         </ItemRowContainer>
         <ItemFormContainer>
             <Select<T>
