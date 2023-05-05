@@ -9,11 +9,8 @@ export const buttonActionStyled = (theme: Theme): CSSObject => ({
     '&:hover': {
         backgroundColor: theme.palette.action.hover
     },
-    [`&.${buttonBaseClasses.focusVisible}`]: {
+    [`&:active, &.${buttonBaseClasses.focusVisible}`]: {
         backgroundColor: theme.palette.action.focus
-    },
-    '&:active': {
-        backgroundColor: theme.palette.action.active
     }
 });
 
