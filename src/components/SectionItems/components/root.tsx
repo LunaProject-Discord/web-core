@@ -1,5 +1,6 @@
-import { Box, ButtonBase as MuiButtonBase, buttonBaseClasses, CSSObject, styled, Theme } from '@mui/material';
+import { Box, ButtonBase as MuiButtonBase, CSSObject, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { buttonActionStyled } from '../../ButtonBase';
 
 export const itemRootStyled = (theme: Theme): CSSObject => ({
     padding: theme.spacing(0, 1.5),
@@ -27,10 +28,5 @@ export const ItemRoot = styled(Box)(({ theme }) => itemRootStyled(theme));
 export const ButtonItemRoot = styled(MuiButtonBase)(({ theme }) => ({
     ...itemRootStyled(theme),
     userSelect: 'none',
-    [`&.${buttonBaseClasses.disabled}`]: {
-        color: theme.palette.action.disabled
-    },
-    [`&:hover, &.${buttonBaseClasses.focusVisible}`]: {
-        backgroundColor: theme.palette.action.hover
-    }
+    ...buttonActionStyled(theme)
 }));

@@ -1,6 +1,21 @@
 'use client';
 
-import { ButtonBase as MuiButtonBase, buttonBaseClasses, styled } from '@mui/material';
+import { ButtonBase as MuiButtonBase, buttonBaseClasses, CSSObject, styled, Theme } from '@mui/material';
+
+export const buttonActionStyled = (theme: Theme): CSSObject => ({
+    [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
+        color: theme.palette.action.disabled
+    },
+    '&:hover': {
+        backgroundColor: theme.palette.action.hover
+    },
+    [`&.${buttonBaseClasses.focusVisible}`]: {
+        backgroundColor: theme.palette.action.focus
+    },
+    '&:active': {
+        backgroundColor: theme.palette.action.active
+    }
+});
 
 export const ButtonBase = styled(MuiButtonBase)(({ theme }) => ({
     display: 'flex',
@@ -10,13 +25,5 @@ export const ButtonBase = styled(MuiButtonBase)(({ theme }) => ({
         duration: theme.transitions.duration.shortest
     }),
     borderRadius: theme.shape.borderRadius,
-    [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
-        color: theme.palette.action.disabled
-    },
-    [`&:hover, &.${buttonBaseClasses.focusVisible}`]: {
-        backgroundColor: theme.palette.action.hover
-    },
-    '&:active': {
-        backgroundColor: theme.palette.action.focus
-    }
+    ...buttonActionStyled(theme)
 }));

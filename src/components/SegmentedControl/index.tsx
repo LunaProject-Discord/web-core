@@ -35,8 +35,11 @@ export const SegmentedControlButton = styled(
     [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
         color: theme.palette.action.disabled
     },
-    [`&:hover, &.${buttonBaseClasses.focusVisible}`]: {
+    '&:hover': {
         backgroundColor: !selected && theme.palette.action.hover
+    },
+    [`&.${buttonBaseClasses.focusVisible}`]: {
+        backgroundColor: theme.palette.action.focus
     }
 }));
 
