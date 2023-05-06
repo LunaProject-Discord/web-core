@@ -1,7 +1,7 @@
 'use client';
 
 import { AppBar as MuiAppBar, Box, styled } from '@mui/material';
-import { RouteLink } from '../Link';
+import NextLink from 'next/link';
 
 export const AppBar = styled(MuiAppBar)(({ theme }) => ({
     borderBottom: `solid 1px ${theme.palette.divider}`,
@@ -15,7 +15,7 @@ interface AppBarBrandProps {
 }
 
 export const AppBarBrand = styled(
-    RouteLink,
+    NextLink,
     { shouldForwardProp: (prop) => prop !== 'src' }
 )<AppBarBrandProps>(({ theme, src }) => ({
     width: 170,
