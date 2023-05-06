@@ -27,9 +27,12 @@ export const DrawerItemRoot = styled('div')(({ theme }) => ({
     outline: 'none',
     '&:hover': {
         color: theme.palette.text.primary,
-        backgroundColor: theme.palette.action.hover
+        backgroundColor: theme.palette.action.hover,
+        [`& ${DrawerButtonItemIcon}`]: {
+            color: theme.palette.text.primary
+        }
     },
-    [`&:active, &.${buttonBaseClasses.focusVisible}`]: {
+    [`&:active, &:focus-visible, &.${buttonBaseClasses.focusVisible}`]: {
         backgroundColor: theme.palette.action.focus
     },
     [theme.breakpoints.up('md')]: {
@@ -47,12 +50,13 @@ export const drawerLinkBaseItemStyles = (theme: Theme, active: boolean, depth: n
         color: theme.palette.primary.main,
         backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
         '&:hover': {
+            color: theme.palette.primary.main,
             backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
             '@media (hover: none)': {
                 backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
             }
         },
-        [`&:active, &.${buttonBaseClasses.focusVisible}`]: {
+        [`&:active, &:focus-visible, &.${buttonBaseClasses.focusVisible}`]: {
             backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
         },
         [`& .${svgIconClasses.root}`]: {
