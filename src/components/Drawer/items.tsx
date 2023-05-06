@@ -5,18 +5,16 @@ import {
     buttonBaseClasses,
     Collapse,
     CSSObject,
-    Link,
     LinkBaseProps,
-    LinkProps,
     styled,
     svgIconClasses,
     Theme
 } from '@mui/material';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { Dispatch, MouseEventHandler, ReactNode, SetStateAction, useState } from 'react';
+import React, { AnchorHTMLAttributes, Dispatch, MouseEventHandler, ReactNode, SetStateAction, useState } from 'react';
 
-export const DrawerItem = styled('div')(({ theme }) => ({
+export const DrawerItemRoot = styled('div')(({ theme }) => ({
     ...theme.typography.body2,
     width: '100%',
     padding: theme.spacing(1, 0),
@@ -36,12 +34,14 @@ export const DrawerItem = styled('div')(({ theme }) => ({
         backgroundColor: theme.palette.action.focus
     },
     [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(.75, 0)
+        paddingTop: theme.spacing(.75),
+        paddingBottom: theme.spacing(.75)
     }
 }));
 
 export const drawerLinkBaseItemStyles = (theme: Theme, active: boolean, depth: number): CSSObject => ({
     paddingLeft: `${8 * (4 + 1.5 * depth)}px`,
+    textDecoration: 'none',
     color: theme.palette.text.secondary,
     userSelect: 'none',
     ...(active && {
@@ -62,35 +62,28 @@ export const drawerLinkBaseItemStyles = (theme: Theme, active: boolean, depth: n
     })
 });
 
-const DrawerLinkBase = DrawerItem.withComponent(Link);
-
-export interface DrawerLinkBaseItemProps extends LinkProps {
+export interface DrawerLinkBaseItemProps {
     active?: boolean;
     depth: number;
 }
 
 export const DrawerLinkBaseItem = styled(
-    (props: LinkBaseProps) => (<DrawerLinkBase underline="none" {...props} />),
+    DrawerItemRoot.withComponent('a'),
     { shouldForwardProp: (prop) => prop !== 'active' && prop !== 'depth' }
-)<DrawerLinkBaseItemProps>(({ theme, active = false, depth }) => drawerLinkBaseItemStyles(theme, active, depth));
+)<DrawerLinkBaseItemProps & LinkBaseProps>(({
+                                                theme,
+                                                active = false,
+                                                depth
+                                            }) => drawerLinkBaseItemStyles(theme, active, depth));
 
-const DrawerRouteLinkBase = DrawerLinkBase.withComponent(NextLink);
-
-type OmittedNextLinkProps = Omit<NextLinkProps, 'as'>;
-
-export type DrawerRouteLinkBaseItemProps = DrawerLinkBaseItemProps & OmittedNextLinkProps;
-
-export const DrawerRouteLinkBaseItem = styled(
-    (props: LinkBaseProps & OmittedNextLinkProps) => (<DrawerRouteLinkBase {...props} />),
-    { shouldForwardProp: (prop) => prop !== 'active' && prop !== 'depth' }
-)<DrawerRouteLinkBaseItemProps>(({ theme, active = false, depth }) => drawerLinkBaseItemStyles(theme, active, depth));
+export const DrawerRouteLinkBaseItem = DrawerLinkBaseItem.withComponent(NextLink);
 
 export interface DrawerButtonItemProps {
     depth: number;
 }
 
 export const DrawerButtonItem = styled(
-    DrawerItem.withComponent(ButtonBase),
+    DrawerItemRoot.withComponent(ButtonBase),
     { shouldForwardProp: (prop) => prop !== 'depth' }
 )<DrawerButtonItemProps>(({ depth, theme }) => ({
     paddingLeft: `${8 * (3 + 1.5 * depth)}px`,
@@ -191,7 +184,7 @@ export const DrawerGroup = ({ label, depth = 0, open, setOpen, defaultOpen = tru
     );
 };
 
-export interface DrawerLinkItemProps extends DrawerItemProps, LinkProps {
+export interface DrawerLinkItemProps extends DrawerItemProps, AnchorHTMLAttributes<HTMLAnchorElement> {
     icon?: ReactNode;
     onClick?: MouseEventHandler;
 }
@@ -206,7 +199,6 @@ export const DrawerLinkItem = ({ label, icon, depth = 0, href, onClick, ...props
         <StyledLi depth={depth}>
             <DrawerLinkBaseItem
                 href={href}
-                underline="none"
                 depth={depth}
                 active={isMatch}
                 onClick={onClick}
@@ -219,7 +211,7 @@ export const DrawerLinkItem = ({ label, icon, depth = 0, href, onClick, ...props
     );
 };
 
-export type DrawerRouteLinkItemProps = DrawerLinkItemProps & OmittedNextLinkProps;
+export type DrawerRouteLinkItemProps = DrawerLinkItemProps & Omit<NextLinkProps, 'as'>;
 
 export const DrawerRouteLinkItem = ({ label, icon, depth = 0, href, onClick, ...props }: DrawerRouteLinkItemProps) => {
     const pathname = usePathname();
@@ -231,7 +223,6 @@ export const DrawerRouteLinkItem = ({ label, icon, depth = 0, href, onClick, ...
         <StyledLi depth={depth}>
             <DrawerRouteLinkBaseItem
                 href={href}
-                underline="none"
                 depth={depth}
                 active={isMatch}
                 onClick={onClick}
