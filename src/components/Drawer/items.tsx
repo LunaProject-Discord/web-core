@@ -5,7 +5,6 @@ import {
     buttonBaseClasses,
     Collapse,
     CSSObject,
-    LinkBaseProps,
     styled,
     svgIconClasses,
     Theme
@@ -47,17 +46,17 @@ export const drawerLinkBaseItemStyles = (theme: Theme, active: boolean, depth: n
     ...(active && {
         color: theme.palette.primary.main,
         backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-        [`&.${svgIconClasses.root}`]: {
-            color: theme.palette.primary.main
-        },
         '&:hover': {
             backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
             '@media (hover: none)': {
                 backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity)
             }
         },
-        [`&.${buttonBaseClasses.focusVisible}`]: {
+        [`&:active, &.${buttonBaseClasses.focusVisible}`]: {
             backgroundColor: alpha(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+        },
+        [`& .${svgIconClasses.root}`]: {
+            color: theme.palette.primary.main
         }
     })
 });
@@ -70,11 +69,7 @@ export interface DrawerLinkBaseItemProps {
 export const DrawerLinkBaseItem = styled(
     DrawerItemRoot.withComponent('a'),
     { shouldForwardProp: (prop) => prop !== 'active' && prop !== 'depth' }
-)<DrawerLinkBaseItemProps & LinkBaseProps>(({
-                                                theme,
-                                                active = false,
-                                                depth
-                                            }) => drawerLinkBaseItemStyles(theme, active, depth));
+)<DrawerLinkBaseItemProps>(({ theme, active = false, depth }) => drawerLinkBaseItemStyles(theme, active, depth));
 
 export const DrawerRouteLinkBaseItem = DrawerLinkBaseItem.withComponent(NextLink);
 
@@ -102,7 +97,7 @@ export const DrawerButtonItemIconContainer = styled('span')(({ theme }) => ({
     justifyContent: 'center',
     fontSize: 18,
     color: theme.palette.text.secondary,
-    [`&.${svgIconClasses.root}`]: {
+    [`& .${svgIconClasses.root}`]: {
         fontSize: 18
     }
 }));
