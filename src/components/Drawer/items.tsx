@@ -185,14 +185,15 @@ export const DrawerGroup = ({ label, depth = 0, open, setOpen, defaultOpen = tru
 
 export interface DrawerLinkItemProps extends DrawerItemProps, AnchorHTMLAttributes<HTMLAnchorElement> {
     icon?: ReactNode;
+    exact?: boolean;
     onClick?: MouseEventHandler;
 }
 
-export const DrawerLinkItem = ({ label, icon, depth = 0, href, onClick, ...props }: DrawerLinkItemProps) => {
+export const DrawerLinkItem = ({ label, icon, depth = 0, href, exact, onClick, ...props }: DrawerLinkItemProps) => {
     const pathname = usePathname();
     const loweredPathname = pathname?.toLowerCase();
     const loweredHref = href?.toLowerCase();
-    const isMatch = href === '/' ? loweredPathname === loweredHref : (loweredPathname && loweredHref ? loweredPathname.startsWith(loweredHref) : false);
+    const isMatch = exact || href === '/' ? loweredPathname === loweredHref : (loweredPathname && loweredHref ? loweredPathname.startsWith(loweredHref) : false);
 
     return (
         <StyledLi depth={depth}>
@@ -212,11 +213,19 @@ export const DrawerLinkItem = ({ label, icon, depth = 0, href, onClick, ...props
 
 export type DrawerRouteLinkItemProps = DrawerLinkItemProps & Omit<NextLinkProps, 'as'>;
 
-export const DrawerRouteLinkItem = ({ label, icon, depth = 0, href, onClick, ...props }: DrawerRouteLinkItemProps) => {
+export const DrawerRouteLinkItem = ({
+                                        label,
+                                        icon,
+                                        depth = 0,
+                                        href,
+                                        exact,
+                                        onClick,
+                                        ...props
+                                    }: DrawerRouteLinkItemProps) => {
     const pathname = usePathname();
     const loweredPathname = pathname?.toLowerCase();
     const loweredHref = href?.toLowerCase();
-    const isMatch = href === '/' ? loweredPathname === loweredHref : (loweredPathname && loweredHref ? loweredPathname.startsWith(loweredHref) : false);
+    const isMatch = exact || href === '/' ? loweredPathname === loweredHref : (loweredPathname && loweredHref ? loweredPathname.startsWith(loweredHref) : false);
 
     return (
         <StyledLi depth={depth}>
