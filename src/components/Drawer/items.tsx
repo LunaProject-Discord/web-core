@@ -213,15 +213,17 @@ export const DrawerLinkItem = ({ label, icon, depth = 0, href, exact, onClick, .
 
 export type DrawerRouteLinkItemProps = DrawerLinkItemProps & Omit<NextLinkProps, 'as'>;
 
-export const DrawerRouteLinkItem = ({
-                                        label,
-                                        icon,
-                                        depth = 0,
-                                        href,
-                                        exact,
-                                        onClick,
-                                        ...props
-                                    }: DrawerRouteLinkItemProps) => {
+export const DrawerRouteLinkItem = (
+    {
+        label,
+        icon,
+        depth = 0,
+        href,
+        exact,
+        onClick,
+        ...props
+    }: DrawerRouteLinkItemProps
+) => {
     const pathname = usePathname();
     const loweredPathname = pathname?.toLowerCase();
     const loweredHref = href?.toLowerCase();
