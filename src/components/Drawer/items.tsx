@@ -72,7 +72,7 @@ export interface DrawerLinkBaseItemProps {
 
 export const DrawerLinkBaseItem = styled(
     DrawerItemRoot.withComponent('a'),
-    { shouldForwardProp: (prop) => prop !== 'active' && prop !== 'depth' }
+    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'active' && prop !== 'depth' }
 )<DrawerLinkBaseItemProps>(({ theme, active = false, depth }) => drawerLinkBaseItemStyles(theme, active, depth));
 
 export const DrawerRouteLinkBaseItem = DrawerLinkBaseItem.withComponent(NextLink);
@@ -83,7 +83,7 @@ export interface DrawerButtonItemProps {
 
 export const DrawerButtonItem = styled(
     DrawerItemRoot.withComponent(ButtonBase),
-    { shouldForwardProp: (prop) => prop !== 'depth' }
+    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'depth' }
 )<DrawerButtonItemProps>(({ depth, theme }) => ({
     paddingLeft: `${8 * (3 + 1.5 * depth)}px`,
     fontWeight: theme.typography.fontWeightMedium,
@@ -112,7 +112,7 @@ export interface DrawerButtonItemIconProps {
 
 export const DrawerButtonItemIcon = styled(
     ArrowRightOutlined,
-    { shouldForwardProp: (prop) => prop !== 'open' }
+    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'open' }
 )<DrawerButtonItemIconProps>(({ open, theme }) => ({
     marginLeft: -19,
     fontSize: 18,
@@ -126,7 +126,7 @@ export interface StyledUlProps {
 
 export const StyledUl = styled(
     'ul',
-    { shouldForwardProp: (prop) => prop !== 'container' }
+    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'container' }
 )<StyledUlProps>(({ theme, container }) => ({
     margin: 0,
     padding: 0,
@@ -142,7 +142,7 @@ export interface StyledLiProps {
 
 export const StyledLi = styled(
     'li',
-    { shouldForwardProp: (prop) => prop !== 'depth' }
+    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'depth' }
 )<StyledLiProps>(({ theme, depth }) => ({
     padding: depth === 0 ? theme.spacing(0, 1) : theme.spacing(.125, 0),
     display: 'block'
