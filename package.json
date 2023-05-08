@@ -1,6 +1,6 @@
 {
     "name": "@lunaproject-discord/web-core",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "packageManager": "yarn@3.5.0",
     "volta": {
         "node": "18.16.0",
