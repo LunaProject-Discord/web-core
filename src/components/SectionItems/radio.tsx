@@ -1,14 +1,14 @@
 'use client';
 
 import { Radio } from '@mui/material';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { ButtonItemRoot, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
 
 export interface RadioItemProps<T> extends ItemProps {
     name: string;
     value: T;
     selected: T;
-    setSelected: (value: T) => void;
+    setSelected: Dispatch<SetStateAction<T>>;
 }
 
 export const RadioItem = <T, >(

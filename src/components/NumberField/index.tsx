@@ -5,15 +5,14 @@ import { InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '
 import { SxProps } from '@mui/system';
 import React from 'react';
 import { ButtonBase } from '../ButtonBase';
+import { ItemVariableProps } from '../SectionItems';
 
 export const SpinButton = styled(ButtonBase)({
     height: 20,
     borderRadius: 0
 });
 
-export interface NumberFieldProps {
-    value: number;
-    setValue: (value: number) => void;
+export interface NumberFieldProps extends ItemVariableProps<number> {
     step?: number;
     min?: number;
     max?: number;
@@ -67,7 +66,7 @@ export const NumberField = ({ value, setValue, step, min, max, disabled, placeho
                     <SpinButton
                         onClick={() => {
                             if (!max || (value + amount) <= max)
-                                setValue(value + amount);
+                                setValue((prevValue) => prevValue + amount);
                         }}
                         disabled={disabled || value === max}
                         tabIndex={-1}
@@ -78,7 +77,7 @@ export const NumberField = ({ value, setValue, step, min, max, disabled, placeho
                     <SpinButton
                         onClick={() => {
                             if (!min || (value - amount) >= min)
-                                setValue(value - amount);
+                                setValue((prevValue) => prevValue - amount);
                         }}
                         disabled={disabled || value === min}
                         tabIndex={-1}

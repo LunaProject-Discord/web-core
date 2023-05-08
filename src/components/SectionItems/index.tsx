@@ -2,7 +2,7 @@
 
 import { Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { ItemIconProps, ItemRootProps, ItemTextBlockProps } from './components';
 
 interface ItemRowContainerProps {
@@ -37,7 +37,7 @@ export interface ItemDisabledProps {
 
 export interface ItemVariableProps<T> {
     value: T;
-    setValue: (value: T) => void;
+    setValue: Dispatch<SetStateAction<T>>;
 }
 
 export const ItemFormContainer = styled(
