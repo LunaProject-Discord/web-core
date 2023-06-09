@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { em, rem } from 'polished';
-import { RichEmbedContainer } from '../../components/Message/RichEmbedContainer';
+import { RichEmbedContainer } from '../../components';
 
 export const CodeBlockContainer = styled.pre`
     max-width: 90%;

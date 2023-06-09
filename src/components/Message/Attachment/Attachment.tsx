@@ -1,8 +1,6 @@
 import React from 'react';
-import { AudioAttachment } from './components/AudioAttachment';
-import { DefaultAttachment } from './components/DefaultAttachment';
-import { ImageAttachment } from './components/ImageAttachment';
-import { getAttachmentType } from './helpers/getAttachmentType';
+import { AudioAttachment, DefaultAttachment, ImageAttachment } from './components';
+import { getAttachmentType } from './helpers';
 
 export interface AttachmentProps {
     file: File;

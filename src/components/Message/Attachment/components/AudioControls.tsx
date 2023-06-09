@@ -2,8 +2,7 @@ import styled from '@emotion/styled';
 import { size, transparentize } from 'polished';
 import React from 'react';
 import { DARK_THEME } from '../../../../styles';
-import { play } from '../icons/play';
-import { volume } from '../icons/volume';
+import { play, volume } from '../icons';
 
 const AudioControlsContainer = styled('div')({
     height: 32,

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { rem } from 'polished';
 import React, { Fragment } from 'react';
 import { getTextDirection, Markdown, MarkdownContainer } from '../../markdown';
-import type { AttachmentProps } from './Attachment/Attachment';
+import type { AttachmentProps } from './Attachment';
 import { MessageHeader } from './MessageHeader';
 import { RichEmbed } from './RichEmbed';
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import type { AttachmentType } from '../AttachmentType';
-import { getAttachmentIcon } from '../helpers/getAttachmentIcon';
-import { getHumanReadableSize } from '../helpers/getHumanReadableSize';
-import { download } from '../icons/download';
+import { getAttachmentIcon, getHumanReadableSize } from '../helpers';
+import { download } from '../icons';
 import {
     AttachmentContainer,
     AttachmentDownloadButton,
