@@ -1,7 +1,6 @@
+import { getAttachmentIcon, getHumanReadableSize } from '@components/Message';
 import styled from '@emotion/styled';
 import React from 'react';
-import { getAttachmentIcon } from '../helpers/getAttachmentIcon';
-import { getHumanReadableSize } from '../helpers/getHumanReadableSize';
 import { download } from '../icons/download';
 import { AudioControls } from './AudioControls';
 import { AttachmentContainer, AttachmentDownloadButton, AttachmentIconContainer } from './styles';

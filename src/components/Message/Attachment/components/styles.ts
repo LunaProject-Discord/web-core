@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+import { DARK_THEME } from '@styles/theme';
 import { ellipsis, em } from 'polished';
-import { DARK_THEME } from '../../../../styles';
 
 export const AttachmentContainer = styled('div')(({ theme }) => ({
     width: '100%',

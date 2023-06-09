@@ -1,12 +1,12 @@
 'use client';
 
 import { Box, styled } from '@mui/material';
-import React, { ChangeEvent, ClipboardEvent, KeyboardEvent, useState } from 'react';
+import React, { ClipboardEvent, KeyboardEvent, useState } from 'react';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
 const IGNORED_META_KEYS = ['Control', 'Alt', 'Meta', 'Tab', 'CapsLock', 'Shift', 'Enter'];
 
-export const PinFieldInput = styled('input')(({ theme, disabled }) => ({
+export const PinFieldInput = styled('input')(({ theme }) => ({
     minWidth: 0,
     padding: theme.spacing(1),
     flexGrow: 0,
@@ -103,9 +103,6 @@ export const PinField = ({ value, setValue, length, pattern, capitalize, disable
         }
     };
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    };
-
     const handleInputPaste = (e: ClipboardEvent<HTMLInputElement>) => {
         const parentElement = e.currentTarget.parentElement;
 
@@ -135,7 +132,6 @@ export const PinField = ({ value, setValue, length, pattern, capitalize, disable
                 <PinFieldInput
                     key={i}
                     value={values[i]}
-                    onChange={(e) => handleInputChange(e)}
                     onKeyDown={(e) => handleInputKeyDown(e, i)}
                     onPaste={(e) => handleInputPaste(e)}
                     type="text"

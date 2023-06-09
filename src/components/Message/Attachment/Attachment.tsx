@@ -1,8 +1,5 @@
+import { AudioAttachment, DefaultAttachment, getAttachmentType, ImageAttachment } from '@components/Message';
 import React from 'react';
-import { AudioAttachment } from './components/AudioAttachment';
-import { DefaultAttachment } from './components/DefaultAttachment';
-import { ImageAttachment } from './components/ImageAttachment';
-import { getAttachmentType } from './helpers/getAttachmentType';
 
 export interface AttachmentProps {
     file: File;
