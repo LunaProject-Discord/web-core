@@ -160,10 +160,10 @@ export interface DrawerGroupProps extends DrawerItemProps {
     defaultOpen?: boolean;
 }
 
-export const DrawerGroup = ({ label, depth = 0, setOpen, defaultOpen = true, children }: DrawerGroupProps) => {
+export const DrawerGroup = ({ label, depth = 0, open, setOpen, defaultOpen = true, children }: DrawerGroupProps) => {
     const [internalOpen, setInternalOpen] = useState(defaultOpen);
 
-    // const state = open ?? internalOpen;
+    const state = open ?? internalOpen;
     const setState = setOpen ?? setInternalOpen;
 
     const handleClick = () => setState((prevOpen) => !prevOpen);

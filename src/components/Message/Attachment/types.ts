@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import type { AttachmentType } from './AttachmentType';
 import { acrobat } from './icons/acrobat';
 import { ae } from './icons/ae';
@@ -14,7 +13,7 @@ import { unknown } from './icons/unknown';
 import { video } from './icons/video';
 import { webcode } from './icons/webcode';
 
-export const ATTACHMENT_ICONS: Record<AttachmentType, ReactNode> = {
+export const ATTACHMENT_ICONS: Record<AttachmentType, JSX.Element> = {
     acrobat,
     ae,
     ai,

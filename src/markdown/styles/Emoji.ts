@@ -1,6 +1,6 @@
-import { RichEmbedContainer } from '@components/Message';
 import styled from '@emotion/styled';
 import { em, rem, size } from 'polished';
+import { RichEmbedContainer } from '../../components/Message/RichEmbedContainer';
 
 const Emoji = styled('img')<{ big?: boolean }>(({ theme, big }) => ({
     ...size(em(22)),

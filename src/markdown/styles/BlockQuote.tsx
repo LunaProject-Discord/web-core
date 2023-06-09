@@ -1,6 +1,6 @@
-import { RichEmbedContainer } from '@components/Message';
 import styled from '@emotion/styled';
 import React, { ReactNode } from 'react';
+import { RichEmbedContainer } from '../../components/Message/RichEmbedContainer';
 
 const BlockQuoteContainer = styled('div')({
     display: 'flex'

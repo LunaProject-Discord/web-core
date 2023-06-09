@@ -1,6 +1,7 @@
-import { getAttachmentIcon, getHumanReadableSize } from '@components/Message';
 import React from 'react';
 import type { AttachmentType } from '../AttachmentType';
+import { getAttachmentIcon } from '../helpers/getAttachmentIcon';
+import { getHumanReadableSize } from '../helpers/getHumanReadableSize';
 import { download } from '../icons/download';
 import {
     AttachmentContainer,

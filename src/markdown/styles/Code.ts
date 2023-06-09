@@ -1,6 +1,6 @@
-import { RichEmbedContainer } from '@components/Message';
 import styled from '@emotion/styled';
 import { em, rem } from 'polished';
+import { RichEmbedContainer } from '../../components/Message/RichEmbedContainer';
 
 export const Code = styled('code')(({ theme }) => ({
     margin: `${em(-3.2)} 0`,
