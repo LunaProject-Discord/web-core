@@ -6,7 +6,7 @@ import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
 const IGNORED_META_KEYS = ['Control', 'Alt', 'Meta', 'Tab', 'CapsLock', 'Shift', 'Enter'];
 
-export const PinFieldInput = styled('input')(({ theme, disabled }) => ({
+export const PinFieldInput = styled('input')(({ theme }) => ({
     minWidth: 0,
     padding: theme.spacing(1),
     flexGrow: 0,
