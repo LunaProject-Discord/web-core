@@ -27,24 +27,6 @@
                 "name": "next"
             }
         ],
-        "baseUrl": ".",
-        "paths": {
-            "@components/*": [
-                "src/components/*"
-            ],
-            "@libs/*": [
-                "src/libs/*"
-            ],
-            "@markdown/*": [
-                "src/markdown/*"
-            ],
-            "@styles/*": [
-                "src/styles/*"
-            ],
-            "@utils/*": [
-                "src/utils/*"
-            ]
-        },
         "types": [
             "node"
         ],
