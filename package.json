@@ -22,7 +22,7 @@
         "@discordjs/rest": "1.7.1",
         "@emotion/react": "11.11.1",
         "@emotion/styled": "11.11.0",
-        "@lunaproject-discord/web-discord": "1.0.9",
+        "@lunaproject-discord/web-discord": "1.0.10",
         "@mui/icons-material": "5.11.16",
         "@mui/lab": "5.0.0-alpha.133",
         "@mui/material": "5.13.4",
