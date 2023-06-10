@@ -3,11 +3,11 @@ import { anyScopeRegex, defaultRules } from 'simple-markdown';
 import type { MarkdownRule } from '../parsers';
 import { HeadingOne, HeadingThree, HeadingTwo } from '../styles/Heading';
 
-const HEADING_RE = /^ *(#+) ([^\n][\S\s].*)\n*/;
+const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
-    match: anyScopeRegex(/^ *(#{1,3})([^\n]+?)#* *(?:\n *)+\n/),
+    match: anyScopeRegex(HEADING_RE),
     parse: (capture, parse, state) => {
         const parsedContent = parse(capture[2].trim(), { ...state, inline: true });
 
