@@ -34,7 +34,7 @@ export const heading: MarkdownRule = {
             case 3:
                 return (<HeadingThree key={state.key}>{children}</HeadingThree>);
             default:
-                return children;
+                return node.content;
         }
     }
 };
