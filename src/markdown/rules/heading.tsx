@@ -3,7 +3,7 @@ import { blockRegex, defaultRules, parseInline } from 'simple-markdown';
 import type { MarkdownRule } from '../parsers';
 import { HeadingOne, HeadingThree, HeadingTwo } from '../styles/Heading';
 
-const HEADING_RE = /^ *(#{1,3})([^\n]+?)#* *(?:\n *)+\n/;
+const HEADING_RE = /^ *(#{1,3})([^\n]+?)#* *([^\n][\S\s].*)\n*/gm;
 
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
