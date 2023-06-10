@@ -15,8 +15,7 @@ export const blockQuote: MarkdownRule = {
         const { nested, inQuote, prevCapture: lookbehind } = state;
 
         // Prevents having multiple layers of quote blocks
-        if (nested) return null;
-        if (inQuote) return null;
+        if (nested || inQuote) return null;
 
         // Makes sure that quotes can only start on the beginning of a line
         if (!BEGINNING_OF_LINE_RE.test(lookbehind?.[0] ?? '')) return null;
@@ -35,19 +34,18 @@ export const blockQuote: MarkdownRule = {
         const trimmedContent = content.replace(trimRegex, '');
 
         // Parses the trimmed content for any markdown
-        const parsedContent = parse(trimmedContent, {
-            ...state,
-            inline: multiline ? inline : true,
-            inQuote: true
-        });
+        const parsedContent = parse(
+            trimmedContent,
+            {
+                ...state,
+                inline: multiline ? inline : true,
+                inQuote: true
+            }
+        );
 
         // Makes sure the block quote always renders, even without content
-        if (parsedContent.length === 0) {
-            parsedContent.push({
-                type: 'text',
-                content: ' '
-            });
-        }
+        if (parsedContent.length === 0)
+            parsedContent.push({ type: 'text', content: ' ' });
 
         return {
             content: parsedContent

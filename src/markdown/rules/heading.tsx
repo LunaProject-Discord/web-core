@@ -3,10 +3,11 @@ import { defaultRules } from 'simple-markdown';
 import type { MarkdownRule } from '../parsers';
 import { HeadingOne, HeadingThree, HeadingTwo } from '../styles/Heading';
 
+const BEGINNING_OF_LINE_RE = /^$|\n *$/;
 const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 
 export const heading: MarkdownRule = {
-    order: defaultRules.heading.order,
+    ...defaultRules.heading,
     match: (source, state) => {
         const { nested, inHeading, prevCapture: lookbehind } = state;
 
@@ -14,14 +15,19 @@ export const heading: MarkdownRule = {
         if (nested || inHeading) return null;
 
         // Makes sure that quotes can only start on the beginning of a line
-        if (!/^$|\n *$/.test(lookbehind?.[0] ?? '')) return null;
+        if (!BEGINNING_OF_LINE_RE.test(lookbehind?.[0] ?? '')) return null;
 
-        console.log(source, state);
         return HEADING_RE.exec(source);
     },
     parse: (capture, parse, state) => {
-        const parsedContent = parse(capture[2].trim(), { ...state, inline: true, inHeading: true });
-        console.log(capture, parse, state, parsedContent);
+        const parsedContent = parse(
+            capture[2].trim(),
+            {
+                ...state,
+                inline: true,
+                inHeading: true
+            }
+        );
 
         if (parsedContent.length === 0)
             parsedContent.push({ type: 'text', content: ' ' });
@@ -40,8 +46,6 @@ export const heading: MarkdownRule = {
                 return (<HeadingTwo key={state.key}>{children}</HeadingTwo>);
             case 3:
                 return (<HeadingThree key={state.key}>{children}</HeadingThree>);
-            default:
-                return children;
         }
     }
 };
