@@ -293,7 +293,7 @@ __metadata:
     "@discordjs/rest": 1.7.1
     "@emotion/react": 11.11.1
     "@emotion/styled": 11.11.0
-    "@lunaproject-discord/web-discord": 1.0.10
+    "@lunaproject-discord/web-discord": 1.0.12
     "@mui/icons-material": 5.11.16
     "@mui/lab": 5.0.0-alpha.133
     "@mui/material": 5.13.4
@@ -319,10 +319,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lunaproject-discord/web-discord@npm:1.0.10":
-  version: 1.0.10
-  resolution: "@lunaproject-discord/web-discord@npm:1.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40lunaproject-discord%2Fweb-discord%2F1.0.10%2F9f5ac0c25f7da891bfa810deb07965b75308e5d7"
-  checksum: 67c1a5e765bbc10da35b2922e80b31d677d114b7a099f1dbc6d8ae0f0ad42af08bb1ff4a78df2e814152134a1944fdc053127f6d28ef23f273bb51b23ed10b81
+"@lunaproject-discord/web-discord@npm:1.0.12":
+  version: 1.0.12
+  resolution: "@lunaproject-discord/web-discord@npm:1.0.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40lunaproject-discord%2Fweb-discord%2F1.0.12%2F3d55213cf763b72aa4a8ee1c7612a5bd2aae119d"
+  checksum: 3d8182b97046ae579a70f45d91ed14808ddb62f5729fbcbe65cd483e28bf5a893e5fda907dff839d8923e798d77964e503c37c2ec436297e7a2a2da1d66b276e
   languageName: node
   linkType: hard
 
