@@ -3,7 +3,7 @@ import { anyScopeRegex, defaultRules, parseInline } from 'simple-markdown';
 import type { MarkdownRule } from '../parsers';
 import { HeadingOne, HeadingThree, HeadingTwo } from '../styles/Heading';
 
-const HEADING_RE = /^ *(#{1,3})[^\n]+?#* *([^\n][\S\s].*)\n*/;
+const HEADING_RE = /^ *(#{1,3}) ([^\n][\S\s].*)\n*/;
 
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
@@ -14,6 +14,7 @@ export const heading: MarkdownRule = {
     }),
     react: (node, output, state) => {
         const children = output(node.content, state);
+        console.log(node, output, state, children);
         switch (node.level) {
             case 1:
                 return (<HeadingOne key={state.key}>{children}</HeadingOne>);
