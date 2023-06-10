@@ -8,12 +8,19 @@ const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
     match: (source, state) => {
-        if (state.nested || state.isHeading) return null;
+        const { nested, inHeading, prevCapture: lookbehind } = state;
+
+        // Prevents having multiple layers of quote blocks
+        if (nested || inHeading) return null;
+
+        // Makes sure that quotes can only start on the beginning of a line
+        if (!/^$|\n *$/.test(lookbehind?.[0] ?? '')) return null;
+
         console.log(source, state);
         return HEADING_RE.exec(source);
     },
     parse: (capture, parse, state) => {
-        const parsedContent = parse(capture[2].trim(), { ...state, inline: true, isHeading: true });
+        const parsedContent = parse(capture[2].trim(), { ...state, inline: true, inHeading: true });
         console.log(capture, parse, state, parsedContent);
 
         if (parsedContent.length === 0)
