@@ -7,7 +7,7 @@ const HEADING_RE = /^ *(#+) ([^\n][\S\s].*)\n*/;
 
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
-    match: anyScopeRegex(HEADING_RE),
+    match: anyScopeRegex(/^ *(#{1,3})([^\n]+?)#* *(?:\n *)+\n/),
     parse: (capture, parse, state) => {
         const parsedContent = parse(capture[2].trim(), { ...state, inline: true });
 
