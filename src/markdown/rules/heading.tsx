@@ -10,6 +10,7 @@ export const heading: MarkdownRule = {
     match: anyScopeRegex(HEADING_RE),
     parse: (capture, parse, state) => {
         const parsedContent = parse(capture[2].trim(), { ...state, inline: true });
+        console.log(capture, parse, state, parsedContent);
 
         if (parsedContent.length === 0)
             parsedContent.push({ type: 'text', content: ' ' });
