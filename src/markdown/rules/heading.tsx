@@ -8,6 +8,7 @@ const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
     match: (source, state) => {
+        if (state.nested) return null;
         console.log(source, state);
         return HEADING_RE.exec(source);
     },
