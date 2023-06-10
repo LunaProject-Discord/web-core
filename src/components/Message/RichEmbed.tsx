@@ -130,7 +130,7 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
                     </EmbedTitleNormal>
                 </Fragment>)}
                 {hasDescription && <EmbedDescription>
-                    <Markdown content={embed.description} type="embed-content" />
+                    <Markdown content={embed.description} type="embed-description" />
                 </EmbedDescription>}
                 {fields.length > 0 && <EmbedFields>
                     {fields.map((field, i) => (

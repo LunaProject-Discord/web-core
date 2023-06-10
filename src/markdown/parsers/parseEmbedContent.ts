@@ -20,9 +20,10 @@ import {
     underline,
     url
 } from '../rules';
+import { heading } from '../rules/heading';
 import { createParser } from './createParser';
 
-export const parseEmbedContent = createParser({
+const RULES = {
     autolink,
     blockQuote,
     codeBlock,
@@ -43,4 +44,8 @@ export const parseEmbedContent = createParser({
     text,
     underline,
     url
-});
+};
+
+export const parseEmbedContent = createParser(RULES);
+
+export const parseEmbedDescription = createParser({ ...RULES, heading });
