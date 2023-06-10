@@ -1,5 +1,5 @@
 import React from 'react';
-import { anyScopeRegex, defaultRules, parseInline } from 'simple-markdown';
+import { anyScopeRegex, defaultRules } from 'simple-markdown';
 import type { MarkdownRule } from '../parsers';
 import { HeadingOne, HeadingThree, HeadingTwo } from '../styles/Heading';
 
@@ -8,10 +8,17 @@ const HEADING_RE = /^ *(#+) ([^\n][\S\s].*)\n*/;
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
     match: anyScopeRegex(HEADING_RE),
-    parse: (capture, parse, state) => ({
-        level: capture[1].length,
-        content: parseInline(parse, capture[2].trim(), state)
-    }),
+    parse: (capture, parse, state) => {
+        const parsedContent = parse(capture[2].trim(), { ...state, inline: true });
+
+        if (parsedContent.length === 0)
+            parsedContent.push({ type: 'text', content: ' ' });
+
+        return {
+            level: capture[1].length,
+            content: parsedContent
+        };
+    },
     react: (node, output, state) => {
         const children = output(node.content, state);
         switch (node.level) {
