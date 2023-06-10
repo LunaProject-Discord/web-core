@@ -7,10 +7,9 @@ const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
-    match: (content, state) => {
-        if (state.inline) return null;
-
-        return HEADING_RE.exec(content);
+    match: (source, state) => {
+        console.log(source, state);
+        return HEADING_RE.exec(source);
     },
     parse: (capture, parse, state) => {
         const parsedContent = parse(capture[2].trim(), { ...state, inline: true });
