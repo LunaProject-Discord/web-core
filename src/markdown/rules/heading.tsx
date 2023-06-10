@@ -13,7 +13,7 @@ export const heading: MarkdownRule = {
         return HEADING_RE.exec(source);
     },
     parse: (capture, parse, state) => {
-        const parsedContent = parse(capture[2].trim(), { ...state, inline: true });
+        const parsedContent = parse(capture[2].trim(), { ...state, inline: true, heading: true });
         console.log(capture, parse, state, parsedContent);
 
         if (parsedContent.length === 0)
@@ -28,11 +28,11 @@ export const heading: MarkdownRule = {
         const children = output(node.content, state);
         switch (node.level) {
             case 1:
-                return (<HeadingOne key={state.key}>{children}</HeadingOne>);
+                return (<HeadingOne key={state.key}>{node.content}</HeadingOne>);
             case 2:
-                return (<HeadingTwo key={state.key}>{children}</HeadingTwo>);
+                return (<HeadingTwo key={state.key}>{node.content}</HeadingTwo>);
             case 3:
-                return (<HeadingThree key={state.key}>{children}</HeadingThree>);
+                return (<HeadingThree key={state.key}>{node.content}</HeadingThree>);
             default:
                 return node.content;
         }
