@@ -8,12 +8,12 @@ const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
 export const heading: MarkdownRule = {
     order: defaultRules.heading.order,
     match: (source, state) => {
-        if (state.nested) return null;
+        if (state.nested || state.isHeading) return null;
         console.log(source, state);
         return HEADING_RE.exec(source);
     },
     parse: (capture, parse, state) => {
-        const parsedContent = parse(capture[2].trim(), { ...state, inline: true, heading: true });
+        const parsedContent = parse(capture[2].trim(), { ...state, inline: true, isHeading: true });
         console.log(capture, parse, state, parsedContent);
 
         if (parsedContent.length === 0)
@@ -28,13 +28,13 @@ export const heading: MarkdownRule = {
         const children = output(node.content, state);
         switch (node.level) {
             case 1:
-                return (<HeadingOne key={state.key}>{node.content}</HeadingOne>);
+                return (<HeadingOne key={state.key}>{children}</HeadingOne>);
             case 2:
-                return (<HeadingTwo key={state.key}>{node.content}</HeadingTwo>);
+                return (<HeadingTwo key={state.key}>{children}</HeadingTwo>);
             case 3:
-                return (<HeadingThree key={state.key}>{node.content}</HeadingThree>);
+                return (<HeadingThree key={state.key}>{children}</HeadingThree>);
             default:
-                return node.content;
+                return children;
         }
     }
 };
