@@ -1,12 +1,27 @@
 'use client';
 
 import { Box, styled } from '@mui/material';
-import React, { ClipboardEvent, KeyboardEvent, useState } from 'react';
+import clsx from 'clsx';
+import React, { ClipboardEvent, InputHTMLAttributes, KeyboardEvent, useState } from 'react';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
+
+export const pinFieldClasses = {
+    root: 'PinField-root',
+    input: 'PinField-input',
+
+    disabled: 'PinField-disabled'
+};
 
 const IGNORED_META_KEYS = ['Control', 'Alt', 'Meta', 'Tab', 'CapsLock', 'Shift', 'Enter'];
 
-export const PinFieldInput = styled('input')(({ theme }) => ({
+export const PinFieldInput = styled(
+    ({ disabled, className, ...props }: InputHTMLAttributes<HTMLInputElement>) => (
+        <Box
+            className={clsx(pinFieldClasses.input, disabled && pinFieldClasses.disabled, className)}
+            {...props}
+        />
+    )
+)<InputHTMLAttributes<HTMLInputElement>>(({ theme }) => ({
     minWidth: 0,
     padding: theme.spacing(1),
     flexGrow: 0,
@@ -127,7 +142,10 @@ export const PinField = ({ value, setValue, length, pattern, capitalize, disable
     };
 
     return (
-        <Box sx={{ width: '100%', display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box
+            className={clsx(pinFieldClasses.root, disabled && pinFieldClasses.disabled)}
+            sx={{ width: '100%', display: 'flex', alignItems: 'center', gap: 1 }}
+        >
             {[...Array(length)].map((_, i) => (
                 <PinFieldInput
                     key={i}

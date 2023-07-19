@@ -1,7 +1,15 @@
 'use client';
 
-import { Box, styled, Typography, TypographyProps } from '@mui/material';
+import { Box, BoxProps, styled, Typography, TypographyProps } from '@mui/material';
+import clsx from 'clsx';
 import React from 'react';
+
+export const sectionClasses = {
+    root: 'Section-root',
+    content: 'Section-content',
+    title: 'Section-title',
+    paragraph: 'Section-paragraph'
+};
 
 export const Section = styled('section')(({ theme }) => ({
     padding: theme.spacing(3, 0, 0),
@@ -9,17 +17,39 @@ export const Section = styled('section')(({ theme }) => ({
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
+Section.defaultProps = {
+    className: sectionClasses.root
+};
 
-export const SectionContent = styled(Box)(({ theme }) => ({
+export const SectionContent = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionClasses.root, className)}
+            {...props}
+        />
+    )
+)<BoxProps>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
 
 export const SectionTitle = styled(
-    (props: TypographyProps) => <Typography variant="h5" {...props} />
+    ({ className, ...props }: TypographyProps) => (
+        <Typography
+            variant="h5"
+            className={clsx(sectionClasses.title, className)}
+            {...props}
+        />
+    )
 )<TypographyProps>();
 
 export const SectionParagraph = styled(
-    (props: TypographyProps) => <Typography variant="body1" {...props} />
+    ({ className, ...props }: TypographyProps) => (
+        <Typography
+            variant="body1"
+            className={clsx(sectionClasses.paragraph, className)}
+            {...props}
+        />
+    )
 )<TypographyProps>();

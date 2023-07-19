@@ -37,7 +37,7 @@ export const ItemRowContainer = styled(
         height: 'auto',
         minHeight: size === 'small' ? 'auto' : 50,
         paddingTop: size === 'small' ? theme.spacing(1.5) : 0,
-        [`& + div.form-container`]: {
+        [`& + .${sectionItemClasses.formContainer}`]: {
             width: '100%'
         }
     }
