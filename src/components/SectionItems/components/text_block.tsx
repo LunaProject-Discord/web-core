@@ -1,8 +1,22 @@
-import { styled, TypeText, Typography, TypographyProps } from '@mui/material';
+import { Box, BoxProps, styled, TypeText, Typography, TypographyProps } from '@mui/material';
+import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 import { ItemDisabledProps } from '../index';
 
-export const ItemTextBlockRoot = styled('div')({
+export const sectionItemTextBlockClasses = {
+    root: 'SectionItemTextBlock-root',
+    primary: 'SectionItemTextBlock-primary',
+    secondary: 'SectionItemTextBlock-secondary'
+};
+
+export const ItemTextBlockRoot = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionItemTextBlockClasses.root, className)}
+            {...props}
+        />
+    )
+)<BoxProps>({
     width: '100%',
     height: '100%',
     display: 'flex',
@@ -21,8 +35,12 @@ export interface ItemTextBlockTypographyProps extends ItemTextBlockTypographyRoo
 }
 
 export const ItemTextBlockTypography = styled(
-    ({ variant, ...props }: ItemTextBlockTypographyProps) => (
-        <Typography variant={variant === 'primary' ? 'body1' : 'body2'} {...props} />
+    ({ variant, className, ...props }: ItemTextBlockTypographyProps) => (
+        <Typography
+            variant={variant === 'primary' ? 'body1' : 'body2'}
+            className={clsx(sectionItemTextBlockClasses[variant], className)}
+            {...props}
+        />
     ),
     { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'disabled' }
 )<ItemTextBlockTypographyProps>(({ theme, variant, disabled }) => ({

@@ -1,6 +1,9 @@
-import { Box, ButtonBase as MuiButtonBase, CSSObject, styled, Theme } from '@mui/material';
+import { Box, BoxProps, ButtonBase, ButtonBaseProps, CSSObject, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
+import clsx from 'clsx';
+import React from 'react';
 import { buttonActionStyled } from '../../ButtonBase';
+import { sectionItemClasses } from '../index';
 
 export const itemRootStyled = (theme: Theme): CSSObject => ({
     padding: theme.spacing(0, 1.5),
@@ -20,12 +23,27 @@ export const itemRootStyled = (theme: Theme): CSSObject => ({
 });
 
 export interface ItemRootProps {
+    className?: string;
     sx?: SxProps<Theme>;
 }
 
-export const ItemRoot = styled(Box)(({ theme }) => itemRootStyled(theme));
+export const ItemRoot = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionItemClasses.root, className)}
+            {...props}
+        />
+    )
+)<BoxProps>(({ theme }) => itemRootStyled(theme));
 
-export const ButtonItemRoot = styled(MuiButtonBase)(({ theme }) => ({
+export const ButtonItemRoot = styled(
+    ({ disabled, className, ...props }: ButtonBaseProps) => (
+        <ButtonBase
+            className={clsx(sectionItemClasses.buttonRoot, disabled && sectionItemClasses.disabled, className)}
+            {...props}
+        />
+    )
+)<ButtonBaseProps>(({ theme }) => ({
     ...itemRootStyled(theme),
     userSelect: 'none',
     ...buttonActionStyled(theme)

@@ -3,9 +3,20 @@
 import { KeyboardArrowDownOutlined, KeyboardArrowUpOutlined } from '@mui/icons-material';
 import { InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
+import clsx from 'clsx';
 import React from 'react';
 import { ButtonBase } from '../ButtonBase';
 import { ItemVariableProps } from '../SectionItems';
+
+export const numberFieldClasses = {
+    root: 'NumberField-root',
+    field: 'NumberField-field',
+    spinButton: 'NumberField-spinButton',
+    spinButtonIncrement: 'NumberField-spinButtonIncrement',
+    spinButtonDecrement: 'NumberField-spinButtonDecrement',
+
+    disabled: 'NumberField-disabled'
+};
 
 export const SpinButton = styled(ButtonBase)({
     height: 20,
@@ -18,10 +29,23 @@ export interface NumberFieldProps extends ItemVariableProps<number> {
     max?: number;
     disabled?: boolean;
     placeholder?: string;
+    className?: string;
     sx?: SxProps<Theme>;
 }
 
-export const NumberField = ({ value, setValue, step, min, max, disabled, placeholder, sx }: NumberFieldProps) => {
+export const NumberField = (
+    {
+        value,
+        setValue,
+        step,
+        min,
+        max,
+        disabled,
+        placeholder,
+        className,
+        sx
+    }: NumberFieldProps
+) => {
     const amount = step ?? 1;
     return (
         <OutlinedInput
@@ -44,7 +68,8 @@ export const NumberField = ({ value, setValue, step, min, max, disabled, placeho
             inputProps={{
                 step: amount,
                 min,
-                max
+                max,
+                className: clsx(numberFieldClasses.field, disabled && numberFieldClasses.disabled)
             }}
             disabled={disabled}
             placeholder={placeholder}
@@ -70,6 +95,7 @@ export const NumberField = ({ value, setValue, step, min, max, disabled, placeho
                         }}
                         disabled={disabled || value === max}
                         tabIndex={-1}
+                        className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonIncrement, disabled && numberFieldClasses.disabled)}
                         sx={{ borderTopRightRadius: (theme) => theme.shape.borderRadius }}
                     >
                         <KeyboardArrowUpOutlined />
@@ -81,12 +107,14 @@ export const NumberField = ({ value, setValue, step, min, max, disabled, placeho
                         }}
                         disabled={disabled || value === min}
                         tabIndex={-1}
+                        className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonDecrement, disabled && numberFieldClasses.disabled)}
                         sx={{ borderBottomRightRadius: (theme) => theme.shape.borderRadius }}
                     >
                         <KeyboardArrowDownOutlined />
                     </SpinButton>
                 </InputAdornment>
             }
+            className={clsx(numberFieldClasses.root, disabled && numberFieldClasses.disabled, className)}
             sx={{
                 p: 0,
                 [`& .${inputBaseClasses.input}`]: {

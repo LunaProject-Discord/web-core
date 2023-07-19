@@ -1,8 +1,20 @@
-import { styled, Theme } from '@mui/material';
+import { Box, BoxProps, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
+import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 
-export const ItemIconRoot = styled('div')(({ theme }) => ({
+export const sectionItemIconClasses = {
+    root: 'SectionItemIcon-root'
+};
+
+export const ItemIconRoot = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionItemIconClasses.root, className)}
+            {...props}
+        />
+    )
+)<BoxProps>(({ theme }) => ({
     minWidth: theme.spacing(3),
     display: 'flex',
     placeItems: 'center',

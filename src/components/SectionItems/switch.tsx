@@ -1,8 +1,14 @@
 'use client';
 
 import { Checkbox, Switch, switchClasses } from '@mui/material';
+import clsx from 'clsx';
 import React from 'react';
 import { ButtonItemRoot, ItemFormContainer, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
+
+export const switchItemClasses = {
+    root: 'SwitchItem-root',
+    control: 'SwitchItem-control'
+};
 
 export interface SwitchItemProps extends ItemProps {
     checked: boolean;
@@ -22,10 +28,16 @@ export const SwitchItem = (
         setChecked,
         defaultChecked,
         disabled,
+        className,
         sx
     }: SwitchItemProps
 ) => (
-    <ButtonItemRoot onClick={() => setChecked(!checked)} disabled={disabled} sx={sx}>
+    <ButtonItemRoot
+        onClick={() => setChecked(!checked)}
+        disabled={disabled}
+        className={clsx(switchItemClasses.root, className)}
+        sx={sx}
+    >
         <ItemRowContainer>
             <ItemIcon icon={icon} iconSx={iconSx} />
             <ItemTextBlock
@@ -43,12 +55,18 @@ export const SwitchItem = (
                     disabled={disabled}
                     disableRipple
                     tabIndex={-1}
+                    className={switchItemClasses.control}
                     sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
                 />
             </ItemFormContainer>
         </ItemRowContainer>
     </ButtonItemRoot>
 );
+
+export const checkItemClasses = {
+    root: 'CheckItem-root',
+    control: 'CheckItem-control'
+};
 
 export const CheckItem = (
     {
@@ -62,10 +80,16 @@ export const CheckItem = (
         setChecked,
         defaultChecked,
         disabled,
+        className,
         sx
     }: SwitchItemProps
 ) => (
-    <ButtonItemRoot onClick={() => setChecked(!checked)} disabled={disabled} sx={sx}>
+    <ButtonItemRoot
+        onClick={() => setChecked(!checked)}
+        disabled={disabled}
+        className={clsx(checkItemClasses.root, className)}
+        sx={sx}
+    >
         <ItemRowContainer>
             <Checkbox
                 checked={checked}
@@ -74,6 +98,7 @@ export const CheckItem = (
                 disabled={disabled}
                 disableRipple
                 tabIndex={-1}
+                className={checkItemClasses.control}
                 sx={{
                     p: 0,
                     display: 'flex',

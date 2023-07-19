@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import React from 'react';
 import { NumberField } from '../NumberField';
 import {
@@ -9,8 +10,14 @@ import {
     ItemRoot,
     ItemRowContainer,
     ItemTextBlock,
-    ItemVariableProps
+    ItemVariableProps,
+    sectionItemClasses
 } from './index';
+
+export const numberFieldItemClasses = {
+    root: 'NumberFieldItem-root',
+    control: 'NumberFieldItem-control'
+};
 
 export interface NumberFieldItemProps extends ItemProps, ItemVariableProps<number> {
     step?: number;
@@ -32,10 +39,11 @@ export const NumberFieldItem = (
         min,
         max,
         disabled,
+        className,
         sx
     }: NumberFieldItemProps
 ) => (
-    <ItemRoot sx={sx}>
+    <ItemRoot className={clsx(numberFieldItemClasses.root, disabled && sectionItemClasses.disabled, className)} sx={sx}>
         <ItemRowContainer size={secondary ? 'medium' : 'small'}>
             <ItemIcon icon={icon} iconSx={iconSx} />
             <ItemTextBlock
@@ -54,6 +62,7 @@ export const NumberFieldItem = (
                 min={min}
                 max={max}
                 disabled={disabled}
+                className={numberFieldItemClasses.control}
                 sx={{
                     width: {
                         xs: '100%',

@@ -5,12 +5,26 @@ import clsx from 'clsx';
 import React, { Dispatch, SetStateAction } from 'react';
 import { ItemIconProps, ItemRootProps, ItemTextBlockProps } from './components';
 
-interface ItemRowContainerProps {
+export const sectionItemClasses = {
+    root: 'SectionItem-root',
+    buttonRoot: 'SectionItem-buttonRoot',
+    rowContainer: 'SectionItem-rowContainer',
+    formContainer: 'SectionItem-formContainer',
+
+    disabled: 'SectionItem-disabled'
+};
+
+export interface ItemRowContainerProps extends BoxProps {
     size?: 'small' | 'medium';
 }
 
 export const ItemRowContainer = styled(
-    Box,
+    ({ className, ...props }: ItemRowContainerProps) => (
+        <Box
+            className={clsx(sectionItemClasses.rowContainer, className)}
+            {...props}
+        />
+    ),
     { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'size' }
 )<ItemRowContainerProps>(({ theme, size = 'medium' }) => ({
     width: '100%',
@@ -41,7 +55,12 @@ export interface ItemVariableProps<T> {
 }
 
 export const ItemFormContainer = styled(
-    ({ className, ...props }: BoxProps) => <Box {...props} className={clsx(className, 'form-container')} />
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionItemClasses.formContainer, className)}
+            {...props}
+        />
+    )
 )<BoxProps>(({ theme }) => ({
     height: 50,
     display: 'flex',

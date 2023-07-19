@@ -1,6 +1,7 @@
 'use client';
 
 import { MenuItem } from '@mui/material';
+import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 import { Select } from '../Select';
 import {
@@ -10,8 +11,14 @@ import {
     ItemRoot,
     ItemRowContainer,
     ItemTextBlock,
-    ItemVariableProps
+    ItemVariableProps,
+    sectionItemClasses
 } from './index';
+
+export const selectItemClasses = {
+    root: 'SelectItem-root',
+    control: 'SelectItem-control'
+};
 
 export interface SelectItemProps<T> extends ItemProps, ItemVariableProps<T> {
     choices: ({ value: T; children?: ReactNode; })[];
@@ -29,10 +36,11 @@ export const SelectItem = <T, >(
         setValue,
         choices,
         disabled,
+        className,
         sx
     }: SelectItemProps<T>
 ) => (
-    <ItemRoot sx={sx}>
+    <ItemRoot className={clsx(selectItemClasses.root, disabled && sectionItemClasses.disabled, className)} sx={sx}>
         <ItemRowContainer size={secondary ? 'medium' : 'small'}>
             <ItemIcon icon={icon} iconSx={iconSx} />
             <ItemTextBlock
@@ -50,6 +58,7 @@ export const SelectItem = <T, >(
                 disabled={disabled}
                 fullWidth
                 size="small"
+                className={selectItemClasses.control}
                 sx={{ minWidth: 300 }}
             >
                 {choices.map((choice) => (

@@ -1,9 +1,14 @@
 'use client';
 
 import { ArrowRightOutlined, OpenInNewOutlined } from '@mui/icons-material';
+import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import React, { HTMLAttributeAnchorTarget } from 'react';
 import { ButtonItemRoot, ItemFormContainer, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
+
+export const linkItemClasses = {
+    root: 'LinkItem-root'
+};
 
 interface Props {
     href: string;
@@ -24,12 +29,14 @@ export const LinkItem = (
         href,
         target,
         disabled,
+        className,
         sx
     }: LinkItemProps
 ) => (
     <ButtonItemRoot
         onClick={() => target ? window.open(href, target) : window.location.href = href}
         disabled={disabled}
+        className={clsx(linkItemClasses.root, className)}
         sx={sx}
     >
         <ItemRowContainer>
@@ -55,6 +62,10 @@ export const LinkItem = (
     </ButtonItemRoot>
 );
 
+export const routeLinkItemClasses = {
+    root: 'RouteLinkItem-root'
+};
+
 export interface RouteLinkItemProps extends ItemProps, Props {
     replace?: boolean;
 }
@@ -70,6 +81,7 @@ export const RouteLinkItem = (
         href,
         replace,
         disabled,
+        className,
         sx
     }: RouteLinkItemProps
 ) => {
@@ -79,6 +91,7 @@ export const RouteLinkItem = (
         <ButtonItemRoot
             onClick={() => replace ? router.replace(href) : router.push(href)}
             disabled={disabled}
+            className={clsx(routeLinkItemClasses.root, className)}
             sx={sx}
         >
             <ItemRowContainer>
