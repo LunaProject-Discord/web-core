@@ -28,13 +28,12 @@ export const ItemRowContainer = styled(
     { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'size' }
 )<ItemRowContainerProps>(({ theme, size = 'medium' }) => ({
     width: '100%',
-    height: 50,
+    minHeight: 50,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: theme.spacing(1.5),
     [theme.breakpoints.down('md')]: {
-        height: 'auto',
         minHeight: size === 'small' ? 'auto' : 50,
         paddingTop: size === 'small' ? theme.spacing(1.5) : 0,
         [`& + .${sectionItemClasses.formContainer}`]: {

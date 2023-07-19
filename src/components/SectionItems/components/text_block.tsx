@@ -46,14 +46,7 @@ export const ItemTextBlockTypography = styled(
 )<ItemTextBlockTypographyProps>(({ theme, variant, disabled }) => ({
     width: '100%',
     textAlign: 'start',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    color: !disabled ? theme.palette.text[variant] : theme.palette.text.disabled,
-    [theme.breakpoints.down('md')]: {
-        overflow: 'auto',
-        whiteSpace: 'normal'
-    }
+    color: !disabled ? theme.palette.text[variant] : theme.palette.text.disabled
 }));
 
 export interface ItemTextBlockProps {
