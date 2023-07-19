@@ -24,7 +24,7 @@ Section.defaultProps = {
 export const SectionContent = styled(
     ({ className, ...props }: BoxProps) => (
         <Box
-            className={clsx(sectionClasses.root, className)}
+            className={clsx(sectionClasses.content, className)}
             {...props}
         />
     )
