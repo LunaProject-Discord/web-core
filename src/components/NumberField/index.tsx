@@ -95,7 +95,7 @@ export const NumberField = (
                         }}
                         disabled={disabled || value === max}
                         tabIndex={-1}
-                        className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonIncrement, disabled && numberFieldClasses.disabled)}
+                        className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonIncrement, (disabled || value === max) && numberFieldClasses.disabled)}
                         sx={{ borderTopRightRadius: (theme) => theme.shape.borderRadius }}
                     >
                         <KeyboardArrowUpOutlined />
@@ -107,7 +107,7 @@ export const NumberField = (
                         }}
                         disabled={disabled || value === min}
                         tabIndex={-1}
-                        className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonDecrement, disabled && numberFieldClasses.disabled)}
+                        className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonDecrement, (disabled || value === min) && numberFieldClasses.disabled)}
                         sx={{ borderBottomRightRadius: (theme) => theme.shape.borderRadius }}
                     >
                         <KeyboardArrowDownOutlined />
