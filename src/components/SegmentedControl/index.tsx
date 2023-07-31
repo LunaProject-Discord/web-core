@@ -33,6 +33,7 @@ export interface SegmentedControlButtonProps extends ButtonBaseProps {
 export const SegmentedControlButton = styled(
     ({ disabled, className, ...props }: ButtonBaseProps) => (
         <ButtonBase
+            disabled={disabled}
             disableRipple
             className={clsx(segmentedControlClasses.button, disabled && segmentedControlClasses.disabled, className)}
             {...props}

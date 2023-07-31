@@ -39,6 +39,7 @@ export const ItemRoot = styled(
 export const ButtonItemRoot = styled(
     ({ disabled, className, ...props }: ButtonBaseProps) => (
         <ButtonBase
+            disabled={disabled}
             className={clsx(sectionItemClasses.buttonRoot, disabled && sectionItemClasses.disabled, className)}
             {...props}
         />
