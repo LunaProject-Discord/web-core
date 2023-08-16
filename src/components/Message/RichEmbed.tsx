@@ -11,6 +11,12 @@ import { EmbedFooter } from './Footer';
 import { EmbedGallery } from './Gallery';
 import { RichEmbedContainer } from './RichEmbedContainer';
 
+const richEmbedClassPrefix = 'RichEmbed';
+export const richEmbedClasses = {
+    title: `${richEmbedClassPrefix}-title`,
+    description: `${richEmbedClassPrefix}-description`
+};
+
 const EmbedGrid = styled('div')({
     padding: `${rem(8)} ${rem(16)} ${rem(16)} ${rem(12)}`,
     display: 'inline-grid',
@@ -23,7 +29,7 @@ const EmbedTitleNormal = styled('span')(({ theme }) => ({
     marginTop: 8,
     display: 'inline-block',
     gridColumn: '1 / 2',
-    [`& > ${MarkdownContainer}`]: {
+    [`& > ${MarkdownContainer}, & .${richEmbedClasses.title}`]: {
         fontSize: rem(16),
         fontWeight: 600,
         color: theme.header.primary
@@ -35,7 +41,7 @@ const EmbedTitleLink = styled(EmbedTitleNormal.withComponent('a'))(({ theme }) =
     '&:hover': {
         textDecoration: 'underline'
     },
-    [`& > ${MarkdownContainer}`]: {
+    [`& > ${MarkdownContainer}, & .${richEmbedClasses.title}`]: {
         color: theme.text.link
     }
 }));
@@ -44,7 +50,7 @@ const EmbedDescription = styled('div')(({ theme }) => ({
     minWidth: 0,
     marginTop: 8,
     gridColumn: '1 / 2',
-    [`& > ${MarkdownContainer}`]: {
+    [`& > ${MarkdownContainer}, & .${richEmbedClasses.description}`]: {
         color: theme.text.normal,
         fontSize: rem(14),
         lineHeight: rem(18),
@@ -122,15 +128,19 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
                 {hasAuthor && <EmbedAuthor embed={embed} />}
                 {hasTitle && (embed.url ? <Fragment>
                     <EmbedTitleLink href={embed.url} rel="noopener noreferrer nofollow ugc" target="_blank">
-                        <Markdown content={embed.title} type="embed-header" />
+                        <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.title} />
                     </EmbedTitleLink>
                 </Fragment> : <Fragment>
                     <EmbedTitleNormal>
-                        <Markdown content={embed.title} type="embed-header" />
+                        <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.title} />
                     </EmbedTitleNormal>
                 </Fragment>)}
                 {hasDescription && <EmbedDescription>
-                    <Markdown content={embed.description} type="embed-description" />
+                    <Markdown
+                        content={embed.description}
+                        type="embed-description"
+                        className={richEmbedClasses.description}
+                    />
                 </EmbedDescription>}
                 {fields.length > 0 && <EmbedFields>
                     {fields.map((field, i) => (
