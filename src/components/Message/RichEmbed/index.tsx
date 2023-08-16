@@ -3,28 +3,37 @@ import { Embed } from '@lunaproject-discord/web-discord';
 import Color from 'color';
 import { isValid } from 'date-fns';
 import { rem } from 'polished';
-import React, { Fragment, useEffect, useRef } from 'react';
-import { Markdown, MarkdownContainer } from '../../markdown';
-import { EmbedAuthor } from './Author';
-import { EmbedField } from './Field';
-import { EmbedFooter } from './Footer';
-import { EmbedGallery } from './Gallery';
-import { RichEmbedContainer } from './RichEmbedContainer';
+import React, { useEffect, useRef } from 'react';
+import { Markdown, MarkdownContainer } from '../../../markdown';
+import { RichEmbedAuthor } from './author';
+import { RichEmbedContainer } from './container';
+import { RichEmbedField } from './field';
+import { RichEmbedFooter } from './footer';
+import { RichEmbedGallery } from './gallery';
 
 const richEmbedClassPrefix = 'RichEmbed';
 export const richEmbedClasses = {
+    root: `${richEmbedClassPrefix}-root`,
+    titleRoot: `${richEmbedClassPrefix}-titleRoot`,
     title: `${richEmbedClassPrefix}-title`,
-    description: `${richEmbedClassPrefix}-description`
+    titleLinkRoot: `${richEmbedClassPrefix}-titleLinkRoot`,
+    titleLink: `${richEmbedClassPrefix}-titleLink`,
+    descriptionRoot: `${richEmbedClassPrefix}-descriptionRoot`,
+    description: `${richEmbedClassPrefix}-description`,
+    fields: `${richEmbedClassPrefix}-fields`,
+    image: `${richEmbedClassPrefix}-image`,
+    thumbnailRoot: `${richEmbedClassPrefix}-thumbnailRoot`,
+    thumbnail: `${richEmbedClassPrefix}-thumbnail`
 };
 
-const EmbedGrid = styled('div')({
+export const RichEmbedRoot = styled('div')({
     padding: `${rem(8)} ${rem(16)} ${rem(16)} ${rem(12)}`,
     display: 'inline-grid',
     gridTemplateColumns: 'auto',
     gridTemplateRows: 'auto'
 });
 
-const EmbedTitleNormal = styled('span')(({ theme }) => ({
+export const RichEmbedTitleNormal = styled('span')(({ theme }) => ({
     minWidth: 0,
     marginTop: 8,
     display: 'inline-block',
@@ -36,17 +45,17 @@ const EmbedTitleNormal = styled('span')(({ theme }) => ({
     }
 }));
 
-const EmbedTitleLink = styled(EmbedTitleNormal.withComponent('a'))(({ theme }) => ({
+export const RichEmbedTitleLink = styled(RichEmbedTitleNormal.withComponent('a'))(({ theme }) => ({
     textDecoration: 'none',
     '&:hover': {
         textDecoration: 'underline'
     },
-    [`& > ${MarkdownContainer}, & .${richEmbedClasses.title}`]: {
+    [`& > ${MarkdownContainer}, & .${richEmbedClasses.titleLink}`]: {
         color: theme.text.link
     }
 }));
 
-const EmbedDescription = styled('div')(({ theme }) => ({
+export const RichEmbedDescription = styled('div')(({ theme }) => ({
     minWidth: 0,
     marginTop: 8,
     gridColumn: '1 / 2',
@@ -58,7 +67,7 @@ const EmbedDescription = styled('div')(({ theme }) => ({
     }
 }));
 
-const EmbedFields = styled('div')({
+export const RichEmbedFields = styled('div')({
     minWidth: 0,
     marginTop: 8,
     display: 'grid',
@@ -66,7 +75,7 @@ const EmbedFields = styled('div')({
     gap: 8
 });
 
-const EmbedImage = styled('img')<{ thumbnail?: boolean }>(({ thumbnail }) => ({
+export const RichEmbedImage = styled('img')<{ thumbnail?: boolean; }>(({ thumbnail }) => ({
     width: '100%',
     minWidth: 0,
     maxWidth: 400,
@@ -80,7 +89,7 @@ const EmbedImage = styled('img')<{ thumbnail?: boolean }>(({ thumbnail }) => ({
     })
 }));
 
-const EmbedThumbnailContainer = styled('div')({
+export const RichEmbedThumbnailRoot = styled('div')({
     marginTop: 8,
     marginLeft: 16,
     gridRow: '1 / 8',
@@ -89,7 +98,7 @@ const EmbedThumbnailContainer = styled('div')({
     cursor: 'pointer'
 });
 
-const EmbedThumbnail = styled('img')({
+export const RichEmbedThumbnail = styled('img')({
     maxWidth: 80,
     maxHeight: 80,
     borderRadius: 4
@@ -124,33 +133,34 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
 
     return (
         <RichEmbedContainer ref={containerRef} style={{ borderColor: color }}>
-            <EmbedGrid>
-                {hasAuthor && <EmbedAuthor embed={embed} />}
-                {hasTitle && (embed.url ? <Fragment>
-                    <EmbedTitleLink href={embed.url} rel="noopener noreferrer nofollow ugc" target="_blank">
-                        <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.title} />
-                    </EmbedTitleLink>
-                </Fragment> : <Fragment>
-                    <EmbedTitleNormal>
-                        <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.title} />
-                    </EmbedTitleNormal>
-                </Fragment>)}
-                {hasDescription && <EmbedDescription>
+            <RichEmbedRoot className={richEmbedClasses.root}>
+                {hasAuthor && <RichEmbedAuthor embed={embed} />}
+                {hasTitle && (embed.url ? <RichEmbedTitleLink
+                    href={embed.url}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow ugc"
+                    className={richEmbedClasses.titleLinkRoot}
+                >
+                    <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.titleLink} />
+                </RichEmbedTitleLink> : <RichEmbedTitleNormal className={richEmbedClasses.titleRoot}>
+                    <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.title} />
+                </RichEmbedTitleNormal>)}
+                {hasDescription && <RichEmbedDescription className={richEmbedClasses.descriptionRoot}>
                     <Markdown
                         content={embed.description}
                         type="embed-description"
                         className={richEmbedClasses.description}
                     />
-                </EmbedDescription>}
-                {fields.length > 0 && <EmbedFields>
+                </RichEmbedDescription>}
+                {fields.length > 0 && <RichEmbedFields className={richEmbedClasses.fields}>
                     {fields.map((field, i) => (
-                        <EmbedField key={field._id ?? i} field={field} embed={embed} />
+                        <RichEmbedField key={field._id ?? i} field={field} embed={embed} />
                     ))}
-                </EmbedFields>}
+                </RichEmbedFields>}
                 {images.length > 1 ? (
-                    <EmbedGallery embed={embed} />
+                    <RichEmbedGallery embed={embed} />
                 ) : images.length === 1 ? (
-                    <EmbedImage
+                    <RichEmbedImage
                         ref={imageRef}
                         src={images[0]}
                         alt="Image"
@@ -163,13 +173,20 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
                             const { width } = image.getBoundingClientRect();
                             container.style.maxWidth = width >= 300 ? `${width + 32}px` : '';
                         }}
+                        className={richEmbedClasses.image}
                     />
                 ) : undefined}
-                {hasFooter && <EmbedFooter embed={embed} />}
-                {thumbnail && <EmbedThumbnailContainer>
-                    <EmbedThumbnail src={thumbnail} alt="Thumbnail" />
-                </EmbedThumbnailContainer>}
-            </EmbedGrid>
+                {hasFooter && <RichEmbedFooter embed={embed} />}
+                {thumbnail && <RichEmbedThumbnailRoot className={richEmbedClasses.thumbnailRoot}>
+                    <RichEmbedThumbnail src={thumbnail} alt="Thumbnail" className={richEmbedClasses.thumbnail} />
+                </RichEmbedThumbnailRoot>}
+            </RichEmbedRoot>
         </RichEmbedContainer>
     );
 };
+
+export * from './author';
+export * from './container';
+export * from './field';
+export * from './footer';
+export * from './gallery';
