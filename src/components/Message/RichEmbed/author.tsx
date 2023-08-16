@@ -30,7 +30,7 @@ export const RichEmbedAuthorNameNormal = styled('span')(({ theme }) => ({
     display: 'inline-block',
     color: theme.header.primary,
     fontSize: rem(14),
-    fontWeight: 500,
+    fontWeight: 600,
     whiteSpace: 'pre-wrap',
     '@media (max-resolution: 1dppx)': {
         fontWeight: 500
