@@ -44,6 +44,9 @@ const Content = styled(Markdown)<{ direction: 'neutral' | 'ltr' | 'rtl' }>(({ th
             textAlign: 'left',
             unicodeBidi: 'plaintext'
         }
+    }),
+    ...(theme.appearance.display === 'compact' && {
+        textIndent: 0
     })
 }));
 
