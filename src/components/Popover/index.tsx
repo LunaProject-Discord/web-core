@@ -1,10 +1,16 @@
 'use client';
 
-import { Popover as MuiPopover, popoverClasses, styled } from '@mui/material';
+import { Popover as MuiPopover, popoverClasses, PopoverProps as MuiPopoverProps, styled } from '@mui/material';
+import { Dispatch, SetStateAction } from 'react';
+import { borderAndBoxShadow } from '../../utils';
+import { ModalProps } from '../DialogV2';
+
+export interface PopoverProps extends Partial<ModalProps>, Partial<Pick<MuiPopoverProps, 'anchorEl' | 'anchorOrigin' | 'anchorPosition' | 'anchorReference' | 'transformOrigin'>> {
+    setAnchorEl?: Dispatch<SetStateAction<MuiPopoverProps['anchorEl']>>;
+}
 
 export const Popover = styled(MuiPopover)(({ theme }) => ({
     [`& .${popoverClasses.paper}`]: {
-        border: `solid 1px ${theme.palette.divider}`,
-        boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`
+        ...borderAndBoxShadow(theme)
     }
 }));

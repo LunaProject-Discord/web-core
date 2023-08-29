@@ -9,6 +9,7 @@ export interface BaseProps {
 export * from './AppBar';
 export * from './ButtonBase';
 export * from './Dialog';
+export * from './DialogV2';
 export * from './Drawer';
 export * from './Gallery';
 export * from './Icons';
