@@ -1,54 +1,55 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "allowJs": true,
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationMap": true,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "incremental": true,
+        "isolatedModules": true,
+        "jsx": "react",
         "lib": [
             "dom",
             "dom.iterable",
             "esnext"
         ],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "alwaysStrict": true,
-        "forceConsistentCasingInFileNames": true,
-        // "noEmit": true,
-        "esModuleInterop": true,
         "module": "commonjs",
         "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "react",
+        // "noEmit": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
-        "strictNullChecks": true,
-        "downlevelIteration": true,
+        "outDir": "./dist",
         "plugins": [
             {
                 "name": "next"
             }
         ],
-        "types": [
-            "node"
-        ],
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "es5",
         "typeRoots": [
             "src/@types"
         ],
-        "incremental": true,
-        "declaration": true,
-        "outDir": "./dist"
+        "types": [
+            "node"
+        ]
     },
-    "ts-node": {
-        "compilerOptions": {
-            "target": "es5",
-            "module": "commonjs"
-        }
-    },
+    "exclude": [
+        ".yarn/**/*",
+        "node_modules/**/*"
+    ],
     "include": [
         "next-env.d.ts",
         "src/**/*"
     ],
-    "exclude": [
-        ".yarn",
-        "node_modules"
-    ]
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs",
+            "target": "es5"
+        }
+    }
 }
