@@ -1,6 +1,89 @@
 import { createTheme, PaletteOptions, Theme } from '@mui/material';
 import { blue, green, indigo, orange, pink, red } from '@mui/material/colors';
+import { Components } from '@mui/material/styles/components';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
+
+export const MuiComponents: Components<Omit<Theme, 'components'>> = {
+    MuiButton: {
+        styleOverrides: {
+            root: {
+                textTransform: 'none'
+            }
+        }
+    },
+    MuiChip: {
+        variants: [
+            {
+                props: {
+                    variant: 'rounded'
+                },
+                style: ({ theme }) => ({
+                    fontWeight: 500,
+                    borderRadius: theme.shape.borderRadius
+                })
+            },
+            {
+                props: {
+                    variant: 'rounded',
+                    color: 'info'
+                },
+                style: ({ theme }) => ({
+                    color: blue[theme.palette.mode === 'light' ? 900 : 100],
+                    backgroundColor: blue[theme.palette.mode === 'light' ? 100 : 900]
+                })
+            },
+            {
+                props: {
+                    variant: 'rounded',
+                    color: 'error'
+                },
+                style: ({ theme }) => ({
+                    color: red[theme.palette.mode === 'light' ? 900 : 100],
+                    backgroundColor: red[theme.palette.mode === 'light' ? 100 : 900]
+                })
+            },
+            {
+                props: {
+                    variant: 'rounded',
+                    color: 'warning'
+                },
+                style: ({ theme }) => ({
+                    color: orange[theme.palette.mode === 'light' ? 900 : 100],
+                    backgroundColor: orange[theme.palette.mode === 'light' ? 100 : 900]
+                })
+            },
+            {
+                props: {
+                    variant: 'rounded',
+                    color: 'success'
+                },
+                style: ({ theme }) => ({
+                    color: green[theme.palette.mode === 'light' ? 900 : 100],
+                    backgroundColor: green[theme.palette.mode === 'light' ? 100 : 900]
+                })
+            }
+        ]
+    },
+    MuiInputBase: {
+        styleOverrides: {
+            input: {
+                '&:placeholder-shown': {
+                    textOverflow: 'ellipsis'
+                }
+            }
+        }
+    },
+    MuiTooltip: {
+        defaultProps: {
+            placement: 'top'
+        },
+        styleOverrides: {
+            popper: {
+                userSelect: 'none'
+            }
+        }
+    }
+};
 
 export const MuiPalette: PaletteOptions = {
     primary: {
@@ -40,6 +123,7 @@ export const MuiTypography: TypographyOptions = {
 };
 
 export const MuiLightTheme = createTheme({
+    components: MuiComponents,
     palette: {
         ...MuiPalette,
         mode: 'light'
@@ -48,8 +132,14 @@ export const MuiLightTheme = createTheme({
 });
 
 export const MuiDarkTheme = createTheme({
+    components: MuiComponents,
     palette: {
         ...MuiPalette,
+        primary: {
+            light: indigo.A200,
+            main: indigo.A400,
+            dark: indigo.A700
+        },
         mode: 'dark'
     },
     typography: MuiTypography
