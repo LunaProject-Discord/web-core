@@ -17,6 +17,7 @@ const IGNORED_META_KEYS = ['Control', 'Alt', 'Meta', 'Tab', 'CapsLock', 'Shift',
 export const PinFieldInput = styled(
     ({ disabled, className, ...props }: InputHTMLAttributes<HTMLInputElement>) => (
         <Box
+            component="input"
             className={clsx(pinFieldClasses.input, disabled && pinFieldClasses.disabled, className)}
             {...props}
         />
