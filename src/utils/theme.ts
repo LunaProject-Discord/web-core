@@ -84,8 +84,11 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                                 p: 1
                             },
                             [`& .${menuItemClasses.root}`]: {
-                                px: 1,
-                                borderRadius: 1
+                                px: 1.5,
+                                borderRadius: 1,
+                                [theme.breakpoints.up('sm')]: {
+                                    px: 1
+                                }
                             }
                         })
                     }
