@@ -1,4 +1,4 @@
-import { createTheme, PaletteOptions, Theme } from '@mui/material';
+import { createTheme, menuClasses, menuItemClasses, PaletteOptions, Theme } from '@mui/material';
 import { blue, green, indigo, orange, pink, red } from '@mui/material/colors';
 import { Components } from '@mui/material/styles/components';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
@@ -69,6 +69,26 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             input: {
                 '&:placeholder-shown': {
                     textOverflow: 'ellipsis'
+                }
+            }
+        }
+    },
+    MuiSelect: {
+        defaultProps: {
+            MenuProps: {
+                slotProps: {
+                    paper: {
+                        sx: (theme) => ({
+                            ...borderAndBoxShadow(theme),
+                            [`& .${menuClasses.list}`]: {
+                                p: 1
+                            },
+                            [`& .${menuItemClasses.root}`]: {
+                                px: 1,
+                                borderRadius: 1
+                            }
+                        })
+                    }
                 }
             }
         }

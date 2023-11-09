@@ -1,9 +1,8 @@
 'use client';
 
-import { MenuItem } from '@mui/material';
+import { MenuItem, Select } from '@mui/material';
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
-import { Select } from '../Select';
 import {
     ItemFormContainer,
     ItemIcon,
