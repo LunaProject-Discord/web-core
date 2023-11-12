@@ -5,43 +5,6 @@ import clsx from 'clsx';
 import React, { Dispatch, SetStateAction } from 'react';
 import { ItemIconProps, ItemRootProps, ItemTextBlockProps } from './components';
 
-export const sectionItemClasses = {
-    root: 'SectionItem-root',
-    buttonRoot: 'SectionItem-buttonRoot',
-    rowContainer: 'SectionItem-rowContainer',
-    formContainer: 'SectionItem-formContainer',
-
-    disabled: 'SectionItem-disabled'
-};
-
-export interface ItemRowContainerProps extends BoxProps {
-    size?: 'small' | 'medium';
-}
-
-export const ItemRowContainer = styled(
-    ({ className, ...props }: ItemRowContainerProps) => (
-        <Box
-            className={clsx(sectionItemClasses.rowContainer, className)}
-            {...props}
-        />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'size' }
-)<ItemRowContainerProps>(({ theme, size = 'medium' }) => ({
-    width: '100%',
-    minHeight: 50,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    gap: theme.spacing(1.5),
-    [theme.breakpoints.down('md')]: {
-        minHeight: size === 'small' ? 'auto' : 50,
-        paddingTop: size === 'small' ? theme.spacing(1.5) : 0,
-        [`& + .${sectionItemClasses.formContainer}`]: {
-            width: '100%'
-        }
-    }
-}));
-
 export type ItemProps = ItemRootProps & ItemIconProps & ItemTextBlockProps & ItemDisabledProps;
 
 export interface ItemDisabledProps {
@@ -52,6 +15,42 @@ export interface ItemVariableProps<T> {
     value: T;
     setValue: Dispatch<SetStateAction<T>>;
 }
+
+export const sectionItemClasses = {
+    root: 'SectionItem-root',
+    buttonRoot: 'SectionItem-buttonRoot',
+    rowContainer: 'SectionItem-rowContainer',
+    formContainer: 'SectionItem-formContainer',
+
+    disabled: 'SectionItem-disabled'
+};
+
+export interface ItemRowContainerProps extends BoxProps {
+    dense?: boolean;
+}
+
+export const ItemRowContainer = styled(
+    ({ className, ...props }: ItemRowContainerProps) => (
+        <Box
+            className={clsx(sectionItemClasses.rowContainer, className)}
+            {...props}
+        />
+    ),
+    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'dense' }
+)<ItemRowContainerProps>(({ theme, dense = false }) => ({
+    width: '100%',
+    minHeight: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: theme.spacing(1.5),
+    [theme.breakpoints.down('md')]: {
+        marginBottom: dense ? theme.spacing(-2.5) : 0,
+        [`& + .${sectionItemClasses.formContainer}`]: {
+            width: '100%'
+        }
+    }
+}));
 
 export const ItemFormContainer = styled(
     ({ className, ...props }: BoxProps) => (

@@ -40,7 +40,7 @@ export const SelectItem = <T, >(
     }: SelectItemProps<T>
 ) => (
     <ItemRoot className={clsx(selectItemClasses.root, disabled && sectionItemClasses.disabled, className)} sx={sx}>
-        <ItemRowContainer size={secondary ? 'medium' : 'small'}>
+        <ItemRowContainer dense={!secondary}>
             <ItemIcon icon={icon} iconSx={iconSx} />
             <ItemTextBlock
                 primary={primary}

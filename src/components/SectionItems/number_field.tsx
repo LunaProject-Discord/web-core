@@ -44,7 +44,7 @@ export const NumberFieldItem = (
     }: NumberFieldItemProps
 ) => (
     <ItemRoot className={clsx(numberFieldItemClasses.root, disabled && sectionItemClasses.disabled, className)} sx={sx}>
-        <ItemRowContainer size={secondary ? 'medium' : 'small'}>
+        <ItemRowContainer dense={!secondary}>
             <ItemIcon icon={icon} iconSx={iconSx} />
             <ItemTextBlock
                 primary={primary}
