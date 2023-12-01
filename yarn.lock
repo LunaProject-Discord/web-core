@@ -324,7 +324,7 @@ __metadata:
     "@discordjs/rest": "npm:2.0.1"
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
-    "@lunaproject/web-discord": "npm:1.1.1"
+    "@lunaproject/web-discord": "npm:1.1.2"
     "@mui/icons-material": "npm:5.14.16"
     "@mui/lab": "npm:5.0.0-alpha.152"
     "@mui/material": "npm:5.14.17"
@@ -350,10 +350,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lunaproject/web-discord@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@lunaproject/web-discord@npm:1.1.1"
-  checksum: e7462b64d616e419f00ab25a91d9a64513f10c7179f30be400aa9b46b9c24917108e8c8c78a6e7cc10cf13e96e17ff88a5f4caa0d5f2af3f2a7f236b730a13e5
+"@lunaproject/web-discord@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@lunaproject/web-discord@npm:1.1.2"
+  checksum: 2fcd3225222ad1650498affb5ca084a0bedf5bc0440c4144330049ab3cfafe570a37595e345f78b5e2fd34e9a5928cc5e0daca5fb704ce8fe298490ec928bda2
   languageName: node
   linkType: hard
 
