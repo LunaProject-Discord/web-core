@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Embed, EmbedField as Field } from '@lunaproject-discord/web-discord';
+import { Embed, EmbedField as Field } from '@lunaproject/web-discord';
 import { rem } from 'polished';
 import React from 'react';
 import { getFieldGridColumn } from '../../../libs';

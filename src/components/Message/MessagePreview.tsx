@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Message } from '@lunaproject-discord/web-discord';
+import { Message } from '@lunaproject/web-discord';
 import dynamic from 'next/dynamic';
 import { rem } from 'polished';
 import React, { Fragment } from 'react';

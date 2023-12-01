@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Embed } from '@lunaproject-discord/web-discord';
+import { Embed } from '@lunaproject/web-discord';
 import { Box } from '@mui/material';
 import { size } from 'polished';
 import React from 'react';

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Embed } from '@lunaproject-discord/web-discord';
+import { Embed } from '@lunaproject/web-discord';
 import Color from 'color';
 import { isValid } from 'date-fns';
 import { rem } from 'polished';

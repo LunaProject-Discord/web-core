@@ -1,4 +1,4 @@
-import { Embed, EmbedField } from '@lunaproject-discord/web-discord';
+import { Embed, EmbedField } from '@lunaproject/web-discord';
 
 const MAX_FIELDS_PER_ROW = 3;
 const FIELD_GRID_SIZE = 12;

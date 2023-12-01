@@ -1,4 +1,4 @@
-import { Message } from '@lunaproject-discord/web-discord';
+import { Message } from '@lunaproject/web-discord';
 import React from 'react';
 import { MessageContainer } from './MessageContainer';
 import { MessagePreview } from './MessagePreview';
