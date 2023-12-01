@@ -1,16 +1,13 @@
 {
-    "name": "@lunaproject-discord/web-core",
+    "name": "@lunaproject/web-core",
     "version": "1.4.3",
-    "packageManager": "yarn@3.6.3",
+    "packageManager": "yarn@4.0.2",
     "volta": {
         "node": "18.17.1",
-        "yarn": "3.6.3"
+        "yarn": "4.0.2"
     },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com/LunaProject-Discord"
-    },
     "repository": {
         "type": "git",
         "url": "https://github.com/LunaProject-Discord/web-core.git"
@@ -22,7 +19,7 @@
         "@discordjs/rest": "2.0.1",
         "@emotion/react": "11.11.1",
         "@emotion/styled": "11.11.0",
-        "@lunaproject-discord/web-discord": "1.0.14",
+        "@lunaproject/web-discord": "1.1.0",
         "@mui/icons-material": "5.14.16",
         "@mui/lab": "5.0.0-alpha.152",
         "@mui/material": "5.14.17",
