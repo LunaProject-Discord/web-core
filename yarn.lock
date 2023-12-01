@@ -324,7 +324,7 @@ __metadata:
     "@discordjs/rest": "npm:2.0.1"
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
-    "@lunaproject/web-discord": "npm:1.1.0"
+    "@lunaproject/web-discord": "npm:1.1.1"
     "@mui/icons-material": "npm:5.14.16"
     "@mui/lab": "npm:5.0.0-alpha.152"
     "@mui/material": "npm:5.14.17"
@@ -336,7 +336,7 @@ __metadata:
     clsx: "npm:2.0.0"
     color: "npm:4.2.3"
     date-fns: "npm:2.30.0"
-    discord-api-types: "npm:0.37.63"
+    discord-api-types: "npm:0.37.65"
     highlight.js: "npm:10.7.3"
     next: "npm:14.0.1"
     polished: "npm:4.2.2"
@@ -350,10 +350,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lunaproject/web-discord@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@lunaproject/web-discord@npm:1.1.0"
-  checksum: 5b14b1af1253f3fc197de7408eaaf2d40f7e4bed5033e96427ac87ef5e0fc4778885cc875a00fab258bdda1f61eee9f4bd65d19a4755b8a497a5f9c50b2ecd1d
+"@lunaproject/web-discord@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@lunaproject/web-discord@npm:1.1.1"
+  checksum: e7462b64d616e419f00ab25a91d9a64513f10c7179f30be400aa9b46b9c24917108e8c8c78a6e7cc10cf13e96e17ff88a5f4caa0d5f2af3f2a7f236b730a13e5
   languageName: node
   linkType: hard
 
@@ -1100,10 +1100,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:0.37.63":
-  version: 0.37.63
-  resolution: "discord-api-types@npm:0.37.63"
-  checksum: 37b35be2ce97f6cff6fe05ebdc88edebdcc5ac5c81f24b9c9f0639da7d235ebc7e13a24e9e55ae513bb84984dcb18e439694e449f2841b899b0a9030f9fee2c8
+"discord-api-types@npm:0.37.65":
+  version: 0.37.65
+  resolution: "discord-api-types@npm:0.37.65"
+  checksum: 4bb650463434efc10b1788500191edeefb0626cf682a9d49fcf094699d887f85b29ec439083672c9f79c9fcdc6d88c9974881ab28f65aac00b5aeaf0e01af855
   languageName: node
   linkType: hard
 
