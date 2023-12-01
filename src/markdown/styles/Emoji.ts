@@ -3,6 +3,7 @@ import { em, rem, size } from 'polished';
 import { RichEmbedContainer } from '../../components';
 
 const Emoji = styled('img')<{ big?: boolean }>(({ theme, big }) => ({
+    display: 'inline',
     ...size(em(22)),
     objectFit: 'contain',
     verticalAlign: 'bottom',
