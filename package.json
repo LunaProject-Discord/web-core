@@ -1,6 +1,6 @@
 {
     "name": "@lunaproject/web-core",
-    "version": "1.5.3",
+    "version": "1.5.4",
     "license": "GPL-3.0",
     "packageManager": "yarn@4.0.2",
     "volta": {
