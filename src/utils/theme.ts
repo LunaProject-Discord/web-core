@@ -1,15 +1,67 @@
-import { createTheme, menuClasses, menuItemClasses, PaletteOptions, Theme } from '@mui/material';
+import {
+    alertClasses,
+    AlertProps,
+    buttonClasses,
+    createTheme,
+    darken,
+    lighten,
+    menuClasses,
+    menuItemClasses,
+    PaletteOptions,
+    Theme
+} from '@mui/material';
 import { blue, green, indigo, orange, pink, red } from '@mui/material/colors';
 import { Components } from '@mui/material/styles/components';
+import { dark, light } from '@mui/material/styles/createPalette';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { rgba } from 'polished';
 
 export const MuiComponents: Components<Omit<Theme, 'components'>> = {
+    MuiAlert: {
+        styleOverrides: {
+            standard: ({ theme, ownerState }) => {
+                const getColor = theme.palette.mode === 'light' ? lighten : darken;
+                const getBackgroundColor = theme.palette.mode === 'light' ? darken : lighten;
+                const color: AlertProps['color'] = ownerState.color || ownerState.severity || 'success';
+
+                return {
+                    [`& .${alertClasses.message} .${buttonClasses.root}.${buttonClasses.containedInherit}`]: {
+                        color: getColor(theme.palette[color].light, .9),
+                        backgroundColor: getBackgroundColor(theme.palette[color].light, .6)
+                    }
+                };
+            }
+        }
+    },
     MuiButton: {
+        defaultProps: {
+            color: 'monotone'
+        },
         styleOverrides: {
             root: {
                 textTransform: 'none'
             }
-        }
+        },
+        variants: [
+            {
+                props: {
+                    variant: 'contained',
+                    color: 'monotone'
+                },
+                style: ({ theme }) => ({
+                    [`&:disabled, &.${buttonClasses.disabled}`]: {
+                        color: theme.palette.mode === 'light' ? rgba(0, 0, 0, .26) : rgba(255, 255, 255, .3),
+                        backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .12) : rgba(255, 255, 255, .12)
+                    },
+                    '&:hover': {
+                        backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .7) : rgba(255, 255, 255, .85)
+                    },
+                    [`&:active, &.${buttonClasses.focusVisible}`]: {
+                        backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .65) : rgba(255, 255, 255, .8)
+                    }
+                })
+            }
+        ]
     },
     MuiChip: {
         variants: [
@@ -63,6 +115,11 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                 })
             }
         ]
+    },
+    MuiCircularProgress: {
+        defaultProps: {
+            color: 'monotone'
+        }
     },
     MuiInputBase: {
         styleOverrides: {
@@ -149,6 +206,12 @@ export const MuiLightTheme = createTheme({
     components: MuiComponents,
     palette: {
         ...MuiPalette,
+        monotone: {
+            light: light.text.primary,
+            main: light.text.primary,
+            dark: dark.text.primary,
+            contrastText: dark.text.primary
+        },
         mode: 'light'
     },
     typography: MuiTypography
@@ -162,6 +225,12 @@ export const MuiDarkTheme = createTheme({
             light: indigo.A200,
             main: indigo.A400,
             dark: indigo.A700
+        },
+        monotone: {
+            light: light.text.primary,
+            main: dark.text.primary,
+            dark: dark.text.primary,
+            contrastText: light.text.primary
         },
         mode: 'dark'
     },
