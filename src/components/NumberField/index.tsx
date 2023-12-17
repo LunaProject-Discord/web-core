@@ -6,7 +6,7 @@ import { SxProps } from '@mui/system';
 import clsx from 'clsx';
 import React from 'react';
 import { ButtonBase } from '../ButtonBase';
-import { ItemVariableProps } from '../SectionItems';
+import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
 export const numberFieldClasses = {
     root: 'NumberField-root',
@@ -23,11 +23,11 @@ export const SpinButton = styled(ButtonBase)({
     borderRadius: 0
 });
 
-export interface NumberFieldProps extends ItemVariableProps<number> {
+export interface NumberFieldProps extends ItemDisabledProps, ItemVariableProps<number> {
+    pattern?: string;
     step?: number;
     min?: number;
     max?: number;
-    disabled?: boolean;
     placeholder?: string;
     className?: string;
     sx?: SxProps<Theme>;
@@ -37,11 +37,12 @@ export const NumberField = (
     {
         value,
         setValue,
+        pattern,
         step,
         min,
         max,
-        disabled,
         placeholder,
+        disabled,
         className,
         sx
     }: NumberFieldProps
@@ -66,13 +67,14 @@ export const NumberField = (
             }}
             type="number"
             inputProps={{
+                pattern,
                 step: amount,
                 min,
                 max,
                 className: clsx(numberFieldClasses.field, disabled && numberFieldClasses.disabled)
             }}
-            disabled={disabled}
             placeholder={placeholder}
+            disabled={disabled}
             size="small"
             margin="none"
             endAdornment={

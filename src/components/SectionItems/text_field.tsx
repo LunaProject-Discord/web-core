@@ -20,8 +20,10 @@ export const textFieldItemClasses = {
 };
 
 export interface TextFieldProps extends ItemProps, ItemVariableProps<string> {
+    pattern?: string;
     minLength?: number;
     maxLength?: number;
+    placeholder?: string;
 }
 
 export const TextFieldItem = (
@@ -34,8 +36,10 @@ export const TextFieldItem = (
         secondaryTypographyProps,
         value,
         setValue,
+        pattern,
         minLength,
         maxLength,
+        placeholder,
         disabled,
         className,
         sx
@@ -58,9 +62,11 @@ export const TextFieldItem = (
                 onChange={(e) => setValue(e.target.value)}
                 type="text"
                 inputProps={{
+                    pattern,
                     minLength,
                     maxLength
                 }}
+                placeholder={placeholder}
                 disabled={disabled}
                 size="small"
                 margin="none"

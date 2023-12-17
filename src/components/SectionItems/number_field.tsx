@@ -20,9 +20,11 @@ export const numberFieldItemClasses = {
 };
 
 export interface NumberFieldItemProps extends ItemProps, ItemVariableProps<number> {
+    pattern?: string;
     step?: number;
     min?: number;
     max?: number;
+    placeholder?: string;
 }
 
 export const NumberFieldItem = (
@@ -35,9 +37,11 @@ export const NumberFieldItem = (
         secondaryTypographyProps,
         value,
         setValue,
+        pattern,
         step,
         min,
         max,
+        placeholder,
         disabled,
         className,
         sx
@@ -58,9 +62,11 @@ export const NumberFieldItem = (
             <NumberField
                 value={value}
                 setValue={setValue}
+                pattern={pattern}
                 step={step}
                 min={min}
                 max={max}
+                placeholder={placeholder}
                 disabled={disabled}
                 className={numberFieldItemClasses.control}
                 sx={{
