@@ -2,11 +2,11 @@ import { ArrowDownwardOutlined, ArrowRightOutlined, ArrowUpwardOutlined, OpenInN
 import { SvgIcon } from '@mui/material';
 import { createContext } from 'react';
 
-type ConfigIconKeys = 'More' | 'OpenInNew' | 'Increment' | 'Decrement';
+export type ConfigIconKeys = 'More' | 'OpenInNew' | 'Increment' | 'Decrement';
 
-type ConfigIcons = { [key in ConfigIconKeys]: typeof SvgIcon };
+export type ConfigIcons = { [key in ConfigIconKeys]: typeof SvgIcon };
 
-interface Config {
+export interface Config {
     icons: ConfigIcons;
 }
 
