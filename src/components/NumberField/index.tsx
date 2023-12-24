@@ -1,10 +1,10 @@
 'use client';
 
-import { KeyboardArrowDownOutlined, KeyboardArrowUpOutlined } from '@mui/icons-material';
 import { InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useContext } from 'react';
+import { ConfigContext } from '../../utils/config';
 import { ButtonBase } from '../ButtonBase';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
@@ -47,6 +47,8 @@ export const NumberField = (
         sx
     }: NumberFieldProps
 ) => {
+    const { icons: { Decrement, Increment } } = useContext(ConfigContext);
+
     const amount = step ?? 1;
     return (
         <OutlinedInput
@@ -100,7 +102,7 @@ export const NumberField = (
                         className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonIncrement, (disabled || value === max) && numberFieldClasses.disabled)}
                         sx={{ borderTopRightRadius: (theme) => theme.shape.borderRadius }}
                     >
-                        <KeyboardArrowUpOutlined />
+                        <Increment />
                     </SpinButton>
                     <SpinButton
                         onClick={() => {
@@ -112,7 +114,7 @@ export const NumberField = (
                         className={clsx(numberFieldClasses.spinButton, numberFieldClasses.spinButtonDecrement, (disabled || value === min) && numberFieldClasses.disabled)}
                         sx={{ borderBottomRightRadius: (theme) => theme.shape.borderRadius }}
                     >
-                        <KeyboardArrowDownOutlined />
+                        <Decrement />
                     </SpinButton>
                 </InputAdornment>
             }

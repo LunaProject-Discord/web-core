@@ -1,9 +1,9 @@
 'use client';
 
-import { ArrowRightOutlined, OpenInNewOutlined } from '@mui/icons-material';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import React, { HTMLAttributeAnchorTarget } from 'react';
+import React, { HTMLAttributeAnchorTarget, useContext } from 'react';
+import { ConfigContext } from '../../utils/config';
 import { ButtonItemRoot, ItemFormContainer, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
 
 export const linkItemClasses = {
@@ -32,35 +32,39 @@ export const LinkItem = (
         className,
         sx
     }: LinkItemProps
-) => (
-    <ButtonItemRoot
-        onClick={() => target ? window.open(href, target) : window.location.href = href}
-        disabled={disabled}
-        className={clsx(linkItemClasses.root, className)}
-        sx={sx}
-    >
-        <ItemRowContainer>
-            <ItemIcon icon={icon} iconSx={iconSx} />
-            <ItemTextBlock
-                primary={primary}
-                secondary={secondary}
-                primaryTypographyProps={primaryTypographyProps}
-                secondaryTypographyProps={secondaryTypographyProps}
-                disabled={disabled}
-            />
-            <ItemFormContainer>
-                <ItemIcon
-                    icon={
-                        target === '_blank' ?
-                            <OpenInNewOutlined color={!disabled ? 'action' : 'disabled'} />
-                            :
-                            <ArrowRightOutlined color={!disabled ? 'action' : 'disabled'} />
-                    }
+) => {
+    const { icons: { More, OpenInNew } } = useContext(ConfigContext);
+
+    return (
+        <ButtonItemRoot
+            onClick={() => target ? window.open(href, target) : window.location.href = href}
+            disabled={disabled}
+            className={clsx(linkItemClasses.root, className)}
+            sx={sx}
+        >
+            <ItemRowContainer>
+                <ItemIcon icon={icon} iconSx={iconSx} />
+                <ItemTextBlock
+                    primary={primary}
+                    secondary={secondary}
+                    primaryTypographyProps={primaryTypographyProps}
+                    secondaryTypographyProps={secondaryTypographyProps}
+                    disabled={disabled}
                 />
-            </ItemFormContainer>
-        </ItemRowContainer>
-    </ButtonItemRoot>
-);
+                <ItemFormContainer>
+                    <ItemIcon
+                        icon={
+                            target === '_blank' ?
+                                <OpenInNew color={!disabled ? 'action' : 'disabled'} />
+                                :
+                                <More color={!disabled ? 'action' : 'disabled'} />
+                        }
+                    />
+                </ItemFormContainer>
+            </ItemRowContainer>
+        </ButtonItemRoot>
+    );
+};
 
 export const routeLinkItemClasses = {
     root: 'RouteLinkItem-root'
@@ -87,6 +91,8 @@ export const RouteLinkItem = (
 ) => {
     const router = useRouter();
 
+    const { icons: { More } } = useContext(ConfigContext);
+
     return (
         <ButtonItemRoot
             onClick={() => replace ? router.replace(href) : router.push(href)}
@@ -104,7 +110,7 @@ export const RouteLinkItem = (
                     disabled={disabled}
                 />
                 <ItemFormContainer>
-                    <ItemIcon icon={<ArrowRightOutlined color={!disabled ? 'action' : 'disabled'} />} />
+                    <ItemIcon icon={<More color={!disabled ? 'action' : 'disabled'} />} />
                 </ItemFormContainer>
             </ItemRowContainer>
         </ButtonItemRoot>

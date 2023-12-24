@@ -1,8 +1,8 @@
 'use client';
 
-import { ArrowRightOutlined } from '@mui/icons-material';
 import clsx from 'clsx';
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useContext } from 'react';
+import { ConfigContext } from '../../utils/config';
 import { ButtonItemRoot, ItemFormContainer, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
 
 export const actionItemClasses = {
@@ -26,25 +26,29 @@ export const ActionItem = (
         className,
         sx
     }: ActionItemProps
-) => (
-    <ButtonItemRoot
-        onClick={onAction}
-        disabled={disabled}
-        className={clsx(actionItemClasses.root, className)}
-        sx={sx}
-    >
-        <ItemRowContainer>
-            <ItemIcon icon={icon} iconSx={iconSx} />
-            <ItemTextBlock
-                primary={primary}
-                secondary={secondary}
-                primaryTypographyProps={primaryTypographyProps}
-                secondaryTypographyProps={secondaryTypographyProps}
-                disabled={disabled}
-            />
-            <ItemFormContainer>
-                <ItemIcon icon={<ArrowRightOutlined color={!disabled ? 'action' : 'disabled'} />} />
-            </ItemFormContainer>
-        </ItemRowContainer>
-    </ButtonItemRoot>
-);
+) => {
+    const { icons: { More } } = useContext(ConfigContext);
+
+    return (
+        <ButtonItemRoot
+            onClick={onAction}
+            disabled={disabled}
+            className={clsx(actionItemClasses.root, className)}
+            sx={sx}
+        >
+            <ItemRowContainer>
+                <ItemIcon icon={icon} iconSx={iconSx} />
+                <ItemTextBlock
+                    primary={primary}
+                    secondary={secondary}
+                    primaryTypographyProps={primaryTypographyProps}
+                    secondaryTypographyProps={secondaryTypographyProps}
+                    disabled={disabled}
+                />
+                <ItemFormContainer>
+                    <ItemIcon icon={<More color={!disabled ? 'action' : 'disabled'} />} />
+                </ItemFormContainer>
+            </ItemRowContainer>
+        </ButtonItemRoot>
+    );
+};
