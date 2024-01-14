@@ -2,7 +2,7 @@
 
 import { MenuItem, Select } from '@mui/material';
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
     ItemFormContainer,
     ItemIcon,
@@ -10,7 +10,7 @@ import {
     ItemRoot,
     ItemRowContainer,
     ItemTextBlock,
-    ItemVariableProps,
+    ItemVariableChoicesProps,
     sectionItemClasses
 } from './index';
 
@@ -19,9 +19,7 @@ export const selectItemClasses = {
     control: 'SelectItem-control'
 };
 
-export interface SelectItemProps<T> extends ItemProps, ItemVariableProps<T> {
-    choices: ({ value: T; children?: ReactNode; })[];
-}
+export type SelectItemProps<T> = ItemProps & ItemVariableChoicesProps<T>;
 
 export const SelectItem = <T, >(
     {
@@ -61,7 +59,12 @@ export const SelectItem = <T, >(
                 sx={{ minWidth: 300 }}
             >
                 {choices.map((choice) => (
-                    <MenuItem key={choice.value as string} value={choice.value as string}>
+                    <MenuItem
+                        key={choice.value as string}
+                        value={choice.value as string}
+                        disabled={choice.disabled}
+                        sx={choice.sx}
+                    >
                         {choice.children}
                     </MenuItem>
                 ))}

@@ -1,7 +1,7 @@
 import { Box, BoxProps, ButtonBase, buttonBaseClasses, ButtonBaseProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
-import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
+import React from 'react';
+import { ItemDisabledProps, ItemRootProps, ItemVariableChoicesProps } from '../SectionItems';
 
 export const segmentedControlClasses = {
     root: 'SegmentedControl-root',
@@ -42,6 +42,7 @@ export const SegmentedControlButton = styled(
     { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'selected' }
 )<SegmentedControlButtonProps>(({ theme, selected }) => ({
     ...theme.typography.body1,
+    height: '100%',
     padding: theme.spacing(.75, 1.5),
     display: 'flex',
     placeItems: 'center',
@@ -66,19 +67,27 @@ export const SegmentedControlButton = styled(
     }
 }));
 
-export interface SegmentedControlProps<T> extends ItemDisabledProps, ItemVariableProps<T> {
-    choices: ({ value: T; children?: ReactNode; })[];
-}
+export type SegmentedControlProps<T> = ItemRootProps & ItemDisabledProps & ItemVariableChoicesProps<T>;
 
-export const SegmentedControl = <T, >({ value, setValue, choices, disabled }: SegmentedControlProps<T>) => (
-    <SegmentedControlRoot className={disabled ? segmentedControlClasses.disabled : undefined}>
+export const SegmentedControl = <T, >(
+    {
+        value,
+        setValue,
+        choices,
+        disabled,
+        className,
+        sx
+    }: SegmentedControlProps<T>
+) => (
+    <SegmentedControlRoot className={clsx(disabled && segmentedControlClasses.disabled, className)} sx={sx}>
         {choices.map((choice) => (
             <SegmentedControlButton
                 key={choice.value as string}
                 selected={choice.value === value}
                 onClick={() => setValue(choice.value)}
-                disabled={disabled}
+                disabled={disabled || choice.disabled}
                 className={choice.value === value ? segmentedControlClasses.selected : undefined}
+                sx={choice.sx}
             >
                 {choice.children}
             </SegmentedControlButton>

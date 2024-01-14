@@ -1,8 +1,9 @@
 'use client';
 
-import { Box, BoxProps, styled } from '@mui/material';
+import { Box, BoxProps, styled, Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 import clsx from 'clsx';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, ReactNode, SetStateAction } from 'react';
 import { ItemIconProps, ItemRootProps, ItemTextBlockProps } from './components';
 
 export type ItemProps = ItemRootProps & ItemIconProps & ItemTextBlockProps & ItemDisabledProps;
@@ -14,6 +15,16 @@ export interface ItemDisabledProps {
 export interface ItemVariableProps<T> {
     value: T;
     setValue: Dispatch<SetStateAction<T>>;
+}
+
+export interface ItemVariableChoiceProps<T> extends ItemDisabledProps {
+    value: T;
+    children?: ReactNode;
+    sx?: SxProps<Theme>;
+}
+
+export interface ItemVariableChoicesProps<T> extends ItemVariableProps<T> {
+    choices: ItemVariableChoiceProps<T>[];
 }
 
 export const sectionItemClasses = {
