@@ -166,6 +166,8 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                 minWidth: theme.spacing(6),
                 padding: 0,
                 ...theme.typography.body1,
+                fontWeight: 500,
+                textTransform: 'none',
                 [`&.${tabClasses.selected}`]: {
                     color: theme.palette.text.primary
                 }

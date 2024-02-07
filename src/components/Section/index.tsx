@@ -11,15 +11,20 @@ export const sectionClasses = {
     paragraph: 'Section-paragraph'
 };
 
-export const Section = styled('section')(({ theme }) => ({
+export const Section = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            component="section"
+            className={clsx(sectionClasses.root, className)}
+            {...props}
+        />
+    )
+)<BoxProps>(({ theme }) => ({
     padding: theme.spacing(2, 0, 0),
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
-Section.defaultProps = {
-    className: sectionClasses.root
-};
 
 export const SectionContent = styled(
     ({ className, ...props }: BoxProps) => (
