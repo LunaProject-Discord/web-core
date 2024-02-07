@@ -1,9 +1,9 @@
 'use client';
 
+import { ConfigContext } from '@utils/config';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import React, { HTMLAttributeAnchorTarget, useContext } from 'react';
-import { ConfigContext } from '../../utils/config';
 import { ButtonItemRoot, ItemFormContainer, ItemIcon, ItemProps, ItemRowContainer, ItemTextBlock } from './index';
 
 export const linkItemClasses = {

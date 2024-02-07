@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, Drawer as MuiDrawer, styled, Toolbar } from '@mui/material';
-import React from 'react';
 
 export const DRAWER_WIDTH = 280;
 

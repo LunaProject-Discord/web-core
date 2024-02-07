@@ -2,9 +2,9 @@
 
 import { InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { ConfigContext } from '@utils/config';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
-import { ConfigContext } from '../../utils/config';
 import { ButtonBase } from '../ButtonBase';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 

@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 import { Embed } from '@lunaproject/web-discord';
+import { Markdown, MarkdownContainer } from '@markdown/index';
+import clsx from 'clsx';
 import Color from 'color';
 import { isValid } from 'date-fns';
 import { rem } from 'polished';
-import React, { useEffect, useRef } from 'react';
-import { Markdown, MarkdownContainer } from '../../../markdown';
+import React, { ComponentProps, useEffect, useRef } from 'react';
 import { RichEmbedAuthor } from './author';
 import { RichEmbedContainer } from './container';
 import { RichEmbedField } from './field';
@@ -26,17 +27,28 @@ export const richEmbedClasses = {
     thumbnail: `${richEmbedClassPrefix}-thumbnail`
 };
 
-export const RichEmbedRoot = styled('div')({
+export const RichEmbedRoot = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedClasses.root, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>({
     padding: `${rem(8)} ${rem(16)} ${rem(16)} ${rem(12)}`,
     display: 'inline-grid',
     gridTemplateColumns: 'auto',
     gridTemplateRows: 'auto'
 });
-RichEmbedRoot.defaultProps = {
-    className: richEmbedClasses.root
-};
 
-export const RichEmbedTitleNormal = styled('span')(({ theme }) => ({
+export const RichEmbedTitleNormal = styled(
+    ({ className, ...props }: ComponentProps<'span'>) => (
+        <span
+            className={clsx(richEmbedClasses.titleRoot, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'span'>>(({ theme }) => ({
     minWidth: 0,
     marginTop: 8,
     display: 'inline-block',
@@ -47,11 +59,18 @@ export const RichEmbedTitleNormal = styled('span')(({ theme }) => ({
         color: theme.header.primary
     }
 }));
-RichEmbedTitleNormal.defaultProps = {
-    className: richEmbedClasses.titleRoot
-};
 
-export const RichEmbedTitleLink = styled(RichEmbedTitleNormal.withComponent('a'))(({ theme }) => ({
+export const RichEmbedTitleLink = styled(
+    ({ className, ...props }: ComponentProps<'a'>) => {
+        const Component = RichEmbedTitleNormal.withComponent('a');
+        return (
+            <Component
+                className={clsx(richEmbedClasses.titleLinkRoot, className)}
+                {...props}
+            />
+        );
+    }
+)<ComponentProps<'a'>>(({ theme }) => ({
     textDecoration: 'none',
     '&:hover': {
         textDecoration: 'underline'
@@ -60,11 +79,15 @@ export const RichEmbedTitleLink = styled(RichEmbedTitleNormal.withComponent('a')
         color: theme.text.link
     }
 }));
-RichEmbedTitleLink.defaultProps = {
-    className: richEmbedClasses.titleLinkRoot
-};
 
-export const RichEmbedDescription = styled('div')(({ theme }) => ({
+export const RichEmbedDescription = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedClasses.descriptionRoot, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>(({ theme }) => ({
     minWidth: 0,
     marginTop: 8,
     gridColumn: '1 / 2',
@@ -75,22 +98,30 @@ export const RichEmbedDescription = styled('div')(({ theme }) => ({
         whiteSpace: 'pre-line'
     }
 }));
-RichEmbedDescription.defaultProps = {
-    className: richEmbedClasses.descriptionRoot
-};
 
-export const RichEmbedFields = styled('div')({
+export const RichEmbedFields = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedClasses.fields, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>({
     minWidth: 0,
     marginTop: 8,
     display: 'grid',
     gridColumn: '1 / 2',
     gap: 8
 });
-RichEmbedFields.defaultProps = {
-    className: richEmbedClasses.fields
-};
 
-export const RichEmbedImage = styled('img')<{ thumbnail?: boolean; }>(({ thumbnail }) => ({
+export const RichEmbedImage = styled(
+    ({ className, ...props }: ComponentProps<'img'>) => (
+        <img
+            className={clsx(richEmbedClasses.image, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'img'> & { thumbnail?: boolean; }>(({ thumbnail }) => ({
     width: '100%',
     minWidth: 0,
     maxWidth: 400,
@@ -103,11 +134,15 @@ export const RichEmbedImage = styled('img')<{ thumbnail?: boolean; }>(({ thumbna
         gridColumn: '1 / 3'
     })
 }));
-RichEmbedImage.defaultProps = {
-    className: richEmbedClasses.image
-};
 
-export const RichEmbedThumbnailRoot = styled('div')({
+export const RichEmbedThumbnailRoot = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedClasses.thumbnailRoot, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>({
     marginTop: 8,
     marginLeft: 16,
     gridRow: '1 / 8',
@@ -115,18 +150,19 @@ export const RichEmbedThumbnailRoot = styled('div')({
     justifySelf: 'end',
     cursor: 'pointer'
 });
-RichEmbedThumbnailRoot.defaultProps = {
-    className: richEmbedClasses.thumbnailRoot
-};
 
-export const RichEmbedThumbnail = styled('img')({
+export const RichEmbedThumbnail = styled(
+    ({ className, ...props }: ComponentProps<'img'>) => (
+        <img
+            className={clsx(richEmbedClasses.thumbnail, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'img'>>({
     maxWidth: 80,
     maxHeight: 80,
     borderRadius: 4
 });
-RichEmbedThumbnail.defaultProps = {
-    className: richEmbedClasses.thumbnail
-};
 
 export interface RichEmbedProps {
     embed: Embed;

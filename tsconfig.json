@@ -21,6 +21,23 @@
         "noImplicitAny": true,
         "noImplicitThis": true,
         "outDir": "./dist",
+        "paths": {
+            "@components/*": [
+                "src/components/*"
+            ],
+            "@libs/*": [
+                "src/libs/*"
+            ],
+            "@markdown/*": [
+                "src/markdown/*"
+            ],
+            "@styles/*": [
+                "src/styles/*"
+            ],
+            "@utils/*": [
+                "src/utils/*"
+            ]
+        },
         "plugins": [
             {
                 "name": "next"

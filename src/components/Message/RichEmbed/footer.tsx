@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { Embed } from '@lunaproject/web-discord';
+import { formatTimestamp } from '@utils/date';
 import { isValid } from 'date-fns';
 import { rem, size } from 'polished';
 import React from 'react';
-import { formatTimestamp } from '../../../utils';
 
 const richEmbedFooterClassPrefix = 'RichEmbedFooter';
 export const richEmbedFooterClasses = {

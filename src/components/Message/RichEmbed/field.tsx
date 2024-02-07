@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
+import { getFieldGridColumn } from '@libs/message';
 import { Embed, EmbedField as Field } from '@lunaproject/web-discord';
+import { Markdown, MarkdownContainer } from '@markdown/index';
 import { rem } from 'polished';
 import React from 'react';
-import { getFieldGridColumn } from '../../../libs';
-import { Markdown, MarkdownContainer } from '../../../markdown';
 
 const richEmbedFieldClassPrefix = 'RichEmbedField';
 export const richEmbedFieldClasses = {
