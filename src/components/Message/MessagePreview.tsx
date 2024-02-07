@@ -3,7 +3,7 @@ import { Message } from '@lunaproject/web-discord';
 import dynamic from 'next/dynamic';
 import { rem } from 'polished';
 import React, { Fragment } from 'react';
-import { getTextDirection, Markdown, MarkdownContainer } from '../../markdown';
+import { getTextDirection, Markdown, markdownContainerClasses } from '../../markdown';
 import type { AttachmentProps } from './Attachment';
 import { MessageHeader } from './MessageHeader';
 import { RichEmbed } from './RichEmbed';
@@ -30,7 +30,7 @@ const Container = styled('div')(({ theme }) => ({
         minHeight: rem(22),
         padding: `${rem(2)} ${rem(16)} ${rem(2)} 80px`,
         textIndent: `calc(${rem(16)} - 80px)`,
-        [`& > ${MarkdownContainer}`]: {
+        [`& .${markdownContainerClasses.root}`]: {
             display: 'inline',
             textIndent: 0
         }
@@ -39,7 +39,7 @@ const Container = styled('div')(({ theme }) => ({
 
 const Content = styled(Markdown)<{ direction: 'neutral' | 'ltr' | 'rtl' }>(({ theme, direction }) => ({
     ...(theme.appearance.display === 'cozy' && direction === 'rtl' && {
-        [`& > ${MarkdownContainer}`]: {
+        [`& .${markdownContainerClasses.root}`]: {
             textIndent: 0,
             textAlign: 'left',
             unicodeBidi: 'plaintext'

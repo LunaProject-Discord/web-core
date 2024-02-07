@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 import { Embed, EmbedField as Field } from '@lunaproject/web-discord';
+import clsx from 'clsx';
 import { rem } from 'polished';
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { getFieldGridColumn } from '../../../libs';
-import { Markdown, MarkdownContainer } from '../../../markdown';
+import { Markdown, markdownContainerClasses } from '../../../markdown';
 
 const richEmbedFieldClassPrefix = 'RichEmbedField';
 export const richEmbedFieldClasses = {
@@ -14,38 +15,50 @@ export const richEmbedFieldClasses = {
     value: `${richEmbedFieldClassPrefix}-value`
 };
 
-export const RichEmbedFieldRoot = styled('div')({
+export const RichEmbedFieldRoot = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedFieldClasses.root, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>({
     minWidth: 0,
     fontSize: rem(14),
     lineHeight: rem(18)
 });
-RichEmbedFieldRoot.defaultProps = {
-    className: richEmbedFieldClasses.root
-};
 
-export const RichEmbedFieldName = styled('div')(({ theme }) => ({
+export const RichEmbedFieldName = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedFieldClasses.nameRoot, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>(({ theme }) => ({
     minWidth: 0,
     marginBottom: 1,
     fontSize: rem(14),
     fontWeight: 600,
     color: theme.header.primary
 }));
-RichEmbedFieldName.defaultProps = {
-    className: richEmbedFieldClasses.nameRoot
-};
 
-export const RichEmbedFieldValue = styled('div')(({ theme }) => ({
+export const RichEmbedFieldValue = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedFieldClasses.valueRoot, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'>>(({ theme }) => ({
     minWidth: 0,
-    [`& > ${MarkdownContainer}`]: {
+    [`& .${markdownContainerClasses.root}`]: {
         color: theme.text.normal,
         fontSize: rem(14),
         lineHeight: rem(18),
         whiteSpace: 'pre-line'
     }
 }));
-RichEmbedFieldValue.defaultProps = {
-    className: richEmbedFieldClasses.valueRoot
-};
 
 export interface RichEmbedFieldProps {
     embed: Embed;

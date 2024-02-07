@@ -5,7 +5,7 @@ import Color from 'color';
 import { isValid } from 'date-fns';
 import { rem } from 'polished';
 import React, { ComponentProps, useEffect, useRef } from 'react';
-import { Markdown, MarkdownContainer } from '../../../markdown';
+import { Markdown, markdownContainerClasses } from '../../../markdown';
 import { RichEmbedAuthor } from './author';
 import { RichEmbedContainer } from './container';
 import { RichEmbedField } from './field';
@@ -53,7 +53,7 @@ export const RichEmbedTitleNormal = styled(
     marginTop: 8,
     display: 'inline-block',
     gridColumn: '1 / 2',
-    [`& > ${MarkdownContainer}, & .${richEmbedClasses.title}`]: {
+    [`& .${markdownContainerClasses.root}, & .${richEmbedClasses.title}`]: {
         fontSize: rem(16),
         fontWeight: 600,
         color: theme.header.primary
@@ -75,7 +75,7 @@ export const RichEmbedTitleLink = styled(
     '&:hover': {
         textDecoration: 'underline'
     },
-    [`& > ${MarkdownContainer}, & .${richEmbedClasses.titleLink}`]: {
+    [`& .${markdownContainerClasses.root}, & .${richEmbedClasses.titleLink}`]: {
         color: theme.text.link
     }
 }));
@@ -91,7 +91,7 @@ export const RichEmbedDescription = styled(
     minWidth: 0,
     marginTop: 8,
     gridColumn: '1 / 2',
-    [`& > ${MarkdownContainer}, & .${richEmbedClasses.description}`]: {
+    [`& .${markdownContainerClasses.root}, & .${richEmbedClasses.description}`]: {
         color: theme.text.normal,
         fontSize: rem(14),
         lineHeight: rem(18),
