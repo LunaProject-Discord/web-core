@@ -66,11 +66,11 @@ export interface RichEmbedFieldProps {
 }
 
 export const RichEmbedField = ({ embed, field }: RichEmbedFieldProps) => (
-    <RichEmbedFieldRoot style={{ gridColumn: getFieldGridColumn(field, embed) }} className={richEmbedFieldClasses.root}>
-        <RichEmbedFieldName className={richEmbedFieldClasses.nameRoot}>
+    <RichEmbedFieldRoot style={{ gridColumn: getFieldGridColumn(field, embed) }}>
+        <RichEmbedFieldName>
             <Markdown content={field.name} type="embed-header" className={richEmbedFieldClasses.name} />
         </RichEmbedFieldName>
-        <RichEmbedFieldValue className={richEmbedFieldClasses.valueRoot}>
+        <RichEmbedFieldValue>
             <Markdown content={field.value} type="embed-content" className={richEmbedFieldClasses.value} />
         </RichEmbedFieldValue>
     </RichEmbedFieldRoot>

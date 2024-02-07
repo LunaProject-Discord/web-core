@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Message } from '@lunaproject/web-discord';
 import dynamic from 'next/dynamic';
 import { rem } from 'polished';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { getTextDirection, Markdown, markdownContainerClasses } from '../../markdown';
 import type { AttachmentProps } from './Attachment';
 import { MessageHeader } from './MessageHeader';
@@ -38,15 +38,10 @@ const Container = styled('div')(({ theme }) => ({
 }));
 
 const Content = styled(Markdown)<{ direction: 'neutral' | 'ltr' | 'rtl' }>(({ theme, direction }) => ({
+    textIndent: 0,
     ...(theme.appearance.display === 'cozy' && direction === 'rtl' && {
-        [`& .${markdownContainerClasses.root}`]: {
-            textIndent: 0,
-            textAlign: 'left',
-            unicodeBidi: 'plaintext'
-        }
-    }),
-    ...(theme.appearance.display === 'compact' && {
-        textIndent: 0
+        textAlign: 'left',
+        unicodeBidi: 'plaintext'
     })
 }));
 
@@ -79,19 +74,17 @@ export const MessagePreview = ({ message }: MessagePreviewProps) => (
             content={message.content}
             type="message-content"
         />}
-        {message.embeds.length > 0 && (
+        {(message.attachments.length > 0 || message.embeds.length > 0) && (
             <ExtrasContainer>
-                <Fragment>
-                    {message.attachments.map((attachment) => (
-                        <Attachment
-                            key={JSON.stringify(attachment.name)}
-                            file={attachment}
-                        />
-                    ))}
-                    {message.embeds.map((embed, i) => (
-                        <RichEmbed key={`Embed ${i}`} embed={embed} />
-                    ))}
-                </Fragment>
+                {message.attachments.map((attachment) => (
+                    <Attachment
+                        key={JSON.stringify(attachment.name)}
+                        file={attachment}
+                    />
+                ))}
+                {message.embeds.map((embed, i) => (
+                    <RichEmbed key={`Embed ${i}`} embed={embed} />
+                ))}
             </ExtrasContainer>
         )}
     </Container>

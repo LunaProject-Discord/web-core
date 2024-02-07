@@ -193,26 +193,25 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
 
     return (
         <RichEmbedContainer ref={containerRef} style={{ borderColor: color }}>
-            <RichEmbedRoot className={richEmbedClasses.root}>
+            <RichEmbedRoot>
                 {hasAuthor && <RichEmbedAuthor embed={embed} />}
                 {hasTitle && (embed.url ? <RichEmbedTitleLink
                     href={embed.url}
                     target="_blank"
                     rel="noopener noreferrer nofollow ugc"
-                    className={richEmbedClasses.titleLinkRoot}
                 >
                     <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.titleLink} />
-                </RichEmbedTitleLink> : <RichEmbedTitleNormal className={richEmbedClasses.titleRoot}>
+                </RichEmbedTitleLink> : <RichEmbedTitleNormal>
                     <Markdown content={embed.title} type="embed-header" className={richEmbedClasses.title} />
                 </RichEmbedTitleNormal>)}
-                {hasDescription && <RichEmbedDescription className={richEmbedClasses.descriptionRoot}>
+                {hasDescription && <RichEmbedDescription>
                     <Markdown
                         content={embed.description}
                         type="embed-description"
                         className={richEmbedClasses.description}
                     />
                 </RichEmbedDescription>}
-                {fields.length > 0 && <RichEmbedFields className={richEmbedClasses.fields}>
+                {fields.length > 0 && <RichEmbedFields>
                     {fields.map((field, i) => (
                         <RichEmbedField key={field._id ?? i} field={field} embed={embed} />
                     ))}
@@ -233,12 +232,11 @@ export const RichEmbed = ({ embed }: RichEmbedProps) => {
                             const { width } = image.getBoundingClientRect();
                             container.style.maxWidth = width >= 300 ? `${width + 32}px` : '';
                         }}
-                        className={richEmbedClasses.image}
                     />
                 ) : undefined}
                 {hasFooter && <RichEmbedFooter embed={embed} />}
-                {thumbnail && <RichEmbedThumbnailRoot className={richEmbedClasses.thumbnailRoot}>
-                    <RichEmbedThumbnail src={thumbnail} alt="Thumbnail" className={richEmbedClasses.thumbnail} />
+                {thumbnail && <RichEmbedThumbnailRoot>
+                    <RichEmbedThumbnail src={thumbnail} alt="Thumbnail" />
                 </RichEmbedThumbnailRoot>}
             </RichEmbedRoot>
         </RichEmbedContainer>

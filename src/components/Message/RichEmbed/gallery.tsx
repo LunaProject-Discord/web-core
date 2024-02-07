@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Embed } from '@lunaproject/web-discord';
-import { Box } from '@mui/material';
+import clsx from 'clsx';
 import { size } from 'polished';
-import React from 'react';
+import React, { ComponentProps } from 'react';
 
 const richEmbedGalleryClassPrefix = 'RichEmbedGallery';
 export const richEmbedGalleryClasses = {
@@ -11,7 +11,14 @@ export const richEmbedGalleryClasses = {
     image: `${richEmbedGalleryClassPrefix}-image`
 };
 
-export const RichEmbedGalleryRoot = styled(Box)<{ thumbnail?: boolean; }>(({ thumbnail }) => ({
+export const RichEmbedGalleryRoot = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedGalleryClasses.root, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'> & { thumbnail?: boolean; }>(({ thumbnail }) => ({
     height: 300,
     marginTop: 16,
     gridColumn: '1 / 2',
@@ -25,11 +32,15 @@ export const RichEmbedGalleryRoot = styled(Box)<{ thumbnail?: boolean; }>(({ thu
         gridColumn: '1 / 3'
     })
 }));
-RichEmbedGalleryRoot.defaultProps = {
-    className: richEmbedGalleryClasses.root
-};
 
-export const RichEmbedGalleryCell = styled(Box)<{ index?: number; length?: number; }>(({ index, length }) => ({
+export const RichEmbedGalleryCell = styled(
+    ({ className, ...props }: ComponentProps<'div'>) => (
+        <div
+            className={clsx(richEmbedGalleryClasses.cell, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'div'> & { index?: number; length?: number; }>(({ index, length }) => ({
     minWidth: '100%',
     minHeight: '100%',
     display: 'flex',
@@ -39,32 +50,28 @@ export const RichEmbedGalleryCell = styled(Box)<{ index?: number; length?: numbe
         gridRow: 'span 2'
     })
 }));
-RichEmbedGalleryCell.defaultProps = {
-    className: richEmbedGalleryClasses.cell
-};
 
-export const RichEmbedGalleryImage = styled('img')({
+export const RichEmbedGalleryImage = styled(
+    ({ className, ...props }: ComponentProps<'img'>) => (
+        <img
+            className={clsx(richEmbedGalleryClasses.image, className)}
+            {...props}
+        />
+    )
+)<ComponentProps<'img'>>({
     ...size('100%'),
     objectFit: 'cover'
 });
-RichEmbedGalleryImage.defaultProps = {
-    className: richEmbedGalleryClasses.image
-};
 
 export interface RichEmbedGalleryProps {
     embed: Embed;
 }
 
 export const RichEmbedGallery = ({ embed: { image: { images, thumbnail } } }: RichEmbedGalleryProps) => (
-    <RichEmbedGalleryRoot thumbnail={Boolean(thumbnail)} className={richEmbedGalleryClasses.root}>
+    <RichEmbedGalleryRoot thumbnail={Boolean(thumbnail)}>
         {(images ?? []).map((url, index) => (
-            <RichEmbedGalleryCell
-                key={`${index}-${url}`}
-                index={index}
-                length={images.length}
-                className={richEmbedGalleryClasses.cell}
-            >
-                <RichEmbedGalleryImage src={url} alt="Image" className={richEmbedGalleryClasses.image} />
+            <RichEmbedGalleryCell key={`${index}-${url}`} index={index} length={images.length}>
+                <RichEmbedGalleryImage src={url} alt="Image" />
             </RichEmbedGalleryCell>
         ))}
     </RichEmbedGalleryRoot>
