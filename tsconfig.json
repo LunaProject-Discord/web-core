@@ -2,7 +2,6 @@
     "compilerOptions": {
         "allowJs": true,
         "alwaysStrict": true,
-        "baseUrl": ".",
         "declaration": true,
         "declarationMap": true,
         "downlevelIteration": true,
@@ -22,23 +21,6 @@
         "noImplicitAny": true,
         "noImplicitThis": true,
         "outDir": "./dist",
-        "paths": {
-            "@components/*": [
-                "src/components/*"
-            ],
-            "@libs/*": [
-                "src/libs/*"
-            ],
-            "@markdown/*": [
-                "src/markdown/*"
-            ],
-            "@styles/*": [
-                "src/styles/*"
-            ],
-            "@utils/*": [
-                "src/utils/*"
-            ]
-        },
         "plugins": [
             {
                 "name": "next"

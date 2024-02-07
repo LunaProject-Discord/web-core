@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import { Embed } from '@lunaproject/web-discord';
-import { Markdown, MarkdownContainer } from '@markdown/index';
 import clsx from 'clsx';
 import Color from 'color';
 import { isValid } from 'date-fns';
 import { rem } from 'polished';
 import React, { ComponentProps, useEffect, useRef } from 'react';
+import { Markdown, MarkdownContainer } from '../../../markdown';
 import { RichEmbedAuthor } from './author';
 import { RichEmbedContainer } from './container';
 import { RichEmbedField } from './field';
