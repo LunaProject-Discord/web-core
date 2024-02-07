@@ -2,12 +2,15 @@ import {
     alertClasses,
     AlertProps,
     buttonClasses,
+    ChipProps,
     createTheme,
     darken,
+    Interpolation,
     lighten,
     menuClasses,
     menuItemClasses,
     PaletteOptions,
+    tabClasses,
     Theme
 } from '@mui/material';
 import { blue, green, indigo, orange, pink, red } from '@mui/material/colors';
@@ -15,6 +18,19 @@ import { Components } from '@mui/material/styles/components';
 import { dark, light } from '@mui/material/styles/createPalette';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 import { rgba } from 'polished';
+
+const chipStyled = (color: ChipProps['color']): Interpolation<{ theme: Omit<Theme, 'components'> }> => ({ theme }) => {
+    const getColor = theme.palette.mode === 'light' ? darken : lighten;
+    const getBackgroundColor = theme.palette.mode === 'light' ? lighten : darken;
+
+    if (!color || color === 'default')
+        return {};
+
+    return {
+        color: getColor(theme.palette[color].light, .9),
+        backgroundColor: getBackgroundColor(theme.palette[color].light, .6)
+    };
+};
 
 export const MuiComponents: Components<Omit<Theme, 'components'>> = {
     MuiAlert: {
@@ -79,40 +95,28 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                     variant: 'rounded',
                     color: 'info'
                 },
-                style: ({ theme }) => ({
-                    color: blue[theme.palette.mode === 'light' ? 900 : 100],
-                    backgroundColor: blue[theme.palette.mode === 'light' ? 100 : 900]
-                })
+                style: chipStyled('info')
             },
             {
                 props: {
                     variant: 'rounded',
                     color: 'error'
                 },
-                style: ({ theme }) => ({
-                    color: red[theme.palette.mode === 'light' ? 900 : 100],
-                    backgroundColor: red[theme.palette.mode === 'light' ? 100 : 900]
-                })
+                style: chipStyled('error')
             },
             {
                 props: {
                     variant: 'rounded',
                     color: 'warning'
                 },
-                style: ({ theme }) => ({
-                    color: orange[theme.palette.mode === 'light' ? 900 : 100],
-                    backgroundColor: orange[theme.palette.mode === 'light' ? 100 : 900]
-                })
+                style: chipStyled('warning')
             },
             {
                 props: {
                     variant: 'rounded',
                     color: 'success'
                 },
-                style: ({ theme }) => ({
-                    color: green[theme.palette.mode === 'light' ? 900 : 100],
-                    backgroundColor: green[theme.palette.mode === 'light' ? 100 : 900]
-                })
+                style: chipStyled('success')
             }
         ]
     },
@@ -153,8 +157,38 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             }
         }
     },
+    MuiTab: {
+        defaultProps: {
+            disableRipple: true
+        },
+        styleOverrides: {
+            root: ({ theme }) => ({
+                minWidth: theme.spacing(6),
+                padding: 0,
+                ...theme.typography.body1,
+                [`&.${tabClasses.selected}`]: {
+                    color: theme.palette.text.primary
+                }
+            })
+        }
+    },
+    MuiTabs: {
+        styleOverrides: {
+            root: ({ theme }) => ({
+                borderBottom: `solid 1px ${theme.palette.divider}`
+            }),
+            flexContainer: ({ theme }) => ({
+                gap: theme.spacing(2)
+            }),
+            indicator: ({ theme }) => ({
+                backgroundColor: theme.palette.text.primary,
+                borderRadius: theme.shape.borderRadius
+            })
+        }
+    },
     MuiTooltip: {
         defaultProps: {
+            disableInteractive: true,
             placement: 'top'
         },
         styleOverrides: {

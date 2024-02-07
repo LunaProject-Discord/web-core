@@ -18,6 +18,9 @@ export const RichEmbedAuthorRoot = styled('div')({
     display: 'flex',
     alignItems: 'center'
 });
+RichEmbedAuthorRoot.defaultProps = {
+    className: richEmbedAuthorClasses.root
+};
 
 export const RichEmbedAuthorIcon = styled('img')({
     ...size(24),
@@ -25,6 +28,9 @@ export const RichEmbedAuthorIcon = styled('img')({
     objectFit: 'contain',
     borderRadius: '50%'
 });
+RichEmbedAuthorIcon.defaultProps = {
+    className: richEmbedAuthorClasses.icon
+};
 
 export const RichEmbedAuthorNameNormal = styled('span')(({ theme }) => ({
     display: 'inline-block',
@@ -36,6 +42,9 @@ export const RichEmbedAuthorNameNormal = styled('span')(({ theme }) => ({
         fontWeight: 500
     }
 }));
+RichEmbedAuthorNameNormal.defaultProps = {
+    className: richEmbedAuthorClasses.name
+};
 
 export const RichEmbedAuthorNameLink = styled(RichEmbedAuthorNameNormal.withComponent('a'))({
     textDecoration: 'none',
@@ -43,6 +52,9 @@ export const RichEmbedAuthorNameLink = styled(RichEmbedAuthorNameNormal.withComp
         textDecoration: 'underline'
     }
 });
+RichEmbedAuthorNameLink.defaultProps = {
+    className: richEmbedAuthorClasses.nameLink
+};
 
 export interface RichEmbedAuthorProps {
     embed: Embed;

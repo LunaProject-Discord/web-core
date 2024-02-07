@@ -19,6 +19,9 @@ export const RichEmbedFieldRoot = styled('div')({
     fontSize: rem(14),
     lineHeight: rem(18)
 });
+RichEmbedFieldRoot.defaultProps = {
+    className: richEmbedFieldClasses.root
+};
 
 export const RichEmbedFieldName = styled('div')(({ theme }) => ({
     minWidth: 0,
@@ -27,6 +30,9 @@ export const RichEmbedFieldName = styled('div')(({ theme }) => ({
     fontWeight: 600,
     color: theme.header.primary
 }));
+RichEmbedFieldName.defaultProps = {
+    className: richEmbedFieldClasses.nameRoot
+};
 
 export const RichEmbedFieldValue = styled('div')(({ theme }) => ({
     minWidth: 0,
@@ -37,6 +43,9 @@ export const RichEmbedFieldValue = styled('div')(({ theme }) => ({
         whiteSpace: 'pre-line'
     }
 }));
+RichEmbedFieldValue.defaultProps = {
+    className: richEmbedFieldClasses.valueRoot
+};
 
 export interface RichEmbedFieldProps {
     embed: Embed;

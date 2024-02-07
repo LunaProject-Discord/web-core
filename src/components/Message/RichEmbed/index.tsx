@@ -32,6 +32,9 @@ export const RichEmbedRoot = styled('div')({
     gridTemplateColumns: 'auto',
     gridTemplateRows: 'auto'
 });
+RichEmbedRoot.defaultProps = {
+    className: richEmbedClasses.root
+};
 
 export const RichEmbedTitleNormal = styled('span')(({ theme }) => ({
     minWidth: 0,
@@ -44,6 +47,9 @@ export const RichEmbedTitleNormal = styled('span')(({ theme }) => ({
         color: theme.header.primary
     }
 }));
+RichEmbedTitleNormal.defaultProps = {
+    className: richEmbedClasses.titleRoot
+};
 
 export const RichEmbedTitleLink = styled(RichEmbedTitleNormal.withComponent('a'))(({ theme }) => ({
     textDecoration: 'none',
@@ -54,6 +60,9 @@ export const RichEmbedTitleLink = styled(RichEmbedTitleNormal.withComponent('a')
         color: theme.text.link
     }
 }));
+RichEmbedTitleLink.defaultProps = {
+    className: richEmbedClasses.titleLinkRoot
+};
 
 export const RichEmbedDescription = styled('div')(({ theme }) => ({
     minWidth: 0,
@@ -66,6 +75,9 @@ export const RichEmbedDescription = styled('div')(({ theme }) => ({
         whiteSpace: 'pre-line'
     }
 }));
+RichEmbedDescription.defaultProps = {
+    className: richEmbedClasses.descriptionRoot
+};
 
 export const RichEmbedFields = styled('div')({
     minWidth: 0,
@@ -74,6 +86,9 @@ export const RichEmbedFields = styled('div')({
     gridColumn: '1 / 2',
     gap: 8
 });
+RichEmbedFields.defaultProps = {
+    className: richEmbedClasses.fields
+};
 
 export const RichEmbedImage = styled('img')<{ thumbnail?: boolean; }>(({ thumbnail }) => ({
     width: '100%',
@@ -88,6 +103,9 @@ export const RichEmbedImage = styled('img')<{ thumbnail?: boolean; }>(({ thumbna
         gridColumn: '1 / 3'
     })
 }));
+RichEmbedImage.defaultProps = {
+    className: richEmbedClasses.image
+};
 
 export const RichEmbedThumbnailRoot = styled('div')({
     marginTop: 8,
@@ -97,12 +115,18 @@ export const RichEmbedThumbnailRoot = styled('div')({
     justifySelf: 'end',
     cursor: 'pointer'
 });
+RichEmbedThumbnailRoot.defaultProps = {
+    className: richEmbedClasses.thumbnailRoot
+};
 
 export const RichEmbedThumbnail = styled('img')({
     maxWidth: 80,
     maxHeight: 80,
     borderRadius: 4
 });
+RichEmbedThumbnail.defaultProps = {
+    className: richEmbedClasses.thumbnail
+};
 
 export interface RichEmbedProps {
     embed: Embed;

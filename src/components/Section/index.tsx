@@ -12,7 +12,7 @@ export const sectionClasses = {
 };
 
 export const Section = styled('section')(({ theme }) => ({
-    padding: theme.spacing(3, 0, 0),
+    padding: theme.spacing(2, 0, 0),
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)

@@ -25,6 +25,9 @@ export const RichEmbedFooterRoot = styled('div')<{ thumbnail?: boolean; }>(({ th
         gridColumn: '1 / 3'
     })
 }));
+RichEmbedFooterRoot.defaultProps = {
+    className: richEmbedFooterClasses.root
+};
 
 export const RichEmbedFooterImage = styled('img')({
     ...size(20),
@@ -32,6 +35,9 @@ export const RichEmbedFooterImage = styled('img')({
     objectFit: 'contain',
     borderRadius: '50%'
 });
+RichEmbedFooterImage.defaultProps = {
+    className: richEmbedFooterClasses.icon
+};
 
 export const RichEmbedFooterText = styled('span')(({ theme }) => ({
     color: theme.text.normal,
@@ -45,11 +51,17 @@ export const RichEmbedFooterText = styled('span')(({ theme }) => ({
         }
     })
 }));
+RichEmbedFooterText.defaultProps = {
+    className: richEmbedFooterClasses.text
+};
 
 export const RichEmbedFooterSeparator = styled('span')({
     margin: '0 4px',
     display: 'inline-block'
 });
+RichEmbedFooterSeparator.defaultProps = {
+    className: richEmbedFooterClasses.separator
+};
 
 export interface RichEmbedFooterProps {
     embed: Embed;

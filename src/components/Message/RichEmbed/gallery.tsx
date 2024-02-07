@@ -25,6 +25,9 @@ export const RichEmbedGalleryRoot = styled(Box)<{ thumbnail?: boolean; }>(({ thu
         gridColumn: '1 / 3'
     })
 }));
+RichEmbedGalleryRoot.defaultProps = {
+    className: richEmbedGalleryClasses.root
+};
 
 export const RichEmbedGalleryCell = styled(Box)<{ index?: number; length?: number; }>(({ index, length }) => ({
     minWidth: '100%',
@@ -36,11 +39,17 @@ export const RichEmbedGalleryCell = styled(Box)<{ index?: number; length?: numbe
         gridRow: 'span 2'
     })
 }));
+RichEmbedGalleryCell.defaultProps = {
+    className: richEmbedGalleryClasses.cell
+};
 
 export const RichEmbedGalleryImage = styled('img')({
     ...size('100%'),
     objectFit: 'cover'
 });
+RichEmbedGalleryImage.defaultProps = {
+    className: richEmbedGalleryClasses.image
+};
 
 export interface RichEmbedGalleryProps {
     embed: Embed;
