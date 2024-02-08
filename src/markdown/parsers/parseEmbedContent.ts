@@ -21,6 +21,7 @@ import {
     url
 } from '../rules';
 import { heading } from '../rules/heading';
+import { list } from '../rules/list';
 import { createParser } from './createParser';
 
 const RULES = {
@@ -48,4 +49,4 @@ const RULES = {
 
 export const parseEmbedContent = createParser(RULES);
 
-export const parseEmbedDescription = createParser({ ...RULES, heading });
+export const parseEmbedDescription = createParser({ ...RULES, heading, list });
