@@ -1,7 +1,19 @@
 import { rgb } from 'polished';
-import type { Theme } from './index';
 
-export const COMMON_THEME: Pick<Theme, 'discord' | 'font'> = {
+export interface CommonTheme {
+    discord: {
+        primary: string;
+        success: string;
+        warning: string;
+        danger: string;
+    };
+    font: {
+        sans: string;
+        mono: string;
+    };
+}
+
+export const DefaultCommonTheme: CommonTheme = {
     discord: {
         primary: rgb(88, 101, 242),
         success: rgb(67, 181, 129),

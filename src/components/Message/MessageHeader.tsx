@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import dynamic from 'next/dynamic';
 import { em, rem, size } from 'polished';
 import React from 'react';
-import { DARK_THEME } from '../../styles';
+import { DarkPalette } from '../../styles';
 import type { ClockProps } from './Clock';
 
 const Clock = dynamic<ClockProps>(
@@ -75,7 +75,7 @@ const BotTag = styled('span')(({ theme }) => ({
     padding: `${rem(1.15)} ${rem(4.4)}`,
     position: 'relative',
     top: rem(-1.6),
-    color: DARK_THEME.header.primary,
+    color: DarkPalette.header.primary,
     fontSize: em(10),
     fontWeight: 500,
     lineHeight: 1.3,
