@@ -54,8 +54,7 @@ export const list: MarkdownRule = {
             .match(LIST_ITEM_R) as string[];
 
         let shallow = false;
-        let lastItemWasAParagraph = false;
-        const itemContent = items.map(function (/** @type {string} */ item, /** @type {number} */ i) {
+        const itemContent = items.map((item, i) => {
             const prefixCapture = LIST_ITEM_PREFIX_R.exec(item);
             const space = prefixCapture ? prefixCapture[0].length : 0;
             const spaceRegex = new RegExp('^ {1,' + space + '}', 'gm');
@@ -64,28 +63,14 @@ export const list: MarkdownRule = {
                 .replace(spaceRegex, '')
                 .replace(LIST_ITEM_PREFIX_R, '');
 
-            shallow = space < 1;
-            const isLastItem = (i === items.length - 1);
-
-            const thisItemIsAParagraph = isLastItem && lastItemWasAParagraph;
-            lastItemWasAParagraph = thisItemIsAParagraph;
+            shallow = space < 3;
 
             const oldStateInline = state.inline;
             const oldStateList = state._list;
             state._list = true;
+            state.inline = true;
 
-            // Parse inline if we're in a tight list, or block if we're in
-            // a loose list.
-            let adjustedContent: string;
-            if (thisItemIsAParagraph) {
-                state.inline = false;
-                adjustedContent = content.replace(LIST_ITEM_END_R, '\n\n');
-            } else {
-                state.inline = true;
-                adjustedContent = content.replace(LIST_ITEM_END_R, '');
-            }
-
-            const result = parse(adjustedContent, state);
+            const result = parse(content.replace(LIST_ITEM_END_R, ''), state);
 
             // Restore our state before returning
             state.inline = oldStateInline;
