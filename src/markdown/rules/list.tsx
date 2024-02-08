@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { ASTNode, defaultRules } from 'simple-markdown';
+import { infoWithName } from '../../utils';
 import type { MarkdownRule } from '../parsers';
 import { ListItem, OrderedList, UnorderedList } from '../styles';
 
@@ -53,6 +54,8 @@ export const list: MarkdownRule = {
             .replace(LIST_BLOCK_END_R, '\n')
             .match(LIST_ITEM_R) as string[];
 
+        infoWithName('List', { capture, parse, state, bullet, ordered, start, items });
+
         let shallow = false;
         const itemContent = items.map((item, i) => {
             const prefixCapture = LIST_ITEM_PREFIX_R.exec(item);
@@ -62,6 +65,8 @@ export const list: MarkdownRule = {
             const content = item
                 .replace(spaceRegex, '')
                 .replace(LIST_ITEM_PREFIX_R, '');
+
+            infoWithName('ListItem', { item, i, prefixCapture, space, content });
 
             shallow = space < 3;
 
