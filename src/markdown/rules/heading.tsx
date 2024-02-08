@@ -1,7 +1,7 @@
 import React from 'react';
 import { defaultRules } from 'simple-markdown';
 import type { MarkdownRule } from '../parsers';
-import { HeadingOne, HeadingThree, HeadingTwo } from '../styles/Heading';
+import { HeadingOne, HeadingThree, HeadingTwo } from '../styles';
 
 const BEGINNING_OF_LINE_RE = /^$|\n *$/;
 const HEADING_RE = /^ *(#{1,3})(?!#) +([^\n]+)\n*/;
