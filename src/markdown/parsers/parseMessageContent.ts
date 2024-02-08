@@ -8,9 +8,11 @@ import {
     emote,
     emphasis,
     escape,
+    heading,
     inlineCode,
     lineBreak,
     link,
+    list,
     mention,
     newline,
     paragraph,
@@ -21,8 +23,6 @@ import {
     underline,
     url
 } from '../rules';
-import { heading } from '../rules/heading';
-import { list } from '../rules/list';
 import { createParser } from './createParser';
 
 export const parseMessageContent = createParser(
