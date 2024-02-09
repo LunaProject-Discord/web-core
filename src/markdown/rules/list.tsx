@@ -4,38 +4,22 @@ import { infoWithName } from '../../utils';
 import type { MarkdownRule } from '../parsers';
 import { ListItem, OrderedList, UnorderedList } from '../styles';
 
-// recognize a `*` `-`, `+`, `1.`, `2.`... list bullet
 const LIST_BULLET = '(?:[*+-]|\\d+\\.)';
-// recognize the start of a list item:
-// leading space plus a bullet plus a space (`   * `)
-const LIST_ITEM_PREFIX = '( *)(' + LIST_BULLET + ') +';
-const LIST_ITEM_PREFIX_R = new RegExp('^' + LIST_ITEM_PREFIX);
-// recognize an individual list item:
-//  * hi
-//    this is part of the same item
-//
-//    as is this, which is a new paragraph in the same item
-//
-//  * but this is not part of the same item
+const LIST_ITEM_PREFIX = `( *)(${LIST_BULLET}) +`;
+const LIST_ITEM_PREFIX_R = new RegExp(`^${LIST_ITEM_PREFIX}`);
 const LIST_ITEM_R = new RegExp(
     LIST_ITEM_PREFIX +
     '[^\\n]*(?:\\n' +
-    '(?!\\1' + LIST_BULLET + ' )[^\\n]*)*(\n|$)',
+    `(?!\\1${LIST_BULLET} )[^\\n]*)*(\n|$)` +
     'gm'
 );
-const INLINE_CODE_ESCAPE_BACKTICKS_R = /^ (?= *`)|(` *) $/g;
-// recognize the end of a paragraph block inside a list item:
-// two or more newlines at end end of the item
-const LIST_BLOCK_END_R = /\n{2,}$/;
+const LIST_BLOCK_END = '\\n{1,}';
+const LIST_BLOCK_END_R = new RegExp(`${LIST_BLOCK_END}$`);
 const LIST_ITEM_END_R = / *\n+$/;
-// check whether a list item has paragraphs: if it does,
-// we leave the newlines at the end
 const LIST_R = new RegExp(
-    '^( *)(' + LIST_BULLET + ') ' +
-    '[\\s\\S]+?(?:\n{2,}(?! )' +
-    '(?!\\1' + LIST_BULLET + ' )\\n*' +
-    // the \\s*$ here is so that we can parse the inside of nested
-    // lists, where our content might end before we receive two `\n`s
+    `^( *)(${LIST_BULLET}) ` +
+    `[\\s\\S]+?(?:${LIST_BLOCK_END}(?! )` +
+    `(?!\\1${LIST_BULLET} )\\n*` +
     '|\\s*\n*$)'
 );
 const LIST_LOOKBEHIND_R = /(?:^|\n)( *)$/;
@@ -44,7 +28,17 @@ export const list: MarkdownRule = {
     ...defaultRules.list,
     match: (source, state, prevCapture) => {
         state._list = true;
-        return defaultRules.list.match(source, state, prevCapture);
+
+        const prevCaptureStr = state.prevCapture == null ? '' : state.prevCapture[0];
+        const isStartOfLineCapture = LIST_LOOKBEHIND_R.exec(prevCaptureStr);
+        const isListBlock = state._list || !state.inline;
+
+        if (isStartOfLineCapture && isListBlock) {
+            source = isStartOfLineCapture[1] + source;
+            return LIST_R.exec(source);
+        } else {
+            return null;
+        }
     },
     parse: (capture, parse, state) => {
         const bullet = capture[2];
@@ -77,7 +71,6 @@ export const list: MarkdownRule = {
 
             const result = parse(content.replace(LIST_ITEM_END_R, ''), state);
 
-            // Restore our state before returning
             state.inline = oldStateInline;
             state._list = oldStateList;
             return result;
