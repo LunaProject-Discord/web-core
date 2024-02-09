@@ -10,7 +10,7 @@ const LIST_ITEM_PREFIX_R = new RegExp(`^${LIST_ITEM_PREFIX}`);
 const LIST_ITEM_R = new RegExp(
     LIST_ITEM_PREFIX +
     '[^\\n]*(?:\\n' +
-    `(?!\\1${LIST_BULLET} )[^\\n]*)*(\n|$)` +
+    `(?!\\1${LIST_BULLET} )[^\\n]*)*(\n|$)`,
     'gm'
 );
 const LIST_BLOCK_END = '\\n{1,}';
