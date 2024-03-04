@@ -1,48 +1,48 @@
 'use client';
 
-import { CloseOutlined } from '@mui/icons-material';
 import {
     Dialog as MuiDialog,
     DialogActions as MuiDialogActions,
-    dialogActionsClasses,
-    DialogActionsProps,
-    dialogContentClasses,
-    DialogTitle,
-    IconButton,
+    dialogClasses,
+    DialogContent as MuiDialogContent,
+    DialogTitle as MuiDialogTitle,
     styled
 } from '@mui/material';
-import React, { ReactNode } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
-export interface DialogProps {
+export interface ModalProps {
     open: boolean;
-    onClose: () => void;
+    setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const Dialog = styled(MuiDialog)(({ theme }) => ({
-    [`& .${dialogContentClasses.root}`]: {
-        padding: theme.spacing(2)
-    },
-    [`& .${dialogActionsClasses.root}`]: {
-        padding: theme.spacing(1)
+    [`& .${dialogClasses.paper}`]: {
+        gap: theme.spacing(2)
     }
 }));
 
-interface DialogHeaderProps {
-    children?: ReactNode;
-    onClose?: () => void;
-}
+export const DialogTitle = styled(MuiDialogTitle)(({ theme }) => ({
+    margin: 0,
+    padding: theme.spacing(2, 2, 0),
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(2)
+}));
 
-export const DialogHeader = ({ children, onClose }: DialogHeaderProps) => (
-    <DialogTitle sx={{ m: 0, p: 2 }}>
-        {children}
-        {onClose && <IconButton onClick={onClose} sx={{ color: (theme) => theme.palette.grey[500] }}>
-            <CloseOutlined />
-        </IconButton>}
-    </DialogTitle>
-);
+export const DialogContent = styled(MuiDialogContent)(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden auto'
+}));
 
-export const DialogActions = styled(
-    (props: DialogActionsProps) => <MuiDialogActions disableSpacing {...props} />
-)<DialogActionsProps>(({ theme }) => ({
-    gap: theme.spacing(1)
+export const DialogActions = styled(MuiDialogActions)(({ theme }) => ({
+    margin: 0,
+    padding: theme.spacing(0, 2, 2),
+    display: 'flex',
+    alignItems: 'center',
+    gap: theme.spacing(1.5),
+    '& > :not(:first-of-type)': {
+        margin: 0
+    }
 }));

@@ -6,16 +6,16 @@ export interface BaseProps {
     style?: CSSProperties;
 }
 
-export * from './AppBar';
+export * from './BottomSheet';
 export * from './ButtonBase';
 export * from './Dialog';
-export * from './DialogV2';
-export * from './Drawer';
 export * from './Gallery';
 export * from './Icons';
+export * from './Layout';
 export * from './Link';
 export * from './Menu';
 export * from './Message';
+export * from './Navigation';
 export * from './NumberField';
 export * from './PinField';
 export * from './Popover';

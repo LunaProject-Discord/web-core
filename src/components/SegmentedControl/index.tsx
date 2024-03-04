@@ -23,7 +23,7 @@ export const SegmentedControlRoot = styled(
     display: 'flex',
     alignItems: 'center',
     backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[200] : '#282828',
-    borderRadius: theme.shape.borderRadius
+    borderRadius: theme.spacing(1)
 }));
 
 export interface SegmentedControlButtonProps extends ButtonBaseProps {
@@ -54,7 +54,7 @@ export const SegmentedControlButton = styled(
     fontWeight: 500,
     color: selected ? theme.palette.text.primary : theme.palette.grey[600],
     backgroundColor: selected ? theme.palette.background.default : 'transparent',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.spacing(.5),
     boxShadow: selected ? `0 ${theme.spacing(.25)} ${theme.spacing(.5)} rgba(0, 0, 0, .15)` : 'none',
     [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
         color: theme.palette.action.disabled
