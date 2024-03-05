@@ -7,6 +7,7 @@ import {
     darken,
     Interpolation,
     lighten,
+    linearProgressClasses,
     menuClasses,
     menuItemClasses,
     PaletteOptions,
@@ -76,6 +77,22 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                         backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .65) : rgba(255, 255, 255, .8)
                     }
                 })
+            },
+            {
+                props: {
+                    variant: 'outlined',
+                    color: 'monotone'
+                },
+                style: ({ theme }) => ({
+                    borderColor: theme.palette.divider,
+                    [`&:disabled, &.${buttonClasses.disabled}`]: {
+                        borderColor: theme.palette.action.disabled
+                    },
+                    '&:hover': {
+                        backgroundColor: theme.palette.divider,
+                        borderColor: 'transparent'
+                    }
+                })
             }
         ]
     },
@@ -134,6 +151,18 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             }
         }
     },
+    MuiLinearProgress: {
+        defaultProps: {
+            color: 'monotone'
+        },
+        styleOverrides: {
+            root: ({ theme }) => ({
+                [`&, & .${linearProgressClasses.bar}`]: {
+                    borderRadius: theme.shape.borderRadius
+                }
+            })
+        }
+    },
     MuiSelect: {
         defaultProps: {
             MenuProps: {
@@ -154,6 +183,34 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                         })
                     }
                 }
+            }
+        }
+    },
+    MuiTablePagination: {
+        defaultProps: {
+            slotProps: {
+                select: {
+                    MenuProps: {
+                        slotProps: {
+                            paper: {
+                                sx: (theme) => borderAndBoxShadow(theme)
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        styleOverrides: {
+            root: {
+                flexShrink: 0,
+                userSelect: 'none',
+                border: 'none'
+            },
+            toolbar: {
+                padding: '0 !important'
+            },
+            selectLabel: {
+                lineHeight: 0
             }
         }
     },
