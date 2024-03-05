@@ -1,12 +1,13 @@
 import '@mui/material';
+import { PaletteColor, PaletteColorOptions } from '@mui/material';
 
 declare module '@mui/material/styles' {
     interface Palette {
-        monotone: Palette['monotone'];
+        monotone: PaletteColor;
     }
 
     interface PaletteOptions {
-        monotone?: PaletteOptions['monotone'];
+        monotone?: PaletteColorOptions;
     }
 }
 
@@ -24,6 +25,12 @@ declare module '@mui/material/Chip' {
 
 declare module '@mui/material/CircularProgress' {
     interface CircularProgressPropsColorOverrides {
+        monotone: true;
+    }
+}
+
+declare module '@mui/material/LinearProgress' {
+    interface LinearProgressPropsColorOverrides {
         monotone: true;
     }
 }
