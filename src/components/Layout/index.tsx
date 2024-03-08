@@ -1,24 +1,63 @@
 'use client';
 
-import { Box, CssBaseline, GlobalStyles, styled, Typography, TypographyProps } from '@mui/material';
+import { Box, CssBaseline, darken, GlobalStyles, lighten, styled, Typography, TypographyProps } from '@mui/material';
 import React, { Fragment, ReactNode } from 'react';
 import { NAVIGATION_DRAWER_WIDTH } from '../Navigation';
 
 export const Body = styled('body')(({ theme }) => ({
     minHeight: '100dvh',
     margin: 0,
-    padding: 0
+    padding: 0,
+    '@media screen and (-webkit-min-device-pixel-ratio: 0)': {
+        width: `calc(100dvw - ${ROOT_SCROLLBAR_SIZE}px)`,
+        marginRight: ROOT_SCROLLBAR_SIZE,
+        paddingRight: '0 !important'
+    }
 }));
+
+export const ROOT_SCROLLBAR_SIZE = 14;
 
 export const RootStyles = () => (
     <Fragment>
         <CssBaseline />
         <GlobalStyles
-            styles={(theme) => ({
-                '[data-rsbs-backdrop], [data-rsbs-overlay], [data-rsbs-root]:after': {
-                    zIndex: theme.zIndex.drawer + 1
-                }
-            })}
+            styles={(theme) => {
+                const getScrollbarColor = theme.palette.mode === 'light' ? lighten : darken;
+
+                return {
+                    '*, ::before, ::after': {
+                        boxSizing: 'border-box'
+                    },
+
+                    '::selection': {
+                        textShadow: 'none',
+                        backgroundColor: '#b3d4fc'
+                    },
+
+                    '@-moz-document url-prefix()': {
+                        '*': {
+                            scrollbarWidth: 'thin',
+                            scrollbarColor: `${theme.palette.text.secondary} transparent`
+                        }
+                    },
+                    '::-webkit-scrollbar': {
+                        width: ROOT_SCROLLBAR_SIZE,
+                        height: ROOT_SCROLLBAR_SIZE
+                    },
+                    '::-webkit-scrollbar-track': {
+                        border: 'solid 3px transparent'
+                    },
+                    '::-webkit-scrollbar-thumb': {
+                        backgroundClip: 'padding-box',
+                        backgroundColor: theme.palette.text.secondary,
+                        border: 'solid 3px transparent',
+                        borderRadius: theme.spacing(1),
+                        '&:hover, &:active': {
+                            backgroundColor: getScrollbarColor(theme.palette.text.secondary, .2)
+                        }
+                    }
+                };
+            }}
         />
     </Fragment>
 );
