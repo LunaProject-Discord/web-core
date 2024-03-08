@@ -37,9 +37,7 @@ export const NavigationAppBar = styled(
     backgroundColor: theme.palette.background.default,
     zIndex: theme.zIndex.drawer + 1,
     '@media screen and (-webkit-min-device-pixel-ratio: 0)': {
-        marginRight: unstable_getScrollbarSize(document) < 1 ? ROOT_SCROLLBAR_SIZE : 0,
-        left: 0,
-        right: 'auto'
+        marginRight: unstable_getScrollbarSize(document) < 1 ? ROOT_SCROLLBAR_SIZE : 0
     }
 }));
 
