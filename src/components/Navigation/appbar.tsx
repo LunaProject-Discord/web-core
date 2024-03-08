@@ -9,11 +9,9 @@ import {
     styled,
     Toolbar as MuiToolbar
 } from '@mui/material';
-import { unstable_getScrollbarSize } from '@mui/utils';
 import NextLink from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { ReactNode } from 'react';
-import { ROOT_SCROLLBAR_SIZE } from '../Layout';
 import { NavigationItemProps } from './index';
 import { defaultPredicate } from './utils';
 
@@ -35,10 +33,7 @@ export const NavigationAppBar = styled(
     gap: theme.spacing(1),
     color: theme.palette.mode === 'dark' ? theme.palette.grey[500] : theme.palette.grey[800],
     backgroundColor: theme.palette.background.default,
-    zIndex: theme.zIndex.drawer + 1,
-    '@media screen and (-webkit-min-device-pixel-ratio: 0)': {
-        marginRight: unstable_getScrollbarSize(document) < 1 ? ROOT_SCROLLBAR_SIZE : 0
-    }
+    zIndex: theme.zIndex.drawer + 1
 }));
 
 export const NavigationToolbar = styled(MuiToolbar)(({ theme }) => ({

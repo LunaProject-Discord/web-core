@@ -7,12 +7,7 @@ import { NAVIGATION_DRAWER_WIDTH } from '../Navigation';
 export const Body = styled('body')(({ theme }) => ({
     minHeight: '100dvh',
     margin: 0,
-    padding: 0,
-    '@media screen and (-webkit-min-device-pixel-ratio: 0)': {
-        width: `calc(100dvw - ${ROOT_SCROLLBAR_SIZE}px)`,
-        marginRight: ROOT_SCROLLBAR_SIZE,
-        paddingRight: '0 !important'
-    }
+    padding: 0
 }));
 
 export const ROOT_SCROLLBAR_SIZE = 14;
