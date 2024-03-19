@@ -7,7 +7,8 @@ import { NAVIGATION_DRAWER_WIDTH } from '../Navigation';
 export const Body = styled('body')(({ theme }) => ({
     minHeight: '100dvh',
     margin: 0,
-    padding: 0
+    padding: 0,
+    overflowY: 'scroll'
 }));
 
 export const ROOT_SCROLLBAR_SIZE = 14;
@@ -50,6 +51,10 @@ export const RootStyles = () => (
                         '&:hover, &:active': {
                             backgroundColor: getScrollbarColor(theme.palette.text.secondary, .2)
                         }
+                    },
+
+                    '[data-rsbs-backdrop], [data-rsbs-overlay], [data-rsbs-root]:after': {
+                        zIndex: theme.zIndex.drawer + 1
                     }
                 };
             }}
