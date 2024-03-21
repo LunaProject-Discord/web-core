@@ -4,12 +4,12 @@ import { Box, CssBaseline, darken, GlobalStyles, lighten, styled, Typography, Ty
 import React, { Fragment, ReactNode } from 'react';
 import { NAVIGATION_DRAWER_WIDTH } from '../Navigation';
 
-export const Body = styled('body')(({ theme }) => ({
+export const Body = styled('body')({
     minHeight: '100dvh',
     margin: 0,
     padding: 0,
     overflowY: 'scroll'
-}));
+});
 
 export const ROOT_SCROLLBAR_SIZE = 14;
 
@@ -77,7 +77,19 @@ export const PageLayout = styled('main')(({ theme }) => ({
     padding: theme.spacing(2)
 }));
 
-export const PageWithSidebarLayout = styled(PageLayout)(({ theme }) => ({
+export const RootSidebarLayout = styled(Box)(({ theme }) => ({
+    // 表示範囲の高さ - ヘッダーの高さ
+    minHeight: `calc(100dvh - ${theme.spacing(7)})`,
+    padding: theme.spacing(2),
+    display: 'flex',
+    gap: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+        // 表示範囲の高さ - ヘッダーの高さ
+        minHeight: `calc(100dvh - ${theme.spacing(8)})`
+    }
+}));
+
+export const PageSidebarLayout = styled(PageLayout)(({ theme }) => ({
     padding: 0,
     [theme.breakpoints.up('md')]: {
         // 表示範囲の幅 - (ナビゲーションドロワーの幅 + サイドバーとの余白)
