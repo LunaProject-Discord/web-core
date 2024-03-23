@@ -1,7 +1,7 @@
-import { Dispatch, DispatchWithoutAction, SetStateAction, useState } from 'react';
+import { Dispatch, DispatchWithoutAction, SetStateAction, useCallback, useState } from 'react';
 
 export const useResettableState = <T>(initialState: T | (() => T)): [T, Dispatch<SetStateAction<T>>, DispatchWithoutAction] => {
     const [state, setState] = useState(initialState);
-    const resetState = () => setState(initialState);
+    const resetState = useCallback(() => setState(initialState), [initialState]);
     return [state, setState, resetState];
 };
