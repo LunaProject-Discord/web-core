@@ -86,7 +86,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discordjs/rest@npm:2.2.0":
+"@discordjs/rest@npm:^2.2.0":
   version: 2.2.0
   resolution: "@discordjs/rest@npm:2.2.0"
   dependencies:
@@ -165,7 +165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.11.4":
+"@emotion/react@npm:^11.11.4":
   version: 11.11.4
   resolution: "@emotion/react@npm:11.11.4"
   dependencies:
@@ -206,7 +206,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:11.11.5":
+"@emotion/styled@npm:^11.11.5":
   version: 11.11.5
   resolution: "@emotion/styled@npm:11.11.5"
   dependencies:
@@ -336,33 +336,31 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lunaproject/web-core@workspace:."
   dependencies:
-    "@discordjs/rest": "npm:2.2.0"
-    "@emotion/react": "npm:11.11.4"
-    "@emotion/styled": "npm:11.11.5"
-    "@lunaproject/web-discord": "npm:1.1.2"
-    "@mui/icons-material": "npm:5.15.15"
-    "@mui/lab": "npm:5.0.0-alpha.170"
-    "@mui/material": "npm:5.15.15"
-    "@mui/x-date-pickers": "npm:7.2.0"
-    "@types/color": "npm:3.0.6"
-    "@types/node": "npm:20.11.30"
-    "@types/react": "npm:18.2.64"
-    "@types/react-dom": "npm:18.2.21"
-    clsx: "npm:2.1.0"
-    color: "npm:4.2.3"
-    date-fns: "npm:3.6.0"
-    discord-api-types: "npm:0.37.79"
+    "@emotion/react": "npm:^11.11.4"
+    "@emotion/styled": "npm:^11.11.5"
+    "@lunaproject/web-discord": "npm:^1.1.4"
+    "@mui/icons-material": "npm:^5.15.15"
+    "@mui/lab": "npm:^5.0.0-alpha.170"
+    "@mui/material": "npm:^5.15.15"
+    "@mui/x-date-pickers": "npm:^7.2.0"
+    "@types/color": "npm:^3.0.6"
+    "@types/node": "npm:~20.11.30"
+    "@types/react": "npm:^18.2.64"
+    "@types/react-dom": "npm:^18.2.21"
+    clsx: "npm:^2.1.0"
+    color: "npm:^4.2.3"
+    date-fns: "npm:^3.6.0"
     highlight.js: "npm:10.7.3"
-    next: "npm:14.2.2"
-    polished: "npm:4.3.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
-    react-spring-bottom-sheet: "npm:3.4.1"
-    simple-markdown: "npm:0.7.3"
-    ts-loader: "npm:9.5.1"
-    ts-node: "npm:10.9.2"
-    tslint: "npm:6.1.3"
-    typescript: "npm:5.4.5"
+    next: "npm:^14.2.2"
+    polished: "npm:^4.3.1"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-spring-bottom-sheet: "npm:^3.4.1"
+    simple-markdown: "npm:^0.7.3"
+    ts-loader: "npm:^9.5.1"
+    ts-node: "npm:^10.9.2"
+    tslint: "npm:^6.1.3"
+    typescript: "npm:^5.4.5"
   peerDependencies:
     "@emotion/react": ^11.11.0
     "@emotion/styled": ^11.11.0
@@ -387,10 +385,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lunaproject/web-discord@npm:1.1.2":
-  version: 1.1.2
-  resolution: "@lunaproject/web-discord@npm:1.1.2"
-  checksum: 10c0/2fcd3225222ad1650498affb5ca084a0bedf5bc0440c4144330049ab3cfafe570a37595e345f78b5e2fd34e9a5928cc5e0daca5fb704ce8fe298490ec928bda2
+"@lunaproject/web-discord@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@lunaproject/web-discord@npm:1.1.4"
+  dependencies:
+    "@discordjs/rest": "npm:^2.2.0"
+    discord-api-types: "npm:^0.37.79"
+  checksum: 10c0/c12929a2725e65df3101471360accb2c6666971b0e7d2abc77d5505c51a52003d4eefaa55e60973fe2ffa1287bcd8de44396c1902ea1207c30781822da56df38
   languageName: node
   linkType: hard
 
@@ -445,7 +446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:5.15.15":
+"@mui/icons-material@npm:^5.15.15":
   version: 5.15.15
   resolution: "@mui/icons-material@npm:5.15.15"
   dependencies:
@@ -461,7 +462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/lab@npm:5.0.0-alpha.170":
+"@mui/lab@npm:^5.0.0-alpha.170":
   version: 5.0.0-alpha.170
   resolution: "@mui/lab@npm:5.0.0-alpha.170"
   dependencies:
@@ -490,7 +491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:5.15.15":
+"@mui/material@npm:^5.15.15":
   version: 5.15.15
   resolution: "@mui/material@npm:5.15.15"
   dependencies:
@@ -637,7 +638,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/x-date-pickers@npm:7.2.0":
+"@mui/x-date-pickers@npm:^7.2.0":
   version: 7.2.0
   resolution: "@mui/x-date-pickers@npm:7.2.0"
   dependencies:
@@ -864,7 +865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/color@npm:3.0.6":
+"@types/color@npm:^3.0.6":
   version: 3.0.6
   resolution: "@types/color@npm:3.0.6"
   dependencies:
@@ -873,7 +874,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.11.30":
+"@types/node@npm:~20.11.30":
   version: 20.11.30
   resolution: "@types/node@npm:20.11.30"
   dependencies:
@@ -896,12 +897,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.21":
-  version: 18.2.21
-  resolution: "@types/react-dom@npm:18.2.21"
+"@types/react-dom@npm:^18.2.21":
+  version: 18.2.25
+  resolution: "@types/react-dom@npm:18.2.25"
   dependencies:
     "@types/react": "npm:*"
-  checksum: 10c0/a887b4b647071df48173f054854713b68fdacfceeba7fa14f64ba26688d7d43574d7dc88a2a346e28f2e667eeab1b9bdbcad8a54353869835e52638607f61ff5
+  checksum: 10c0/87604407eca6884c5b4d4657cb511dc5ba28ea1cfa5d0ce1fc2d659a7ad1b64ae85dcda60e3f010641f9a52a6a60dfcaa6be3b0d0de9d624475052a13dae01f4
   languageName: node
   linkType: hard
 
@@ -914,31 +915,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:>=16.0.0":
+"@types/react@npm:*, @types/react@npm:>=16.0.0, @types/react@npm:^18.2.64":
   version: 18.2.79
   resolution: "@types/react@npm:18.2.79"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/c8a8a005d8830a48cc1ef93c3510c4935a2a03e5557dbecaa8f1038450cbfcb18eb206fa7fba7077d54b8da21faeb25577e897a333392770a7797f625b62c78a
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:18.2.64":
-  version: 18.2.64
-  resolution: "@types/react@npm:18.2.64"
-  dependencies:
-    "@types/prop-types": "npm:*"
-    "@types/scheduler": "npm:*"
-    csstype: "npm:^3.0.2"
-  checksum: 10c0/ab3ba9597990d08ffd419a5ad28fd22393c7a9a241ae455fb1d5d193d209471aa1909fa7ad016fd8d161eab6d0babba77b013b56a5170bedf78833085b9ee424
-  languageName: node
-  linkType: hard
-
-"@types/scheduler@npm:*":
-  version: 0.23.0
-  resolution: "@types/scheduler@npm:0.23.0"
-  checksum: 10c0/5cf7f2ba3732b74877559eb20b19f95fcd0a20c17dcb20e75a7ca7c7369cd455aeb2d406b3ff5a38168a9750da3bad78dd20d96d11118468b78f4959b8e56090
   languageName: node
   linkType: hard
 
@@ -1127,7 +1110,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.1.0, clsx@npm:^2.1.0":
+"clsx@npm:^2.1.0":
   version: 2.1.0
   resolution: "clsx@npm:2.1.0"
   checksum: 10c0/c09c00ad14f638366ca814097e6cab533dfa1972a358da5b557be487168acbb25b4c1395e89ffa842a8a61ba87a462d2b4885bc9d4f8410b598f3cb339599cdb
@@ -1176,7 +1159,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:4.2.3":
+"color@npm:^4.2.3":
   version: 4.2.3
   resolution: "color@npm:4.2.3"
   dependencies:
@@ -1234,7 +1217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:3.6.0":
+"date-fns@npm:^3.6.0":
   version: 3.6.0
   resolution: "date-fns@npm:3.6.0"
   checksum: 10c0/0b5fb981590ef2f8e5a3ba6cd6d77faece0ea7f7158948f2eaae7bbb7c80a8f63ae30b01236c2923cf89bb3719c33aeb150c715ea4fe4e86e37dcf06bed42fb6
@@ -1255,7 +1238,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:0.37.79":
+"discord-api-types@npm:^0.37.79":
   version: 0.37.79
   resolution: "discord-api-types@npm:0.37.79"
   checksum: 10c0/1f8d9d7ee76c06faab213a1a0c9ca4f252f8cc3b959f8338416e793c32fec8676c6ef451fd5b73d19fbd0783d08b901b533b178b3564e89170c0ed38dfdce440
@@ -1584,7 +1567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:14.2.2":
+"next@npm:^14.2.2":
   version: 14.2.2
   resolution: "next@npm:14.2.2"
   dependencies:
@@ -1714,7 +1697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"polished@npm:4.3.1":
+"polished@npm:^4.3.1":
   version: 4.3.1
   resolution: "polished@npm:4.3.1"
   dependencies:
@@ -1745,7 +1728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0":
+"react-dom@npm:^18.2.0":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -1771,7 +1754,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-spring-bottom-sheet@npm:3.4.1":
+"react-spring-bottom-sheet@npm:^3.4.1":
   version: 3.4.1
   resolution: "react-spring-bottom-sheet@npm:3.4.1"
   dependencies:
@@ -1826,7 +1809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0":
+"react@npm:^18.2.0":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -1904,7 +1887,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-markdown@npm:0.7.3":
+"simple-markdown@npm:^0.7.3":
   version: 0.7.3
   resolution: "simple-markdown@npm:0.7.3"
   dependencies:
@@ -2035,7 +2018,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-loader@npm:9.5.1":
+"ts-loader@npm:^9.5.1":
   version: 9.5.1
   resolution: "ts-loader@npm:9.5.1"
   dependencies:
@@ -2051,7 +2034,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.9.2":
+"ts-node@npm:^10.9.2":
   version: 10.9.2
   resolution: "ts-node@npm:10.9.2"
   dependencies:
@@ -2103,7 +2086,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslint@npm:6.1.3":
+"tslint@npm:^6.1.3":
   version: 6.1.3
   resolution: "tslint@npm:6.1.3"
   dependencies:
@@ -2139,7 +2122,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.4.5":
+"typescript@npm:^5.4.5":
   version: 5.4.5
   resolution: "typescript@npm:5.4.5"
   bin:
@@ -2149,7 +2132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.4.5#optional!builtin<compat/typescript>":
   version: 5.4.5
   resolution: "typescript@patch:typescript@npm%3A5.4.5#optional!builtin<compat/typescript>::version=5.4.5&hash=5adc0c"
   bin:
