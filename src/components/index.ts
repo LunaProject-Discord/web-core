@@ -7,6 +7,7 @@ export interface BaseProps {
 }
 
 export * from './BottomSheet';
+export * from './Button';
 export * from './ButtonBase';
 export * from './Dialog';
 export * from './Gallery';
