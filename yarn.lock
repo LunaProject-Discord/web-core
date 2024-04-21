@@ -367,7 +367,7 @@ __metadata:
     "@mui/x-date-pickers": "npm:7.2.0"
     "@types/color": "npm:3.0.6"
     "@types/node": "npm:20.11.30"
-    "@types/react": "npm:18.2.79"
+    "@types/react": "npm:18.2.69"
     "@types/react-dom": "npm:18.2.25"
     clsx: "npm:2.1.0"
     color: "npm:4.2.3"
@@ -393,7 +393,7 @@ __metadata:
     "@mui/x-date-pickers": ^7.2.0
     "@types/react": ^18.2.0
     "@types/react-dom": ^18.2.0
-    next: ^14.1.0
+    next: ^14.2.0
     react: ^18.2.0
     react-dom: ^18.2.0
   peerDependenciesMeta:
@@ -953,13 +953,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.79":
-  version: 18.2.79
-  resolution: "@types/react@npm:18.2.79"
+"@types/react@npm:18.2.69":
+  version: 18.2.69
+  resolution: "@types/react@npm:18.2.69"
   dependencies:
     "@types/prop-types": "npm:*"
+    "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/c8a8a005d8830a48cc1ef93c3510c4935a2a03e5557dbecaa8f1038450cbfcb18eb206fa7fba7077d54b8da21faeb25577e897a333392770a7797f625b62c78a
+  checksum: 10c0/239b947ed8576a271057a6f571d0967098074b101a2bece244e88093dc8fb2f020872c463b8e78b2049334ba99158f6eef5960e51f73a389f86eee39b835d846
   languageName: node
   linkType: hard
 
