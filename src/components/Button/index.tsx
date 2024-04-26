@@ -1,6 +1,5 @@
-import { LoadingButton as MuiLoadingButton, LoadingButtonProps } from '@mui/lab';
-import { Button as MuiButton, ButtonProps, styled, Theme } from '@mui/material';
-import React, { ElementType } from 'react';
+import { LoadingButton as MuiLoadingButton } from '@mui/lab';
+import { Button as MuiButton, styled, Theme } from '@mui/material';
 
 export type ButtonCornerType =
     undefined
@@ -21,42 +20,23 @@ export interface ButtonRootProps {
 }
 
 export const getCorner = (corner: ButtonCornerType, theme: Theme) => {
+    const radius = theme.shape.borderRadius;
+
     if (!corner || corner === 'rounded')
-        return 1;
+        return radius;
     if (corner === 'square')
         return 0;
     if (corner === 'extended')
-        return 10000;
+        return '10000px';
 
-    return typeof corner === 'function' ? corner(theme) : corner;
+    if (typeof corner === 'string')
+        return corner;
+    if (typeof corner === 'number')
+        return radius * corner;
+    return corner(theme);
 };
 
-export const Button = <C extends ElementType, >(
-    {
-        corners,
-        sx,
-        ...props
-    }: ButtonRootProps & ButtonProps<C, { components?: C }>
-) => (
-    <MuiButton
-        {...props}
-        sx={(theme) => ({
-            ...(corners && {
-                ...(typeof corners === 'object' ? {
-                    borderTopLeftRadius: getCorner(corners.topLeft, theme),
-                    borderTopRightRadius: getCorner(corners.topRight, theme),
-                    borderBottomLeftRadius: getCorner(corners.bottomLeft, theme),
-                    borderBottomRightRadius: getCorner(corners.bottomRight, theme)
-                } : {
-                    borderRadius: getCorner(corners, theme)
-                })
-            }),
-            ...sx
-        })}
-    />
-);
-
-export const Button2 = styled(MuiButton)<ButtonRootProps>(({ theme, corners }) => ({
+export const Button = styled(MuiButton)<ButtonRootProps>(({ theme, corners }) => ({
     ...(typeof corners === 'object' ? {
         borderTopLeftRadius: getCorner(corners.topLeft, theme),
         borderTopRightRadius: getCorner(corners.topRight, theme),
@@ -65,34 +45,9 @@ export const Button2 = styled(MuiButton)<ButtonRootProps>(({ theme, corners }) =
     } : {
         borderRadius: getCorner(corners, theme)
     })
-})) as typeof Button;
+})) as typeof MuiButton;
 
-export const LoadingButton = <C extends ElementType, >(
-    {
-        corners,
-        sx,
-        ...props
-    }: ButtonRootProps & LoadingButtonProps<C, { components?: C }>
-) => (
-    <MuiLoadingButton
-        {...props}
-        sx={(theme) => ({
-            ...(corners && {
-                ...(typeof corners === 'object' ? {
-                    borderTopLeftRadius: getCorner(corners.topLeft, theme),
-                    borderTopRightRadius: getCorner(corners.topRight, theme),
-                    borderBottomLeftRadius: getCorner(corners.bottomLeft, theme),
-                    borderBottomRightRadius: getCorner(corners.bottomRight, theme)
-                } : {
-                    borderRadius: getCorner(corners, theme)
-                })
-            }),
-            ...sx
-        })}
-    />
-);
-
-export const LoadingButton2 = styled(MuiLoadingButton)<ButtonRootProps>(({ theme, corners }) => ({
+export const LoadingButton = styled(MuiLoadingButton)<ButtonRootProps>(({ theme, corners }) => ({
     ...(typeof corners === 'object' ? {
         borderTopLeftRadius: getCorner(corners.topLeft, theme),
         borderTopRightRadius: getCorner(corners.topRight, theme),
@@ -101,4 +56,4 @@ export const LoadingButton2 = styled(MuiLoadingButton)<ButtonRootProps>(({ theme
     } : {
         borderRadius: getCorner(corners, theme)
     })
-})) as typeof LoadingButton;
+})) as typeof MuiLoadingButton;
