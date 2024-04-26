@@ -45,7 +45,7 @@ export const Button = styled(MuiButton)<ButtonRootProps>(({ theme, corners }) =>
     } : {
         borderRadius: getCorner(corners, theme)
     })
-})) as typeof MuiButton;
+})) as typeof MuiButton & ButtonRootProps;
 
 export const LoadingButton = styled(MuiLoadingButton)<ButtonRootProps>(({ theme, corners }) => ({
     ...(typeof corners === 'object' ? {
@@ -56,4 +56,4 @@ export const LoadingButton = styled(MuiLoadingButton)<ButtonRootProps>(({ theme,
     } : {
         borderRadius: getCorner(corners, theme)
     })
-})) as typeof MuiLoadingButton;
+})) as typeof MuiLoadingButton & ButtonRootProps;
