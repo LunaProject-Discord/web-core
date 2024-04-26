@@ -26,7 +26,7 @@ export const getCorner = (corner: ButtonCornerType, theme: Theme) => {
     if (corner === 'square')
         return 0;
     if (corner === 'extended')
-        return 10000;
+        return '10000px';
 
     return typeof corner === 'function' ? corner(theme) : corner;
 };
