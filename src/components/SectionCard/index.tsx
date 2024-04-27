@@ -1,6 +1,7 @@
 'use client';
 
 import { Box, BoxProps, CSSObject, styled, Theme } from '@mui/material';
+import { BoxTypeMap } from '@mui/system';
 import clsx from 'clsx';
 import React, { ElementType } from 'react';
 import { SectionCardDisplay, sectionCardDisplayClasses, SectionCardDisplayProps } from './display';
@@ -16,12 +17,13 @@ export const sectionCardClasses = {
 
 export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
     minHeight: theme.spacing(8),
-    padding: theme.spacing(1, 1.5),
+    padding: theme.spacing(.875, 1.375),
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: theme.spacing(1.5),
+    border: `solid 1px ${theme.palette.divider}`,
     borderRadius: theme.shape.borderRadius,
     transition: theme.transitions.create(['background-color', 'box-shadow', 'border-color', 'color'], {
         duration: theme.transitions.duration.shortest
@@ -43,12 +45,12 @@ export const SectionCardRoot = styled(
     )
 )<BoxProps & SectionCardDisabledProps>(({ theme }) => sectionCardRootStyled(theme)) as typeof Box;
 
-export type SectionCardProps<C extends ElementType, > =
+export type SectionCardProps<C extends ElementType = BoxTypeMap['defaultComponent']> =
     SectionCardDisplayProps
     & SectionCardDisabledProps
     & Omit<BoxProps<C, { component?: C }>, 'children'>;
 
-export const SectionCard = <C extends ElementType, >(
+export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent'], >(
     {
         icon,
         primary,
@@ -71,6 +73,8 @@ export const SectionCard = <C extends ElementType, >(
 );
 
 export * from './Button';
+export * from './Checkbox';
 export * from './Link';
 export * from './RouteLink';
+export * from './Switch';
 export * from './display';

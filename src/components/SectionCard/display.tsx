@@ -1,5 +1,5 @@
-import { SlotComponentProps } from '@mui/base';
 import { Box, BoxProps, styled } from '@mui/material';
+import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
 import React, { ElementType, ReactNode } from 'react';
 
@@ -64,37 +64,34 @@ export const SectionCardDisplaySecondary = styled(
     color: theme.palette.text.secondary
 })) as typeof Box;
 
-export interface SectionCardDisplaySlots {
+export type SectionCardDisplaySlotsAndSlotProps = CreateSlotsAndSlotProps<{
+    root?: ElementType;
     icon?: ElementType;
     primary?: ElementType;
     secondary?: ElementType;
-}
+}, {
+    root: SlotProps<typeof Box, {}, {}>;
+    icon: SlotProps<typeof Box, {}, {}>;
+    primary: SlotProps<typeof Box, {}, {}>;
+    secondary: SlotProps<typeof Box, {}, {}>;
+}>;
 
-export interface SectionCardDisplaySlotProps {
-    icon?: SlotComponentProps<typeof Box, {}, {}>;
-    primary?: SlotComponentProps<typeof Box, {}, {}>;
-    secondary?: SlotComponentProps<typeof Box, {}, {}>;
-}
-
-export interface SectionCardDisplayProps {
+export type SectionCardDisplayProps = SectionCardDisplaySlotsAndSlotProps & {
     icon?: ReactNode;
     primary?: ReactNode;
     secondary?: ReactNode;
-    slots?: SectionCardDisplaySlots;
-    slotProps?: SectionCardDisplaySlotProps;
-}
+};
 
-export const SectionCardDisplay = <C extends ElementType, >(
+export const SectionCardDisplay = (
     {
         icon,
         primary,
         secondary,
         slots,
-        slotProps,
-        ...props
-    }: SectionCardDisplayProps & BoxProps<C, { component?: C }>
+        slotProps
+    }: SectionCardDisplayProps
 ) => (
-    <SectionCardDisplayRoot {...props}>
+    <SectionCardDisplayRoot component={slots?.root} {...slotProps?.root}>
         {icon && <SectionCardDisplayIcon component={slots?.icon} {...slotProps?.icon}>{icon}</SectionCardDisplayIcon>}
         {(primary || secondary) && <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             {primary && <SectionCardDisplayPrimary component={slots?.primary} {...slotProps?.primary}>

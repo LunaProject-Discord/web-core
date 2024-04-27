@@ -20,6 +20,7 @@ export const SectionLinkCard = (
         secondary,
         disabled,
         className,
+        sx,
         slots,
         slotProps,
         ...props
@@ -29,9 +30,10 @@ export const SectionLinkCard = (
 
     return (
         <SectionButtonCardRoot
+            component={Link}
             disabled={disabled}
             className={clsx(sectionLinkCardClasses.root, className)}
-            component={Link}
+            sx={{ flexWrap: 'nowrap', ...sx }}
             {...props}
         >
             <SectionCardDisplay

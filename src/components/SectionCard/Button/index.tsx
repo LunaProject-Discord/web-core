@@ -1,8 +1,9 @@
 'use client';
 
 import { ButtonBase, ButtonBaseProps, styled } from '@mui/material';
+import { ButtonBaseTypeMap } from '@mui/material/ButtonBase/ButtonBase';
 import clsx from 'clsx';
-import React from 'react';
+import React, { ElementType } from 'react';
 import { buttonActionStyled } from '../../ButtonBase';
 import { SectionCardDisplay, SectionCardDisplayProps } from '../display';
 import { sectionCardClasses, SectionCardDisabledProps, sectionCardRootStyled } from '../index';
@@ -24,12 +25,12 @@ export const SectionButtonCardRoot = styled(
     ...buttonActionStyled(theme)
 })) as typeof ButtonBase;
 
-export type SectionButtonCardProps<C extends React.ElementType> =
+export type SectionButtonCardProps<C extends ElementType = ButtonBaseTypeMap['defaultComponent']> =
     SectionCardDisplayProps
     & SectionCardDisabledProps
     & Omit<ButtonBaseProps<C, { components?: C }>, 'children'>;
 
-export const SectionButtonCard = <C extends React.ElementType, >(
+export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['defaultComponent'], >(
     {
         icon,
         primary,
