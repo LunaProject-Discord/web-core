@@ -16,7 +16,7 @@ import {
     svgIconClasses,
     Theme
 } from '@mui/material';
-import { SystemStyleObject } from '@mui/system/styleFunctionSx/styleFunctionSx';
+import { SystemStyleObject } from '@mui/system';
 import NextLink from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { Dispatch, MouseEvent, ReactNode, SetStateAction, useContext } from 'react';

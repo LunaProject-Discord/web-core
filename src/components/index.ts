@@ -21,6 +21,7 @@ export * from './NumberField';
 export * from './PinField';
 export * from './Popover';
 export * from './Section';
+export * from './SectionCard';
 export * from './SectionItems';
 export * from './SegmentedControl';
 export * from './Select';
