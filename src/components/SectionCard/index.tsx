@@ -74,7 +74,7 @@ export const SectionCard = <C extends ElementType, >(
         slots,
         slotProps,
         ...props
-    }: SectionCardProps & BoxProps<C, { component: C }>
+    }: SectionCardProps & BoxProps<C, { component?: C }>
 ) => (
     <SectionCardRoot {...props}>
         {icon && <SectionCardIcon component={slots?.icon} {...slotProps?.icon}>{icon}</SectionCardIcon>}
