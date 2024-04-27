@@ -43,8 +43,10 @@ export const SectionCardRoot = styled(
     )
 )<BoxProps & SectionCardDisabledProps>(({ theme }) => sectionCardRootStyled(theme)) as typeof Box;
 
-export interface SectionCardProps extends SectionCardDisplayProps, SectionCardDisabledProps {
-}
+export type SectionCardProps<C extends ElementType, > =
+    SectionCardDisplayProps
+    & SectionCardDisabledProps
+    & Omit<BoxProps<C, { component?: C }>, 'children'>;
 
 export const SectionCard = <C extends ElementType, >(
     {
@@ -55,7 +57,7 @@ export const SectionCard = <C extends ElementType, >(
         slots,
         slotProps,
         ...props
-    }: SectionCardProps & BoxProps<C, { component?: C }>
+    }: SectionCardProps<C>
 ) => (
     <SectionCardRoot disabled={disabled} {...props}>
         <SectionCardDisplay
@@ -70,4 +72,5 @@ export const SectionCard = <C extends ElementType, >(
 
 export * from './Button';
 export * from './Link';
+export * from './RouteLink';
 export * from './display';

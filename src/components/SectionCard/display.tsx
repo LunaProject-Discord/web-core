@@ -31,12 +31,12 @@ export const SectionCardDisplayIcon = styled(
             {...props}
         />
     )
-)<BoxProps>(({ theme }) => ({
+)<BoxProps>({
     display: 'flex',
     placeItems: 'center',
     placeContent: 'center',
     flexShrink: 0
-})) as typeof Box;
+}) as typeof Box;
 
 export const SectionCardDisplayPrimary = styled(
     ({ className, ...props }: BoxProps) => (
