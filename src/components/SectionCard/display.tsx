@@ -47,6 +47,7 @@ export const SectionCardDisplayPrimary = styled(
     )
 )<BoxProps>(({ theme }) => ({
     ...theme.typography.body1,
+    textAlign: 'start',
     color: theme.palette.text.primary
 })) as typeof Box;
 
@@ -59,6 +60,7 @@ export const SectionCardDisplaySecondary = styled(
     )
 )<BoxProps>(({ theme }) => ({
     ...theme.typography.body2,
+    textAlign: 'start',
     color: theme.palette.text.secondary
 })) as typeof Box;
 

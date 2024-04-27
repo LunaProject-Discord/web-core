@@ -5,27 +5,21 @@ import clsx from 'clsx';
 import React from 'react';
 import { buttonActionStyled } from '../../ButtonBase';
 import { SectionCardDisplay } from '../display';
-import { SectionCardProps } from '../index';
+import { sectionCardClasses, SectionCardProps, sectionCardRootStyled } from '../index';
 
 export const sectionButtonCardClasses = {
     root: 'SectionButtonCard-root'
 };
 
 export const SectionButtonCardRoot = styled(
-    ({ className, ...props }: ButtonBaseProps) => (
+    ({ disabled, className, ...props }: ButtonBaseProps) => (
         <ButtonBase
-            className={clsx(sectionButtonCardClasses.root, className)}
+            className={clsx(sectionButtonCardClasses.root, disabled && sectionCardClasses.disabled, className)}
             {...props}
         />
     )
 )<ButtonBaseProps>(({ theme }) => ({
-    minHeight: theme.spacing(8),
-    padding: theme.spacing(1, 1.5),
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: theme.spacing(1.5),
-    borderRadius: theme.shape.borderRadius,
+    ...sectionCardRootStyled(theme),
     ...buttonActionStyled(theme)
 })) as typeof ButtonBase;
 
