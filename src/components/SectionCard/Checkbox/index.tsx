@@ -4,9 +4,10 @@ import { Checkbox } from '@mui/material';
 import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
 import React, { ElementType } from 'react';
-import { SectionButtonCardRoot } from '../Button';
+import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
 import { SectionCardDisplay } from '../display';
-import { SectionSwitchCardProps } from '../Switch';
+import { SectionCardContent } from '../index';
+import { SectionSwitchCardRootProps } from '../Switch';
 
 export const sectionCheckboxCardClasses = {
     root: 'SectionCheckboxCard-root',
@@ -19,17 +20,22 @@ export type SectionCheckboxCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     control: SlotProps<typeof Checkbox, {}, {}>;
 }>;
 
-export type SectionCheckboxCardProps = SectionSwitchCardProps & SectionCheckboxCardSlotsAndSlotProps;
+export type SectionCheckboxCardProps =
+    SectionButtonCardProps
+    & SectionSwitchCardRootProps
+    & SectionCheckboxCardSlotsAndSlotProps;
 
 export const SectionCheckboxCard = (
     {
         icon,
         primary,
         secondary,
+        children,
         checked,
         setChecked,
         defaultChecked,
         disabled,
+        variant,
         className,
         sx,
         slots,
@@ -40,6 +46,7 @@ export const SectionCheckboxCard = (
     <SectionButtonCardRoot
         onClick={() => setChecked(!checked)}
         disabled={disabled}
+        variant={variant}
         className={clsx(sectionCheckboxCardClasses.root, className)}
         sx={{ flexWrap: 'nowrap', ...sx }}
         {...props}
@@ -54,6 +61,7 @@ export const SectionCheckboxCard = (
             tabIndex={-1}
             className={sectionCheckboxCardClasses.control}
             sx={{
+                mx: .5,
                 p: 0,
                 display: 'flex',
                 placeItems: 'center',
@@ -69,8 +77,11 @@ export const SectionCheckboxCard = (
             icon={icon}
             primary={primary}
             secondary={secondary}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots?.display}
+            slotProps={slotProps?.display}
         />
+        {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+            {children}
+        </SectionCardContent>}
     </SectionButtonCardRoot>
 );

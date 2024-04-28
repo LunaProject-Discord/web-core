@@ -1,23 +1,20 @@
 'use client';
 
-import { Link } from '@mui/material';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
-import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
-import { SectionCardDisplay, SectionCardDisplayIcon } from '../display';
+import { SectionButtonCard, SectionButtonCardProps } from '../Button';
+import { SectionCardDisplayIcon } from '../display';
 
 export const sectionLinkCardClasses = {
     root: 'SectionLinkCard-root'
 };
 
-export type SectionLinkCardProps = SectionButtonCardProps<typeof Link>;
+export type SectionLinkCardProps = SectionButtonCardProps<'a'>;
 
 export const SectionLinkCard = (
     {
-        icon,
-        primary,
-        secondary,
+        children,
         disabled,
         className,
         sx,
@@ -29,23 +26,19 @@ export const SectionLinkCard = (
     const { icons: { OpenInNew } } = useContext(ConfigContext);
 
     return (
-        <SectionButtonCardRoot
-            component={Link}
+        <SectionButtonCard
+            component="a"
             disabled={disabled}
             className={clsx(sectionLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
+            slots={slots}
+            slotProps={slotProps}
             {...props}
         >
-            <SectionCardDisplay
-                icon={icon}
-                primary={primary}
-                secondary={secondary}
-                slots={slots}
-                slotProps={slotProps}
-            />
+            {children}
             <SectionCardDisplayIcon sx={{ ml: 'auto' }}>
                 <OpenInNew color={!disabled ? 'action' : 'disabled'} />
             </SectionCardDisplayIcon>
-        </SectionButtonCardRoot>
+        </SectionButtonCard>
     );
 };

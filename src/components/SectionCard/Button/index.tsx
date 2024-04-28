@@ -1,53 +1,71 @@
 'use client';
 
 import { ButtonBase, ButtonBaseProps, styled } from '@mui/material';
-import { ButtonBaseTypeMap } from '@mui/material/ButtonBase/ButtonBase';
+import { ButtonBaseTypeMap, ExtendButtonBase } from '@mui/material/ButtonBase/ButtonBase';
 import clsx from 'clsx';
 import React, { ElementType } from 'react';
 import { buttonActionStyled } from '../../ButtonBase';
-import { SectionCardDisplay, SectionCardDisplayProps } from '../display';
-import { sectionCardClasses, SectionCardDisabledProps, sectionCardRootStyled } from '../index';
+import { SectionCardDisplay } from '../display';
+import {
+    sectionCardClasses,
+    SectionCardContent,
+    SectionCardRootProps,
+    sectionCardRootStyled,
+    SectionCardVariantProps
+} from '../index';
 
 export const sectionButtonCardClasses = {
     root: 'SectionButtonCard-root'
 };
 
 export const SectionButtonCardRoot = styled(
-    ({ disabled, className, ...props }: ButtonBaseProps) => (
+    ({ disabled, variant, className, ...props }: ButtonBaseProps & SectionCardVariantProps) => (
         <ButtonBase
             disabled={disabled}
-            className={clsx(sectionCardClasses.root, sectionButtonCardClasses.root, disabled && sectionCardClasses.disabled, className)}
+            className={
+                clsx(
+                    sectionCardClasses.root,
+                    sectionButtonCardClasses.root,
+                    disabled && sectionCardClasses.disabled,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantDefault,
+                    className
+                )
+            }
             {...props}
         />
     )
-)<ButtonBaseProps>(({ theme }) => ({
+)<ButtonBaseProps & SectionCardVariantProps>(({ theme }) => ({
     ...sectionCardRootStyled(theme),
     ...buttonActionStyled(theme)
-})) as typeof ButtonBase;
+})) as ExtendButtonBase<ButtonBaseTypeMap<SectionCardVariantProps>>;
 
 export type SectionButtonCardProps<C extends ElementType = ButtonBaseTypeMap['defaultComponent']> =
-    SectionCardDisplayProps
-    & SectionCardDisabledProps
-    & Omit<ButtonBaseProps<C, { components?: C }>, 'children'>;
+    SectionCardRootProps
+    & ButtonBaseProps<C, { components?: C }>;
 
 export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['defaultComponent'], >(
     {
         icon,
         primary,
         secondary,
+        children,
         disabled,
+        variant,
         slots,
         slotProps,
         ...props
     }: SectionButtonCardProps<C>
 ) => (
-    <SectionButtonCardRoot disabled={disabled} {...props}>
+    <SectionButtonCardRoot disabled={disabled} variant={variant} {...props}>
         <SectionCardDisplay
             icon={icon}
             primary={primary}
             secondary={secondary}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots?.display}
+            slotProps={slotProps?.display}
         />
+        {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+            {children}
+        </SectionCardContent>}
     </SectionButtonCardRoot>
 );

@@ -1,16 +1,21 @@
 'use client';
 
-import { Box, Switch, switchClasses } from '@mui/material';
+import { Switch, switchClasses } from '@mui/material';
 import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
 import React, { Dispatch, ElementType, SetStateAction } from 'react';
-import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
-import { SectionCardDisplay } from '../display';
+import { SectionButtonCard, SectionButtonCardProps } from '../Button';
 
 export const sectionSwitchCardClasses = {
     root: 'SectionSwitchCard-root',
     control: 'SectionSwitchCard-control'
 };
+
+export interface SectionSwitchCardRootProps {
+    checked: boolean;
+    setChecked: Dispatch<SetStateAction<boolean>>;
+    defaultChecked?: boolean;
+}
 
 export type SectionSwitchCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     control?: ElementType;
@@ -18,17 +23,14 @@ export type SectionSwitchCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     control: SlotProps<typeof Switch, {}, {}>;
 }>;
 
-export type SectionSwitchCardProps = SectionButtonCardProps & SectionSwitchCardSlotsAndSlotProps & {
-    checked: boolean;
-    setChecked: Dispatch<SetStateAction<boolean>>;
-    defaultChecked?: boolean;
-};
+export type SectionSwitchCardProps =
+    SectionButtonCardProps
+    & SectionSwitchCardRootProps
+    & SectionSwitchCardSlotsAndSlotProps;
 
 export const SectionSwitchCard = (
     {
-        icon,
-        primary,
-        secondary,
+        children,
         checked,
         setChecked,
         defaultChecked,
@@ -40,33 +42,27 @@ export const SectionSwitchCard = (
         ...props
     }: SectionSwitchCardProps
 ) => (
-    <SectionButtonCardRoot
+    <SectionButtonCard
         onClick={() => setChecked(!checked)}
         disabled={disabled}
         className={clsx(sectionSwitchCardClasses.root, className)}
         sx={{ flexWrap: 'nowrap', ...sx }}
+        slots={slots}
+        slotProps={slotProps}
         {...props}
     >
-        <SectionCardDisplay
-            icon={icon}
-            primary={primary}
-            secondary={secondary}
-            slots={slots}
-            slotProps={slotProps}
+        {children}
+        <Switch
+            component={slots?.control}
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+            defaultChecked={defaultChecked}
+            disabled={disabled}
+            disableRipple
+            tabIndex={-1}
+            className={sectionSwitchCardClasses.control}
+            sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
+            {...slotProps?.control}
         />
-        <Box sx={{ ml: 'auto' }}>
-            <Switch
-                component={slots?.control}
-                checked={checked}
-                onChange={() => setChecked(!checked)}
-                defaultChecked={defaultChecked}
-                disabled={disabled}
-                disableRipple
-                tabIndex={-1}
-                className={sectionSwitchCardClasses.control}
-                sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
-                {...slotProps?.control}
-            />
-        </Box>
-    </SectionButtonCardRoot>
+    </SectionButtonCard>
 );

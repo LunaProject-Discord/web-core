@@ -21,7 +21,13 @@ export const SectionCardDisplayRoot = styled(
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
-    gap: theme.spacing(1.5)
+    gap: theme.spacing(1.5),
+    [`& .${sectionCardDisplayClasses.icon}`]: {
+        margin: theme.spacing(0, .5)
+    },
+    [`&:not(:has(${sectionCardDisplayClasses.secondary})) .${sectionCardDisplayClasses.primary}`]: {
+        marginTop: theme.spacing(.25)
+    }
 })) as typeof Box;
 
 export const SectionCardDisplayIcon = styled(
@@ -44,7 +50,7 @@ export const SectionCardDisplayPrimary = styled(
             component={Box}
             variant="body1"
             color="text.primary"
-            className={clsx(sectionCardDisplayClasses.primary, className)}
+            className={sectionCardDisplayClasses.primary}
             {...props}
         />
     )
@@ -57,13 +63,19 @@ export const SectionCardDisplaySecondary = styled(
         <Typography
             variant="body2"
             color="text.secondary"
-            className={clsx(sectionCardDisplayClasses.secondary, className)}
+            className={sectionCardDisplayClasses.secondary}
             {...props}
         />
     )
 )<TypographyProps>({
     textAlign: 'start'
 }) as typeof Typography;
+
+export interface SectionCardDisplayRootProps {
+    icon?: ReactNode;
+    primary?: ReactNode;
+    secondary?: ReactNode;
+}
 
 export type SectionCardDisplaySlotsAndSlotProps = CreateSlotsAndSlotProps<{
     root?: ElementType;
@@ -77,11 +89,7 @@ export type SectionCardDisplaySlotsAndSlotProps = CreateSlotsAndSlotProps<{
     secondary: SlotProps<typeof Typography, {}, {}>;
 }>;
 
-export type SectionCardDisplayProps = SectionCardDisplaySlotsAndSlotProps & {
-    icon?: ReactNode;
-    primary?: ReactNode;
-    secondary?: ReactNode;
-};
+export type SectionCardDisplayProps = SectionCardDisplayRootProps & SectionCardDisplaySlotsAndSlotProps;
 
 export const SectionCardDisplay = (
     {
