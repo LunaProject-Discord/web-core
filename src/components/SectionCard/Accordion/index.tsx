@@ -49,7 +49,7 @@ export const SectionAccordionCardRoot = styled(
             {...props}
         />
     ),
-    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'expanded' && prop !== 'readOnly' && prop !== 'variant' }
+    { shouldForwardProp: (prop) => prop !== 'sx' }
 )<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
@@ -81,9 +81,12 @@ export const SectionAccordionCardHeader = styled(
             {...props}
         />
     ),
-    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'expanded' }
+    { shouldForwardProp: (prop) => prop !== 'sx' }
 )<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
+    [`& .${sectionCardClasses.root}`]: {
+        width: '100%'
+    },
     [`&.${sectionAccordionCardClasses.expanded}, &.${sectionAccordionCardClasses.expanded} .${sectionCardClasses.root}`]: {
         borderRadius: 0,
         borderTopLeftRadius: theme.shape.borderRadius,
@@ -110,7 +113,7 @@ export const SectionAccordionCardHeaderIcon = styled(
             {...props}
         />
     ),
-    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'expanded' }
+    { shouldForwardProp: (prop) => prop !== 'sx' }
 )<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>>(({ theme }) => ({
     transform: 'rotate(90deg)',
     transition: theme.transitions.create('transform', {
@@ -144,7 +147,7 @@ export const SectionAccordionCardItems = styled(
             {...props}
         />
     ),
-    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'expanded' && prop !== 'readOnly' && prop !== 'variant' }
+    { shouldForwardProp: (prop) => prop !== 'sx' }
 )<CollapseProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',

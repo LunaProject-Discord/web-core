@@ -25,7 +25,7 @@ export const SectionCardDisplayRoot = styled(
     [`& .${sectionCardDisplayClasses.icon}`]: {
         margin: theme.spacing(0, .5)
     },
-    [`&:not(:has(${sectionCardDisplayClasses.secondary})) .${sectionCardDisplayClasses.primary}`]: {
+    [`&:not(:has(.${sectionCardDisplayClasses.secondary})) .${sectionCardDisplayClasses.primary}`]: {
         marginTop: theme.spacing(.25)
     }
 })) as typeof Box;
@@ -49,27 +49,25 @@ export const SectionCardDisplayPrimary = styled(
         <Typography
             component={Box}
             variant="body1"
+            textAlign="start"
             color="text.primary"
             className={sectionCardDisplayClasses.primary}
             {...props}
         />
     )
-)<TypographyProps>({
-    textAlign: 'start'
-}) as typeof Typography;
+)<TypographyProps>() as typeof Typography;
 
 export const SectionCardDisplaySecondary = styled(
     ({ className, ...props }: TypographyProps) => (
         <Typography
             variant="body2"
+            textAlign="start"
             color="text.secondary"
             className={sectionCardDisplayClasses.secondary}
             {...props}
         />
     )
-)<TypographyProps>({
-    textAlign: 'start'
-}) as typeof Typography;
+)<TypographyProps>() as typeof Typography;
 
 export interface SectionCardDisplayRootProps {
     icon?: ReactNode;

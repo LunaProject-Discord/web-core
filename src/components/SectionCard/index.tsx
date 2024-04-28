@@ -60,7 +60,7 @@ export const SectionCardRoot = styled(
             {...props}
         />
     ),
-    { shouldForwardProp: (prop) => prop !== 'sx' && prop !== 'disabled' && prop !== 'variant' }
+    { shouldForwardProp: (prop) => prop !== 'sx' }
 )<BoxProps & SectionCardDisabledProps & SectionCardVariantProps>(({ theme }) => sectionCardRootStyled(theme)) as OverridableComponent<BoxTypeMap<SectionCardDisabledProps & SectionCardVariantProps, 'div', Theme>>;
 
 export const SectionCardContent = styled(
