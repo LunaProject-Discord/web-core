@@ -100,7 +100,7 @@ export const SectionCardDisplay = (
 ) => (
     <SectionCardDisplayRoot component={slots?.root} {...slotProps?.root}>
         {icon && <SectionCardDisplayIcon component={slots?.icon} {...slotProps?.icon}>{icon}</SectionCardDisplayIcon>}
-        {(primary || secondary) && <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        {(primary || secondary) && <Box sx={{ display: 'flex', flexDirection: 'column', gap: .25 }}>
             {primary && <SectionCardDisplayPrimary component={slots?.primary ?? Box} {...slotProps?.primary}>
                 {primary}
             </SectionCardDisplayPrimary>}

@@ -36,7 +36,7 @@ export const SectionLinkCard = (
             {...props}
         >
             {children}
-            <SectionCardDisplayIcon sx={{ ml: 'auto' }}>
+            <SectionCardDisplayIcon>
                 <OpenInNew color={!disabled ? 'action' : 'disabled'} />
             </SectionCardDisplayIcon>
         </SectionButtonCard>

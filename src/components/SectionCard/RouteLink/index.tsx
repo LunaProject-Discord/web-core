@@ -37,7 +37,7 @@ export const SectionRouteLinkCard = (
             {...props}
         >
             {children}
-            <SectionCardDisplayIcon sx={{ ml: 'auto' }}>
+            <SectionCardDisplayIcon>
                 <More color={!disabled ? 'action' : 'disabled'} />
             </SectionCardDisplayIcon>
         </SectionButtonCard>
