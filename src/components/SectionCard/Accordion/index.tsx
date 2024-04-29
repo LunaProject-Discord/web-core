@@ -171,7 +171,7 @@ export const SectionAccordionCardItems = styled(
     [`&.${sectionCardClasses.variantOutlined} .${sectionCardClasses.root}`]: {
         padding: theme.spacing(.375, 1.375),
         paddingLeft: theme.spacing(6.875),
-        borderTop: `solid 1px ${theme.palette.divider}`
+        borderTop: `solid 1px ${theme.palette.divider} !important`
     }
 }));
 
