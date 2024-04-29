@@ -39,10 +39,10 @@ export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
         border: `solid 1px ${theme.palette.divider}`
     },
     [`
-        &:disabled .${sectionCardDisplayClasses.root}, &:disabled .${sectionCardDisplayClasses.icon}, &:disabled .${sectionCardDisplayClasses.primary}, &:disabled .${sectionCardDisplayClasses.secondary},
-        &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.root}, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.icon}, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.primary}, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.secondary}
+        &:disabled .${sectionCardDisplayClasses.root} *, &:disabled .${sectionCardDisplayClasses.icon} *, &:disabled .${sectionCardDisplayClasses.primary} *, &:disabled .${sectionCardDisplayClasses.secondary} *, &:disabled .${sectionCardClasses.content} *,
+        &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.root} *, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.icon} *, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.primary} *, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.secondary} *, &.${sectionCardClasses.disabled} .${sectionCardClasses.content} *
     `]: {
-        color: theme.palette.text.disabled
+        color: theme.palette.action.disabled
     }
 });
 

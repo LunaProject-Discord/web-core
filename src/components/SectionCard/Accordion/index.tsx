@@ -11,6 +11,7 @@ import {
     SectionButtonCard,
     sectionCardClasses,
     SectionCardDisabledProps,
+    sectionCardDisplayClasses,
     SectionCardDisplayRootProps,
     SectionCardDisplaySlotsAndSlotProps,
     SectionCardVariantProps
@@ -164,13 +165,21 @@ export const SectionAccordionCardItems = styled(
             borderBottomRightRadius: theme.shape.borderRadius
         }
     },
+    [`&.${sectionAccordionCardClasses.readOnly} .${sectionCardClasses.root}`]: {
+        pointerEvents: 'none',
+        cursor: 'default',
+        color: theme.palette.action.disabled,
+        // backgroundColor: theme.palette.action.disabledBackground,
+        [`& .${sectionCardDisplayClasses.root} *, & .${sectionCardDisplayClasses.icon} *, & .${sectionCardDisplayClasses.primary} *, & .${sectionCardDisplayClasses.secondary} *, & .${sectionCardClasses.content} *`]: {
+            color: theme.palette.action.disabled
+        }
+    },
     [`&.${sectionCardClasses.variantDefault} .${sectionCardClasses.root}`]: {
         padding: theme.spacing(.5, 1.5),
         paddingLeft: theme.spacing(7)
     },
     [`&.${sectionCardClasses.variantOutlined} .${sectionCardClasses.root}`]: {
-        padding: theme.spacing(.375, 1.375),
-        paddingLeft: theme.spacing(6.875),
+        padding: theme.spacing(.375, 1.375, .5, 6.875),
         borderTop: `solid 1px ${theme.palette.divider} !important`
     }
 }));
