@@ -115,7 +115,10 @@ export const SectionAccordionCardHeaderIcon = styled(
     ),
     { shouldForwardProp: (prop) => prop !== 'sx' }
 )<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>>(({ theme }) => ({
-    transform: 'rotate(90deg)',
+    display: 'flex',
+    placeItems: 'center',
+    placeContent: 'center',
+    transform: 'rotate(-90deg)',
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest
     }),
@@ -153,7 +156,7 @@ export const SectionAccordionCardItems = styled(
     flexDirection: 'column',
     borderBottomLeftRadius: theme.shape.borderRadius,
     borderBottomRightRadius: theme.shape.borderRadius,
-    [`&. .${sectionCardClasses.root}`]: {
+    [`& .${sectionCardClasses.root}`]: {
         minHeight: theme.spacing(7),
         borderRadius: 0,
         ['&:last-child']: {
@@ -162,13 +165,13 @@ export const SectionAccordionCardItems = styled(
         }
     },
     [`&.${sectionCardClasses.variantDefault} .${sectionCardClasses.root}`]: {
-        padding: theme.spacing(.5, 1.5)
+        padding: theme.spacing(.5, 1.5),
+        paddingLeft: theme.spacing(7)
     },
     [`&.${sectionCardClasses.variantOutlined} .${sectionCardClasses.root}`]: {
         padding: theme.spacing(.375, 1.375),
-        ['&:not(:last-child)']: {
-            borderBottom: `solid 1px ${theme.palette.divider}`
-        }
+        paddingLeft: theme.spacing(6.875),
+        borderTop: `solid 1px ${theme.palette.divider}`
     }
 }));
 
