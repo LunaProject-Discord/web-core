@@ -3,7 +3,8 @@
 import { ButtonBase, ButtonBaseProps, styled } from '@mui/material';
 import { ButtonBaseTypeMap, ExtendButtonBase } from '@mui/material/ButtonBase/ButtonBase';
 import clsx from 'clsx';
-import React, { ElementType } from 'react';
+import React, { ElementType, useContext } from 'react';
+import { ConfigContext } from '../../../utils';
 import { buttonActionStyled } from '../../ButtonBase';
 import { SectionCardDisplay } from '../display';
 import {
@@ -55,17 +56,21 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
         slotProps,
         ...props
     }: SectionButtonCardProps<C>
-) => (
-    <SectionButtonCardRoot disabled={disabled} variant={variant} {...props}>
-        <SectionCardDisplay
-            icon={icon}
-            primary={primary}
-            secondary={secondary}
-            slots={slots?.display}
-            slotProps={slotProps?.display}
-        />
-        {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
-            {children}
-        </SectionCardContent>}
-    </SectionButtonCardRoot>
-);
+) => {
+    const { components } = useContext(ConfigContext);
+
+    return (
+        <SectionButtonCardRoot disabled={disabled} variant={variant ?? components?.SectionCard?.variant} {...props}>
+            <SectionCardDisplay
+                icon={icon}
+                primary={primary}
+                secondary={secondary}
+                slots={slots?.display}
+                slotProps={slotProps?.display}
+            />
+            {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+                {children}
+            </SectionCardContent>}
+        </SectionButtonCardRoot>
+    );
+};

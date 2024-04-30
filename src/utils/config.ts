@@ -10,6 +10,13 @@ import {
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import { createContext, ReactNode } from 'react';
+import { SectionCardVariantProps } from '../components';
+
+export interface ConfigComponents {
+    SectionCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+}
 
 export type ConfigIconKeys =
     'Decrement'
@@ -28,6 +35,7 @@ export type ConfigTranslateKeys = 'open' | 'close';
 export type ConfigTranslations = { [key in ConfigTranslateKeys]: ReactNode };
 
 export interface Config {
+    components?: ConfigComponents;
     icons: ConfigIcons;
     translations: ConfigTranslations;
 }

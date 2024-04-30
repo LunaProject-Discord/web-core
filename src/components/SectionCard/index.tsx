@@ -5,7 +5,8 @@ import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import { OverridableComponent } from '@mui/types';
 import clsx from 'clsx';
-import React, { ElementType } from 'react';
+import React, { ElementType, useContext } from 'react';
+import { ConfigContext } from '../../utils';
 import {
     SectionCardDisplay,
     sectionCardDisplayClasses,
@@ -116,20 +117,24 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
         slotProps,
         ...props
     }: SectionCardProps<C>
-) => (
-    <SectionCardRoot disabled={disabled} variant={variant} {...props}>
-        <SectionCardDisplay
-            icon={icon}
-            primary={primary}
-            secondary={secondary}
-            slots={slots?.display}
-            slotProps={slotProps?.display}
-        />
-        {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
-            {children}
-        </SectionCardContent>}
-    </SectionCardRoot>
-);
+) => {
+    const { components } = useContext(ConfigContext);
+
+    return (
+        <SectionCardRoot disabled={disabled} variant={variant ?? components?.SectionCard?.variant} {...props}>
+            <SectionCardDisplay
+                icon={icon}
+                primary={primary}
+                secondary={secondary}
+                slots={slots?.display}
+                slotProps={slotProps?.display}
+            />
+            {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+                {children}
+            </SectionCardContent>}
+        </SectionCardRoot>
+    );
+};
 
 export * from './Accordion';
 export * from './Button';
