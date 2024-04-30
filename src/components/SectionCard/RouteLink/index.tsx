@@ -11,7 +11,7 @@ export const sectionRouteLinkCardClasses = {
     root: 'SectionLinkCard-root'
 };
 
-export type SectionRouteLinkCardProps = SectionButtonCardProps<typeof NextLink>;
+export type SectionRouteLinkCardProps = Omit<SectionButtonCardProps<typeof NextLink>, 'component'>;
 
 export const SectionRouteLinkCard = (
     {

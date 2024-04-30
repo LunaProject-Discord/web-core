@@ -10,7 +10,7 @@ export const sectionLinkCardClasses = {
     root: 'SectionLinkCard-root'
 };
 
-export type SectionLinkCardProps = SectionButtonCardProps<'a'>;
+export type SectionLinkCardProps = Omit<SectionButtonCardProps<'a'>, 'component'>;
 
 export const SectionLinkCard = (
     {

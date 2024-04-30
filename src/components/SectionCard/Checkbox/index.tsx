@@ -1,30 +1,20 @@
 'use client';
 
 import { Checkbox } from '@mui/material';
-import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
-import React, { ElementType, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
 import { SectionCardDisplay } from '../display';
 import { SectionCardContent } from '../index';
 import { SectionSwitchCardRootProps } from '../Switch';
+import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
-export const sectionCheckboxCardClasses = {
-    root: 'SectionCheckboxCard-root',
-    control: 'SectionCheckboxCard-control'
-};
+export const sectionCheckboxCardClasses = getSectionControlCardClasses('Checkbox');
 
-export type SectionCheckboxCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
-    control?: ElementType;
-}, {
-    control: SlotProps<typeof Checkbox, {}, {}>;
-}>;
+export type SectionCheckboxCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Checkbox>;
 
-export type SectionCheckboxCardProps =
-    SectionButtonCardProps
-    & SectionSwitchCardRootProps
-    & SectionCheckboxCardSlotsAndSlotProps;
+export type SectionCheckboxCardProps = Omit<SectionButtonCardProps & SectionSwitchCardRootProps & SectionCheckboxCardSlotsAndSlotProps, 'component'>;
 
 export const SectionCheckboxCard = (
     {

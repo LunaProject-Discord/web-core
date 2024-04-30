@@ -1,16 +1,13 @@
 'use client';
 
 import { Switch, switchClasses } from '@mui/material';
-import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
-import React, { Dispatch, ElementType, SetStateAction, useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
+import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
-export const sectionSwitchCardClasses = {
-    root: 'SectionSwitchCard-root',
-    control: 'SectionSwitchCard-control'
-};
+export const sectionSwitchCardClasses = getSectionControlCardClasses('Switch');
 
 export interface SectionSwitchCardRootProps {
     checked: boolean;
@@ -18,16 +15,9 @@ export interface SectionSwitchCardRootProps {
     defaultChecked?: boolean;
 }
 
-export type SectionSwitchCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
-    control?: ElementType;
-}, {
-    control: SlotProps<typeof Switch, {}, {}>;
-}>;
+export type SectionSwitchCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Switch>;
 
-export type SectionSwitchCardProps =
-    SectionButtonCardProps
-    & SectionSwitchCardRootProps
-    & SectionSwitchCardSlotsAndSlotProps;
+export type SectionSwitchCardProps = Omit<SectionButtonCardProps & SectionSwitchCardRootProps & SectionSwitchCardSlotsAndSlotProps, 'component'>;
 
 export const SectionSwitchCard = (
     {

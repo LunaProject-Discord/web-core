@@ -141,5 +141,7 @@ export * from './Button';
 export * from './Checkbox';
 export * from './Link';
 export * from './RouteLink';
+export * from './Select';
 export * from './Switch';
 export * from './display';
+export * from './utils';
