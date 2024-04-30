@@ -12,6 +12,15 @@ export const Select = <T, >({ MenuProps, ...props }: SelectProps<T>) => (
                 ...MenuProps?.PaperProps,
                 sx: (theme) => borderAndBoxShadow(theme)
             }
+            /*
+            slotProps: {
+                ...MenuProps?.slotProps,
+                paper: {
+                    ...MenuProps?.slotProps?.paper,
+                    sx: (theme) => borderAndBoxShadow(theme)
+                }
+            }
+            */
         }}
         {...props}
     />
