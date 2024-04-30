@@ -22,7 +22,10 @@ export interface SectionSelectCardSlotProps<T> {
     };
 }
 
-export type SectionSelectCardProps<T> = Omit<SectionCardProps & SectionSelectCardRootProps<T> & SectionSelectCardSlotProps<T>, 'component'>;
+export type SectionSelectCardProps<T> =
+    SectionCardProps
+    & SectionSelectCardRootProps<T>
+    & SectionSelectCardSlotProps<T>;
 
 export const SectionSelectCard = <T, >(
     {
