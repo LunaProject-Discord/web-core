@@ -226,10 +226,15 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
     const expanded = __expanded ?? _expanded;
     const setExpanded = __setExpanded ?? _setExpanded;
 
-    const { icons: { ExpandMore } } = useContext(ConfigContext);
+    const { components, icons: { ExpandMore } } = useContext(ConfigContext);
 
     return (
-        <SectionAccordionCardRoot expanded={expanded} readOnly={readOnly} variant={variant} {...props}>
+        <SectionAccordionCardRoot
+            expanded={expanded}
+            readOnly={readOnly}
+            variant={variant ?? components?.SectionAccordionCard?.variant ?? components?.SectionCard?.variant}
+            {...props}
+        >
             <SectionAccordionCardHeader expanded={expanded}>
                 {header ? header : <SectionButtonCard
                     onClick={() => setExpanded(!expanded)}

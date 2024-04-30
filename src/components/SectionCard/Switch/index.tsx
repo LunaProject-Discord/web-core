@@ -3,7 +3,8 @@
 import { Switch, switchClasses } from '@mui/material';
 import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
-import React, { Dispatch, ElementType, SetStateAction } from 'react';
+import React, { Dispatch, ElementType, SetStateAction, useContext } from 'react';
+import { ConfigContext } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
 
 export const sectionSwitchCardClasses = {
@@ -35,34 +36,40 @@ export const SectionSwitchCard = (
         setChecked,
         defaultChecked,
         disabled,
+        variant,
         className,
         sx,
         slots,
         slotProps,
         ...props
     }: SectionSwitchCardProps
-) => (
-    <SectionButtonCard
-        onClick={() => setChecked(!checked)}
-        disabled={disabled}
-        className={clsx(sectionSwitchCardClasses.root, className)}
-        sx={{ flexWrap: 'nowrap', ...sx }}
-        slots={slots}
-        slotProps={slotProps}
-        {...props}
-    >
-        {children}
-        <Switch
-            component={slots?.control}
-            checked={checked}
-            onChange={() => setChecked(!checked)}
-            defaultChecked={defaultChecked}
+) => {
+    const { components } = useContext(ConfigContext);
+
+    return (
+        <SectionButtonCard
+            onClick={() => setChecked(!checked)}
             disabled={disabled}
-            disableRipple
-            tabIndex={-1}
-            className={sectionSwitchCardClasses.control}
-            sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
-            {...slotProps?.control}
-        />
-    </SectionButtonCard>
-);
+            variant={variant ?? components?.SectionSwitchCard?.variant}
+            className={clsx(sectionSwitchCardClasses.root, className)}
+            sx={{ flexWrap: 'nowrap', ...sx }}
+            slots={slots}
+            slotProps={slotProps}
+            {...props}
+        >
+            {children}
+            <Switch
+                component={slots?.control}
+                checked={checked}
+                onChange={() => setChecked(!checked)}
+                defaultChecked={defaultChecked}
+                disabled={disabled}
+                disableRipple
+                tabIndex={-1}
+                className={sectionSwitchCardClasses.control}
+                sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
+                {...slotProps?.control}
+            />
+        </SectionButtonCard>
+    );
+};

@@ -16,6 +16,39 @@ export interface ConfigComponents {
     SectionCard?: {
         variant?: SectionCardVariantProps['variant'];
     };
+    SectionAccordionCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionButtonCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionCheckboxCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionLinkCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionNumberFieldCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionRadioCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionRouteLinkCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionSelectCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionSliderCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionSwitchCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionTextFieldCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
 }
 
 export type ConfigIconKeys =

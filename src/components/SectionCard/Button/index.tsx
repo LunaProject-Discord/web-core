@@ -60,7 +60,11 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
     const { components } = useContext(ConfigContext);
 
     return (
-        <SectionButtonCardRoot disabled={disabled} variant={variant ?? components?.SectionCard?.variant} {...props}>
+        <SectionButtonCardRoot
+            disabled={disabled}
+            variant={variant ?? components?.SectionButtonCard?.variant ?? components?.SectionCard?.variant}
+            {...props}
+        >
             <SectionCardDisplay
                 icon={icon}
                 primary={primary}

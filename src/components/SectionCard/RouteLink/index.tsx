@@ -17,6 +17,7 @@ export const SectionRouteLinkCard = (
     {
         children,
         disabled,
+        variant,
         className,
         sx,
         slots,
@@ -24,12 +25,13 @@ export const SectionRouteLinkCard = (
         ...props
     }: SectionRouteLinkCardProps
 ) => {
-    const { icons: { More } } = useContext(ConfigContext);
+    const { components, icons: { More } } = useContext(ConfigContext);
 
     return (
         <SectionButtonCard
             component={NextLink}
             disabled={disabled}
+            variant={variant ?? components?.SectionRouteLinkCard?.variant}
             className={clsx(sectionRouteLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
             slots={slots}

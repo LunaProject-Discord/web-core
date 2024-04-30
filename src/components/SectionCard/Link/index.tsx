@@ -16,6 +16,7 @@ export const SectionLinkCard = (
     {
         children,
         disabled,
+        variant,
         className,
         sx,
         slots,
@@ -23,12 +24,13 @@ export const SectionLinkCard = (
         ...props
     }: SectionLinkCardProps
 ) => {
-    const { icons: { OpenInNew } } = useContext(ConfigContext);
+    const { components, icons: { OpenInNew } } = useContext(ConfigContext);
 
     return (
         <SectionButtonCard
             component="a"
             disabled={disabled}
+            variant={variant ?? components?.SectionLinkCard?.variant}
             className={clsx(sectionLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
             slots={slots}
