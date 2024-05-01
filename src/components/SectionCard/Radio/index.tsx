@@ -18,7 +18,7 @@ export interface SectionRadioCardRootProps<T> extends SectionCardVariableProps<{
 
 export type SectionRadioCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Radio>;
 
-export type SectionRadioCardProps<T> = Omit<SectionButtonCardProps & SectionRadioCardRootProps<T> & SectionRadioCardSlotsAndSlotProps, 'component'>;
+export type SectionRadioCardProps<T> = Omit<Omit<SectionButtonCardProps, 'value'> & SectionRadioCardRootProps<T> & SectionRadioCardSlotsAndSlotProps, 'component'>;
 
 export const SectionRadioCard = <T, >(
     {
