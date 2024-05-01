@@ -43,7 +43,7 @@ export const SectionAccordionCardRoot = styled(
                     sectionAccordionCardClasses.root,
                     expanded && sectionAccordionCardClasses.expanded,
                     readOnly && sectionAccordionCardClasses.readOnly,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantDefault,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     className
                 )
             }
@@ -144,7 +144,7 @@ export const SectionAccordionCardItems = styled(
                     sectionAccordionCardClasses.items,
                     expanded && sectionAccordionCardClasses.expanded,
                     readOnly && sectionAccordionCardClasses.readOnly,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantDefault,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     className
                 )
             }
@@ -174,7 +174,7 @@ export const SectionAccordionCardItems = styled(
             color: theme.palette.action.disabled
         }
     },
-    [`&.${sectionCardClasses.variantDefault} .${sectionCardClasses.root}`]: {
+    [`&.${sectionCardClasses.variantStandard} .${sectionCardClasses.root}`]: {
         padding: theme.spacing(.5, 1.5),
         paddingLeft: theme.spacing(7)
     },

@@ -27,7 +27,7 @@ export const SectionButtonCardRoot = styled(
                 clsx(
                     sectionCardClasses.root,
                     disabled && sectionCardClasses.disabled,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantDefault,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     sectionButtonCardClasses.root,
                     className
                 )

@@ -19,7 +19,7 @@ export const sectionCardClasses = {
     content: 'SectionCard-content',
 
     disabled: 'SectionCard-disabled',
-    variantDefault: 'SectionCard-variantDefault',
+    variantStandard: 'SectionCard-variantStandard',
     variantOutlined: 'SectionCard-variantOutlined'
 };
 
@@ -54,7 +54,7 @@ export const SectionCardRoot = styled(
                 clsx(
                     sectionCardClasses.root,
                     disabled && sectionCardClasses.disabled,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantDefault,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     className
                 )
             }
@@ -88,7 +88,7 @@ export interface SectionCardDisabledProps {
 }
 
 export interface SectionCardVariantProps {
-    variant?: 'default' | 'outlined';
+    variant?: 'standard' | 'outlined';
 }
 
 export type SectionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
