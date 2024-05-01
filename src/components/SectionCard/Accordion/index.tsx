@@ -67,15 +67,17 @@ export const SectionAccordionCardHeader = styled(
     (
         {
             expanded,
+            variant,
             className,
             ...props
-        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>
+        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'variant'>
     ) => (
         <Box
             className={
                 clsx(
                     sectionAccordionCardClasses.header,
                     expanded && sectionAccordionCardClasses.expanded,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     className
                 )
             }
@@ -83,15 +85,20 @@ export const SectionAccordionCardHeader = styled(
         />
     ),
     { shouldForwardProp: (prop) => prop !== 'sx' }
-)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>>(({ theme }) => ({
+)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'variant'>>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     [`& .${sectionCardClasses.root}`]: {
         width: '100%'
     },
-    [`&.${sectionAccordionCardClasses.expanded}, &.${sectionAccordionCardClasses.expanded} .${sectionCardClasses.root}`]: {
-        borderRadius: 0,
-        borderTopLeftRadius: theme.shape.borderRadius,
-        borderTopRightRadius: theme.shape.borderRadius
+    [`&.${sectionCardClasses.variantOutlined}`]: {
+        [`&.${sectionAccordionCardClasses.expanded}, &.${sectionAccordionCardClasses.expanded} .${sectionCardClasses.root}`]: {
+            borderRadius: 0,
+            borderTopLeftRadius: theme.shape.borderRadius,
+            borderTopRightRadius: theme.shape.borderRadius
+        },
+        [`& .${sectionCardClasses.root}`]: {
+            minHeight: theme.spacing(7.75)
+        }
     }
 }));
 
@@ -158,12 +165,7 @@ export const SectionAccordionCardItems = styled(
     borderBottomLeftRadius: theme.shape.borderRadius,
     borderBottomRightRadius: theme.shape.borderRadius,
     [`& .${sectionCardClasses.root}`]: {
-        minHeight: theme.spacing(7),
-        borderRadius: 0,
-        ['&:last-child']: {
-            borderBottomLeftRadius: theme.shape.borderRadius,
-            borderBottomRightRadius: theme.shape.borderRadius
-        }
+        minHeight: theme.spacing(7)
     },
     [`&.${sectionAccordionCardClasses.readOnly} .${sectionCardClasses.root}`]: {
         pointerEvents: 'none',
@@ -180,7 +182,12 @@ export const SectionAccordionCardItems = styled(
     },
     [`&.${sectionCardClasses.variantOutlined} .${sectionCardClasses.root}`]: {
         padding: theme.spacing(.375, 1.375, .5, 6.875),
-        borderTop: `solid 1px ${theme.palette.divider} !important`
+        borderTop: `solid 1px ${theme.palette.divider} !important`,
+        borderRadius: 0,
+        ['&:last-child']: {
+            borderBottomLeftRadius: theme.shape.borderRadius,
+            borderBottomRightRadius: theme.shape.borderRadius
+        }
     }
 }));
 
@@ -236,13 +243,14 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
             variant={cardVariant}
             {...props}
         >
-            <SectionAccordionCardHeader expanded={expanded}>
+            <SectionAccordionCardHeader expanded={expanded} variant={cardVariant}>
                 {header ? header : <SectionButtonCard
                     onClick={() => setExpanded(!expanded)}
                     disabled={disabled}
                     icon={icon}
                     primary={primary}
                     secondary={secondary}
+                    variant={cardVariant}
                     slots={slots}
                     slotProps={slotProps}
                 >
