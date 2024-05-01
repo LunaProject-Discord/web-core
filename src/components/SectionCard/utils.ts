@@ -6,6 +6,12 @@ export const getSectionControlCardClasses = (name: string) => ({
     control: `Section${name}Card-control`
 });
 
+export type SectionControlCardSlotProps<Component extends ElementType, Overrides = {}, OwnerState = {}> = {
+    slotProps?: {
+        control?: SlotProps<Component, Overrides, OwnerState>;
+    };
+};
+
 export type SectionControlCardSlotsAndSlotProps<Component extends ElementType, Overrides = {}, OwnerState = {}> = CreateSlotsAndSlotProps<{
     control?: ElementType;
 }, {

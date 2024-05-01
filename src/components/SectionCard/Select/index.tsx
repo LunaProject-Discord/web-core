@@ -1,26 +1,19 @@
 'use client';
 
 import { MenuItem, MenuItemProps, MenuItemTypeMap, Select } from '@mui/material';
-import { SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
-import { SectionCard, SectionCardProps } from '../index';
+import { SectionCard, SectionCardProps, SectionCardVariableProps, SectionControlCardSlotProps } from '../index';
 import { getSectionControlCardClasses } from '../utils';
 
 export const sectionSelectCardClasses = getSectionControlCardClasses('Select');
 
-export interface SectionSelectCardRootProps<T> {
-    value: T;
-    setValue: Dispatch<SetStateAction<T>>;
+export interface SectionSelectCardRootProps<T> extends SectionCardVariableProps<{ value: T }> {
     choices: MenuItemProps<MenuItemTypeMap['defaultComponent'], { value: T }>[];
 }
 
-export interface SectionSelectCardSlotProps<T> {
-    slotProps?: {
-        control?: SlotProps<typeof Select<T>, {}, {}>;
-    };
-}
+export type SectionSelectCardSlotProps<T> = SectionControlCardSlotProps<typeof Select<T>>;
 
 export type SectionSelectCardProps<T> =
     SectionCardProps
@@ -61,6 +54,7 @@ export const SectionSelectCard = <T, >(
                 fullWidth
                 size="small"
                 className={sectionSelectCardClasses.control}
+                sx={{ minWidth: 300 }}
                 {...slotProps?.control}
             >
                 {choices.map(({ value: choiceValue, ...choiceProps }) => (

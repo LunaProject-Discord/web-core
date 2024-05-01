@@ -5,7 +5,7 @@ import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import { OverridableComponent } from '@mui/types';
 import clsx from 'clsx';
-import React, { ElementType, useContext } from 'react';
+import React, { Dispatch, ElementType, SetStateAction, useContext } from 'react';
 import { ConfigContext } from '../../utils';
 import {
     SectionCardDisplay,
@@ -79,6 +79,10 @@ export const SectionCardContent = styled(
     gap: theme.spacing(1.5)
 })) as typeof Box;
 
+export type SectionCardVariableProps<Properties extends {}> = Properties & {
+    [Property in keyof Properties as `set${Capitalize<string & Property>}`]: Dispatch<SetStateAction<Properties[Property]>>;
+};
+
 export interface SectionCardDisabledProps {
     disabled?: boolean;
 }
@@ -140,8 +144,10 @@ export * from './Accordion';
 export * from './Button';
 export * from './Checkbox';
 export * from './Link';
+export * from './Radio';
 export * from './RouteLink';
 export * from './Select';
 export * from './Switch';
+export * from './TextField';
 export * from './display';
 export * from './utils';

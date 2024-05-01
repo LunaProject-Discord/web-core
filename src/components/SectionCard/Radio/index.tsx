@@ -1,30 +1,35 @@
 'use client';
 
-import { Checkbox } from '@mui/material';
+import { Radio } from '@mui/material';
 import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
 import { SectionCardDisplay } from '../display';
-import { SectionCardContent } from '../index';
-import { SectionSwitchCardRootProps } from '../Switch';
+import { SectionCardContent, SectionCardVariableProps } from '../index';
 import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
-export const sectionCheckboxCardClasses = getSectionControlCardClasses('Checkbox');
+export const sectionRadioCardClasses = getSectionControlCardClasses('Radio');
 
-export type SectionCheckboxCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Checkbox>;
+export interface SectionRadioCardRootProps<T> extends SectionCardVariableProps<{ selected: T }> {
+    name: string;
+    value: T;
+}
 
-export type SectionCheckboxCardProps = Omit<SectionButtonCardProps & SectionSwitchCardRootProps & SectionCheckboxCardSlotsAndSlotProps, 'component'>;
+export type SectionRadioCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Radio>;
 
-export const SectionCheckboxCard = (
+export type SectionRadioCardProps<T> = Omit<SectionButtonCardProps & SectionRadioCardRootProps<T> & SectionRadioCardSlotsAndSlotProps, 'component'>;
+
+export const SectionRadioCard = <T, >(
     {
         icon,
         primary,
         secondary,
         children,
-        checked,
-        setChecked,
-        defaultChecked,
+        name,
+        value,
+        selected,
+        setSelected,
         disabled,
         variant,
         className,
@@ -32,32 +37,32 @@ export const SectionCheckboxCard = (
         slots,
         slotProps,
         ...props
-    }: SectionCheckboxCardProps
+    }: SectionRadioCardProps<T>
 ) => {
     const { components } = useContext(ConfigContext);
 
-    const handleChange = useCallback(() => setChecked(!checked), [setChecked, checked]);
+    const handleChange = useCallback(() => setSelected(value), [setSelected, value]);
 
     return (
         <SectionButtonCardRoot
             onClick={handleChange}
             disabled={disabled}
-            variant={variant ?? components?.SectionCheckboxCard?.variant ?? components?.SectionButtonCard?.variant ?? components?.SectionCard?.variant}
-            className={clsx(sectionCheckboxCardClasses.root, className)}
+            variant={variant ?? components?.SectionRadioCard?.variant ?? components?.SectionButtonCard?.variant ?? components?.SectionCard?.variant}
+            className={clsx(sectionRadioCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
             {...props}
         >
-            <Checkbox
+            <Radio
                 component={slots?.control}
-                checked={checked}
+                name={name}
+                value={value}
+                checked={value === selected}
                 onChange={handleChange}
-                defaultChecked={defaultChecked}
                 disabled={disabled}
                 disableRipple
                 tabIndex={-1}
-                className={sectionCheckboxCardClasses.control}
+                className={sectionRadioCardClasses.control}
                 sx={{
-                    mx: .5,
                     p: 0,
                     display: 'flex',
                     placeItems: 'center',

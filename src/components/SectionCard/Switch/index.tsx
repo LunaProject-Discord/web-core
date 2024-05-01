@@ -2,16 +2,15 @@
 
 import { Switch, switchClasses } from '@mui/material';
 import clsx from 'clsx';
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
+import { SectionCardVariableProps } from '../index';
 import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
 export const sectionSwitchCardClasses = getSectionControlCardClasses('Switch');
 
-export interface SectionSwitchCardRootProps {
-    checked: boolean;
-    setChecked: Dispatch<SetStateAction<boolean>>;
+export interface SectionSwitchCardRootProps extends SectionCardVariableProps<{ checked: boolean }> {
     defaultChecked?: boolean;
 }
 
@@ -36,9 +35,11 @@ export const SectionSwitchCard = (
 ) => {
     const { components } = useContext(ConfigContext);
 
+    const handleChange = useCallback(() => setChecked(!checked), [setChecked, checked]);
+
     return (
         <SectionButtonCard
-            onClick={() => setChecked(!checked)}
+            onClick={handleChange}
             disabled={disabled}
             variant={variant ?? components?.SectionSwitchCard?.variant}
             className={clsx(sectionSwitchCardClasses.root, className)}
@@ -51,7 +52,7 @@ export const SectionSwitchCard = (
             <Switch
                 component={slots?.control}
                 checked={checked}
-                onChange={() => setChecked(!checked)}
+                onChange={handleChange}
                 defaultChecked={defaultChecked}
                 disabled={disabled}
                 disableRipple

@@ -25,10 +25,16 @@ export interface ConfigComponents {
     SectionCheckboxCard?: {
         variant?: SectionCardVariantProps['variant'];
     };
+    SectionFilledTextFieldCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
     SectionLinkCard?: {
         variant?: SectionCardVariantProps['variant'];
     };
     SectionNumberFieldCard?: {
+        variant?: SectionCardVariantProps['variant'];
+    };
+    SectionOutlinedTextFieldCard?: {
         variant?: SectionCardVariantProps['variant'];
     };
     SectionRadioCard?: {
