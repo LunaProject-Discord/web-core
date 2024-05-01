@@ -222,17 +222,18 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
         ...props
     }: SectionAccordionCardProps<C>
 ) => {
+    const { components, icons: { ExpandMore } } = useContext(ConfigContext);
+    const cardVariant = variant ?? components?.SectionAccordionCard?.variant ?? components?.SectionCard?.variant;
+
     const [_expanded, _setExpanded] = useState(Boolean(defaultExpanded));
     const expanded = __expanded ?? _expanded;
     const setExpanded = __setExpanded ?? _setExpanded;
-
-    const { components, icons: { ExpandMore } } = useContext(ConfigContext);
 
     return (
         <SectionAccordionCardRoot
             expanded={expanded}
             readOnly={readOnly}
-            variant={variant ?? components?.SectionAccordionCard?.variant ?? components?.SectionCard?.variant}
+            variant={cardVariant}
             {...props}
         >
             <SectionAccordionCardHeader expanded={expanded}>
@@ -250,7 +251,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                     </SectionAccordionCardHeaderIcon>
                 </SectionButtonCard>}
             </SectionAccordionCardHeader>
-            <SectionAccordionCardItems in={expanded} expanded={expanded} readOnly={readOnly} variant={variant}>
+            <SectionAccordionCardItems in={expanded} expanded={expanded} readOnly={readOnly} variant={cardVariant}>
                 {children}
             </SectionAccordionCardItems>
         </SectionAccordionCardRoot>
