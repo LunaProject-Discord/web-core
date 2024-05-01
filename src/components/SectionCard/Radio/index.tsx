@@ -63,6 +63,7 @@ export const SectionRadioCard = <T, >(
                 tabIndex={-1}
                 className={sectionRadioCardClasses.control}
                 sx={{
+                    mx: .5,
                     p: 0,
                     display: 'flex',
                     placeItems: 'center',
