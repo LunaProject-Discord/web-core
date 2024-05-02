@@ -67,6 +67,7 @@ export const SectionCardDisplaySecondary = styled(
     )
 )<BoxProps>(({ theme }) => ({
     ...theme.typography.body2,
+    margin: 0,
     textAlign: 'start',
     color: theme.palette.text.secondary
 }));
