@@ -1,7 +1,5 @@
-import { Box, BoxProps, styled, Typography, TypographyProps } from '@mui/material';
-import { TypographyTypeMap } from '@mui/material/Typography/Typography';
+import { Box, BoxProps, styled } from '@mui/material';
 import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
-import { OverridableComponent } from '@mui/types';
 import clsx from 'clsx';
 import React, { ElementType, ReactNode } from 'react';
 
@@ -46,34 +44,32 @@ export const SectionCardDisplayIcon = styled(
     flexShrink: 0
 });
 
-export type SectionCardDisplayPrimaryType = OverridableComponent<TypographyTypeMap<{}, 'div'>>;
-
 export const SectionCardDisplayPrimary = styled(
-    ({ className, ...props }: TypographyProps<'div'>) => (
-        <Typography
-            component={Box}
-            variant="body1"
-            textAlign="start"
-            color="text.primary"
-            className={sectionCardDisplayClasses.primary}
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionCardDisplayClasses.primary, className)}
             {...props}
         />
     )
-)<TypographyProps<'div'>>();
-
-export type SectionCardDisplaySecondaryType = OverridableComponent<TypographyTypeMap<{}, 'p'>>;
+)<BoxProps>(({ theme }) => ({
+    ...theme.typography.body1,
+    textAlign: 'start',
+    color: theme.palette.text.primary
+}));
 
 export const SectionCardDisplaySecondary = styled(
-    ({ className, ...props }: TypographyProps<'p'>) => (
-        <Typography
-            variant="body2"
-            textAlign="start"
-            color="text.secondary"
-            className={sectionCardDisplayClasses.secondary}
+    ({ component, className, ...props }: BoxProps) => (
+        <Box
+            component={component ?? 'p'}
+            className={clsx(sectionCardDisplayClasses.secondary, className)}
             {...props}
         />
     )
-)<TypographyProps<'p'>>();
+)<BoxProps>(({ theme }) => ({
+    ...theme.typography.body2,
+    textAlign: 'start',
+    color: theme.palette.text.secondary
+}));
 
 export interface SectionCardDisplayRootProps {
     icon?: ReactNode;
@@ -89,8 +85,8 @@ export type SectionCardDisplaySlotsAndSlotProps = CreateSlotsAndSlotProps<{
 }, {
     root: SlotProps<typeof Box, {}, {}>;
     icon: SlotProps<typeof Box, {}, {}>;
-    primary: SlotProps<SectionCardDisplayPrimaryType, {}, {}>;
-    secondary: SlotProps<SectionCardDisplaySecondaryType, {}, {}>;
+    primary: SlotProps<typeof Box, {}, {}>;
+    secondary: SlotProps<typeof Box, {}, {}>;
 }>;
 
 export type SectionCardDisplayProps = SectionCardDisplayRootProps & SectionCardDisplaySlotsAndSlotProps;
