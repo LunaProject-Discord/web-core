@@ -2,6 +2,7 @@ import { Box, BoxProps, styled } from '@mui/material';
 import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
 import React, { ElementType, ReactNode } from 'react';
+import { SlotRootProps } from './utils';
 
 export const sectionCardDisplayClasses = {
     root: 'SectionCardDisplay-root',
@@ -84,10 +85,10 @@ export type SectionCardDisplaySlotsAndSlotProps = CreateSlotsAndSlotProps<{
     primary?: ElementType;
     secondary?: ElementType;
 }, {
-    root: SlotProps<typeof Box, {}, {}>;
-    icon: SlotProps<typeof Box, {}, {}>;
-    primary: SlotProps<typeof Box, {}, {}>;
-    secondary: SlotProps<typeof Box, {}, {}>;
+    root: SlotProps<typeof Box, SlotRootProps, {}>;
+    icon: SlotProps<typeof Box, SlotRootProps, {}>;
+    primary: SlotProps<typeof Box, SlotRootProps, {}>;
+    secondary: SlotProps<typeof Box, SlotRootProps, {}>;
 }>;
 
 export type SectionCardDisplayProps = SectionCardDisplayRootProps & SectionCardDisplaySlotsAndSlotProps;

@@ -12,6 +12,7 @@ import {
     SectionCardDisplayRootProps,
     SectionCardDisplaySlotsAndSlotProps
 } from './display';
+import { SlotRootProps } from './utils';
 
 export const sectionCardClasses = {
     root: 'SectionCard-root',
@@ -93,7 +94,7 @@ export type SectionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     content?: ElementType;
 }, {
     display: SectionCardDisplaySlotsAndSlotProps['slotProps'];
-    content: SlotProps<typeof Box, {}, {}>;
+    content: SlotProps<typeof Box, SlotRootProps, {}>;
 }>;
 
 export type SectionCardRootProps =
