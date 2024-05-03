@@ -1,5 +1,6 @@
+import { SlotComponentProps } from '@mui/base';
 import { Theme } from '@mui/material';
-import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
+import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { SxProps } from '@mui/system';
 import { ElementType } from 'react';
 
@@ -9,17 +10,18 @@ export const getSectionControlCardClasses = (name: string) => ({
 });
 
 export interface SlotRootProps {
+    component?: ElementType;
     sx?: SxProps<Theme>;
 }
 
 export type SectionControlCardSlotProps<Component extends ElementType, Overrides = {}, OwnerState = {}> = {
     slotProps?: {
-        control?: SlotProps<Component, SlotRootProps & Overrides, OwnerState>;
+        control?: SlotComponentProps<Component, SlotRootProps & Overrides, OwnerState>;
     };
 };
 
 export type SectionControlCardSlotsAndSlotProps<Component extends ElementType, Overrides = {}, OwnerState = {}> = CreateSlotsAndSlotProps<{
     control?: ElementType;
 }, {
-    control: SlotProps<Component, SlotRootProps & Overrides, OwnerState>;
+    control: SlotComponentProps<Component, SlotRootProps & Overrides, OwnerState>;
 }>;

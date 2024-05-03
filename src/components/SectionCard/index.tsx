@@ -1,7 +1,8 @@
 'use client';
 
+import { SlotComponentProps } from '@mui/base';
 import { Box, BoxProps, CSSObject, styled, Theme } from '@mui/material';
-import { CreateSlotsAndSlotProps, SlotProps } from '@mui/material/utils/types';
+import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import clsx from 'clsx';
 import React, { Dispatch, ElementType, SetStateAction, useContext } from 'react';
@@ -94,7 +95,7 @@ export type SectionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     content?: ElementType;
 }, {
     display: SectionCardDisplaySlotsAndSlotProps['slotProps'];
-    content: SlotProps<typeof Box, SlotRootProps, {}>;
+    content: SlotComponentProps<typeof Box, SlotRootProps, {}>;
 }>;
 
 export type SectionCardRootProps =
