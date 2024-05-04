@@ -113,6 +113,8 @@ export const translate = (translation: TranslationValue, ...placeholders: [strin
                                     };
                                 });
 
+                                console.log(styles);
+
                                 return styles;
                             }}
                         />}
