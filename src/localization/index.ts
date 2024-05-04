@@ -13,6 +13,10 @@ export interface Localization {
     translations: TranslationMap;
 }
 
+export interface LocalizationProps {
+    localization: Localization;
+}
+
 export const getLocalizationByName = (language: string | undefined): Localization => {
     switch (language) {
         case 'en':
