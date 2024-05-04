@@ -23,6 +23,7 @@
         "color": "^4.2.3",
         "date-fns": "^3.6.0",
         "highlight.js": "10.7.3",
+        "nookies": "^2.5.2",
         "polished": "^4.3.1",
         "react-spring-bottom-sheet": "^3.4.1",
         "simple-markdown": "^0.7.3"
