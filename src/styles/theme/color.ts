@@ -1,7 +1,7 @@
 import { rgb, rgba } from 'polished';
-import { DefaultCommonTheme } from './common';
+import { DefaultDiscordCommonTheme } from './common';
 
-export interface ColorPalette {
+export interface DiscordColorPalette {
     accent: {
         primary: string;
         warning: string;
@@ -54,9 +54,9 @@ export interface ColorPalette {
     };
 }
 
-export const DarkPalette: ColorPalette = {
+export const DiscordDarkPalette: DiscordColorPalette = {
     accent: {
-        primary: DefaultCommonTheme.discord.primary,
+        primary: DefaultDiscordCommonTheme.discord.primary,
         warning: rgb(255, 217, 83),
         danger: rgb(255, 122, 107)
     },
@@ -111,9 +111,9 @@ export const DarkPalette: ColorPalette = {
     }
 };
 
-export const LightPalette: ColorPalette = {
+export const DiscordLightPalette: DiscordColorPalette = {
     accent: {
-        primary: DefaultCommonTheme.discord.primary,
+        primary: DefaultDiscordCommonTheme.discord.primary,
         warning: rgb(204, 77, 0),
         danger: rgb(217, 47, 47)
     },

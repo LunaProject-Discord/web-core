@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ellipsis, em } from 'polished';
-import { DarkPalette } from '../../../../styles';
+import { DiscordDarkPalette } from '../../../../styles';
 
 export const AttachmentContainer = styled('div')(({ theme }) => ({
     width: '100%',
@@ -44,7 +44,7 @@ export const AttachmentFileNameInner = styled('span')(({ theme }) => ({
 }));
 
 export const AttachmentFileSize = styled('div')({
-    color: DarkPalette.text.muted,
+    color: DiscordDarkPalette.text.muted,
     fontSize: 12,
     fontWeight: 300,
     lineHeight: em(21 + 1 / 3)

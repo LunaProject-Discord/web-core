@@ -1,6 +1,6 @@
 import { rgb } from 'polished';
 
-export interface CommonTheme {
+export interface DiscordCommonTheme {
     discord: {
         primary: string;
         success: string;
@@ -13,7 +13,7 @@ export interface CommonTheme {
     };
 }
 
-export const DefaultCommonTheme: CommonTheme = {
+export const DefaultDiscordCommonTheme: DiscordCommonTheme = {
     discord: {
         primary: rgb(88, 101, 242),
         success: rgb(67, 181, 129),

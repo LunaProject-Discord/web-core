@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { rgb, transparentize } from 'polished';
-import { DarkPalette, DefaultCommonTheme } from '../../styles';
+import { DefaultDiscordCommonTheme, DiscordDarkPalette } from '../../styles';
 
 export const Mention = styled('span')(({ theme }) => ({
     padding: '0 2px',
@@ -12,7 +12,7 @@ export const Mention = styled('span')(({ theme }) => ({
     transition: '50ms ease-out',
     transitionProperty: 'background-color, color',
     '&:hover': {
-        color: DarkPalette.header.primary,
-        backgroundColor: DefaultCommonTheme.discord.primary
+        color: DiscordDarkPalette.header.primary,
+        backgroundColor: DefaultDiscordCommonTheme.discord.primary
     }
 }));

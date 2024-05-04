@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { size, transparentize } from 'polished';
 import React from 'react';
-import { DarkPalette } from '../../../../styles';
+import { DiscordDarkPalette } from '../../../../styles';
 import { play, volume } from '../icons';
 
 const AudioControlsContainer = styled('div')({
@@ -16,7 +16,7 @@ const AudioControlsContainer = styled('div')({
 const AudioDuration = styled('div')(({ theme }) => ({
     margin: 4,
     display: 'flex',
-    color: DarkPalette.header.primary,
+    color: DiscordDarkPalette.header.primary,
     fontFamily: theme.font.mono,
     fontSize: 12,
     fontWeight: 500,
@@ -38,7 +38,7 @@ const AudioSeekbarContainer = styled('div')({
 
 const AudioSeekbar = styled('div')({
     ...size(6, '100%'),
-    background: transparentize(.7, DarkPalette.interactive.normal),
+    background: transparentize(.7, DiscordDarkPalette.interactive.normal),
     borderRadius: 3
 });
 

@@ -1,22 +1,22 @@
-import { Appearance, DefaultAppearance } from './appearance';
-import { ColorPalette, DarkPalette, LightPalette } from './color';
-import { CommonTheme, DefaultCommonTheme } from './common';
+import { DefaultDiscordAppearance, DiscordAppearance } from './appearance';
+import { DiscordColorPalette, DiscordDarkPalette, DiscordLightPalette } from './color';
+import { DefaultDiscordCommonTheme, DiscordCommonTheme } from './common';
 
-export interface Theme extends ColorPalette, CommonTheme {
-    appearance: Appearance;
+export interface DiscordTheme extends DiscordColorPalette, DiscordCommonTheme {
+    appearance: DiscordAppearance;
 }
 
-export const DefaultTheme: Theme = {
-    ...DefaultCommonTheme,
-    ...DarkPalette,
-    appearance: DefaultAppearance
+export const DefaultDiscordTheme: DiscordTheme = {
+    ...DefaultDiscordCommonTheme,
+    ...DiscordDarkPalette,
+    appearance: DefaultDiscordAppearance
 };
 
-export const buildTheme = (appearance: Partial<Appearance>): Theme => ({
-    ...DefaultCommonTheme,
-    ...(appearance.color === 'dark' ? DarkPalette : LightPalette),
+export const buildDiscordTheme = (appearance: Partial<DiscordAppearance>): DiscordTheme => ({
+    ...DefaultDiscordCommonTheme,
+    ...(appearance.color === 'dark' ? DiscordDarkPalette : DiscordLightPalette),
     appearance: {
-        ...DefaultAppearance,
+        ...DefaultDiscordAppearance,
         ...appearance
     }
 });
