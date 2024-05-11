@@ -36,19 +36,19 @@ export const translationsEn: TranslationMap = {
 
     error_unauthorized_title: 'Login is required!',
     error_unauthorized_description: [
-        'You must be logged in to access this page.',
-        'Please click the button below to log in.'
+        { text: 'You must be logged in to access this page.' },
+        { text: 'Please click the button below to log in.' }
     ],
     error_forbidden_title: 'Forbidden!',
     error_forbidden_description: [
-        'You do not have authorization to access this page.',
-        'If you are sure you are authorized, please switch to another account and try again.'
+        { text: 'You do not have authorization to access this page.' },
+        { text: 'If you are sure you are authorized, please switch to another account and try again.' }
     ],
     error_not_found_title: 'Page not found!',
     error_not_found_description: [
-        'The specified page could not be found.',
-        'The URL of the page may have changed or the page itself may have been deleted.',
-        'Please click the button below to return to the home page.'
+        { text: 'The specified page could not be found.' },
+        { text: 'The URL of the page may have changed or the page itself may have been deleted.' },
+        { text: 'Please click the button below to return to the home page.' }
     ],
 
 

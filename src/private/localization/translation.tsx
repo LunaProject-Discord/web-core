@@ -67,60 +67,78 @@ export type TranslationKey =
     | 'japanese'
     | 'english';
 
-export type TranslationValue = string | (string | [string, Breakpoint[] | undefined])[];
+export type TranslationValueText = { text: string, br?: Breakpoint[] | false };
+export type TranslationValueWords = { words: string[] };
 
-export type TranslationMap = Record<TranslationKey, TranslationValue>;
+export type TranslationValue = string | TranslationValueText[] | TranslationValueWords[];
 
-export const translate = (translation: TranslationValue, ...placeholders: [string, string | number | boolean][]): ReactNode => {
-    if (typeof translation === 'string') {
-        let translated = translation;
-        placeholders.forEach(([key, value]) => {
-            translated = translated.replaceAll(key, value.toString());
-        });
+export type TranslationPlaceholder = [string, string | number];
+export type TranslationPlaceholders = TranslationPlaceholder[];
 
-        return translated;
-    }
+export type TranslationMap<T extends keyof any = never> = Record<TranslationKey | T, TranslationValue>;
 
-    return (
-        <Fragment>
-            {translation.map((value, index) => {
-                let translated = typeof value === 'string' ? value : value[0];
-                const breakpoints = typeof value === 'string' ? undefined : value[1];
+const isTranslationValueWordsArray = (value: TranslationValue): value is TranslationValueWords[] => typeof value !== 'string' && 'words' in value[0];
 
-                placeholders.forEach(([key, value]) => {
-                    translated = translated.replaceAll(key, value.toString());
-                });
+const replace = (text: string, placeholders: TranslationPlaceholders): string => {
+    let translated = text;
+    placeholders.forEach(([key, value]) => {
+        translated = translated.replaceAll(key, typeof value === 'string' ? value : value.toLocaleString());
+    });
+    return translated;
+};
 
-                return (
-                    <Fragment key={index}>
-                        {translated}
-                        {translation.length - 1 > index && <Box
+export const translate = (translation: TranslationValue, ...placeholders: TranslationPlaceholders): ReactNode => {
+    if (typeof translation === 'string')
+        return replace(translation, placeholders);
+
+    if (translation.length < 1)
+        return null;
+
+    if (isTranslationValueWordsArray(translation)) {
+        return (
+            <Box sx={{ '& span': { display: 'inline-block' } }}>
+                {translation.map(({ words }, i) => (
+                    <span key={`words_${i}`}>
+                        {words.map((word, v) => (
+                            <span key={`word_${v}`}>
+                                {replace(word, placeholders)}
+                            </span>
+                        ))}
+                    </span>
+                ))}
+            </Box>
+        );
+    } else {
+        return (
+            <Fragment>
+                {translation.map(({ text, br }, i) => (
+                    <Fragment key={`text_${i}`}>
+                        {replace(text, placeholders)}
+                        {translation.length - 1 > i && <Box
                             component="br"
                             sx={(theme) => {
-                                if (!breakpoints) {
-                                    return {
-                                        display: 'block'
-                                    };
-                                }
+                                if (br === undefined)
+                                    return {};
+
+                                if (!br)
+                                    return { display: 'none' };
 
                                 const styles: Record<string, string | Record<string, string>> = {
                                     display: 'none'
                                 };
 
-                                breakpoints.forEach((breakpoint) => {
+                                br.forEach((breakpoint) => {
                                     styles[theme.breakpoints.only(breakpoint)] = {
                                         display: 'block'
                                     };
                                 });
 
-                                console.log(styles);
-
                                 return styles;
                             }}
                         />}
                     </Fragment>
-                );
-            })}
-        </Fragment>
-    );
+                ))}
+            </Fragment>
+        );
+    }
 };
