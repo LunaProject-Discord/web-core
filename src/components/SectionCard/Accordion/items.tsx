@@ -33,8 +33,7 @@ export const SectionAccordionCardItems = styled(
             }
             {...props}
         />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
+    )
 )<CollapseProps & Pick<SectionAccordionCardRootProps, 'readOnly' | 'variant'>>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',

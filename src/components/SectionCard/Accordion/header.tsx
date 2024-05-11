@@ -25,8 +25,7 @@ export const SectionAccordionCardHeader = styled(
             }
             {...props}
         />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
+    )
 )<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'variant'>>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     [`& .${sectionCardClasses.root}`]: {
@@ -62,8 +61,7 @@ export const SectionAccordionCardHeaderIcon = styled(
             }
             {...props}
         />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
+    )
 )<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>>(({ theme }) => ({
     display: 'flex',
     placeItems: 'center',

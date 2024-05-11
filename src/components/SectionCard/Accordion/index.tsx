@@ -33,27 +33,29 @@ export const SectionAccordionCardRoot = styled(
     (
         {
             expanded,
+            disabled,
             readOnly,
             variant,
             className,
             ...props
-        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>
+        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>
     ) => (
         <Box
             className={
                 clsx(
+                    sectionCardClasses.root,
+                    disabled && sectionCardClasses.disabled,
+                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     sectionAccordionCardClasses.root,
                     expanded && sectionAccordionCardClasses.expanded,
                     readOnly && sectionAccordionCardClasses.readOnly,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
                     className
                 )
             }
             {...props}
         />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
-)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>>(({ theme }) => ({
+    )
+)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius: theme.shape.borderRadius,
@@ -63,7 +65,7 @@ export const SectionAccordionCardRoot = styled(
             border: 'none'
         }
     }
-})) as OverridableComponent<BoxTypeMap<Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>, 'div', Theme>>;
+})) as OverridableComponent<BoxTypeMap<Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>, 'div', Theme>>;
 
 export type SectionAccordionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     display?: SectionCardDisplaySlotsAndSlotProps['slots'];
@@ -103,6 +105,12 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
 ) => {
     const config = useContext(ConfigContext);
     const {
+        disabled: configRootDisabled,
+        variant: configRootVariant,
+        slots: configRootSlots,
+        slotProps: configRootSlotProps
+    } = config.components?.SectionCard ?? {};
+    const {
         defaultExpanded: configDefaultExpanded,
         disabled: configDisabled,
         readOnly: configReadOnly,
@@ -117,12 +125,13 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
     const expanded = _expanded ?? __expanded;
     const setExpanded = _setExpanded ?? __setExpanded;
 
-    const disabled = _disabled ?? configDisabled;
+    const disabled = _disabled ?? configDisabled ?? configRootDisabled;
     const readOnly = _readOnly ?? configReadOnly;
-    const variant = _variant ?? configVariant;
+    const variant = _variant ?? configVariant ?? configRootVariant;
     return (
         <SectionAccordionCardRoot
             expanded={expanded}
+            disabled={disabled}
             readOnly={readOnly}
             variant={variant}
             {...props}
@@ -135,8 +144,8 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                     primary={primary}
                     secondary={secondary}
                     variant={variant}
-                    slots={slots ?? configSlots}
-                    slotProps={slotProps ?? configSlotProps}
+                    slots={slots ?? configSlots ?? configRootSlots}
+                    slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
                 >
                     <SectionAccordionCardHeaderIcon expanded={expanded}>
                         <ExpandMore color={!disabled ? 'action' : 'disabled'} />
