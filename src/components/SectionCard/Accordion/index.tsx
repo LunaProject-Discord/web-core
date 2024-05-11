@@ -1,21 +1,23 @@
 'use client';
 
-import { Box, BoxProps, Collapse, CollapseProps, styled, Theme } from '@mui/material';
+import { Box, BoxProps, styled, Theme } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import { OverridableComponent } from '@mui/types';
 import clsx from 'clsx';
+import deepmerge from 'deepmerge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
-import { ConfigContext } from '../../../utils';
+import { Config, ConfigContext, ConfigProvider } from '../../../utils';
 import {
     SectionButtonCard,
     sectionCardClasses,
     SectionCardDisabledProps,
-    sectionCardDisplayClasses,
     SectionCardDisplayRootProps,
     SectionCardDisplaySlotsAndSlotProps,
     SectionCardVariantProps
 } from '../index';
+import { SectionAccordionCardHeader, SectionAccordionCardHeaderIcon } from './header';
+import { SectionAccordionCardItems } from './items';
 
 export const sectionAccordionCardClasses = {
     root: 'SectionAccordionCard-root',
@@ -63,134 +65,6 @@ export const SectionAccordionCardRoot = styled(
     }
 })) as OverridableComponent<BoxTypeMap<Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>, 'div', Theme>>;
 
-export const SectionAccordionCardHeader = styled(
-    (
-        {
-            expanded,
-            variant,
-            className,
-            ...props
-        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'variant'>
-    ) => (
-        <Box
-            className={
-                clsx(
-                    sectionAccordionCardClasses.header,
-                    expanded && sectionAccordionCardClasses.expanded,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
-                    className
-                )
-            }
-            {...props}
-        />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
-)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'variant'>>(({ theme }) => ({
-    borderRadius: theme.shape.borderRadius,
-    [`& .${sectionCardClasses.root}`]: {
-        width: '100%'
-    },
-    [`&.${sectionCardClasses.variantOutlined}`]: {
-        [`&.${sectionAccordionCardClasses.expanded}, &.${sectionAccordionCardClasses.expanded} .${sectionCardClasses.root}`]: {
-            borderRadius: 0,
-            borderTopLeftRadius: theme.shape.borderRadius,
-            borderTopRightRadius: theme.shape.borderRadius
-        },
-        [`& .${sectionCardClasses.root}`]: {
-            minHeight: theme.spacing(7.75)
-        }
-    }
-}));
-
-export const SectionAccordionCardHeaderIcon = styled(
-    (
-        {
-            expanded,
-            className,
-            ...props
-        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>
-    ) => (
-        <Box
-            className={
-                clsx(
-                    sectionAccordionCardClasses.headerIcon,
-                    expanded && sectionAccordionCardClasses.expanded,
-                    className
-                )
-            }
-            {...props}
-        />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
-)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded'>>(({ theme }) => ({
-    display: 'flex',
-    placeItems: 'center',
-    placeContent: 'center',
-    transform: 'rotate(-90deg)',
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest
-    }),
-    [`&.${sectionAccordionCardClasses.expanded}`]: {
-        transform: 'rotate(0deg)'
-    }
-}));
-
-export const SectionAccordionCardItems = styled(
-    (
-        {
-            expanded,
-            readOnly,
-            variant,
-            className,
-            ...props
-        }: CollapseProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>
-    ) => (
-        <Collapse
-            className={
-                clsx(
-                    sectionAccordionCardClasses.items,
-                    expanded && sectionAccordionCardClasses.expanded,
-                    readOnly && sectionAccordionCardClasses.readOnly,
-                    variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
-                    className
-                )
-            }
-            {...props}
-        />
-    ),
-    { shouldForwardProp: (prop) => prop !== 'sx' }
-)<CollapseProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'readOnly' | 'variant'>>(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    borderBottomLeftRadius: theme.shape.borderRadius,
-    borderBottomRightRadius: theme.shape.borderRadius,
-    [`& .${sectionCardClasses.root}`]: {
-        minHeight: theme.spacing(7)
-    },
-    [`&.${sectionAccordionCardClasses.readOnly} .${sectionCardClasses.root}`]: {
-        pointerEvents: 'none',
-        cursor: 'default',
-        color: theme.palette.action.disabled,
-        // backgroundColor: theme.palette.action.disabledBackground,
-        [`& .${sectionCardDisplayClasses.root} *, & .${sectionCardDisplayClasses.icon} *, & .${sectionCardDisplayClasses.primary} *, & .${sectionCardDisplayClasses.secondary} *, & .${sectionCardClasses.content} *`]: {
-            color: theme.palette.action.disabled
-        }
-    },
-    [`&.${sectionCardClasses.variantStandard} .${sectionCardClasses.root}`]: {
-        padding: theme.spacing(.5, 1.5),
-        paddingLeft: theme.spacing(7)
-    },
-    [`&.${sectionCardClasses.variantOutlined} .${sectionCardClasses.root}`]: {
-        padding: theme.spacing(.375, 1.375, .5, 6.875),
-        borderTop: `solid 1px ${theme.palette.divider} !important`,
-        borderRadius: 0,
-        ['&:last-child']: {
-            borderBottomLeftRadius: theme.shape.borderRadius,
-            borderBottomRightRadius: theme.shape.borderRadius
-        }
-    }
-}));
-
 export type SectionAccordionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     display?: SectionCardDisplaySlotsAndSlotProps['slots'];
 }, {
@@ -216,52 +90,83 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
         secondary,
         header,
         children,
-        // tslint:disable-next-line:variable-name
-        expanded: __expanded,
-        // tslint:disable-next-line:variable-name
-        setExpanded: __setExpanded,
+        expanded: _expanded,
+        setExpanded: _setExpanded,
         defaultExpanded,
-        disabled,
-        readOnly,
-        variant,
+        disabled: _disabled,
+        readOnly: _readOnly,
+        variant: _variant,
         slots,
         slotProps,
         ...props
     }: SectionAccordionCardProps<C>
 ) => {
-    const { components, icons: { ExpandMore } } = useContext(ConfigContext);
-    const cardVariant = variant ?? components?.SectionAccordionCard?.variant ?? components?.SectionCard?.variant;
+    const config = useContext(ConfigContext);
+    const {
+        defaultExpanded: configDefaultExpanded,
+        disabled: configDisabled,
+        readOnly: configReadOnly,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = config.components?.SectionAccordionCard ?? {};
+    const ExpandMore = config.icons.ExpandMore;
 
-    const [_expanded, _setExpanded] = useState(Boolean(defaultExpanded));
-    const expanded = __expanded ?? _expanded;
-    const setExpanded = __setExpanded ?? _setExpanded;
+    // tslint:disable-next-line:variable-name
+    const [__expanded, __setExpanded] = useState(Boolean(defaultExpanded ?? configDefaultExpanded));
+    const expanded = _expanded ?? __expanded;
+    const setExpanded = _setExpanded ?? __setExpanded;
 
+    const disabled = _disabled ?? configDisabled;
+    const readOnly = _readOnly ?? configReadOnly;
+    const variant = _variant ?? configVariant;
     return (
         <SectionAccordionCardRoot
             expanded={expanded}
             readOnly={readOnly}
-            variant={cardVariant}
+            variant={variant}
             {...props}
         >
-            <SectionAccordionCardHeader expanded={expanded} variant={cardVariant}>
+            <SectionAccordionCardHeader expanded={expanded} variant={variant}>
                 {header ? header : <SectionButtonCard
                     onClick={() => setExpanded(!expanded)}
                     disabled={disabled}
                     icon={icon}
                     primary={primary}
                     secondary={secondary}
-                    variant={cardVariant}
-                    slots={slots}
-                    slotProps={slotProps}
+                    variant={variant}
+                    slots={slots ?? configSlots}
+                    slotProps={slotProps ?? configSlotProps}
                 >
                     <SectionAccordionCardHeaderIcon expanded={expanded}>
                         <ExpandMore color={!disabled ? 'action' : 'disabled'} />
                     </SectionAccordionCardHeaderIcon>
                 </SectionButtonCard>}
             </SectionAccordionCardHeader>
-            <SectionAccordionCardItems in={expanded} expanded={expanded} readOnly={readOnly} variant={cardVariant}>
-                {children}
+            <SectionAccordionCardItems in={expanded} readOnly={readOnly} variant={variant}>
+                <ConfigProvider
+                    value={
+                        deepmerge<Config>(
+                            config,
+                            {
+                                components: {
+                                    SectionCard: {
+                                        disabled: readOnly,
+                                        variant
+                                    }
+                                }
+                            }
+                        )
+                    }
+                >
+                    {children}
+                </ConfigProvider>
             </SectionAccordionCardItems>
         </SectionAccordionCardRoot>
     );
 };
+
+export type SectionAccordionCardConfigProps = Partial<Omit<SectionAccordionCardRootProps, keyof SectionCardDisplayRootProps | 'expanded' | 'setExpanded' | 'header'>>;
+
+export * from './header';
+export * from './items';

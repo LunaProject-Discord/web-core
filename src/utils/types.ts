@@ -1,7 +1,7 @@
-export type RecursiveRequired<T> = {
-    [P in keyof T]-?: RecursiveRequired<T[P]>;
+export type DeepRequired<T> = {
+    [P in keyof T]-?: DeepRequired<T[P]>;
 };
 
-export type RecursivePartial<T> = {
-    [P in keyof T]?: RecursivePartial<T[P]>;
+export type DeepPartial<T> = {
+    [P in keyof T]?: DeepPartial<T[P]>;
 };

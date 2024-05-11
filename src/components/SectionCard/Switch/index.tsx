@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
-import { SectionCardVariableProps } from '../index';
+import { SectionCardDisplayRootProps, SectionCardRootProps, SectionCardVariableProps } from '../index';
 import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
 export const sectionSwitchCardClasses = getSectionControlCardClasses('Switch');
@@ -24,7 +24,7 @@ export const SectionSwitchCard = (
         checked,
         setChecked,
         defaultChecked,
-        disabled,
+        disabled: _disabled,
         variant,
         className,
         sx,
@@ -34,33 +34,43 @@ export const SectionSwitchCard = (
     }: SectionSwitchCardProps
 ) => {
     const { components } = useContext(ConfigContext);
+    const {
+        defaultChecked: configDefaultChecked,
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionSwitchCard ?? {};
 
     const handleChange = useCallback(() => setChecked(!checked), [setChecked, checked]);
 
+    const disabled = _disabled ?? configDisabled;
     return (
         <SectionButtonCard
             onClick={handleChange}
             disabled={disabled}
-            variant={variant ?? components?.SectionSwitchCard?.variant}
+            variant={variant ?? configVariant}
             className={clsx(sectionSwitchCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots ?? configSlots}
+            slotProps={slotProps ?? configSlotProps}
             {...props}
         >
             {children}
             <Switch
-                component={slots?.control}
+                component={slots?.control ?? configSlots?.control}
                 checked={checked}
                 onChange={handleChange}
-                defaultChecked={defaultChecked}
+                defaultChecked={defaultChecked ?? configDefaultChecked}
                 disabled={disabled}
                 disableRipple
                 tabIndex={-1}
                 className={sectionSwitchCardClasses.control}
                 sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
-                {...slotProps?.control}
+                {...(slotProps?.control ?? configSlotProps?.control)}
             />
         </SectionButtonCard>
     );
 };
+
+export type SectionSwitchCardConfigProps = Partial<Omit<SectionCardRootProps & Pick<SectionSwitchCardRootProps, 'defaultChecked'> & SectionSwitchCardSlotsAndSlotProps, keyof SectionCardDisplayRootProps>>;

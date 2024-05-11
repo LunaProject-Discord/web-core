@@ -122,22 +122,33 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
     }: SectionCardProps<C>
 ) => {
     const { components } = useContext(ConfigContext);
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionCard ?? {};
 
     return (
-        <SectionCardRoot disabled={disabled} variant={variant ?? components?.SectionCard?.variant} {...props}>
+        <SectionCardRoot disabled={disabled ?? configDisabled} variant={variant ?? configVariant} {...props}>
             <SectionCardDisplay
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display}
-                slotProps={slotProps?.display}
+                slots={slots?.display ?? configSlots?.display}
+                slotProps={slotProps?.display ?? configSlotProps?.display}
             />
-            {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+            {children && <SectionCardContent
+                component={slots?.content ?? configSlots?.content}
+                {...(slotProps?.content ?? configSlotProps?.content)}
+            >
                 {children}
             </SectionCardContent>}
         </SectionCardRoot>
     );
 };
+
+export type SectionCardConfigProps = Partial<Omit<SectionCardRootProps, keyof SectionCardDisplayRootProps>>;
 
 export * from './Accordion';
 export * from './Button';

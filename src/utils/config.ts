@@ -9,52 +9,39 @@ import {
     ToggleOnOutlined
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
-import { createContext, ReactNode } from 'react';
-import { SectionCardVariantProps } from '../components';
+import { createContext, Provider, ReactNode } from 'react';
+import {
+    SectionAccordionCardConfigProps,
+    SectionCardConfigProps,
+    SectionCardVariantProps,
+    SectionCheckboxCardConfigProps,
+    SectionFilledTextFieldCardConfigProps,
+    SectionOutlinedTextFieldCardConfigProps,
+    SectionRadioCardConfigProps,
+    SectionSelectCardConfigProps,
+    SectionSwitchCardConfigProps
+} from '../components';
+import { DeepPartial } from './types';
 
 export interface ConfigComponents {
-    SectionCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionAccordionCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionButtonCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionCheckboxCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionFilledTextFieldCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionLinkCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
+    SectionCard?: SectionCardConfigProps;
+    SectionAccordionCard?: SectionAccordionCardConfigProps;
+    SectionButtonCard?: SectionCardConfigProps;
+    SectionCheckboxCard?: SectionCheckboxCardConfigProps;
+    SectionFilledTextFieldCard?: SectionFilledTextFieldCardConfigProps;
+    SectionLinkCard?: SectionCardConfigProps;
     SectionNumberFieldCard?: {
         variant?: SectionCardVariantProps['variant'];
     };
-    SectionOutlinedTextFieldCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionRadioCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionRouteLinkCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionSelectCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
+    SectionOutlinedTextFieldCard?: SectionOutlinedTextFieldCardConfigProps;
+    SectionRadioCard?: SectionRadioCardConfigProps;
+    SectionRouteLinkCard?: SectionCardConfigProps;
+    SectionSelectCard?: SectionSelectCardConfigProps;
     SectionSliderCard?: {
         variant?: SectionCardVariantProps['variant'];
     };
-    SectionSwitchCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
-    SectionTextFieldCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
+    SectionSwitchCard?: SectionSwitchCardConfigProps;
+    SectionTextFieldCard?: SectionCardConfigProps;
 }
 
 export type ConfigIconKeys =
@@ -69,7 +56,7 @@ export type ConfigIconKeys =
 
 export type ConfigIcons = { [key in ConfigIconKeys]: typeof SvgIcon };
 
-export type ConfigTranslateKeys = 'open' | 'close';
+export type ConfigTranslateKeys = 'close' | 'open';
 
 export type ConfigTranslations = { [key in ConfigTranslateKeys]: ReactNode };
 
@@ -96,4 +83,4 @@ export const ConfigContext = createContext<Config>({
     }
 });
 
-export const ConfigProvider = ConfigContext.Provider;
+export const ConfigProvider = ConfigContext.Provider as Provider<DeepPartial<Config>>;

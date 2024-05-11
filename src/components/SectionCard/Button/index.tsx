@@ -58,21 +58,36 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
     }: SectionButtonCardProps<C>
 ) => {
     const { components } = useContext(ConfigContext);
+    const {
+        disabled: configRootDisabled,
+        variant: configRootVariant,
+        slots: configRootSlots,
+        slotProps: configRootSlotProps
+    } = components?.SectionCard ?? {};
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionButtonCard ?? {};
 
     return (
         <SectionButtonCardRoot
-            disabled={disabled}
-            variant={variant ?? components?.SectionButtonCard?.variant ?? components?.SectionCard?.variant}
+            disabled={disabled ?? configDisabled ?? configRootDisabled}
+            variant={variant ?? configVariant ?? configRootVariant}
             {...props}
         >
             <SectionCardDisplay
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display}
-                slotProps={slotProps?.display}
+                slots={slots?.display ?? configSlots?.display ?? configRootSlots?.display}
+                slotProps={slotProps?.display ?? configSlotProps?.display ?? configRootSlotProps?.display}
             />
-            {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+            {children && <SectionCardContent
+                component={slots?.content ?? configSlots?.content ?? configRootSlots?.content}
+                {...(slotProps?.content ?? configSlotProps?.content ?? configRootSlotProps?.content)}
+            >
                 {children}
             </SectionCardContent>}
         </SectionButtonCardRoot>

@@ -5,8 +5,8 @@ import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
-import { SectionCardDisplay } from '../display';
-import { SectionCardContent } from '../index';
+import { SectionCardDisplay, SectionCardDisplayRootProps } from '../display';
+import { SectionCardContent, SectionCardRootProps } from '../index';
 import { SectionSwitchCardRootProps } from '../Switch';
 import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
@@ -25,7 +25,7 @@ export const SectionCheckboxCard = (
         checked,
         setChecked,
         defaultChecked,
-        disabled,
+        disabled: _disabled,
         variant,
         className,
         sx,
@@ -35,23 +35,43 @@ export const SectionCheckboxCard = (
     }: SectionCheckboxCardProps
 ) => {
     const { components } = useContext(ConfigContext);
+    const {
+        disabled: configRootDisabled,
+        variant: configRootVariant,
+        slots: configRootSlots,
+        slotProps: configRootSlotProps
+    } = components?.SectionCard ?? {};
+    const {
+        disabled: configButtonDisabled,
+        variant: configButtonVariant,
+        slots: configButtonSlots,
+        slotProps: configButtonSlotProps
+    } = components?.SectionButtonCard ?? {};
+    const {
+        defaultChecked: configDefaultChecked,
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionCheckboxCard ?? {};
 
     const handleChange = useCallback(() => setChecked(!checked), [setChecked, checked]);
 
+    const disabled = _disabled ?? configDisabled ?? configButtonDisabled ?? configRootDisabled;
     return (
         <SectionButtonCardRoot
             onClick={handleChange}
             disabled={disabled}
-            variant={variant ?? components?.SectionCheckboxCard?.variant ?? components?.SectionButtonCard?.variant ?? components?.SectionCard?.variant}
+            variant={variant ?? configVariant ?? configButtonVariant ?? configRootVariant}
             className={clsx(sectionCheckboxCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
             {...props}
         >
             <Checkbox
-                component={slots?.control}
+                component={slots?.control ?? configSlots?.control}
                 checked={checked}
                 onChange={handleChange}
-                defaultChecked={defaultChecked}
+                defaultChecked={defaultChecked ?? configDefaultChecked}
                 disabled={disabled}
                 disableRipple
                 tabIndex={-1}
@@ -67,18 +87,23 @@ export const SectionCheckboxCard = (
                         backgroundColor: 'transparent'
                     }
                 }}
-                {...slotProps?.control}
+                {...(slotProps?.control ?? configSlotProps?.control)}
             />
             <SectionCardDisplay
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display}
-                slotProps={slotProps?.display}
+                slots={slots?.display ?? configSlots?.display ?? configButtonSlots?.display ?? configRootSlots?.display}
+                slotProps={slotProps?.display ?? configSlotProps?.display ?? configButtonSlotProps?.display ?? configRootSlotProps?.display}
             />
-            {children && <SectionCardContent component={slots?.content} {...slotProps?.content}>
+            {children && <SectionCardContent
+                component={slots?.content ?? configSlots?.content ?? configButtonSlots?.content ?? configRootSlots?.content}
+                {...(slotProps?.content ?? configSlotProps?.content ?? configButtonSlotProps?.content ?? configRootSlotProps?.content)}
+            >
                 {children}
             </SectionCardContent>}
         </SectionButtonCardRoot>
     );
 };
+
+export type SectionCheckboxCardConfigProps = Partial<Omit<SectionCardRootProps & Pick<SectionSwitchCardRootProps, 'defaultChecked'> & SectionCheckboxCardSlotsAndSlotProps, keyof SectionCardDisplayRootProps>>;

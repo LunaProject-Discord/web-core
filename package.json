@@ -19,9 +19,12 @@
     "dependencies": {
         "@lunaproject/web-discord": "^1.1.4",
         "@types/color": "^3.0.6",
+        "@types/deep-equal": "^1.0.4",
         "clsx": "^2.1.0",
         "color": "^4.2.3",
         "date-fns": "^3.6.0",
+        "deep-equal": "^2.2.3",
+        "deepmerge": "^4.3.1",
         "highlight.js": "10.7.3",
         "jotai": "^2.8.0",
         "nookies": "^2.5.2",

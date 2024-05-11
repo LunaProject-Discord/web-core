@@ -4,7 +4,13 @@ import { FilledInput } from '@mui/material';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
-import { SectionCard, SectionCardProps, SectionControlCardSlotProps } from '../index';
+import {
+    SectionCard,
+    SectionCardDisplayRootProps,
+    SectionCardProps,
+    SectionCardRootProps,
+    SectionControlCardSlotProps
+} from '../index';
 import { getSectionControlCardClasses } from '../utils';
 import { SectionTextFieldCardRootProps } from './index';
 
@@ -22,7 +28,7 @@ export const SectionFilledTextFieldCard = (
         children,
         value,
         setValue,
-        disabled,
+        disabled: _disabled,
         variant,
         className,
         sx,
@@ -32,14 +38,27 @@ export const SectionFilledTextFieldCard = (
     }: SectionFilledTextFieldCardProps
 ) => {
     const { components } = useContext(ConfigContext);
+    const {
+        disabled: configRootDisabled,
+        variant: configRootVariant,
+        slots: configRootSlots,
+        slotProps: configRootSlotProps
+    } = components?.SectionTextFieldCard ?? {};
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionFilledTextFieldCard ?? {};
 
+    const disabled = _disabled ?? configDisabled ?? configRootDisabled;
     return (
         <SectionCard
             disabled={disabled}
-            variant={variant ?? components?.SectionFilledTextFieldCard?.variant ?? components?.SectionTextFieldCard?.variant}
+            variant={variant ?? configVariant ?? configRootVariant}
             className={clsx(sectionFilledTextFieldCardClasses.root, className)}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots ?? configSlots ?? configRootSlots}
+            slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
             {...props}
         >
             {children}
@@ -51,8 +70,10 @@ export const SectionFilledTextFieldCard = (
                 margin="none"
                 className={sectionFilledTextFieldCardClasses.control}
                 sx={{ width: { xs: '100%', md: 300 } }}
-                {...slotProps?.control}
+                {...(slotProps?.control ?? configSlotProps?.control)}
             />
         </SectionCard>
     );
 };
+
+export type SectionFilledTextFieldCardConfigProps = Partial<Omit<SectionCardRootProps & SectionFilledTextFieldCardSlotProps, keyof SectionCardDisplayRootProps>>;

@@ -15,7 +15,7 @@ export type SectionLinkCardProps = Omit<SectionButtonCardProps<'a'>, 'component'
 export const SectionLinkCard = (
     {
         children,
-        disabled,
+        disabled: _disabled,
         variant,
         className,
         sx,
@@ -25,16 +25,23 @@ export const SectionLinkCard = (
     }: SectionLinkCardProps
 ) => {
     const { components, icons: { OpenInNew } } = useContext(ConfigContext);
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionLinkCard ?? {};
 
+    const disabled = _disabled ?? configDisabled;
     return (
         <SectionButtonCard
             component="a"
             disabled={disabled}
-            variant={variant ?? components?.SectionLinkCard?.variant}
+            variant={variant ?? configVariant}
             className={clsx(sectionLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots ?? configSlots}
+            slotProps={slotProps ?? configSlotProps}
             {...props}
         >
             {children}

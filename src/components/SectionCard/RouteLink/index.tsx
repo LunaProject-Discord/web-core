@@ -16,7 +16,7 @@ export type SectionRouteLinkCardProps = Omit<SectionButtonCardProps<typeof NextL
 export const SectionRouteLinkCard = (
     {
         children,
-        disabled,
+        disabled: _disabled,
         variant,
         className,
         sx,
@@ -26,16 +26,23 @@ export const SectionRouteLinkCard = (
     }: SectionRouteLinkCardProps
 ) => {
     const { components, icons: { More } } = useContext(ConfigContext);
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionRouteLinkCard ?? {};
 
+    const disabled = _disabled ?? configDisabled;
     return (
         <SectionButtonCard
             component={NextLink}
             disabled={disabled}
-            variant={variant ?? components?.SectionRouteLinkCard?.variant}
+            variant={variant ?? configVariant}
             className={clsx(sectionRouteLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots ?? configSlots}
+            slotProps={slotProps ?? configSlotProps}
             {...props}
         >
             {children}

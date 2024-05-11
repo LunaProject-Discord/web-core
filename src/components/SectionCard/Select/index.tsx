@@ -1,10 +1,19 @@
 'use client';
 
+import { SlotComponentProps } from '@mui/base';
 import { MenuItem, MenuItemProps, MenuItemTypeMap, Select } from '@mui/material';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
-import { SectionCard, SectionCardProps, SectionCardVariableProps, SectionControlCardSlotProps } from '../index';
+import {
+    SectionCard,
+    SectionCardDisplayRootProps,
+    SectionCardProps,
+    SectionCardRootProps,
+    SectionCardVariableProps,
+    SectionControlCardSlotProps,
+    SlotRootProps
+} from '../index';
 import { getSectionControlCardClasses } from '../utils';
 
 export const sectionSelectCardClasses = getSectionControlCardClasses('Select');
@@ -26,7 +35,7 @@ export const SectionSelectCard = <T, >(
         value,
         setValue,
         choices,
-        disabled,
+        disabled: _disabled,
         variant,
         className,
         sx,
@@ -36,14 +45,21 @@ export const SectionSelectCard = <T, >(
     }: SectionSelectCardProps<T>
 ) => {
     const { components } = useContext(ConfigContext);
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionSelectCard ?? {};
 
+    const disabled = _disabled ?? configDisabled;
     return (
         <SectionCard
             disabled={disabled}
-            variant={variant ?? components?.SectionSelectCard?.variant}
+            variant={variant ?? configVariant}
             className={clsx(sectionSelectCardClasses.root, className)}
-            slots={slots}
-            slotProps={slotProps}
+            slots={slots ?? configSlots}
+            slotProps={slotProps ?? configSlotProps}
             {...props}
         >
             {children}
@@ -55,7 +71,7 @@ export const SectionSelectCard = <T, >(
                 size="small"
                 className={sectionSelectCardClasses.control}
                 sx={{ minWidth: 300 }}
-                {...slotProps?.control}
+                {...(slotProps?.control ?? (configSlotProps?.control as SlotComponentProps<typeof Select<T>, SlotRootProps, {}>))}
             >
                 {choices.map(({ value: choiceValue, ...choiceProps }) => (
                     <MenuItem
@@ -68,3 +84,5 @@ export const SectionSelectCard = <T, >(
         </SectionCard>
     );
 };
+
+export type SectionSelectCardConfigProps = Partial<Omit<SectionCardRootProps & SectionSelectCardSlotProps<unknown>, keyof SectionCardDisplayRootProps>>;
