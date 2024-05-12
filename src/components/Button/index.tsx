@@ -1,5 +1,5 @@
-import { LoadingButton as MuiLoadingButton, LoadingButtonProps } from '@mui/lab';
-import { Button as MuiButton, ButtonProps, Theme } from '@mui/material';
+import { LoadingButton as MuiLoadingButton, LoadingButtonProps, LoadingButtonTypeMap } from '@mui/lab';
+import { Button as MuiButton, ButtonProps, ButtonTypeMap, Theme } from '@mui/material';
 import React, { ElementType } from 'react';
 
 export type ButtonCornerType =
@@ -31,7 +31,7 @@ export const getCorner = (corner: ButtonCornerType, theme: Theme) => {
     return typeof corner === 'function' ? corner(theme) : corner;
 };
 
-export const Button = <C extends ElementType, >(
+export const Button = <C extends ElementType = ButtonTypeMap['defaultComponent'], >(
     {
         corners,
         sx,
@@ -56,7 +56,7 @@ export const Button = <C extends ElementType, >(
     />
 );
 
-export const LoadingButton = <C extends ElementType, >(
+export const LoadingButton = <C extends ElementType = LoadingButtonTypeMap['defaultComponent'], >(
     {
         corners,
         sx,
