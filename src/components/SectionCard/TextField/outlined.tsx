@@ -1,12 +1,12 @@
 'use client';
 
-import { OutlinedInput } from '@mui/material';
+import { OutlinedInput, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import deepmerge from 'deepmerge';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
     SectionCard,
+    sectionCardClasses,
     SectionCardDisplayRootProps,
     SectionCardProps,
     SectionCardRootProps,
@@ -52,26 +52,25 @@ export const SectionOutlinedTextFieldCard = (
         slotProps: configSlotProps
     } = components?.SectionOutlinedTextFieldCard ?? {};
 
+    const theme = useTheme();
+
     const disabled = _disabled ?? configDisabled ?? configRootDisabled;
     return (
         <SectionCard
             disabled={disabled}
             variant={variant ?? configVariant ?? configRootVariant}
             className={clsx(sectionOutlinedTextFieldCardClasses.root, className)}
-            sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots ?? configSlots ?? configRootSlots}
-            slotProps={deepmerge<SectionOutlinedTextFieldCardProps['slotProps']>(
-                {
-                    content: {
-                        sx: (theme) => ({
-                            [theme.breakpoints.down('md')]: {
-                                width: '100%'
-                            }
-                        })
+            sx={{
+                flexWrap: 'nowrap',
+                [theme.breakpoints.down('md')]: {
+                    [`& .${sectionCardClasses.content}`]: {
+                        width: '100%'
                     }
                 },
-                slotProps ?? configSlotProps ?? configRootSlotProps
-            )}
+                ...sx
+            }}
+            slots={slots ?? configSlots ?? configRootSlots}
+            slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
             {...props}
         >
             {children}

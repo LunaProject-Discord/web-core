@@ -1,13 +1,13 @@
 'use client';
 
 import { SlotComponentProps } from '@mui/base';
-import { MenuItem, MenuItemProps, MenuItemTypeMap, Select } from '@mui/material';
+import { MenuItem, MenuItemProps, MenuItemTypeMap, Select, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import deepmerge from 'deepmerge';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
     SectionCard,
+    sectionCardClasses,
     SectionCardDisplayRootProps,
     SectionCardProps,
     SectionCardRootProps,
@@ -53,26 +53,25 @@ export const SectionSelectCard = <T, >(
         slotProps: configSlotProps
     } = components?.SectionSelectCard ?? {};
 
+    const theme = useTheme();
+
     const disabled = _disabled ?? configDisabled;
     return (
         <SectionCard
             disabled={disabled}
             variant={variant ?? configVariant}
             className={clsx(sectionSelectCardClasses.root, className)}
-            sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots ?? configSlots}
-            slotProps={deepmerge<SectionSelectCardProps<any>['slotProps']>(
-                {
-                    content: {
-                        sx: (theme) => ({
-                            [theme.breakpoints.down('md')]: {
-                                width: '100%'
-                            }
-                        })
+            sx={{
+                flexWrap: 'nowrap',
+                [theme.breakpoints.down('md')]: {
+                    [`& .${sectionCardClasses.content}`]: {
+                        width: '100%'
                     }
                 },
-                slotProps ?? configSlotProps
-            )}
+                ...sx
+            }}
+            slots={slots ?? configSlots}
+            slotProps={slotProps ?? configSlotProps}
             {...props}
         >
             {children}
