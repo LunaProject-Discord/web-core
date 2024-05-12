@@ -79,6 +79,7 @@ export interface SectionAccordionCardRootProps extends SectionCardDisplayRootPro
     defaultExpanded?: boolean;
     readOnly?: boolean;
     header?: ReactNode;
+    headerChildren?: ReactNode;
 }
 
 export type SectionAccordionCardProps<C extends ElementType = BoxTypeMap['defaultComponent']> =
@@ -91,6 +92,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
         primary,
         secondary,
         header,
+        headerChildren,
         children,
         expanded: _expanded,
         setExpanded: _setExpanded,
@@ -147,6 +149,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                     slots={slots ?? configSlots ?? configRootSlots}
                     slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
                 >
+                    {headerChildren}
                     <SectionAccordionCardHeaderIcon expanded={expanded}>
                         <ExpandMore color={!disabled ? 'action' : 'disabled'} />
                     </SectionAccordionCardHeaderIcon>
