@@ -1,7 +1,6 @@
 'use client';
 
-import { ButtonBase, ButtonBaseProps, styled } from '@mui/material';
-import { ButtonBaseTypeMap, ExtendButtonBase } from '@mui/material/ButtonBase/ButtonBase';
+import { ButtonBase, ButtonBaseProps, ButtonBaseTypeMap, ExtendButtonBase, styled } from '@mui/material';
 import clsx from 'clsx';
 import React, { ElementType, useContext } from 'react';
 import { ConfigContext } from '../../../utils';

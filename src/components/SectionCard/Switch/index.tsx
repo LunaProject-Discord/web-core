@@ -58,7 +58,7 @@ export const SectionSwitchCard = (
         >
             {children}
             <Switch
-                component={slots?.control ?? configSlots?.control}
+                component={slots?.control ?? configSlots?.control ?? 'span'}
                 checked={checked}
                 onChange={handleChange}
                 defaultChecked={defaultChecked ?? configDefaultChecked}

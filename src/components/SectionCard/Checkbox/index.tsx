@@ -68,7 +68,7 @@ export const SectionCheckboxCard = (
             {...props}
         >
             <Checkbox
-                component={slots?.control ?? configSlots?.control}
+                component={slots?.control ?? configSlots?.control ?? 'span'}
                 checked={checked}
                 onChange={handleChange}
                 defaultChecked={defaultChecked ?? configDefaultChecked}
