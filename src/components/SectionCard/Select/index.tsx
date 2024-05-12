@@ -64,6 +64,7 @@ export const SectionSelectCard = <T, >(
             sx={{
                 flexWrap: 'nowrap',
                 [theme.breakpoints.down('md')]: {
+                    flexWrap: 'wrap',
                     [`& .${sectionCardClasses.content}`]: {
                         width: '100%'
                     }

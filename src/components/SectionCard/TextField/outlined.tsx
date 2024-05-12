@@ -63,6 +63,7 @@ export const SectionOutlinedTextFieldCard = (
             sx={{
                 flexWrap: 'nowrap',
                 [theme.breakpoints.down('md')]: {
+                    flexWrap: 'wrap',
                     [`& .${sectionCardClasses.content}`]: {
                         width: '100%'
                     }
