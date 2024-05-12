@@ -70,6 +70,6 @@ export const SectionAccordionCardHeaderIcon = styled(
         duration: theme.transitions.duration.shortest
     }),
     [`&.${sectionAccordionCardClasses.expanded}`]: {
-        transform: 'rotate(180deg)'
+        transform: 'scale(1, -1)'
     }
 }));

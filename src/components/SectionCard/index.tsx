@@ -1,7 +1,7 @@
 'use client';
 
 import { SlotComponentProps } from '@mui/base';
-import { Box, BoxProps, CSSObject, styled, Theme } from '@mui/material';
+import { Box, BoxProps, CSSObject, styled, switchClasses, Theme } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import clsx from 'clsx';
@@ -40,10 +40,18 @@ export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
         padding: theme.spacing(.875, 1.375),
         border: `solid 1px ${theme.palette.divider}`
     },
-    [`
-        &:disabled .${sectionCardDisplayClasses.root} *, &:disabled .${sectionCardDisplayClasses.icon} *, &:disabled .${sectionCardDisplayClasses.primary} *, &:disabled .${sectionCardDisplayClasses.secondary} *, &:disabled .${sectionCardClasses.content} *,
-        &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.root} *, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.icon} *, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.primary} *, &.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.secondary} *, &.${sectionCardClasses.disabled} .${sectionCardClasses.content} *
-    `]: {
+    [[
+        `&:disabled .${sectionCardDisplayClasses.root} *`,
+        `&:disabled .${sectionCardDisplayClasses.icon} *`,
+        `&:disabled .${sectionCardDisplayClasses.primary} *`,
+        `&:disabled .${sectionCardDisplayClasses.secondary} *`,
+        `&:disabled .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`,
+        `&.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.root} *`,
+        `&.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.icon} *`,
+        `&.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.primary} *`,
+        `&.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.secondary} *`,
+        `&.${sectionCardClasses.disabled} .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`
+    ].join(',')]: {
         color: theme.palette.action.disabled
     }
 });

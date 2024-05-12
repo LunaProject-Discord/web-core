@@ -1,6 +1,6 @@
 'use client';
 
-import { Collapse, CollapseProps, styled } from '@mui/material';
+import { Collapse, CollapseProps, styled, switchClasses } from '@mui/material';
 import clsx from 'clsx';
 import React from 'react';
 import {
@@ -40,13 +40,20 @@ export const SectionAccordionCardItems = styled(
     borderBottomLeftRadius: theme.shape.borderRadius,
     borderBottomRightRadius: theme.shape.borderRadius,
     [`& .${sectionCardClasses.root}`]: {
+        width: '100%',
         minHeight: theme.spacing(7)
     },
     [`&.${sectionAccordionCardClasses.readOnly} .${sectionCardClasses.root}`]: {
         pointerEvents: 'none',
         cursor: 'default',
         color: theme.palette.action.disabled,
-        [`& .${sectionCardDisplayClasses.root} *, & .${sectionCardDisplayClasses.icon} *, & .${sectionCardDisplayClasses.primary} *, & .${sectionCardDisplayClasses.secondary} *, & .${sectionCardClasses.content} *`]: {
+        [[
+            `& .${sectionCardDisplayClasses.root} *`,
+            `& .${sectionCardDisplayClasses.icon} *`,
+            `& .${sectionCardDisplayClasses.primary} *`,
+            `& .${sectionCardDisplayClasses.secondary} *`,
+            `& .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`
+        ].join(',')]: {
             color: theme.palette.action.disabled
         }
     },

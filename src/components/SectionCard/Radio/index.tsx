@@ -72,7 +72,7 @@ export const SectionRadioCard = <T, >(
             {...props}
         >
             <Radio
-                component={slots?.control ?? configSlots?.control}
+                component={slots?.control ?? configSlots?.control ?? 'span'}
                 name={name}
                 value={value}
                 checked={value === selected}
