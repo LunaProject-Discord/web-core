@@ -3,6 +3,7 @@
 import { SlotComponentProps } from '@mui/base';
 import { MenuItem, MenuItemProps, MenuItemTypeMap, Select } from '@mui/material';
 import clsx from 'clsx';
+import deepmerge from 'deepmerge';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
@@ -58,8 +59,20 @@ export const SectionSelectCard = <T, >(
             disabled={disabled}
             variant={variant ?? configVariant}
             className={clsx(sectionSelectCardClasses.root, className)}
+            sx={{ flexWrap: 'nowrap', ...sx }}
             slots={slots ?? configSlots}
-            slotProps={slotProps ?? configSlotProps}
+            slotProps={deepmerge<SectionSelectCardProps<any>['slotProps']>(
+                {
+                    content: {
+                        sx: (theme) => ({
+                            [theme.breakpoints.down('md')]: {
+                                width: '100%'
+                            }
+                        })
+                    }
+                },
+                slotProps ?? configSlotProps
+            )}
             {...props}
         >
             {children}

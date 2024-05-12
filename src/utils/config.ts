@@ -26,6 +26,7 @@ import { DeepPartial } from './types';
 export interface ConfigComponents {
     SectionCard?: SectionCardConfigProps;
     SectionAccordionCard?: SectionAccordionCardConfigProps;
+    SectionButtonActionCard?: SectionCardConfigProps;
     SectionButtonCard?: SectionCardConfigProps;
     SectionCheckboxCard?: SectionCheckboxCardConfigProps;
     SectionFilledTextFieldCard?: SectionFilledTextFieldCardConfigProps;

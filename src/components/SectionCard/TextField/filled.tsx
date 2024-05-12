@@ -2,6 +2,7 @@
 
 import { FilledInput } from '@mui/material';
 import clsx from 'clsx';
+import deepmerge from 'deepmerge';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
@@ -57,8 +58,20 @@ export const SectionFilledTextFieldCard = (
             disabled={disabled}
             variant={variant ?? configVariant ?? configRootVariant}
             className={clsx(sectionFilledTextFieldCardClasses.root, className)}
+            sx={{ flexWrap: 'nowrap', ...sx }}
             slots={slots ?? configSlots ?? configRootSlots}
-            slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
+            slotProps={deepmerge<SectionFilledTextFieldCardProps['slotProps']>(
+                {
+                    content: {
+                        sx: (theme) => ({
+                            [theme.breakpoints.down('md')]: {
+                                width: '100%'
+                            }
+                        })
+                    }
+                },
+                slotProps ?? configSlotProps ?? configRootSlotProps
+            )}
             {...props}
         >
             {children}

@@ -66,7 +66,12 @@ export const SectionSwitchCard = (
                 disableRipple
                 tabIndex={-1}
                 className={sectionSwitchCardClasses.control}
-                sx={{ [`& .${switchClasses.switchBase}`]: { backgroundColor: 'transparent !important' } }}
+                sx={{
+                    mr: -.75,
+                    [`& .${switchClasses.switchBase}`]: {
+                        backgroundColor: 'transparent !important'
+                    }
+                }}
                 {...(slotProps?.control ?? configSlotProps?.control)}
             />
         </SectionButtonCard>

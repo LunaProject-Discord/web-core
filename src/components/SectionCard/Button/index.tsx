@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import React, { ElementType, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { buttonActionStyled } from '../../ButtonBase';
-import { SectionCardDisplay } from '../display';
+import { SectionCardDisplay, SectionCardDisplayIcon } from '../display';
 import {
     sectionCardClasses,
     SectionCardContent,
@@ -89,6 +89,68 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
             >
                 {children}
             </SectionCardContent>}
+        </SectionButtonCardRoot>
+    );
+};
+
+export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMap['defaultComponent'], >(
+    {
+        icon,
+        primary,
+        secondary,
+        children,
+        disabled: _disabled,
+        variant,
+        sx,
+        slots,
+        slotProps,
+        ...props
+    }: SectionButtonCardProps<C>
+) => {
+    const { components, icons: { More } } = useContext(ConfigContext);
+    const {
+        disabled: configRootDisabled,
+        variant: configRootVariant,
+        slots: configRootSlots,
+        slotProps: configRootSlotProps
+    } = components?.SectionCard ?? {};
+    const {
+        disabled: configButtonDisabled,
+        variant: configButtonVariant,
+        slots: configButtonSlots,
+        slotProps: configButtonSlotProps
+    } = components?.SectionButtonCard ?? {};
+    const {
+        disabled: configDisabled,
+        variant: configVariant,
+        slots: configSlots,
+        slotProps: configSlotProps
+    } = components?.SectionButtonCard ?? {};
+
+    const disabled = _disabled ?? configDisabled ?? configButtonDisabled ?? configRootDisabled;
+    return (
+        <SectionButtonCardRoot
+            disabled={disabled}
+            variant={variant ?? configVariant ?? configButtonVariant ?? configRootVariant}
+            sx={{ flexWrap: 'nowrap', ...sx }}
+            {...props}
+        >
+            <SectionCardDisplay
+                icon={icon}
+                primary={primary}
+                secondary={secondary}
+                slots={slots?.display ?? configSlots?.display ?? configButtonSlots?.display ?? configRootSlots?.display}
+                slotProps={slotProps?.display ?? configSlotProps?.display ?? configButtonSlotProps?.display ?? configRootSlotProps?.display}
+            />
+            <SectionCardContent
+                component={slots?.content ?? configSlots?.content ?? configButtonSlots?.content ?? configRootSlots?.content}
+                {...(slotProps?.content ?? configSlotProps?.content ?? configButtonSlotProps?.content ?? configRootSlotProps?.content)}
+            >
+                {children}
+                <SectionCardDisplayIcon>
+                    <More color={!disabled ? 'action' : 'disabled'} />
+                </SectionCardDisplayIcon>
+            </SectionCardContent>
         </SectionButtonCardRoot>
     );
 };
