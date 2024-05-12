@@ -41,7 +41,7 @@ export const SectionButtonCardRoot = styled(
 
 export type SectionButtonCardProps<C extends ElementType = ButtonBaseTypeMap['defaultComponent']> =
     SectionCardRootProps
-    & ButtonBaseProps<C, { components?: C }>;
+    & ButtonBaseProps<C, { component?: C }>;
 
 export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['defaultComponent'], >(
     {
