@@ -36,7 +36,7 @@ export const Button = <C extends ElementType = ButtonTypeMap['defaultComponent']
         corners,
         sx,
         ...props
-    }: ButtonRootProps & ButtonProps<C, { components?: C }>
+    }: ButtonRootProps & ButtonProps<C, { component?: C }>
 ) => (
     <MuiButton
         {...props}
@@ -61,7 +61,7 @@ export const LoadingButton = <C extends ElementType = LoadingButtonTypeMap['defa
         corners,
         sx,
         ...props
-    }: ButtonRootProps & LoadingButtonProps<C, { components?: C }>
+    }: ButtonRootProps & LoadingButtonProps<C, { component?: C }>
 ) => (
     <MuiLoadingButton
         {...props}
