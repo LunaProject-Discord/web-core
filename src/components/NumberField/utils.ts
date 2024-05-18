@@ -1,7 +1,8 @@
+import { InputBaseProps, InternalStandardProps } from '@mui/material';
 import { ChangeEventHandler, MouseEventHandler, useCallback } from 'react';
 import { NumberFieldRootProps } from './index';
 
-export interface NumberFieldHookProps extends Omit<NumberFieldRootProps, 'step' | 'shiftMultiplier'> {
+export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseProps>> extends Omit<NumberFieldRootProps, 'step' | 'shiftMultiplier'> {
     step: number;
     shiftMultiplier: number;
     pattern: string;
@@ -9,9 +10,11 @@ export interface NumberFieldHookProps extends Omit<NumberFieldRootProps, 'step' 
     onChange: ChangeEventHandler<HTMLInputElement>;
     onIncrementButtonClick: MouseEventHandler<HTMLButtonElement>;
     onDecrementButtonClick: MouseEventHandler<HTMLButtonElement>;
+
+    props: T;
 }
 
-export const useNumberField = (
+export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, >(
     {
         value,
         setValue: _setValue,
@@ -19,9 +22,10 @@ export const useNumberField = (
         min,
         max,
         step: _step,
-        shiftMultiplier: _shiftMultiplier
-    }: NumberFieldRootProps
-): NumberFieldHookProps => {
+        shiftMultiplier: _shiftMultiplier,
+        ...props
+    }: T & NumberFieldRootProps
+): NumberFieldHookProps<T> => {
     const step = _step ?? 1;
     const shiftMultiplier = _shiftMultiplier ?? 10;
     const pattern = Number.isInteger(step) ? '[0-9]*' : '[0-9,.]*';
@@ -67,6 +71,8 @@ export const useNumberField = (
 
         onChange,
         onIncrementButtonClick,
-        onDecrementButtonClick
+        onDecrementButtonClick,
+
+        props: props as unknown as T
     };
 };

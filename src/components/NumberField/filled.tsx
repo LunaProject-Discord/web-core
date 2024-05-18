@@ -1,15 +1,40 @@
-import { FilledInput, FilledInputProps, InputAdornment } from '@mui/material';
+import {
+    FilledInput as MuiFilledInput,
+    FilledInputProps,
+    InputAdornment,
+    inputBaseClasses,
+    styled
+} from '@mui/material';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../utils';
 import { numberFieldClasses, NumberFieldRootProps, SpinButton } from './index';
 import { useNumberField } from './utils';
 
+const FilledInput = styled(
+    ({ disabled, className, ...props }: FilledInputProps) => (
+        <MuiFilledInput
+            className={
+                clsx(
+                    numberFieldClasses.root,
+                    disabled && numberFieldClasses.disabled,
+                    numberFieldClasses.variantFilled,
+                    className
+                )
+            }
+            {...props}
+        />
+    )
+)<FilledInputProps>(({ theme }) => ({
+    padding: 0,
+    [`& .${inputBaseClasses.input}`]: {
+        padding: theme.spacing(1.75, 1.0625)
+    }
+}));
+
 export type FilledNumberFieldProps = Omit<FilledInputProps, 'value'> & NumberFieldRootProps;
 
-export const FilledNumberField = (props: FilledNumberFieldProps) => {
-    const { className } = props;
-
+export const FilledNumberField = (_props: FilledNumberFieldProps) => {
     const {
         value,
         disabled,
@@ -19,8 +44,9 @@ export const FilledNumberField = (props: FilledNumberFieldProps) => {
         pattern,
         onChange,
         onIncrementButtonClick,
-        onDecrementButtonClick
-    } = useNumberField(props);
+        onDecrementButtonClick,
+        props
+    } = useNumberField(_props);
 
     const { icons: { Decrement, Increment } } = useContext(ConfigContext);
 
@@ -82,14 +108,7 @@ export const FilledNumberField = (props: FilledNumberFieldProps) => {
                     </SpinButton>
                 </InputAdornment>
             }
-            className={
-                clsx(
-                    numberFieldClasses.root,
-                    disabled && numberFieldClasses.disabled,
-                    numberFieldClasses.variantFilled,
-                    className
-                )
-            }
+            {...props}
         />
     );
 };

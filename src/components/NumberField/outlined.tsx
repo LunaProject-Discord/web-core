@@ -1,15 +1,40 @@
-import { InputAdornment, OutlinedInput, OutlinedInputProps } from '@mui/material';
+import {
+    InputAdornment,
+    inputBaseClasses,
+    OutlinedInput as MuiOutlinedInput,
+    OutlinedInputProps,
+    styled
+} from '@mui/material';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../utils';
 import { numberFieldClasses, NumberFieldRootProps, SpinButton } from './index';
 import { useNumberField } from './utils';
 
+const OutlinedInput = styled(
+    ({ disabled, className, ...props }: OutlinedInputProps) => (
+        <MuiOutlinedInput
+            className={
+                clsx(
+                    numberFieldClasses.root,
+                    disabled && numberFieldClasses.disabled,
+                    numberFieldClasses.variantOutlined,
+                    className
+                )
+            }
+            {...props}
+        />
+    )
+)<OutlinedInputProps>(({ theme }) => ({
+    padding: 0,
+    [`& .${inputBaseClasses.input}`]: {
+        padding: theme.spacing(1.75, 1.0625)
+    }
+}));
+
 export type OutlinedNumberFieldProps = Omit<OutlinedInputProps, 'value'> & NumberFieldRootProps;
 
-export const OutlinedNumberField = (props: OutlinedNumberFieldProps) => {
-    const { className } = props;
-
+export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
     const {
         value,
         disabled,
@@ -19,8 +44,9 @@ export const OutlinedNumberField = (props: OutlinedNumberFieldProps) => {
         pattern,
         onChange,
         onIncrementButtonClick,
-        onDecrementButtonClick
-    } = useNumberField(props);
+        onDecrementButtonClick,
+        props
+    } = useNumberField(_props);
 
     const { icons: { Decrement, Increment } } = useContext(ConfigContext);
 
@@ -82,14 +108,7 @@ export const OutlinedNumberField = (props: OutlinedNumberFieldProps) => {
                     </SpinButton>
                 </InputAdornment>
             }
-            className={
-                clsx(
-                    numberFieldClasses.root,
-                    disabled && numberFieldClasses.disabled,
-                    numberFieldClasses.variantOutlined,
-                    className
-                )
-            }
+            {...props}
         />
     );
 };
