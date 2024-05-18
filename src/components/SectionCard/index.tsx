@@ -6,7 +6,7 @@ import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import clsx from 'clsx';
 import React, { Dispatch, ElementType, SetStateAction, useContext } from 'react';
-import { ConfigContext } from '../../utils';
+import { ConfigContext, generateComponentClasses } from '../../utils';
 import {
     SectionCardDisplay,
     sectionCardDisplayClasses,
@@ -15,14 +15,17 @@ import {
 } from './display';
 import { SlotRootProps } from './utils';
 
-export const sectionCardClasses = {
-    root: 'SectionCard-root',
-    content: 'SectionCard-content',
+export const sectionCardClasses = generateComponentClasses(
+    'SectionCard',
+    [
+        'root',
+        'content',
 
-    disabled: 'SectionCard-disabled',
-    variantStandard: 'SectionCard-variantStandard',
-    variantOutlined: 'SectionCard-variantOutlined'
-};
+        'disabled',
+        'variantStandard',
+        'variantOutlined'
+    ]
+);
 
 export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
     minHeight: theme.spacing(8),

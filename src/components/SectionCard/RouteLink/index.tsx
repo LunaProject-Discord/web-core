@@ -3,13 +3,11 @@
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import React, { useContext } from 'react';
-import { ConfigContext } from '../../../utils';
+import { ConfigContext, generateComponentClasses } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
 import { SectionCardDisplayIcon } from '../display';
 
-export const sectionRouteLinkCardClasses = {
-    root: 'SectionLinkCard-root'
-};
+export const sectionRouteLinkCardClasses = generateComponentClasses('SectionRouteLinkCard', ['root']);
 
 export type SectionRouteLinkCardProps = Omit<SectionButtonCardProps<typeof NextLink>, 'component'>;
 

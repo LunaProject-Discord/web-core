@@ -6,9 +6,9 @@ import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
 import { SectionCardDisplayRootProps, SectionCardRootProps, SectionCardVariableProps } from '../index';
-import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
+import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
-export const sectionSwitchCardClasses = getSectionControlCardClasses('Switch');
+export const sectionSwitchCardClasses = generateSectionControlCardClasses('Switch');
 
 export interface SectionSwitchCardRootProps extends SectionCardVariableProps<{ checked: boolean }> {
     defaultChecked?: boolean;

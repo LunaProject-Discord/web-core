@@ -12,10 +12,10 @@ import {
     SectionCardRootProps,
     SectionControlCardSlotProps
 } from '../index';
-import { getSectionControlCardClasses } from '../utils';
+import { generateSectionControlCardClasses } from '../utils';
 import { SectionTextFieldCardRootProps } from './index';
 
-export const sectionFilledTextFieldCardClasses = getSectionControlCardClasses('FilledTextField');
+export const sectionFilledTextFieldCardClasses = generateSectionControlCardClasses('FilledTextField');
 
 export type SectionFilledTextFieldCardSlotProps = SectionControlCardSlotProps<typeof FilledInput>;
 

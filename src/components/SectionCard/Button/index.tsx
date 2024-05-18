@@ -3,7 +3,7 @@
 import { ButtonBase, ButtonBaseProps, ButtonBaseTypeMap, ExtendButtonBase, styled } from '@mui/material';
 import clsx from 'clsx';
 import React, { ElementType, useContext } from 'react';
-import { ConfigContext } from '../../../utils';
+import { ConfigContext, generateComponentClasses } from '../../../utils';
 import { buttonActionStyled } from '../../ButtonBase';
 import { SectionCardDisplay, SectionCardDisplayIcon } from '../display';
 import {
@@ -14,9 +14,7 @@ import {
     SectionCardVariantProps
 } from '../index';
 
-export const sectionButtonCardClasses = {
-    root: 'SectionButtonCard-root'
-};
+export const sectionButtonCardClasses = generateComponentClasses('SectionButtonCard', ['root']);
 
 export const SectionButtonCardRoot = styled(
     ({ disabled, variant, className, ...props }: ButtonBaseProps & SectionCardVariantProps) => (

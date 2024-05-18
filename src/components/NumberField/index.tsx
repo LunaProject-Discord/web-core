@@ -1,22 +1,29 @@
 'use client';
 
-import { InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
+import { generateUtilityClasses, InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../utils';
 import { ButtonBase } from '../ButtonBase';
+import { SectionCardDisabledProps, SectionCardVariableProps } from '../SectionCard';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
-export const numberFieldClasses = {
-    root: 'NumberField-root',
-    field: 'NumberField-field',
-    spinButton: 'NumberField-spinButton',
-    spinButtonIncrement: 'NumberField-spinButtonIncrement',
-    spinButtonDecrement: 'NumberField-spinButtonDecrement',
+export const numberFieldClasses = generateUtilityClasses(
+    'NumberField',
+    [
+        'root',
+        'field',
+        'spinButton',
+        'spinButtonIncrement',
+        'spinButtonDecrement',
 
-    disabled: 'NumberField-disabled'
-};
+        'disabled',
+        'variantStandard',
+        'variantOutlined',
+        'variantFilled'
+    ]
+);
 
 export const SpinButton = styled(ButtonBase)({
     height: 20,
@@ -31,6 +38,13 @@ export interface NumberFieldProps extends ItemDisabledProps, ItemVariableProps<n
     placeholder?: string;
     className?: string;
     sx?: SxProps<Theme>;
+}
+
+export interface NumberFieldRootProps extends SectionCardDisabledProps, SectionCardVariableProps<{ value: number }> {
+    min?: number;
+    max?: number;
+    step?: number;
+    shiftMultiplier?: number;
 }
 
 export const NumberField = (
@@ -137,3 +151,6 @@ export const NumberField = (
         />
     );
 };
+
+export * from './filled';
+export * from './outlined';

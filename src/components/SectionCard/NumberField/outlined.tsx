@@ -1,9 +1,10 @@
 'use client';
 
-import { OutlinedInput, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
+import { OutlinedNumberField } from '../../NumberField';
 import {
     SectionCard,
     sectionCardClasses,
@@ -13,18 +14,18 @@ import {
     SectionControlCardSlotProps
 } from '../index';
 import { generateSectionControlCardClasses } from '../utils';
-import { SectionTextFieldCardRootProps } from './index';
+import { SectionNumberFieldCardRootProps } from './index';
 
-export const sectionOutlinedTextFieldCardClasses = generateSectionControlCardClasses('OutlinedTextField');
+export const sectionOutlinedNumberFieldCardClasses = generateSectionControlCardClasses('OutlinedNumberField');
 
-export type SectionOutlinedTextFieldCardSlotProps = SectionControlCardSlotProps<typeof OutlinedInput>;
+export type SectionOutlinedNumberFieldCardSlotProps = SectionControlCardSlotProps<typeof OutlinedNumberField>;
 
-export type SectionOutlinedTextFieldCardProps =
+export type SectionOutlinedNumberFieldCardProps =
     SectionCardProps
-    & SectionTextFieldCardRootProps
-    & SectionOutlinedTextFieldCardSlotProps;
+    & SectionNumberFieldCardRootProps
+    & SectionOutlinedNumberFieldCardSlotProps;
 
-export const SectionOutlinedTextFieldCard = (
+export const SectionOutlinedNumberFieldCard = (
     {
         children,
         value,
@@ -36,7 +37,7 @@ export const SectionOutlinedTextFieldCard = (
         slots,
         slotProps,
         ...props
-    }: SectionOutlinedTextFieldCardProps
+    }: SectionOutlinedNumberFieldCardProps
 ) => {
     const { components } = useContext(ConfigContext);
     const {
@@ -44,13 +45,13 @@ export const SectionOutlinedTextFieldCard = (
         variant: configRootVariant,
         slots: configRootSlots,
         slotProps: configRootSlotProps
-    } = components?.SectionTextFieldCard ?? {};
+    } = components?.SectionNumberFieldCard ?? {};
     const {
         disabled: configDisabled,
         variant: configVariant,
         slots: configSlots,
         slotProps: configSlotProps
-    } = components?.SectionOutlinedTextFieldCard ?? {};
+    } = components?.SectionOutlinedNumberFieldCard ?? {};
 
     const theme = useTheme();
 
@@ -59,7 +60,7 @@ export const SectionOutlinedTextFieldCard = (
         <SectionCard
             disabled={disabled}
             variant={variant ?? configVariant ?? configRootVariant}
-            className={clsx(sectionOutlinedTextFieldCardClasses.root, className)}
+            className={clsx(sectionOutlinedNumberFieldCardClasses.root, className)}
             sx={{
                 flexWrap: 'nowrap',
                 [theme.breakpoints.down('md')]: {
@@ -75,13 +76,11 @@ export const SectionOutlinedTextFieldCard = (
             {...props}
         >
             {children}
-            <OutlinedInput
+            <OutlinedNumberField
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                setValue={setValue}
                 disabled={disabled}
-                size="small"
-                margin="none"
-                className={sectionOutlinedTextFieldCardClasses.control}
+                className={sectionOutlinedNumberFieldCardClasses.control}
                 sx={{ width: { xs: '100%', md: 300 } }}
                 {...(slotProps?.control ?? configSlotProps?.control)}
             />
@@ -89,4 +88,4 @@ export const SectionOutlinedTextFieldCard = (
     );
 };
 
-export type SectionOutlinedTextFieldCardConfigProps = Partial<Omit<SectionCardRootProps & SectionOutlinedTextFieldCardSlotProps, keyof SectionCardDisplayRootProps>>;
+export type SectionOutlinedNumberFieldCardConfigProps = Partial<Omit<SectionCardRootProps & SectionOutlinedNumberFieldCardSlotProps, keyof SectionCardDisplayRootProps>>;

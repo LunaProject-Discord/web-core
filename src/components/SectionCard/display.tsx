@@ -5,14 +5,18 @@ import { Box, BoxProps, styled } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
 import React, { ElementType, ReactNode } from 'react';
+import { generateComponentClasses } from '../../utils';
 import { SlotRootProps } from './utils';
 
-export const sectionCardDisplayClasses = {
-    root: 'SectionCardDisplay-root',
-    icon: 'SectionCardDisplay-icon',
-    primary: 'SectionCardDisplay-primary',
-    secondary: 'SectionCardDisplay-secondary'
-};
+export const sectionCardDisplayClasses = generateComponentClasses(
+    'SectionCardDisplay',
+    [
+        'root',
+        'icon',
+        'primary',
+        'secondary'
+    ]
+);
 
 export const SectionCardDisplayRoot = styled(
     ({ className, ...props }: BoxProps) => (

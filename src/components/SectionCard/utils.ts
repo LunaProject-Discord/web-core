@@ -3,11 +3,9 @@ import { Theme } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { SxProps } from '@mui/system';
 import { ElementType } from 'react';
+import { generateComponentClasses } from '../../utils';
 
-export const getSectionControlCardClasses = (name: string) => ({
-    root: `Section${name}Card-root`,
-    control: `Section${name}Card-control`
-});
+export const generateSectionControlCardClasses = (name: string) => generateComponentClasses(`Section${name}Card`, ['root', 'control']);
 
 export interface SlotRootProps {
     component?: ElementType;

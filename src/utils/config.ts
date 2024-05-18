@@ -21,6 +21,10 @@ import {
     SectionSelectCardConfigProps,
     SectionSwitchCardConfigProps
 } from '../components';
+import {
+    SectionFilledNumberFieldCardConfigProps,
+    SectionOutlinedNumberFieldCardConfigProps
+} from '../components/SectionCard/NumberField';
 import { DeepPartial } from './types';
 
 export interface ConfigComponents {
@@ -29,11 +33,11 @@ export interface ConfigComponents {
     SectionButtonActionCard?: SectionCardConfigProps;
     SectionButtonCard?: SectionCardConfigProps;
     SectionCheckboxCard?: SectionCheckboxCardConfigProps;
+    SectionFilledNumberFieldCard?: SectionFilledNumberFieldCardConfigProps;
     SectionFilledTextFieldCard?: SectionFilledTextFieldCardConfigProps;
     SectionLinkCard?: SectionCardConfigProps;
-    SectionNumberFieldCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
+    SectionNumberFieldCard?: SectionCardConfigProps;
+    SectionOutlinedNumberFieldCard?: SectionOutlinedNumberFieldCardConfigProps;
     SectionOutlinedTextFieldCard?: SectionOutlinedTextFieldCardConfigProps;
     SectionRadioCard?: SectionRadioCardConfigProps;
     SectionRouteLinkCard?: SectionCardConfigProps;

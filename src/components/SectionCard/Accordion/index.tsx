@@ -7,7 +7,7 @@ import { OverridableComponent } from '@mui/types';
 import clsx from 'clsx';
 import deepmerge from 'deepmerge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
-import { Config, ConfigContext, ConfigProvider } from '../../../utils';
+import { Config, ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
 import {
     SectionButtonCard,
     sectionCardClasses,
@@ -19,15 +19,18 @@ import {
 import { SectionAccordionCardHeader, SectionAccordionCardHeaderIcon } from './header';
 import { SectionAccordionCardItems } from './items';
 
-export const sectionAccordionCardClasses = {
-    root: 'SectionAccordionCard-root',
-    header: 'SectionAccordionCard-header',
-    headerIcon: 'SectionAccordionCard-headerIcon',
-    items: 'SectionAccordionCard-items',
+export const sectionAccordionCardClasses = generateComponentClasses(
+    'SectionAccordionCard',
+    [
+        'root',
+        'header',
+        'headerIcon',
+        'items',
 
-    expanded: 'SectionAccordionCard-expanded',
-    readOnly: 'SectionAccordionCard-readOnly'
-};
+        'expanded',
+        'readOnly'
+    ]
+);
 
 export const SectionAccordionCardRoot = styled(
     (

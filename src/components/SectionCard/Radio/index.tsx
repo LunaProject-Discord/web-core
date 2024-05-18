@@ -7,9 +7,9 @@ import { ConfigContext } from '../../../utils';
 import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
 import { SectionCardDisplay, SectionCardDisplayRootProps } from '../display';
 import { SectionCardContent, SectionCardRootProps, SectionCardVariableProps } from '../index';
-import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
+import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
-export const sectionRadioCardClasses = getSectionControlCardClasses('Radio');
+export const sectionRadioCardClasses = generateSectionControlCardClasses('Radio');
 
 export interface SectionRadioCardRootProps<T> extends SectionCardVariableProps<{ selected: T }> {
     name: string;

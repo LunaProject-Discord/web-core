@@ -8,9 +8,9 @@ import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
 import { SectionCardDisplay, SectionCardDisplayRootProps } from '../display';
 import { SectionCardContent, SectionCardRootProps } from '../index';
 import { SectionSwitchCardRootProps } from '../Switch';
-import { getSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
+import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
 
-export const sectionCheckboxCardClasses = getSectionControlCardClasses('Checkbox');
+export const sectionCheckboxCardClasses = generateSectionControlCardClasses('Checkbox');
 
 export type SectionCheckboxCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Checkbox>;
 

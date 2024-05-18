@@ -334,3 +334,10 @@ export const borderAndBoxShadow = (theme: Theme) => ({
     border: `solid 1px ${theme.palette.divider}`,
     boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`
 });
+
+export const generateComponentClasses = <T extends string>(name: string, slots: T[]): Record<T, string> => {
+    const classes: Record<string, string> = {};
+    for (const slot of slots)
+        classes[slot] = `LP${name}-${slot}`;
+    return classes;
+};

@@ -2,13 +2,11 @@
 
 import clsx from 'clsx';
 import React, { useContext } from 'react';
-import { ConfigContext } from '../../../utils';
+import { ConfigContext, generateComponentClasses } from '../../../utils';
 import { SectionButtonCard, SectionButtonCardProps } from '../Button';
 import { SectionCardDisplayIcon } from '../display';
 
-export const sectionLinkCardClasses = {
-    root: 'SectionLinkCard-root'
-};
+export const sectionLinkCardClasses = generateComponentClasses('SectionLinkCard', ['root']);
 
 export type SectionLinkCardProps = Omit<SectionButtonCardProps<'a'>, 'component'>;
 

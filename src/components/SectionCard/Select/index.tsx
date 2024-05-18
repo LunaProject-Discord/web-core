@@ -15,9 +15,9 @@ import {
     SectionControlCardSlotProps,
     SlotRootProps
 } from '../index';
-import { getSectionControlCardClasses } from '../utils';
+import { generateSectionControlCardClasses } from '../utils';
 
-export const sectionSelectCardClasses = getSectionControlCardClasses('Select');
+export const sectionSelectCardClasses = generateSectionControlCardClasses('Select');
 
 export interface SectionSelectCardRootProps<T> extends SectionCardVariableProps<{ value: T }> {
     choices: MenuItemProps<MenuItemTypeMap['defaultComponent'], { value: T }>[];
