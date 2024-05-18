@@ -1,10 +1,11 @@
 import { InputBaseProps, InternalStandardProps } from '@mui/material';
-import { ChangeEventHandler, MouseEventHandler, useCallback } from 'react';
+import { ChangeEventHandler, MouseEventHandler, useCallback, useMemo } from 'react';
 import { NumberFieldRootProps } from './index';
 
 export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseProps>> extends Omit<NumberFieldRootProps, 'step' | 'shiftMultiplier'> {
     step: number;
     shiftMultiplier: number;
+    inputMode: 'numeric' | 'decimal';
     pattern: string;
 
     onChange: ChangeEventHandler<HTMLInputElement>;
@@ -28,8 +29,17 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, 
 ): NumberFieldHookProps<T> => {
     const step = _step ?? 1;
     const shiftMultiplier = _shiftMultiplier ?? 10;
-    const pattern = Number.isInteger(step) ? '[0-9]*' : '[0-9,.]*';
-    const regex = new RegExp(`^${pattern}$`);
+
+    const [pattern, regex] = useMemo(() => {
+        let p = '^';
+        if (!min || min < 0)
+            p += '-?';
+        p += '[\d';
+        if (!Number.isInteger(step))
+            p += '.';
+        p += ']*$';
+        return [p, new RegExp(p)];
+    }, [min, step]);
 
     const mathMinMax = useCallback((value: number) => {
         let n = value;
@@ -67,6 +77,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, 
         max,
         step,
         shiftMultiplier,
+        inputMode: Number.isInteger(step) ? 'numeric' : 'decimal',
         pattern,
 
         onChange,

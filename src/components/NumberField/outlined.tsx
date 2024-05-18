@@ -28,7 +28,7 @@ const OutlinedInput = styled(
 )<OutlinedInputProps>(({ theme }) => ({
     padding: 0,
     [`& .${inputBaseClasses.input}`]: {
-        padding: theme.spacing(1.75, 1.0625)
+        padding: theme.spacing(1.0625, 1.75)
     }
 }));
 
@@ -41,6 +41,7 @@ export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
         min,
         max,
         step,
+        inputMode,
         pattern,
         onChange,
         onIncrementButtonClick,
@@ -56,7 +57,7 @@ export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
             onChange={onChange}
             disabled={disabled}
             inputProps={{
-                inputMode: 'numeric',
+                inputMode,
                 pattern,
                 min,
                 max,
