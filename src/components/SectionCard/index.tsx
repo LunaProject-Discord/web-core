@@ -34,7 +34,8 @@ export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    gap: theme.spacing(1.5),
+    columnGap: theme.spacing(1.5),
+    rowGap: theme.spacing(1),
     borderRadius: theme.shape.borderRadius,
     transition: theme.transitions.create(['background-color', 'box-shadow', 'border-color', 'color'], {
         duration: theme.transitions.duration.shortest

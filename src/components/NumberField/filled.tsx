@@ -28,7 +28,7 @@ const FilledInput = styled(
 )<FilledInputProps>(({ theme }) => ({
     padding: 0,
     [`& .${inputBaseClasses.input}`]: {
-        padding: theme.spacing(1.0625, 1.75)
+        padding: theme.spacing(1, 1.5, 1.125)
     }
 }));
 
@@ -43,7 +43,8 @@ export const FilledNumberField = (_props: FilledNumberFieldProps) => {
         step,
         inputMode,
         pattern,
-        onChange,
+        onInputChange,
+        onInputKeyDown,
         onIncrementButtonClick,
         onDecrementButtonClick,
         props
@@ -54,7 +55,8 @@ export const FilledNumberField = (_props: FilledNumberFieldProps) => {
     return (
         <FilledInput
             value={value}
-            onChange={onChange}
+            onChange={onInputChange}
+            onKeyDown={onInputKeyDown}
             disabled={disabled}
             inputProps={{
                 inputMode,
@@ -103,7 +105,6 @@ export const FilledNumberField = (_props: FilledNumberFieldProps) => {
                                 (disabled || value === min) && numberFieldClasses.disabled
                             )
                         }
-                        sx={{ borderBottomRightRadius: (theme) => theme.shape.borderRadius }}
                     >
                         <Decrement />
                     </SpinButton>

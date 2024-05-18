@@ -41,6 +41,7 @@ export interface NumberFieldProps extends ItemDisabledProps, ItemVariableProps<n
 }
 
 export interface NumberFieldRootProps extends SectionCardDisabledProps, SectionCardVariableProps<{ value: number }> {
+    disabledArrowKeys?: boolean;
     min?: number;
     max?: number;
     step?: number;

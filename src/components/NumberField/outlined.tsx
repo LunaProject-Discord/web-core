@@ -43,7 +43,8 @@ export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
         step,
         inputMode,
         pattern,
-        onChange,
+        onInputChange,
+        onInputKeyDown,
         onIncrementButtonClick,
         onDecrementButtonClick,
         props
@@ -54,7 +55,8 @@ export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
     return (
         <OutlinedInput
             value={value}
-            onChange={onChange}
+            onChange={onInputChange}
+            onKeyDown={onInputKeyDown}
             disabled={disabled}
             inputProps={{
                 inputMode,
