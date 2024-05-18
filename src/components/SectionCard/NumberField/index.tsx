@@ -1,9 +1,9 @@
 'use client';
 
-import { NumberFieldRootProps } from '../../NumberField';
+import { SectionCardVariableProps } from '../index';
 import { SectionOutlinedNumberFieldCard } from './outlined';
 
-export type SectionNumberFieldCardRootProps = NumberFieldRootProps;
+export type SectionNumberFieldCardRootProps = SectionCardVariableProps<{ value: number }>;
 
 export const SectionNumberFieldCard = SectionOutlinedNumberFieldCard;
 
