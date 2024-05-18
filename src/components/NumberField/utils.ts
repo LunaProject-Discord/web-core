@@ -34,7 +34,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, 
         let p = '^';
         if (!min || min < 0)
             p += '-?';
-        p += '[\d';
+        p += '[\\d';
         if (!Number.isInteger(step))
             p += '.';
         p += ']*$';

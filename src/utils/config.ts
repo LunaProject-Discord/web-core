@@ -15,16 +15,14 @@ import {
     SectionCardConfigProps,
     SectionCardVariantProps,
     SectionCheckboxCardConfigProps,
+    SectionFilledNumberFieldCardConfigProps,
     SectionFilledTextFieldCardConfigProps,
+    SectionOutlinedNumberFieldCardConfigProps,
     SectionOutlinedTextFieldCardConfigProps,
     SectionRadioCardConfigProps,
     SectionSelectCardConfigProps,
     SectionSwitchCardConfigProps
 } from '../components';
-import {
-    SectionFilledNumberFieldCardConfigProps,
-    SectionOutlinedNumberFieldCardConfigProps
-} from '../components/SectionCard/NumberField';
 import { DeepPartial } from './types';
 
 export interface ConfigComponents {
