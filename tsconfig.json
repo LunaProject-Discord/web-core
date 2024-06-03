@@ -30,7 +30,7 @@
         "skipLibCheck": true,
         "strict": true,
         "strictNullChecks": true,
-        "target": "es5",
+        "target": "es2020",
         "typeRoots": [
             "src/@types"
         ]
