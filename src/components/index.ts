@@ -15,7 +15,6 @@ export * from './Icons';
 export * from './Layout';
 export * from './Link';
 export * from './Menu';
-export * from './Message';
 export * from './Navigation';
 export * from './NumberField';
 export * from './PinField';
