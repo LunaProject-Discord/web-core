@@ -1,3 +1,5 @@
+'use client';
+
 import { Dispatch, DispatchWithoutAction, SetStateAction, useCallback, useState } from 'react';
 
 export type ResettableState<T> = [T, Dispatch<SetStateAction<T>>, DispatchWithoutAction];

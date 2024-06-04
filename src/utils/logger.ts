@@ -1,5 +1,3 @@
-import { blue, green, orange, purple, red } from '@mui/material/colors';
-
 const prefixes = {
     success: '%cSuccess ―',
     warning: '%cWarning ―',
@@ -8,12 +6,12 @@ const prefixes = {
 };
 
 const styles = {
-    success: `color: ${green[500]}; font-weight: bold;`,
-    warning: `color: ${orange[500]}; font-weight: bold;`,
-    error: `color: ${red[500]}; font-weight: bold;`,
-    info: `color: ${blue[500]}; font-weight: bold;`,
+    success: `color: #4caf50; font-weight: bold;`,
+    warning: `color: #ff9800; font-weight: bold;`,
+    error: `color: #f44336; font-weight: bold;`,
+    info: `color: #2196f3; font-weight: bold;`,
 
-    name: `color: ${purple[500]}; font-weight: bold;`
+    name: `color: #9c27b0; font-weight: bold;`
 };
 
 
