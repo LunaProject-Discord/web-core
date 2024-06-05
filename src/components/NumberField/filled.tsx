@@ -14,6 +14,7 @@ import { useNumberField } from './utils';
 const FilledInput = styled(
     ({ disabled, className, ...props }: FilledInputProps) => (
         <MuiFilledInput
+            disabled={disabled}
             className={
                 clsx(
                     numberFieldClasses.root,

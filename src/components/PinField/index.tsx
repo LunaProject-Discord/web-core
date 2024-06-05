@@ -22,7 +22,14 @@ export const PinFieldInput = styled(
     ({ disabled, className, ...props }: InputHTMLAttributes<HTMLInputElement>) => (
         <Box
             component="input"
-            className={clsx(pinFieldClasses.input, disabled && pinFieldClasses.disabled, className)}
+            disabled={disabled}
+            className={
+                clsx(
+                    pinFieldClasses.input,
+                    disabled && pinFieldClasses.disabled,
+                    className
+                )
+            }
             {...props}
         />
     )

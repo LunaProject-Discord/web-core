@@ -14,6 +14,7 @@ import { useNumberField } from './utils';
 const OutlinedInput = styled(
     ({ disabled, className, ...props }: OutlinedInputProps) => (
         <MuiOutlinedInput
+            disabled={disabled}
             className={
                 clsx(
                     numberFieldClasses.root,
