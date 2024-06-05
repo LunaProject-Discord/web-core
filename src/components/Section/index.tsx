@@ -15,7 +15,7 @@ export const sectionClasses = generateComponentClasses(
     ]
 );
 
-export const Section2 = styled(
+export const Section = styled(
     forwardRef<HTMLElement, BoxProps>((
         {
             className,
@@ -30,15 +30,15 @@ export const Section2 = styled(
             {...props}
         />
     ))
-)(({ theme }) => ({
+)<BoxProps>(({ theme }) => ({
     padding: theme.spacing(2, 0, 0),
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
 
-export const SectionContent2 = styled(
-    forwardRef<HTMLDivElement, BoxProps>((
+export const SectionContent = styled(
+    forwardRef<HTMLElement, BoxProps>((
         {
             className,
             ...props
@@ -51,72 +51,42 @@ export const SectionContent2 = styled(
             {...props}
         />
     ))
-)(({ theme }) => ({
+)<BoxProps>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
-
-const StyledSection = styled(Box)(({ theme }) => ({
-    padding: theme.spacing(2, 0, 0),
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(.5)
-}));
-
-export const Section = forwardRef<HTMLElement, Omit<BoxProps, 'component'>>((
-    {
-        className,
-        ...props
-    },
-    ref
-) => (
-    <StyledSection
-        ref={ref}
-        component="section"
-        className={clsx(sectionClasses.root, className)}
-        {...props}
-    />
-));
-Section.displayName = 'Section';
-
-const StyledSectionContent = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(.5)
-}));
-
-export const SectionContent = forwardRef<HTMLDivElement, BoxProps>((
-    {
-        className,
-        ...props
-    },
-    ref
-) => (
-    <StyledSectionContent
-        ref={ref}
-        className={clsx(sectionClasses.content, className)}
-        {...props}
-    />
-));
-SectionContent.displayName = 'SectionContent';
 
 export const SectionTitle = styled(
-    ({ className, ...props }: TypographyProps) => (
+    forwardRef<HTMLElement, TypographyProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <Typography
+            ref={ref}
             variant="h5"
             className={clsx(sectionClasses.title, className)}
             {...props}
         />
-    )
+    ))
 )<TypographyProps>();
 
 export const SectionParagraph = styled(
-    ({ className, ...props }: TypographyProps) => (
+    forwardRef<HTMLElement, TypographyProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <Typography
+            ref={ref}
             variant="body1"
             className={clsx(sectionClasses.paragraph, className)}
             {...props}
         />
-    )
+    ))
 )<TypographyProps>();
