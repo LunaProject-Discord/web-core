@@ -3,14 +3,18 @@
 import { Box, styled } from '@mui/material';
 import clsx from 'clsx';
 import React, { ClipboardEvent, InputHTMLAttributes, KeyboardEvent, useState } from 'react';
+import { generateComponentClasses } from '../../utils';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
-export const pinFieldClasses = {
-    root: 'PinField-root',
-    input: 'PinField-input',
+export const pinFieldClasses = generateComponentClasses(
+    'PinField',
+    [
+        'root',
+        'input',
 
-    disabled: 'PinField-disabled'
-};
+        'disabled'
+    ]
+);
 
 const IGNORED_META_KEYS = ['Control', 'Alt', 'Meta', 'Tab', 'CapsLock', 'Shift', 'Enter'];
 

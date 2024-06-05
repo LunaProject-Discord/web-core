@@ -2,16 +2,20 @@
 
 import { Box, BoxProps, styled, Typography, TypographyProps } from '@mui/material';
 import clsx from 'clsx';
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { generateComponentClasses } from '../../utils';
 
-export const sectionClasses = {
-    root: 'Section-root',
-    content: 'Section-content',
-    title: 'Section-title',
-    paragraph: 'Section-paragraph'
-};
+export const sectionClasses = generateComponentClasses(
+    'Section',
+    [
+        'root',
+        'content',
+        'title',
+        'paragraph'
+    ]
+);
 
-export const Section = styled(
+export const StyledSection = styled(
     ({ className, ...props }: BoxProps) => (
         <Box
             component="section"
@@ -26,7 +30,12 @@ export const Section = styled(
     gap: theme.spacing(.5)
 }));
 
-export const SectionContent = styled(
+export const Section = forwardRef<HTMLElement, BoxProps>((props, ref) => (
+    <StyledSection ref={ref} {...props} />
+));
+Section.displayName = 'Section';
+
+export const StyledSectionContent = styled(
     ({ className, ...props }: BoxProps) => (
         <Box
             className={clsx(sectionClasses.content, className)}
@@ -38,6 +47,11 @@ export const SectionContent = styled(
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
+
+export const SectionContent = forwardRef<HTMLElement, BoxProps>((props, ref) => (
+    <StyledSectionContent ref={ref} {...props} />
+));
+SectionContent.displayName = 'SectionContent';
 
 export const SectionTitle = styled(
     ({ className, ...props }: TypographyProps) => (

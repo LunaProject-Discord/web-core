@@ -1,15 +1,19 @@
 import { Box, BoxProps, ButtonBase, buttonBaseClasses, ButtonBaseProps, styled } from '@mui/material';
 import clsx from 'clsx';
 import React from 'react';
+import { generateComponentClasses } from '../../utils';
 import { ItemDisabledProps, ItemRootProps, ItemVariableChoicesProps } from '../SectionItems';
 
-export const segmentedControlClasses = {
-    root: 'SegmentedControl-root',
-    button: 'SegmentedControl-button',
+export const segmentedControlClasses = generateComponentClasses(
+    'SegmentedControl',
+    [
+        'root',
+        'button',
 
-    selected: 'SegmentedControl-selected',
-    disabled: 'SegmentedControl-disabled'
-};
+        'selected',
+        'disabled'
+    ]
+);
 
 export const SegmentedControlRoot = styled(
     ({ className, ...props }: BoxProps) => (

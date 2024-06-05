@@ -16,7 +16,7 @@ export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseP
     props: T;
 }
 
-export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, >(
+export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
     {
         value,
         setValue: _setValue,
@@ -34,7 +34,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, 
 
     const [pattern, regex] = useMemo(() => {
         let p = '^';
-        if (!min || min < 0)
+        if (min === undefined || min < 0)
             p += '-?';
         p += '[\\d';
         if (!Number.isInteger(step))
@@ -45,9 +45,9 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>, 
 
     const mathMinMax = useCallback((value: number) => {
         let n = value;
-        if (min)
+        if (min !== undefined)
             n = Math.max(n, min);
-        if (max)
+        if (max !== undefined)
             n = Math.min(n, max);
         return n;
     }, [min, max]);
