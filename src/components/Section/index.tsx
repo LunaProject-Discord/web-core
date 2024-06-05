@@ -15,7 +15,7 @@ export const sectionClasses = generateComponentClasses(
     ]
 );
 
-const Section2 = styled(
+export const Section2 = styled(
     forwardRef<HTMLElement, BoxProps>((
         {
             className,
@@ -37,7 +37,7 @@ const Section2 = styled(
     gap: theme.spacing(.5)
 }));
 
-const SectionContent2 = styled(
+export const SectionContent2 = styled(
     forwardRef<HTMLDivElement, BoxProps>((
         {
             className,
