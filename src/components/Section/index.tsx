@@ -15,41 +15,47 @@ export const sectionClasses = generateComponentClasses(
     ]
 );
 
-export const StyledSection = styled(
-    ({ className, ...props }: BoxProps) => (
-        <Box
-            component="section"
-            className={clsx(sectionClasses.root, className)}
-            {...props}
-        />
-    )
-)<BoxProps>(({ theme }) => ({
+const StyledSection = styled(Box)(({ theme }) => ({
     padding: theme.spacing(2, 0, 0),
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
 
-export const Section = forwardRef<HTMLElement, BoxProps>((props, ref) => (
-    <StyledSection ref={ref} {...props} />
+export const Section = forwardRef<HTMLElement, Omit<BoxProps, 'component'>>((
+    {
+        className,
+        ...props
+    },
+    ref
+) => (
+    <StyledSection
+        ref={ref}
+        component="section"
+        className={clsx(sectionClasses.root, className)}
+        {...props}
+    />
 ));
 Section.displayName = 'Section';
 
-export const StyledSectionContent = styled(
-    ({ className, ...props }: BoxProps) => (
-        <Box
-            className={clsx(sectionClasses.content, className)}
-            {...props}
-        />
-    )
-)<BoxProps>(({ theme }) => ({
+const StyledSectionContent = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(.5)
 }));
 
-export const SectionContent = forwardRef<HTMLElement, BoxProps>((props, ref) => (
-    <StyledSectionContent ref={ref} {...props} />
+export const SectionContent = forwardRef<HTMLDivElement, BoxProps>((
+    {
+        className,
+        ...props
+    },
+    ref
+) => (
+    <StyledSectionContent
+        ref={ref}
+        className={clsx(sectionClasses.content, className)}
+        {...props}
+    />
 ));
 SectionContent.displayName = 'SectionContent';
 
