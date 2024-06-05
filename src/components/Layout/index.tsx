@@ -54,7 +54,7 @@ export const RootStyles = () => (
                     },
 
                     '[data-rsbs-backdrop], [data-rsbs-overlay], [data-rsbs-root]:after': {
-                        zIndex: theme.zIndex.drawer + 1
+                        zIndex: theme.zIndex.modal
                     }
                 };
             }}
