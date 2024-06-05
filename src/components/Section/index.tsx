@@ -15,6 +15,48 @@ export const sectionClasses = generateComponentClasses(
     ]
 );
 
+const Section2 = styled(
+    forwardRef<HTMLElement, BoxProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
+        <Box
+            ref={ref}
+            component="section"
+            className={clsx(sectionClasses.root, className)}
+            {...props}
+        />
+    ))
+)(({ theme }) => ({
+    padding: theme.spacing(2, 0, 0),
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(.5)
+}));
+
+const SectionContent2 = styled(
+    forwardRef<HTMLDivElement, BoxProps>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
+        <Box
+            ref={ref}
+            className={clsx(sectionClasses.content, className)}
+            {...props}
+        />
+    ))
+)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(.5)
+}));
+
 const StyledSection = styled(Box)(({ theme }) => ({
     padding: theme.spacing(2, 0, 0),
     display: 'flex',
