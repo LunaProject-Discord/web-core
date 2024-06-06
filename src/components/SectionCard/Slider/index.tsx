@@ -101,7 +101,11 @@ export const SectionSliderCard = (
                 valueLabelDisplay="auto"
                 size="small"
                 className={sectionSliderCardClasses.control}
-                sx={{ width: '100%', minWidth: 300 }}
+                sx={{
+                    width: '100%',
+                    minWidth: 286,
+                    mx: 1
+                }}
                 {...(slotProps?.control ?? configSlotProps?.control)}
             />
         </SectionCard>
