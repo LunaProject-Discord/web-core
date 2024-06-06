@@ -10,7 +10,7 @@ import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps 
 
 export const sectionSwitchCardClasses = generateSectionControlCardClasses('Switch');
 
-export interface SectionSwitchCardRootProps extends SectionCardVariableProps<{ checked: boolean }> {
+export interface SectionSwitchCardRootProps extends SectionCardVariableProps<{ checked: boolean; }> {
     defaultChecked?: boolean;
 }
 

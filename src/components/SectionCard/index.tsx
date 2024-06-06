@@ -170,6 +170,7 @@ export * from './NumberField';
 export * from './Radio';
 export * from './RouteLink';
 export * from './Select';
+export * from './Slider';
 export * from './Switch';
 export * from './TextField';
 export * from './display';

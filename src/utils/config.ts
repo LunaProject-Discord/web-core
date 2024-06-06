@@ -15,7 +15,6 @@ import { createContext, Provider, ReactNode } from 'react';
 import {
     SectionAccordionCardConfigProps,
     SectionCardConfigProps,
-    SectionCardVariantProps,
     SectionCheckboxCardConfigProps,
     SectionFilledNumberFieldCardConfigProps,
     SectionFilledTextFieldCardConfigProps,
@@ -23,6 +22,7 @@ import {
     SectionOutlinedTextFieldCardConfigProps,
     SectionRadioCardConfigProps,
     SectionSelectCardConfigProps,
+    SectionSliderCardConfigProps,
     SectionSwitchCardConfigProps
 } from '../components';
 import { DeepPartial } from './types';
@@ -42,9 +42,7 @@ export interface ConfigComponents {
     SectionRadioCard?: SectionRadioCardConfigProps;
     SectionRouteLinkCard?: SectionCardConfigProps;
     SectionSelectCard?: SectionSelectCardConfigProps;
-    SectionSliderCard?: {
-        variant?: SectionCardVariantProps['variant'];
-    };
+    SectionSliderCard?: SectionSliderCardConfigProps;
     SectionSwitchCard?: SectionSwitchCardConfigProps;
     SectionTextFieldCard?: SectionCardConfigProps;
 }

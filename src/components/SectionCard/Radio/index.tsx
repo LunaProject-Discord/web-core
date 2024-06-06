@@ -11,7 +11,7 @@ import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps 
 
 export const sectionRadioCardClasses = generateSectionControlCardClasses('Radio');
 
-export interface SectionRadioCardRootProps<T> extends SectionCardVariableProps<{ selected: T }> {
+export interface SectionRadioCardRootProps<T> extends SectionCardVariableProps<{ selected: T; }> {
     name: string;
     value: T;
 }
