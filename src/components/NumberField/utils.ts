@@ -1,5 +1,13 @@
 import { InputBaseProps, InternalStandardProps } from '@mui/material';
-import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, useCallback, useMemo, useState } from 'react';
+import {
+    ChangeEventHandler,
+    FocusEventHandler,
+    KeyboardEventHandler,
+    MouseEventHandler,
+    useCallback,
+    useMemo,
+    useState
+} from 'react';
 import { NumberFieldRootProps } from './index';
 
 export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseProps>> extends Omit<NumberFieldRootProps, 'setValue' | 'step' | 'shiftMultiplier'> {
@@ -12,6 +20,7 @@ export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseP
 
     onInputChange: ChangeEventHandler<HTMLInputElement>;
     onInputKeyDown: KeyboardEventHandler<HTMLInputElement>;
+    onInputBlur: FocusEventHandler<HTMLInputElement>;
     onIncrementButtonClick: MouseEventHandler<HTMLButtonElement>;
     onDecrementButtonClick: MouseEventHandler<HTMLButtonElement>;
 
@@ -57,6 +66,8 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
     }, [min, max]);
 
     const setValue = useCallback((_value: string | number) => {
+        setInput(_value.toString());
+
         const value = typeof _value === 'string' ? Number(_value) : _value;
         if (!Number.isNaN(value))
             _setValue(mathMinMax(value));
@@ -67,7 +78,6 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
         if (!regex.test(value))
             return;
 
-        setInput(value);
         setValue(value);
     }, [mathMinMax, setValue, regex]);
 
@@ -92,6 +102,10 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
                 return;
         }
     }, [mathMinMax, setValue, value, step, shiftMultiplier, disabledArrowKeys]);
+
+    const onInputBlur: FocusEventHandler<HTMLInputElement> = useCallback(() => {
+        setInput(value.toString());
+    }, [value]);
 
     const onIncrementButtonClick: MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
         const isShift = e.shiftKey;
@@ -118,6 +132,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
 
         onInputChange,
         onInputKeyDown,
+        onInputBlur,
         onIncrementButtonClick,
         onDecrementButtonClick,
 

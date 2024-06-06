@@ -49,6 +49,7 @@ export const OutlinedNumberField = forwardRef<HTMLInputElement, OutlinedNumberFi
 
         onInputChange,
         onInputKeyDown,
+        onInputBlur,
         onIncrementButtonClick,
         onDecrementButtonClick,
 
@@ -62,6 +63,7 @@ export const OutlinedNumberField = forwardRef<HTMLInputElement, OutlinedNumberFi
             value={input}
             onChange={onInputChange}
             onKeyDown={onInputKeyDown}
+            onBlur={onInputBlur}
             disabled={disabled}
             inputRef={ref}
             inputProps={{
