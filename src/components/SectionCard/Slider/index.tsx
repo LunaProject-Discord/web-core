@@ -17,13 +17,27 @@ import { generateSectionControlCardClasses } from '../utils';
 
 export const sectionSliderCardClasses = generateSectionControlCardClasses('Slider');
 
-export type SectionSliderCardRootProps = SectionCardVariableProps<{ value: number | number[]; }>;
+export interface SectionSliderCardRootProps {
+    multiple?: boolean;
+}
+
+export interface SingleSectionSliderCardRootProps extends SectionSliderCardRootProps, SectionCardVariableProps<{
+    value: number;
+}> {
+    multiple?: false;
+}
+
+export interface RangeSectionSliderCardRootProps extends SectionSliderCardRootProps, SectionCardVariableProps<{
+    value: number[];
+}> {
+    multiple: true;
+}
 
 export type SectionSliderCardSlotProps = SectionControlCardSlotProps<typeof Slider>;
 
 export type SectionSliderCardProps =
     SectionCardProps
-    & SectionSliderCardRootProps
+    & (SingleSectionSliderCardRootProps | RangeSectionSliderCardRootProps)
     & SectionSliderCardSlotProps;
 
 export const SectionSliderCard = (
@@ -31,6 +45,7 @@ export const SectionSliderCard = (
         children,
         value,
         setValue,
+        multiple,
         disabled: _disabled,
         variant,
         className,
@@ -50,7 +65,13 @@ export const SectionSliderCard = (
 
     const theme = useTheme();
 
-    const handleChange: NonNullable<SliderProps['onChange']> = useCallback((_, value) => setValue(value), [setValue]);
+    const handleChange: NonNullable<SliderProps['onChange']> = useCallback((_, value) => {
+        if (multiple) {
+            setValue(value as number[]);
+        } else {
+            setValue(value as number);
+        }
+    }, [multiple, setValue]);
 
     const disabled = _disabled ?? configDisabled;
     return (
