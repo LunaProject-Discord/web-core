@@ -40,7 +40,7 @@ export interface NumberFieldProps extends ItemDisabledProps, ItemVariableProps<n
     sx?: SxProps<Theme>;
 }
 
-export interface NumberFieldRootProps extends SectionCardDisabledProps, SectionCardVariableProps<{ value: number }> {
+export interface NumberFieldRootProps extends SectionCardDisabledProps, SectionCardVariableProps<{ value: number; }> {
     disabledArrowKeys?: boolean;
     min?: number;
     max?: number;

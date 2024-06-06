@@ -1,8 +1,10 @@
 import { InputBaseProps, InternalStandardProps } from '@mui/material';
-import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, useCallback, useMemo } from 'react';
+import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { NumberFieldRootProps } from './index';
 
-export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseProps>> extends Omit<NumberFieldRootProps, 'step' | 'shiftMultiplier'> {
+export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseProps>> extends Omit<NumberFieldRootProps, 'setValue' | 'step' | 'shiftMultiplier'> {
+    input: string;
+
     step: number;
     shiftMultiplier: number;
     inputMode: 'numeric' | 'decimal';
@@ -32,6 +34,8 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
     const step = _step ?? 1;
     const shiftMultiplier = _shiftMultiplier ?? 10;
 
+    const [input, setInput] = useState(value.toString());
+
     const [pattern, regex] = useMemo(() => {
         let p = '^';
         if (min === undefined || min < 0)
@@ -52,15 +56,19 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
         return n;
     }, [min, max]);
 
-    const setValue = useCallback(_setValue, [_setValue]);
+    const setValue = useCallback((_value: string | number) => {
+        const value = typeof _value === 'string' ? Number(_value) : _value;
+        if (!Number.isNaN(value))
+            _setValue(mathMinMax(value));
+    }, [_setValue]);
 
     const onInputChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
         const value = e.target.value;
         if (!regex.test(value))
             return;
 
-        const i = Number(value);
-        setValue(mathMinMax(i));
+        setInput(value);
+        setValue(value);
     }, [mathMinMax, setValue, regex]);
 
     const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = useCallback((e) => {
@@ -72,13 +80,13 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
                 e.preventDefault();
 
                 if (!disabledArrowKeys)
-                    setValue(mathMinMax(value + (isShift ? step * shiftMultiplier : step)));
+                    setValue(value + (isShift ? step * shiftMultiplier : step));
                 return;
             case 'ArrowDown':
                 e.preventDefault();
 
                 if (!disabledArrowKeys)
-                    setValue(mathMinMax(value - (isShift ? step * shiftMultiplier : step)));
+                    setValue(value - (isShift ? step * shiftMultiplier : step));
                 return;
             default:
                 return;
@@ -96,8 +104,9 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
     }, [mathMinMax, setValue, value, step, shiftMultiplier]);
 
     return {
+        input,
         value,
-        setValue,
+
         disabled,
         disabledArrowKeys,
         min,

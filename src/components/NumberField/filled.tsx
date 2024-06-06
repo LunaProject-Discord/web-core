@@ -6,7 +6,7 @@ import {
     styled
 } from '@mui/material';
 import clsx from 'clsx';
-import React, { useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { ConfigContext } from '../../utils';
 import { numberFieldClasses, NumberFieldRootProps, SpinButton } from './index';
 import { useNumberField } from './utils';
@@ -35,19 +35,23 @@ const FilledInput = styled(
 
 export type FilledNumberFieldProps = Omit<FilledInputProps, 'value'> & NumberFieldRootProps;
 
-export const FilledNumberField = (_props: FilledNumberFieldProps) => {
+export const FilledNumberField = forwardRef<HTMLInputElement, FilledNumberFieldProps>((_props, ref) => {
     const {
+        input,
         value,
+
         disabled,
         min,
         max,
         step,
         inputMode,
         pattern,
+
         onInputChange,
         onInputKeyDown,
         onIncrementButtonClick,
         onDecrementButtonClick,
+
         props
     } = useNumberField(_props);
 
@@ -55,10 +59,11 @@ export const FilledNumberField = (_props: FilledNumberFieldProps) => {
 
     return (
         <FilledInput
-            value={value}
+            value={input}
             onChange={onInputChange}
             onKeyDown={onInputKeyDown}
             disabled={disabled}
+            inputRef={ref}
             inputProps={{
                 inputMode,
                 pattern,
@@ -114,4 +119,4 @@ export const FilledNumberField = (_props: FilledNumberFieldProps) => {
             {...props}
         />
     );
-};
+});

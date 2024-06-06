@@ -6,7 +6,7 @@ import {
     styled
 } from '@mui/material';
 import clsx from 'clsx';
-import React, { useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { ConfigContext } from '../../utils';
 import { numberFieldClasses, NumberFieldRootProps, SpinButton } from './index';
 import { useNumberField } from './utils';
@@ -35,19 +35,23 @@ const OutlinedInput = styled(
 
 export type OutlinedNumberFieldProps = Omit<OutlinedInputProps, 'value'> & NumberFieldRootProps;
 
-export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
+export const OutlinedNumberField = forwardRef<HTMLInputElement, OutlinedNumberFieldProps>((_props, ref) => {
     const {
+        input,
         value,
+
         disabled,
         min,
         max,
         step,
         inputMode,
         pattern,
+
         onInputChange,
         onInputKeyDown,
         onIncrementButtonClick,
         onDecrementButtonClick,
+
         props
     } = useNumberField(_props);
 
@@ -55,10 +59,11 @@ export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
 
     return (
         <OutlinedInput
-            value={value}
+            value={input}
             onChange={onInputChange}
             onKeyDown={onInputKeyDown}
             disabled={disabled}
+            inputRef={ref}
             inputProps={{
                 inputMode,
                 pattern,
@@ -115,4 +120,4 @@ export const OutlinedNumberField = (_props: OutlinedNumberFieldProps) => {
             {...props}
         />
     );
-};
+});
