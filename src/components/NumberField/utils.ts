@@ -65,13 +65,17 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
         return n;
     }, [min, max]);
 
-    const setValue = useCallback((_value: string | number) => {
-        setInput(_value.toString());
+    const setValue = useCallback((value: string | number) => {
+        const n = typeof value === 'string' ? Number(value) : value;
+        if (Number.isNaN(n)) {
+            setInput(value.toString());
+            return;
+        }
 
-        const value = typeof _value === 'string' ? Number(_value) : _value;
-        if (!Number.isNaN(value))
-            _setValue(mathMinMax(value));
-    }, [_setValue]);
+        const v = mathMinMax(n);
+        _setValue(v);
+        setInput(v.toString());
+    }, [_setValue, mathMinMax]);
 
     const onInputChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
         const value = e.target.value;
@@ -79,7 +83,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
             return;
 
         setValue(value);
-    }, [mathMinMax, setValue, regex]);
+    }, [regex, setValue]);
 
     const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = useCallback((e) => {
         const key = e.key;
