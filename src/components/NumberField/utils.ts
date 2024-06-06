@@ -5,6 +5,7 @@ import {
     KeyboardEventHandler,
     MouseEventHandler,
     useCallback,
+    useEffect,
     useMemo,
     useState
 } from 'react';
@@ -20,6 +21,7 @@ export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseP
 
     onInputChange: ChangeEventHandler<HTMLInputElement>;
     onInputKeyDown: KeyboardEventHandler<HTMLInputElement>;
+    onInputFocus: FocusEventHandler<HTMLInputElement>;
     onInputBlur: FocusEventHandler<HTMLInputElement>;
     onIncrementButtonClick: MouseEventHandler<HTMLButtonElement>;
     onDecrementButtonClick: MouseEventHandler<HTMLButtonElement>;
@@ -44,6 +46,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
     const shiftMultiplier = _shiftMultiplier ?? 10;
 
     const [input, setInput] = useState(value.toString());
+    const [focused, setFocused] = useState(false);
 
     const [pattern, regex] = useMemo(() => {
         let p = '^';
@@ -67,7 +70,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
 
     const setValue = useCallback((value: string | number) => {
         const n = typeof value === 'string' ? Number(value) : value;
-        if (Number.isNaN(n)) {
+        if (Number.isNaN(n) || typeof value === 'string' && value.length < 1) {
             setInput(value.toString());
             return;
         }
@@ -105,21 +108,31 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
             default:
                 return;
         }
-    }, [mathMinMax, setValue, value, step, shiftMultiplier, disabledArrowKeys]);
+    }, [setValue, value, step, shiftMultiplier, disabledArrowKeys]);
+
+    const onInputFocus: FocusEventHandler<HTMLInputElement> = useCallback(() => {
+        setFocused(true);
+    }, []);
 
     const onInputBlur: FocusEventHandler<HTMLInputElement> = useCallback(() => {
+        setFocused(false);
         setInput(value.toString());
     }, [value]);
 
     const onIncrementButtonClick: MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
         const isShift = e.shiftKey;
-        setValue(mathMinMax(value + (isShift ? step * shiftMultiplier : step)));
-    }, [mathMinMax, setValue, value, step, shiftMultiplier]);
+        setValue(value + (isShift ? step * shiftMultiplier : step));
+    }, [setValue, value, step, shiftMultiplier]);
 
     const onDecrementButtonClick: MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
         const isShift = e.shiftKey;
-        setValue(mathMinMax(value - (isShift ? step * shiftMultiplier : step)));
-    }, [mathMinMax, setValue, value, step, shiftMultiplier]);
+        setValue(value - (isShift ? step * shiftMultiplier : step));
+    }, [setValue, value, step, shiftMultiplier]);
+
+    useEffect(() => {
+        if (!focused)
+            setInput(value.toString());
+    }, [value, focused]);
 
     return {
         input,
@@ -136,6 +149,7 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
 
         onInputChange,
         onInputKeyDown,
+        onInputFocus,
         onInputBlur,
         onIncrementButtonClick,
         onDecrementButtonClick,
