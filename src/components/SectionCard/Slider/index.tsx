@@ -1,6 +1,6 @@
 'use client';
 
-import { Slider, SliderProps, useTheme } from '@mui/material';
+import { Slider, sliderClasses, SliderProps, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
@@ -101,11 +101,14 @@ export const SectionSliderCard = (
                 valueLabelDisplay="auto"
                 size="small"
                 className={sectionSliderCardClasses.control}
-                sx={{
+                sx={(theme) => ({
                     width: '100%',
                     minWidth: 286,
-                    mx: 1
-                }}
+                    mx: 1,
+                    [`& .${sliderClasses.markLabel}`]: {
+                        ...theme.typography.caption
+                    }
+                })}
                 {...(slotProps?.control ?? configSlotProps?.control)}
             />
         </SectionCard>
