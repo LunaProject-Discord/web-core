@@ -1,15 +1,15 @@
 'use client';
 
-import { generateUtilityClasses, InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
+import { InputAdornment, inputBaseClasses, OutlinedInput, styled, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
-import { ConfigContext } from '../../utils';
+import { ConfigContext, generateComponentClasses } from '../../utils';
 import { ButtonBase } from '../ButtonBase';
 import { SectionCardDisabledProps, SectionCardVariableProps } from '../SectionCard';
 import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
 
-export const numberFieldClasses = generateUtilityClasses(
+export const numberFieldClasses = generateComponentClasses(
     'NumberField',
     [
         'root',

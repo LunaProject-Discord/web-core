@@ -87,9 +87,6 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                 },
                 style: ({ theme }) => ({
                     borderColor: theme.palette.divider,
-                    [`&:disabled, &.${buttonClasses.disabled}`]: {
-                        borderColor: theme.palette.action.disabled
-                    },
                     '&:hover': {
                         backgroundColor: theme.palette.divider,
                         borderColor: 'transparent'
