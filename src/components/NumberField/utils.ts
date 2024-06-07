@@ -72,6 +72,8 @@ export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
         const n = typeof value === 'string' ? Number(value) : value;
         if (Number.isNaN(n) || typeof value === 'string' && value.length < 1) {
             setInput(value.toString());
+            if (typeof value === 'string' && value.length < 1)
+                _setValue(0);
             return;
         }
 
