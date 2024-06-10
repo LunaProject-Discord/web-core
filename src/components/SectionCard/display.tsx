@@ -27,7 +27,6 @@ export const SectionCardDisplayRoot = styled(
     )
 )<BoxProps>(({ theme }) => ({
     display: 'flex',
-    flexWrap: 'wrap',
     alignItems: 'center',
     gap: theme.spacing(1.5),
     [`& .${sectionCardDisplayClasses.icon}`]: {
