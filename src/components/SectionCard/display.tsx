@@ -1,7 +1,7 @@
 'use client';
 
 import { SlotComponentProps } from '@mui/base';
-import { Box, BoxProps, styled } from '@mui/material';
+import { avatarClasses, Box, BoxProps, styled } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import clsx from 'clsx';
 import React, { ElementType, ReactNode } from 'react';
@@ -29,7 +29,7 @@ export const SectionCardDisplayRoot = styled(
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(1.5),
-    [`& .${sectionCardDisplayClasses.icon}`]: {
+    [`& .${sectionCardDisplayClasses.icon} :not(.${avatarClasses.root})`]: {
         margin: theme.spacing(0, .5)
     },
     [`&:not(:has(.${sectionCardDisplayClasses.secondary})) .${sectionCardDisplayClasses.primary}`]: {
