@@ -41,7 +41,7 @@ export const Unstable_SectionAccordionCardHeader2 = styled(
     )
 )<BoxProps>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
-    [`&:is(.${sectionCardClasses.variantOutlined} *)`]: {
+    [`.${sectionCardClasses.variantOutlined} &`]: {
         [`&, & .${sectionCardClasses.root}`]: {
             borderRadius: theme.shape.borderRadius - 1
         },
@@ -53,6 +53,11 @@ export const Unstable_SectionAccordionCardHeader2 = styled(
                 borderRadius: 0,
                 borderTopLeftRadius: theme.shape.borderRadius - 1,
                 borderTopRightRadius: theme.shape.borderRadius - 1
+            }
+        },
+        [`.${sectionAccordionCardClasses.expanded} &`]: {
+            [`&, & .${sectionCardClasses.root}`]: {
+                background: 'red'
             }
         }
     }
@@ -82,11 +87,8 @@ export const Unstable_SectionAccordionCardHeaderIcon2 = styled(
     transition: theme.transitions.create('transform', {
         duration: theme.transitions.duration.shortest
     }),
-    [`&:is(.${sectionAccordionCardClasses.expanded} *)`]: {
-        transform: 'scale(1, -1)'
-    },
     [`.${sectionAccordionCardClasses.expanded} &`]: {
-        background: 'red'
+        transform: 'scale(1, -1)'
     }
 }));
 
@@ -121,17 +123,19 @@ export const Unstable_SectionAccordionCardItems2 = styled(
     [`& .${sectionCardClasses.root}`]: {
         minHeight: theme.spacing(7),
         rowGap: theme.spacing(.5),
-        [[
-            `&.${sectionLinkCardClasses.root}`,
-            `&.${sectionRouteLinkCardClasses.root}`
-        ].join(',')]: {
-            [`& .${sectionCardClasses.content}:has(.${sectionCardDisplayClasses.icon}:only-child)`]: {
-                // アイコン: 24px + ギャップ: 8px
-                marginRight: theme.spacing(-4)
+        [theme.breakpoints.up('md')]: {
+            [[
+                `&.${sectionLinkCardClasses.root}`,
+                `&.${sectionRouteLinkCardClasses.root}`
+            ].join(',')]: {
+                [`& .${sectionCardClasses.content}:has(.${sectionCardDisplayClasses.icon}:only-child)`]: {
+                    // アイコン: 24px + ギャップ: 8px
+                    marginRight: theme.spacing(-4)
+                }
             }
         }
     },
-    [`&:is(.${sectionAccordionCardClasses.readOnly} *) .${sectionCardClasses.root}`]: {
+    [`.${sectionAccordionCardClasses.readOnly} & .${sectionCardClasses.root}`]: {
         pointerEvents: 'none',
         cursor: 'default',
         color: theme.palette.action.disabled,
@@ -145,7 +149,7 @@ export const Unstable_SectionAccordionCardItems2 = styled(
             color: theme.palette.action.disabled
         }
     },
-    [`&:is(.${sectionCardClasses.variantStandard} *) .${sectionCardClasses.root}`]: {
+    [`.${sectionCardClasses.variantStandard} & .${sectionCardClasses.root}`]: {
         /**
          * [上下] パディング: 8px
          * [左右] パディング: 12px
@@ -161,7 +165,7 @@ export const Unstable_SectionAccordionCardItems2 = styled(
             padding: theme.spacing(.5, 5.5, .5, 7)
         }
     },
-    [`&:is(.${sectionCardClasses.variantOutlined} *) .${sectionCardClasses.root}`]: {
+    [`.${sectionCardClasses.variantOutlined} & .${sectionCardClasses.root}`]: {
         /**
          * [上] (ボーダー: 1px) + パディング: 7px
          * [下] パディング: 8px
