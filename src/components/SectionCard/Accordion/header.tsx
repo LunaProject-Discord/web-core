@@ -2,8 +2,21 @@
 
 import { Box, BoxProps, styled } from '@mui/material';
 import clsx from 'clsx';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { sectionAccordionCardClasses, SectionAccordionCardRootProps, sectionCardClasses } from '../index';
+
+// tslint:disable-next-line:variable-name
+export const Unstable_SectionAccordionCardHeader = styled(
+    forwardRef<HTMLDivElement, BoxProps>(({ className, ...props }, ref) => (
+        <Box
+            ref={ref}
+            className={clsx(sectionAccordionCardClasses.header, className)}
+            {...props}
+        />
+    ))
+)<BoxProps>(({ theme }) => ({
+    borderRadius: theme.shape.borderRadius
+}));
 
 export const SectionAccordionCardHeader = styled(
     (
