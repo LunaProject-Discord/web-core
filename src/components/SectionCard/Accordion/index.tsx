@@ -154,7 +154,7 @@ export const SectionAccordionCardItems = styled(
          * [左右] パディング: 11px
          */
         padding: theme.spacing(.875, 1.375, 1),
-        borderTop: `solid 1px ${theme.palette.divider}`,
+        borderTop: `solid 1px ${theme.palette.divider} !important`,
         borderRadius: 0,
         ['&:last-child']: {
             borderBottomLeftRadius: theme.shape.borderRadius - 1,
