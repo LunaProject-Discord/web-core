@@ -102,10 +102,10 @@ export const Unstable_SectionAccordionCardRoot = styled(
                 /**
                  * [上] (ボーダー: 1px) + パディング: 3px
                  * [下] パディング: 4px
-                 * [左] パディング: 12px + アイコン: 24px + ギャップ: 12px
+                 * [左] パディング: 12px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
                  * [右] パディング: 12px + アイコン: 24px + ギャップ: 8px
                  */
-                padding: theme.spacing(.5, 5.5, .5, 6)
+                padding: theme.spacing(.5, 5.5, .5, 7)
             }
         }
     },
@@ -121,8 +121,13 @@ export const Unstable_SectionAccordionCardRoot = styled(
         [`& .${sectionCardClasses.root}`]: {
             border: 'none'
         },
-        [`& .${sectionAccordionCardClasses.header} .${sectionCardClasses.root}`]: {
-            minHeight: theme.spacing(7.75)
+        [`& .${sectionAccordionCardClasses.header}`]: {
+            [`&, & .${sectionCardClasses.root}`]: {
+                borderRadius: theme.shape.borderRadius - 1
+            },
+            [`& .${sectionCardClasses.root}`]: {
+                minHeight: theme.spacing(7.75)
+            }
         },
         [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
             /**
@@ -141,10 +146,10 @@ export const Unstable_SectionAccordionCardRoot = styled(
                 /**
                  * [上] (ボーダー: 1px) + パディング: 3px
                  * [下] パディング: 4px
-                 * [左] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + ギャップ: 12px
+                 * [左] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
                  * [右] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + ギャップ: 8px
                  */
-                padding: theme.spacing(.375, 5.375, .5, 5.875)
+                padding: theme.spacing(.375, 5.375, .5, 6.875)
             },
             [[
                 `&.${sectionFilledNumberFieldCardClasses.root}`,

@@ -15,7 +15,7 @@ export const Unstable_SectionAccordionCardHeader = styled(
         />
     ))
 )<BoxProps>(({ theme }) => ({
-    borderRadius: theme.shape.borderRadius - 1
+    borderRadius: theme.shape.borderRadius
 }));
 
 export const SectionAccordionCardHeader = styled(
