@@ -116,13 +116,13 @@ export const Unstable_SectionAccordionCardRoot = styled(
                 borderRadius: 0,
                 borderTopLeftRadius: theme.shape.borderRadius,
                 borderTopRightRadius: theme.shape.borderRadius
-            },
-            [`& .${sectionCardClasses.root}`]: {
-                minHeight: theme.spacing(7.75)
             }
         },
         [`& .${sectionCardClasses.root}`]: {
             border: 'none'
+        },
+        [`& .${sectionAccordionCardClasses.header} .${sectionCardClasses.root}`]: {
+            minHeight: theme.spacing(7.75)
         },
         [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
             /**
