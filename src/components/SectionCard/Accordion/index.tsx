@@ -1,12 +1,13 @@
 'use client';
 
-import { Box, BoxProps, styled, switchClasses, Theme } from '@mui/material';
+import { SlotComponentProps } from '@mui/base';
+import { Box, BoxProps, Collapse, CollapseProps, styled, switchClasses } from '@mui/material';
+import { TransitionProps } from '@mui/material/transitions';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
-import { OverridableComponent } from '@mui/types';
 import clsx from 'clsx';
 import deepmerge from 'deepmerge';
-import React, { Dispatch, ElementType, forwardRef, ReactNode, SetStateAction, useContext, useState } from 'react';
+import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
 import { Config, ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
 import {
     SectionButtonCard,
@@ -23,11 +24,8 @@ import {
     sectionOutlinedTextFieldCardClasses,
     sectionRouteLinkCardClasses,
     sectionSelectCardClasses,
-    Unstable_SectionAccordionCardHeader,
-    Unstable_SectionAccordionCardItems
+    SlotRootProps
 } from '../index';
-import { SectionAccordionCardHeader, SectionAccordionCardHeaderIcon } from './header';
-import { SectionAccordionCardItems } from './items';
 
 export const sectionAccordionCardClasses = generateComponentClasses(
     'SectionAccordionCard',
@@ -42,161 +40,144 @@ export const sectionAccordionCardClasses = generateComponentClasses(
     ]
 );
 
-// tslint:disable-next-line:variable-name
-export const Unstable_SectionAccordionCardRoot = styled(
-    forwardRef<HTMLDivElement, BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>>(
-        (
-            {
-                expanded,
-                disabled,
-                readOnly,
-                variant,
-                className,
-                ...props
-            },
-            ref
-        ) => (
-            <Box
-                ref={ref}
-                className={
-                    clsx(
-                        sectionCardClasses.root,
-                        disabled && sectionCardClasses.disabled,
-                        variant === 'outlined' ? sectionCardClasses.variantOutlined : sectionCardClasses.variantStandard,
-                        sectionAccordionCardClasses.root,
-                        expanded && sectionAccordionCardClasses.expanded,
-                        readOnly && sectionAccordionCardClasses.readOnly,
-                        className
-                    )
-                }
-                {...props}
-            />
-        )
+export const SectionAccordionCardHeader = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionAccordionCardClasses.header, className)}
+            {...props}
+        />
     )
-)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>>(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
+)<BoxProps>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
-    [`&.${sectionAccordionCardClasses.readOnly}`]: {
-        [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
-            pointerEvents: 'none',
-            cursor: 'default',
-            color: theme.palette.action.disabled,
-            [[
-                `& .${sectionCardDisplayClasses.root} *`,
-                `& .${sectionCardDisplayClasses.icon} *`,
-                `& .${sectionCardDisplayClasses.primary} *`,
-                `& .${sectionCardDisplayClasses.secondary} *`,
-                `& .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`
-            ].join(',')]: {
-                color: theme.palette.action.disabled
-            }
-        }
-    },
-    [`&.${sectionCardClasses.variantStandard}`]: {
-        [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
-            /**
-             * [上下] パディング: 8px
-             * [左右] パディング: 12px
-             */
-            padding: theme.spacing(1, 1.5),
-            [theme.breakpoints.up('md')]: {
-                /**
-                 * [上] (ボーダー: 1px) + パディング: 3px
-                 * [下] パディング: 4px
-                 * [左] パディング: 12px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
-                 * [右] パディング: 12px + アイコン: 24px + ギャップ: 8px
-                 */
-                padding: theme.spacing(.5, 5.5, .5, 7)
-            }
-        }
-    },
-    [`&.${sectionCardClasses.variantOutlined}`]: {
-        border: `solid 1px ${theme.palette.divider}`,
-        /*
-        [`&.${sectionAccordionCardClasses.expanded} .${sectionAccordionCardClasses.header}`]: {
+    [`.${sectionCardClasses.variantOutlined} &`]: {
+        [`&, & .${sectionCardClasses.root}`]: {
+            borderRadius: theme.shape.borderRadius - 1
+        },
+        [`& .${sectionCardClasses.root}`]: {
+            minHeight: theme.spacing(7.75)
+        },
+        [`&:is(.${sectionAccordionCardClasses.expanded} *)`]: {
             [`&, & .${sectionCardClasses.root}`]: {
                 borderRadius: 0,
                 borderTopLeftRadius: theme.shape.borderRadius - 1,
                 borderTopRightRadius: theme.shape.borderRadius - 1
             }
-        },
-        */
-        [`& .${sectionCardClasses.root}`]: {
-            border: 'none'
-        },
-        [`& .${sectionAccordionCardClasses.header}`]: {
-            [`&, & .${sectionCardClasses.root}`]: {
-                borderRadius: theme.shape.borderRadius - 1
-            },
-            [`& .${sectionCardClasses.root}`]: {
-                minHeight: theme.spacing(7.75)
-            },
-            [`&:is(.${sectionAccordionCardClasses.expanded} *)`]: {
-                [`&, & .${sectionCardClasses.root}`]: {
-                    borderRadius: 0,
-                    borderTopLeftRadius: theme.shape.borderRadius - 1,
-                    borderTopRightRadius: theme.shape.borderRadius - 1
-                }
+        }
+    }
+}));
+
+export const SectionAccordionCardHeaderIcon = styled(
+    ({ className, ...props }: BoxProps) => (
+        <Box
+            className={clsx(sectionAccordionCardClasses.headerIcon, className)}
+            {...props}
+        />
+    )
+)<BoxProps>(({ theme }) => ({
+    display: 'flex',
+    placeItems: 'center',
+    placeContent: 'center',
+    transition: theme.transitions.create('transform', {
+        duration: theme.transitions.duration.shortest
+    }),
+    [`.${sectionAccordionCardClasses.expanded} &`]: {
+        transform: 'scale(1, -1)'
+    }
+}));
+
+export const SectionAccordionCardItems = styled(
+    ({ in: expanded, className, ...props }: CollapseProps) => (
+        <Collapse
+            in={expanded}
+            className={
+                clsx(
+                    sectionAccordionCardClasses.items,
+                    expanded && sectionAccordionCardClasses.expanded,
+                    className
+                )
             }
-        },
-        /*
-        [`& .${sectionAccordionCardClasses.header}`]: {
-            [`&, & .${sectionCardClasses.root}`]: {
-                borderRadius: theme.shape.borderRadius - 1
-            },
-            [`& .${sectionCardClasses.root}`]: {
-                minHeight: theme.spacing(7.75)
-            }
-        },
-        */
-        [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
-            /**
-             * [上] (ボーダー: 1px) + パディング: 7px
-             * [下] パディング: 8px
-             * [左右] パディング: 11px
-             */
-            padding: theme.spacing(.875, 1.375, 1),
-            borderTop: `solid 1px ${theme.palette.divider}`,
-            borderRadius: 0,
-            ['&:last-child']: {
-                borderBottomLeftRadius: theme.shape.borderRadius - 1,
-                borderBottomRightRadius: theme.shape.borderRadius - 1
-            },
-            [theme.breakpoints.up('md')]: {
-                /**
-                 * [上] (ボーダー: 1px) + パディング: 3px
-                 * [下] パディング: 4px
-                 * [左] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
-                 * [右] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + ギャップ: 8px
-                 */
-                padding: theme.spacing(.375, 5.375, .5, 6.875)
-            },
+            {...props}
+        />
+    )
+)<CollapseProps>(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    [`& .${sectionCardClasses.root}`]: {
+        minHeight: theme.spacing(7),
+        rowGap: theme.spacing(.5),
+        [theme.breakpoints.up('md')]: {
             [[
-                `&.${sectionFilledNumberFieldCardClasses.root}`,
-                `&.${sectionFilledTextFieldCardClasses.root}`,
-                `&.${sectionOutlinedNumberFieldCardClasses.root}`,
-                `&.${sectionOutlinedTextFieldCardClasses.root}`,
-                `&.${sectionSelectCardClasses.root}`
+                `&.${sectionLinkCardClasses.root}`,
+                `&.${sectionRouteLinkCardClasses.root}`
             ].join(',')]: {
-                [`& .${sectionCardClasses.content}`]: {
-                    marginTop: theme.spacing(.125)
+                [`& .${sectionCardClasses.content}:has(.${sectionCardDisplayClasses.icon}:only-child)`]: {
+                    // アイコン: 24px + ギャップ: 8px
+                    marginRight: theme.spacing(-4)
                 }
             }
         }
     },
-    [`& .${sectionCardClasses.root}`]: {
-        width: '100%'
-    },
-    [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
-        rowGap: theme.spacing(.5),
+    [`.${sectionAccordionCardClasses.readOnly} & .${sectionCardClasses.root}`]: {
+        pointerEvents: 'none',
+        cursor: 'default',
+        color: theme.palette.action.disabled,
         [[
-            `&.${sectionLinkCardClasses.root}`,
-            `&.${sectionRouteLinkCardClasses.root}`
+            `& .${sectionCardDisplayClasses.root} *`,
+            `& .${sectionCardDisplayClasses.icon} *`,
+            `& .${sectionCardDisplayClasses.primary} *`,
+            `& .${sectionCardDisplayClasses.secondary} *`,
+            `& .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`
         ].join(',')]: {
-            [`& .${sectionCardClasses.content} .${sectionCardDisplayClasses.icon}`]: {
-                // アイコン: 24px + ギャップ: 8px
-                marginRight: theme.spacing(-4)
+            color: theme.palette.action.disabled
+        }
+    },
+    [`.${sectionCardClasses.variantStandard} & .${sectionCardClasses.root}`]: {
+        /**
+         * [上下] パディング: 8px
+         * [左右] パディング: 12px
+         */
+        padding: theme.spacing(1, 1.5),
+        [theme.breakpoints.up('md')]: {
+            /**
+             * [上] (ボーダー: 1px) + パディング: 3px
+             * [下] パディング: 4px
+             * [左] パディング: 12px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
+             * [右] パディング: 12px + アイコン: 24px + ギャップ: 8px
+             */
+            padding: theme.spacing(.5, 5.5, .5, 7)
+        }
+    },
+    [`.${sectionCardClasses.variantOutlined} & .${sectionCardClasses.root}`]: {
+        /**
+         * [上] (ボーダー: 1px) + パディング: 7px
+         * [下] パディング: 8px
+         * [左右] パディング: 11px
+         */
+        padding: theme.spacing(.875, 1.375, 1),
+        borderTop: `solid 1px ${theme.palette.divider}`,
+        borderRadius: 0,
+        ['&:last-child']: {
+            borderBottomLeftRadius: theme.shape.borderRadius - 1,
+            borderBottomRightRadius: theme.shape.borderRadius - 1
+        },
+        [theme.breakpoints.up('md')]: {
+            /**
+             * [上] (ボーダー: 1px) + パディング: 3px
+             * [下] パディング: 4px
+             * [左] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
+             * [右] (ボーダー: 1px) + パディング: 11px + アイコン: 24px + ギャップ: 8px
+             */
+            padding: theme.spacing(.375, 5.375, .5, 6.875)
+        },
+        [[
+            `&.${sectionFilledNumberFieldCardClasses.root}`,
+            `&.${sectionFilledTextFieldCardClasses.root}`,
+            `&.${sectionOutlinedNumberFieldCardClasses.root}`,
+            `&.${sectionOutlinedTextFieldCardClasses.root}`,
+            `&.${sectionSelectCardClasses.root}`
+        ].join(',')]: {
+            [`& .${sectionCardClasses.content}`]: {
+                marginTop: theme.spacing(.125)
             }
         }
     }
@@ -237,13 +218,22 @@ export const SectionAccordionCardRoot = styled(
         [`& .${sectionCardClasses.root}`]: {
             border: 'none'
         }
+    },
+    [`& .${sectionCardClasses.root}`]: {
+        width: '100%'
     }
-})) as OverridableComponent<BoxTypeMap<Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>, 'div', Theme>>;
+}));
 
 export type SectionAccordionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
     display?: SectionCardDisplaySlotsAndSlotProps['slots'];
+    header?: ElementType;
+    headerIcon?: ElementType;
+    items?: ElementType<TransitionProps>;
 }, {
     display: SectionCardDisplaySlotsAndSlotProps['slotProps'];
+    header: SlotComponentProps<typeof Box, SlotRootProps, {}>;
+    headerIcon: SlotComponentProps<typeof Box, SlotRootProps, {}>;
+    items: SlotComponentProps<typeof Collapse, SlotRootProps, {}>;
 }>;
 
 export interface SectionAccordionCardRootProps extends SectionCardDisplayRootProps, SectionCardDisabledProps, SectionCardVariantProps, SectionAccordionCardSlotsAndSlotProps {
@@ -259,8 +249,7 @@ export type SectionAccordionCardProps<C extends ElementType = BoxTypeMap['defaul
     SectionAccordionCardRootProps
     & BoxProps<C, { component?: C }>;
 
-// tslint:disable-next-line:variable-name
-export const Unstable_SectionAccordionCard = <C extends ElementType = BoxTypeMap['defaultComponent'], >(
+export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['defaultComponent'], >(
     {
         icon,
         primary,
@@ -328,14 +317,17 @@ export const Unstable_SectionAccordionCard = <C extends ElementType = BoxTypeMap
 
     return (
         <ConfigProvider value={rootConfig}>
-            <Unstable_SectionAccordionCardRoot
+            <SectionAccordionCardRoot
                 expanded={expanded}
                 disabled={disabled}
                 readOnly={readOnly}
                 variant={variant}
                 {...props}
             >
-                <Unstable_SectionAccordionCardHeader>
+                <SectionAccordionCardHeader
+                    component={slots?.header ?? configSlots?.header}
+                    {...(slotProps?.header ?? configSlotProps?.header)}
+                >
                     {header ? header : <SectionButtonCard
                         onClick={() => setExpanded(!expanded)}
                         disabled={disabled}
@@ -347,115 +339,26 @@ export const Unstable_SectionAccordionCard = <C extends ElementType = BoxTypeMap
                         slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
                     >
                         {headerChildren}
-                        <SectionAccordionCardHeaderIcon expanded={expanded}>
+                        <SectionAccordionCardHeaderIcon
+                            component={slots?.headerIcon ?? configSlots?.headerIcon}
+                            {...(slotProps?.headerIcon ?? configSlotProps?.headerIcon)}
+                        >
                             <ExpandMore color={!disabled ? 'action' : 'disabled'} />
                         </SectionAccordionCardHeaderIcon>
                     </SectionButtonCard>}
-                </Unstable_SectionAccordionCardHeader>
+                </SectionAccordionCardHeader>
                 <ConfigProvider value={itemsConfig}>
-                    <Unstable_SectionAccordionCardItems in={expanded} unmountOnExit>
+                    <SectionAccordionCardItems
+                        in={expanded}
+                        component={slots?.items ?? configSlots?.items}
+                        {...(slotProps?.items ?? configSlotProps?.items)}
+                    >
                         {children}
-                    </Unstable_SectionAccordionCardItems>
+                    </SectionAccordionCardItems>
                 </ConfigProvider>
-            </Unstable_SectionAccordionCardRoot>
+            </SectionAccordionCardRoot>
         </ConfigProvider>
     );
 };
 
-export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['defaultComponent'], >(
-    {
-        icon,
-        primary,
-        secondary,
-        header,
-        headerChildren,
-        children,
-        expanded: _expanded,
-        setExpanded: _setExpanded,
-        defaultExpanded,
-        disabled: _disabled,
-        readOnly: _readOnly,
-        variant: _variant,
-        slots,
-        slotProps,
-        ...props
-    }: SectionAccordionCardProps<C>
-) => {
-    const config = useContext(ConfigContext);
-    const {
-        disabled: configRootDisabled,
-        variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
-    } = config.components?.SectionCard ?? {};
-    const {
-        defaultExpanded: configDefaultExpanded,
-        disabled: configDisabled,
-        readOnly: configReadOnly,
-        variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
-    } = config.components?.SectionAccordionCard ?? {};
-    const ExpandMore = config.icons.ExpandMore;
-
-    // tslint:disable-next-line:variable-name
-    const [__expanded, __setExpanded] = useState(Boolean(defaultExpanded ?? configDefaultExpanded));
-    const expanded = _expanded ?? __expanded;
-    const setExpanded = _setExpanded ?? __setExpanded;
-
-    const disabled = _disabled ?? configDisabled ?? configRootDisabled;
-    const readOnly = _readOnly ?? configReadOnly;
-    const variant = _variant ?? configVariant ?? configRootVariant;
-    return (
-        <SectionAccordionCardRoot
-            expanded={expanded}
-            disabled={disabled}
-            readOnly={readOnly}
-            variant={variant}
-            {...props}
-        >
-            <SectionAccordionCardHeader expanded={expanded} variant={variant}>
-                {header ? header : <SectionButtonCard
-                    onClick={() => setExpanded(!expanded)}
-                    disabled={disabled}
-                    icon={icon}
-                    primary={primary}
-                    secondary={secondary}
-                    variant={variant}
-                    slots={slots ?? configSlots ?? configRootSlots}
-                    slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
-                >
-                    {headerChildren}
-                    <SectionAccordionCardHeaderIcon expanded={expanded}>
-                        <ExpandMore color={!disabled ? 'action' : 'disabled'} />
-                    </SectionAccordionCardHeaderIcon>
-                </SectionButtonCard>}
-            </SectionAccordionCardHeader>
-            <SectionAccordionCardItems in={expanded} readOnly={readOnly} variant={variant}>
-                <ConfigProvider
-                    value={
-                        deepmerge<Config>(
-                            config,
-                            {
-                                components: {
-                                    SectionCard: {
-                                        disabled: readOnly,
-                                        variant
-                                    }
-                                }
-                            }
-                        )
-                    }
-                >
-                    {children}
-                </ConfigProvider>
-            </SectionAccordionCardItems>
-        </SectionAccordionCardRoot>
-    );
-};
-
-export type SectionAccordionCardConfigProps = Partial<Omit<SectionAccordionCardRootProps, keyof SectionCardDisplayRootProps | 'expanded' | 'setExpanded' | 'header'>>;
-
-export * from './header';
-export * from './items';
-export * from './unstable';
+export type SectionAccordionCardConfigProps = Partial<Omit<SectionAccordionCardRootProps, keyof SectionCardDisplayRootProps | 'header' | 'headerChildren' | 'expanded' | 'setExpanded'>>;
