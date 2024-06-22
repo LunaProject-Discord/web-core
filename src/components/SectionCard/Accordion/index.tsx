@@ -113,6 +113,7 @@ export const Unstable_SectionAccordionCardRoot = styled(
     },
     [`&.${sectionCardClasses.variantOutlined}`]: {
         border: `solid 1px ${theme.palette.divider}`,
+        /*
         [`&.${sectionAccordionCardClasses.expanded} .${sectionAccordionCardClasses.header}`]: {
             [`&, & .${sectionCardClasses.root}`]: {
                 borderRadius: 0,
@@ -120,6 +121,7 @@ export const Unstable_SectionAccordionCardRoot = styled(
                 borderTopRightRadius: theme.shape.borderRadius - 1
             }
         },
+        */
         [`& .${sectionCardClasses.root}`]: {
             border: 'none'
         },
@@ -129,8 +131,25 @@ export const Unstable_SectionAccordionCardRoot = styled(
             },
             [`& .${sectionCardClasses.root}`]: {
                 minHeight: theme.spacing(7.75)
+            },
+            [`&:is(.${sectionAccordionCardClasses.expanded} *)`]: {
+                [`&, & .${sectionCardClasses.root}`]: {
+                    borderRadius: 0,
+                    borderTopLeftRadius: theme.shape.borderRadius - 1,
+                    borderTopRightRadius: theme.shape.borderRadius - 1
+                }
             }
         },
+        /*
+        [`& .${sectionAccordionCardClasses.header}`]: {
+            [`&, & .${sectionCardClasses.root}`]: {
+                borderRadius: theme.shape.borderRadius - 1
+            },
+            [`& .${sectionCardClasses.root}`]: {
+                minHeight: theme.spacing(7.75)
+            }
+        },
+        */
         [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
             /**
              * [上] (ボーダー: 1px) + パディング: 7px
