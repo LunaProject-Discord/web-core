@@ -84,6 +84,9 @@ export const Unstable_SectionAccordionCardHeaderIcon2 = styled(
     }),
     [`&:is(.${sectionAccordionCardClasses.expanded} *)`]: {
         transform: 'scale(1, -1)'
+    },
+    [`.${sectionAccordionCardClasses.expanded} &`]: {
+        background: 'red'
     }
 }));
 
@@ -122,7 +125,7 @@ export const Unstable_SectionAccordionCardItems2 = styled(
             `&.${sectionLinkCardClasses.root}`,
             `&.${sectionRouteLinkCardClasses.root}`
         ].join(',')]: {
-            [`& .${sectionCardClasses.content} .${sectionCardDisplayClasses.icon}`]: {
+            [`& .${sectionCardClasses.content}:has(.${sectionCardDisplayClasses.icon}:only-child)`]: {
                 // アイコン: 24px + ギャップ: 8px
                 marginRight: theme.spacing(-4)
             }
