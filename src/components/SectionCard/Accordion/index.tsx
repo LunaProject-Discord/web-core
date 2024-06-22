@@ -18,8 +18,10 @@ import {
     SectionCardVariantProps,
     sectionFilledNumberFieldCardClasses,
     sectionFilledTextFieldCardClasses,
+    sectionLinkCardClasses,
     sectionOutlinedNumberFieldCardClasses,
     sectionOutlinedTextFieldCardClasses,
+    sectionRouteLinkCardClasses,
     sectionSelectCardClasses,
     Unstable_SectionAccordionCardHeader,
     Unstable_SectionAccordionCardItems
@@ -159,7 +161,7 @@ export const Unstable_SectionAccordionCardRoot = styled(
                 `&.${sectionSelectCardClasses.root}`
             ].join(',')]: {
                 [`& .${sectionCardClasses.content}`]: {
-                    mt: .125
+                    marginTop: theme.spacing(.125)
                 }
             }
         }
@@ -168,7 +170,16 @@ export const Unstable_SectionAccordionCardRoot = styled(
         width: '100%'
     },
     [`& .${sectionAccordionCardClasses.items} .${sectionCardClasses.root}`]: {
-        rowGap: theme.spacing(.5)
+        rowGap: theme.spacing(.5),
+        [[
+            `&.${sectionLinkCardClasses.root}`,
+            `&.${sectionRouteLinkCardClasses.root}`
+        ].join(',')]: {
+            [`& .${sectionCardClasses.content} .${sectionCardDisplayClasses.icon}`]: {
+                // アイコン: 24px + ギャップ: 8px
+                marginRight: theme.spacing(-4)
+            }
+        }
     }
 }));
 
