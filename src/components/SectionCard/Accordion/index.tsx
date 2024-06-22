@@ -114,8 +114,8 @@ export const Unstable_SectionAccordionCardRoot = styled(
         [`&.${sectionAccordionCardClasses.expanded} .${sectionAccordionCardClasses.header}`]: {
             [`&, & .${sectionCardClasses.root}`]: {
                 borderRadius: 0,
-                borderTopLeftRadius: theme.shape.borderRadius,
-                borderTopRightRadius: theme.shape.borderRadius
+                borderTopLeftRadius: theme.shape.borderRadius - 1,
+                borderTopRightRadius: theme.shape.borderRadius - 1
             }
         },
         [`& .${sectionCardClasses.root}`]: {
@@ -134,8 +134,8 @@ export const Unstable_SectionAccordionCardRoot = styled(
             borderTop: `solid 1px ${theme.palette.divider}`,
             borderRadius: 0,
             ['&:last-child']: {
-                borderBottomLeftRadius: theme.shape.borderRadius,
-                borderBottomRightRadius: theme.shape.borderRadius
+                borderBottomLeftRadius: theme.shape.borderRadius - 1,
+                borderBottomRightRadius: theme.shape.borderRadius - 1
             },
             [theme.breakpoints.up('md')]: {
                 /**
