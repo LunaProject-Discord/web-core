@@ -147,14 +147,14 @@ export const SectionAccordionCardItems = styled(
             padding: theme.spacing(.5, 5.5, .5, 7)
         }
     },
-    [`.${sectionCardClasses.variantOutlined} & .${sectionCardClasses.root}`]: {
+    [`&:is(.${sectionCardClasses.variantOutlined} *) .${sectionCardClasses.root}`]: {
         /**
          * [上] (ボーダー: 1px) + パディング: 7px
          * [下] パディング: 8px
          * [左右] パディング: 11px
          */
         padding: theme.spacing(.875, 1.375, 1),
-        borderTop: `solid 1px ${theme.palette.divider} !important`,
+        borderTop: `solid 1px ${theme.palette.divider}`,
         borderRadius: 0,
         ['&:last-child']: {
             borderBottomLeftRadius: theme.shape.borderRadius - 1,
