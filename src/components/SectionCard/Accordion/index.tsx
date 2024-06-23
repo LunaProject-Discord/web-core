@@ -10,13 +10,11 @@ import deepmerge from 'deepmerge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
 import { Config, ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
 import {
+    merges,
     SectionButtonCard,
     sectionCardClasses,
-    SectionCardDisabledProps,
     sectionCardDisplayClasses,
-    SectionCardDisplayRootProps,
-    SectionCardDisplaySlotsAndSlotProps,
-    SectionCardVariantProps,
+    SectionCardRootProps,
     sectionFilledNumberFieldCardClasses,
     sectionFilledTextFieldCardClasses,
     sectionLinkCardClasses,
@@ -192,7 +190,7 @@ export const SectionAccordionCardRoot = styled(
             variant,
             className,
             ...props
-        }: BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>
+        }: BoxProps & Pick<SectionAccordionCardProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>
     ) => (
         <Box
             className={
@@ -209,7 +207,7 @@ export const SectionAccordionCardRoot = styled(
             {...props}
         />
     )
-)<BoxProps & Pick<SectionAccordionCardRootProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>>(({ theme }) => ({
+)<BoxProps & Pick<SectionAccordionCardProps, 'expanded' | 'disabled' | 'readOnly' | 'variant'>>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
     borderRadius: theme.shape.borderRadius,
@@ -224,29 +222,29 @@ export const SectionAccordionCardRoot = styled(
     }
 }));
 
+export interface SectionAccordionCardRootProps {
+    header?: ReactNode;
+    headerChildren?: ReactNode;
+    expanded?: boolean;
+    setExpanded?: Dispatch<SetStateAction<boolean>>;
+    defaultExpanded?: boolean;
+    readOnly?: boolean;
+}
+
 export type SectionAccordionCardSlotsAndSlotProps = CreateSlotsAndSlotProps<{
-    display?: SectionCardDisplaySlotsAndSlotProps['slots'];
     header?: ElementType;
     headerIcon?: ElementType;
     items?: ElementType<TransitionProps>;
 }, {
-    display: SectionCardDisplaySlotsAndSlotProps['slotProps'];
     header: SlotComponentProps<typeof Box, SlotRootProps, {}>;
     headerIcon: SlotComponentProps<typeof Box, SlotRootProps, {}>;
     items: SlotComponentProps<typeof Collapse, SlotRootProps, {}>;
 }>;
 
-export interface SectionAccordionCardRootProps extends SectionCardDisplayRootProps, SectionCardDisabledProps, SectionCardVariantProps, SectionAccordionCardSlotsAndSlotProps {
-    expanded?: boolean;
-    setExpanded?: Dispatch<SetStateAction<boolean>>;
-    defaultExpanded?: boolean;
-    readOnly?: boolean;
-    header?: ReactNode;
-    headerChildren?: ReactNode;
-}
-
 export type SectionAccordionCardProps<C extends ElementType = BoxTypeMap['defaultComponent']> =
-    SectionAccordionCardRootProps
+    SectionCardRootProps
+    & SectionAccordionCardRootProps
+    & SectionAccordionCardSlotsAndSlotProps
     & BoxProps<C, { component?: C }>;
 
 export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['defaultComponent'], >(
@@ -254,7 +252,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
         icon,
         primary,
         secondary,
-        header,
+        header: headerElement,
         headerChildren,
         children,
         expanded: _expanded,
@@ -263,8 +261,18 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
         disabled: _disabled,
         readOnly: _readOnly,
         variant: _variant,
-        slots,
-        slotProps,
+        slots: {
+            header,
+            headerIcon,
+            items,
+            ...slots
+        } = {},
+        slotProps: {
+            header: headerProps,
+            headerIcon: headerIconProps,
+            items: itemsProps,
+            ...slotProps
+        } = {},
         ...props
     }: SectionAccordionCardProps<C>
 ) => {
@@ -280,8 +288,18 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
         disabled: configDisabled,
         readOnly: configReadOnly,
         variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
+        slots: {
+            header: configHeader = undefined,
+            headerIcon: configHeaderIcon = undefined,
+            items: configItems = undefined,
+            ...configSlots
+        } = {},
+        slotProps: {
+            header: configHeaderProps = {},
+            headerIcon: configHeaderIconProps = {},
+            items: configItemsProps = {},
+            ...configSlotProps
+        } = {}
     } = config.components?.SectionAccordionCard ?? {};
     const ExpandMore = config.icons.ExpandMore;
 
@@ -325,23 +343,23 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                 {...props}
             >
                 <SectionAccordionCardHeader
-                    component={slots?.header ?? configSlots?.header}
-                    {...(slotProps?.header ?? configSlotProps?.header)}
+                    component={merges(configHeader, header)}
+                    {...merges(configHeaderProps, headerProps)}
                 >
-                    {header ? header : <SectionButtonCard
+                    {headerElement ? headerElement : <SectionButtonCard
                         onClick={() => setExpanded(!expanded)}
                         disabled={disabled}
                         icon={icon}
                         primary={primary}
                         secondary={secondary}
                         variant={variant}
-                        slots={slots ?? configSlots ?? configRootSlots}
-                        slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
+                        slots={merges(configRootSlots, configSlots, slots)}
+                        slotProps={merges(configRootSlotProps, configSlotProps, slotProps)}
                     >
                         {headerChildren}
                         <SectionAccordionCardHeaderIcon
-                            component={slots?.headerIcon ?? configSlots?.headerIcon}
-                            {...(slotProps?.headerIcon ?? configSlotProps?.headerIcon)}
+                            component={merges(configHeaderIcon, headerIcon)}
+                            {...merges(configHeaderIconProps, headerIconProps)}
                         >
                             <ExpandMore color={!disabled ? 'action' : 'disabled'} />
                         </SectionAccordionCardHeaderIcon>
@@ -350,8 +368,8 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                 <ConfigProvider value={itemsConfig}>
                     <SectionAccordionCardItems
                         in={expanded}
-                        component={slots?.items ?? configSlots?.items}
-                        {...(slotProps?.items ?? configSlotProps?.items)}
+                        component={merges(configItems, items)}
+                        {...merges(configItemsProps, itemsProps)}
                     >
                         {children}
                     </SectionAccordionCardItems>
@@ -361,4 +379,4 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
     );
 };
 
-export type SectionAccordionCardConfigProps = Partial<Omit<SectionAccordionCardRootProps, keyof SectionCardDisplayRootProps | 'header' | 'headerChildren' | 'expanded' | 'setExpanded'>>;
+export type SectionAccordionCardConfigProps = Partial<Pick<SectionAccordionCardProps, 'defaultExpanded' | 'disabled' | 'readOnly' | 'variant' | 'slots' | 'slotProps'>>;

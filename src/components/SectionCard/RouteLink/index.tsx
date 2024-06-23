@@ -4,8 +4,7 @@ import clsx from 'clsx';
 import NextLink from 'next/link';
 import React, { useContext } from 'react';
 import { ConfigContext, generateComponentClasses } from '../../../utils';
-import { SectionButtonCard, SectionButtonCardProps } from '../Button';
-import { SectionCardDisplayIcon } from '../display';
+import { merges, SectionButtonCard, SectionButtonCardProps, SectionCardDisplayIcon } from '../index';
 
 export const sectionRouteLinkCardClasses = generateComponentClasses('SectionRouteLinkCard', ['root']);
 
@@ -39,8 +38,8 @@ export const SectionRouteLinkCard = (
             variant={variant ?? configVariant}
             className={clsx(sectionRouteLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots ?? configSlots}
-            slotProps={slotProps ?? configSlotProps}
+            slots={merges(configSlots, slots)}
+            slotProps={merges(configSlotProps, slotProps)}
             {...props}
         >
             {children}

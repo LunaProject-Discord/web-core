@@ -4,10 +4,18 @@ import { Radio } from '@mui/material';
 import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
-import { SectionButtonCardProps, SectionButtonCardRoot } from '../Button';
-import { SectionCardDisplay, SectionCardDisplayRootProps } from '../display';
-import { SectionCardContent, SectionCardRootProps, SectionCardVariableProps } from '../index';
-import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
+import {
+    generateSectionControlCardClasses,
+    merges,
+    SectionButtonCardProps,
+    SectionButtonCardRoot,
+    SectionCardContent,
+    SectionCardDisplay,
+    SectionCardDisplayRootProps,
+    SectionCardRootProps,
+    SectionCardVariableProps,
+    SectionControlCardSlotProps
+} from '../index';
 
 export const sectionRadioCardClasses = generateSectionControlCardClasses('Radio');
 
@@ -16,9 +24,9 @@ export interface SectionRadioCardRootProps<T> extends SectionCardVariableProps<{
     value: T;
 }
 
-export type SectionRadioCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Radio>;
+export type SectionRadioCardSlotProps = SectionControlCardSlotProps<typeof Radio>;
 
-export type SectionRadioCardProps<T> = Omit<Omit<SectionButtonCardProps, 'value'> & SectionRadioCardRootProps<T> & SectionRadioCardSlotsAndSlotProps, 'component'>;
+export type SectionRadioCardProps<T> = Omit<Omit<SectionButtonCardProps, 'value'> & SectionRadioCardRootProps<T> & SectionRadioCardSlotProps, 'component'>;
 
 export const SectionRadioCard = <T, >(
     {
@@ -34,8 +42,8 @@ export const SectionRadioCard = <T, >(
         variant,
         className,
         sx,
-        slots,
-        slotProps,
+        slots: { display, content } = {},
+        slotProps: { display: displayProps, content: contentProps, control: controlProps } = {},
         ...props
     }: SectionRadioCardProps<T>
 ) => {
@@ -43,20 +51,39 @@ export const SectionRadioCard = <T, >(
     const {
         disabled: configRootDisabled,
         variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
+        slots: {
+            display: configRootDisplay = undefined,
+            content: configRootContent = undefined
+        } = {},
+        slotProps: {
+            display: configRootDisplayProps = {},
+            content: configRootContentProps = {}
+        } = {}
     } = components?.SectionCard ?? {};
     const {
         disabled: configButtonDisabled,
         variant: configButtonVariant,
-        slots: configButtonSlots,
-        slotProps: configButtonSlotProps
+        slots: {
+            display: configButtonDisplay = undefined,
+            content: configButtonContent = undefined
+        } = {},
+        slotProps: {
+            display: configButtonDisplayProps = {},
+            content: configButtonContentProps = {}
+        } = {}
     } = components?.SectionButtonCard ?? {};
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
+        slots: {
+            display: configDisplay = undefined,
+            content: configContent = undefined
+        } = {},
+        slotProps: {
+            display: configDisplayProps = {},
+            content: configContentProps = {},
+            control: configControlProps = {}
+        } = {}
     } = components?.SectionRadioCard ?? {};
 
     const handleChange = useCallback(() => setSelected(value), [setSelected, value]);
@@ -72,7 +99,6 @@ export const SectionRadioCard = <T, >(
             {...props}
         >
             <Radio
-                component={slots?.control ?? configSlots?.control ?? 'span'}
                 name={name}
                 value={value}
                 checked={value === selected}
@@ -92,18 +118,18 @@ export const SectionRadioCard = <T, >(
                         backgroundColor: 'transparent'
                     }
                 }}
-                {...(slotProps?.control ?? configSlotProps?.control)}
+                {...merges(configControlProps, controlProps)}
             />
             <SectionCardDisplay
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display ?? configSlots?.display ?? configButtonSlots?.display ?? configRootSlots?.display}
-                slotProps={slotProps?.display ?? configSlotProps?.display ?? configButtonSlotProps?.display ?? configRootSlotProps?.display}
+                slots={merges(configRootDisplay, configButtonDisplay, configDisplay, display)}
+                slotProps={merges(configRootDisplayProps, configButtonDisplayProps, configDisplayProps, displayProps)}
             />
             {children && <SectionCardContent
-                component={slots?.content ?? configSlots?.content ?? configButtonSlots?.content ?? configRootSlots?.content}
-                {...(slotProps?.content ?? configSlotProps?.content ?? configButtonSlotProps?.content ?? configRootSlotProps?.content)}
+                component={merges(configRootContent, configButtonContent, configContent, content)}
+                {...merges(configRootContentProps, configButtonContentProps, configContentProps, contentProps)}
             >
                 {children}
             </SectionCardContent>}
@@ -111,4 +137,4 @@ export const SectionRadioCard = <T, >(
     );
 };
 
-export type SectionRadioCardConfigProps = Partial<Omit<SectionCardRootProps & SectionRadioCardSlotsAndSlotProps, keyof SectionCardDisplayRootProps>>;
+export type SectionRadioCardConfigProps = Partial<Omit<SectionCardRootProps & SectionRadioCardSlotProps, keyof SectionCardDisplayRootProps>>;

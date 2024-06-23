@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
+    generateSectionControlCardClasses,
+    merges,
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
@@ -13,7 +15,6 @@ import {
     SectionCardVariableProps,
     SectionControlCardSlotProps
 } from '../index';
-import { generateSectionControlCardClasses } from '../utils';
 
 export const sectionSliderCardClasses = generateSectionControlCardClasses('Slider');
 
@@ -51,7 +52,7 @@ export const SectionSliderCard = (
         className,
         sx,
         slots,
-        slotProps,
+        slotProps: { control: controlProps, ...slotProps } = {},
         ...props
     }: SectionSliderCardProps
 ) => {
@@ -60,7 +61,10 @@ export const SectionSliderCard = (
         disabled: configDisabled,
         variant: configVariant,
         slots: configSlots,
-        slotProps: configSlotProps
+        slotProps: {
+            control: configControlProps = {},
+            ...configSlotProps
+        } = {}
     } = components?.SectionSliderCard ?? {};
 
     const theme = useTheme();
@@ -89,8 +93,8 @@ export const SectionSliderCard = (
                 },
                 ...sx
             }}
-            slots={slots ?? configSlots}
-            slotProps={slotProps ?? configSlotProps}
+            slots={merges(configSlots, slots)}
+            slotProps={merges(configSlotProps, slotProps)}
             {...props}
         >
             {children}
@@ -109,7 +113,7 @@ export const SectionSliderCard = (
                         ...theme.typography.caption
                     }
                 })}
-                {...(slotProps?.control ?? configSlotProps?.control)}
+                {...merges(configControlProps, controlProps)}
             />
         </SectionCard>
     );

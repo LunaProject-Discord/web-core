@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
+    generateSectionControlCardClasses,
+    merges,
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
@@ -12,7 +14,6 @@ import {
     SectionCardRootProps,
     SectionControlCardSlotProps
 } from '../index';
-import { generateSectionControlCardClasses } from '../utils';
 import { SectionTextFieldCardRootProps } from './index';
 
 export const sectionFilledTextFieldCardClasses = generateSectionControlCardClasses('FilledTextField');
@@ -34,7 +35,7 @@ export const SectionFilledTextFieldCard = (
         className,
         sx,
         slots,
-        slotProps,
+        slotProps: { control: controlProps, ...slotProps } = {},
         ...props
     }: SectionFilledTextFieldCardProps
 ) => {
@@ -49,7 +50,10 @@ export const SectionFilledTextFieldCard = (
         disabled: configDisabled,
         variant: configVariant,
         slots: configSlots,
-        slotProps: configSlotProps
+        slotProps: {
+            control: configControlProps = {},
+            ...configSlotProps
+        } = {}
     } = components?.SectionFilledTextFieldCard ?? {};
 
     const theme = useTheme();
@@ -70,8 +74,8 @@ export const SectionFilledTextFieldCard = (
                 },
                 ...sx
             }}
-            slots={slots ?? configSlots ?? configRootSlots}
-            slotProps={slotProps ?? configSlotProps ?? configRootSlotProps}
+            slots={merges(configRootSlots, configSlots, slots)}
+            slotProps={merges(configRootSlotProps, configSlotProps, slotProps)}
             {...props}
         >
             {children}
@@ -83,7 +87,7 @@ export const SectionFilledTextFieldCard = (
                 margin="none"
                 className={sectionFilledTextFieldCardClasses.control}
                 sx={{ width: { xs: '100%', md: 300 } }}
-                {...(slotProps?.control ?? configSlotProps?.control)}
+                {...merges(configControlProps, controlProps)}
             />
         </SectionCard>
     );

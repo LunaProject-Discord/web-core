@@ -3,8 +3,7 @@
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext, generateComponentClasses } from '../../../utils';
-import { SectionButtonCard, SectionButtonCardProps } from '../Button';
-import { SectionCardDisplayIcon } from '../display';
+import { merges, SectionButtonCard, SectionButtonCardProps, SectionCardDisplayIcon } from '../index';
 
 export const sectionLinkCardClasses = generateComponentClasses('SectionLinkCard', ['root']);
 
@@ -38,8 +37,8 @@ export const SectionLinkCard = (
             variant={variant ?? configVariant}
             className={clsx(sectionLinkCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots ?? configSlots}
-            slotProps={slotProps ?? configSlotProps}
+            slots={merges(configSlots, slots)}
+            slotProps={merges(configSlotProps, slotProps)}
             {...props}
         >
             {children}

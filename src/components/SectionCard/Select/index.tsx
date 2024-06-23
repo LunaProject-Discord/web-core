@@ -6,6 +6,8 @@ import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
+    generateSectionControlCardClasses,
+    merges,
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
@@ -15,7 +17,6 @@ import {
     SectionControlCardSlotProps,
     SlotRootProps
 } from '../index';
-import { generateSectionControlCardClasses } from '../utils';
 
 export const sectionSelectCardClasses = generateSectionControlCardClasses('Select');
 
@@ -41,7 +42,7 @@ export const SectionSelectCard = <T, >(
         className,
         sx,
         slots,
-        slotProps,
+        slotProps: { control: controlProps, ...slotProps } = {},
         ...props
     }: SectionSelectCardProps<T>
 ) => {
@@ -50,7 +51,10 @@ export const SectionSelectCard = <T, >(
         disabled: configDisabled,
         variant: configVariant,
         slots: configSlots,
-        slotProps: configSlotProps
+        slotProps: {
+            control: configControlProps = {},
+            ...configSlotProps
+        } = {}
     } = components?.SectionSelectCard ?? {};
 
     const theme = useTheme();
@@ -71,8 +75,8 @@ export const SectionSelectCard = <T, >(
                 },
                 ...sx
             }}
-            slots={slots ?? configSlots}
-            slotProps={slotProps ?? configSlotProps}
+            slots={merges(configSlots, slots)}
+            slotProps={merges(configSlotProps, slotProps)}
             {...props}
         >
             {children}
@@ -84,7 +88,7 @@ export const SectionSelectCard = <T, >(
                 size="small"
                 className={sectionSelectCardClasses.control}
                 sx={{ minWidth: 300 }}
-                {...(slotProps?.control ?? (configSlotProps?.control as SlotComponentProps<typeof Select<T>, SlotRootProps, {}>))}
+                {...merges(configControlProps as SlotComponentProps<typeof Select<T>, SlotRootProps, {}>, controlProps)}
             >
                 {choices.map(({ value: choiceValue, ...choiceProps }) => (
                     <MenuItem

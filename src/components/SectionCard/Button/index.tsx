@@ -5,10 +5,12 @@ import clsx from 'clsx';
 import React, { ElementType, useContext } from 'react';
 import { ConfigContext, generateComponentClasses } from '../../../utils';
 import { buttonActionStyled } from '../../ButtonBase';
-import { SectionCardDisplay, SectionCardDisplayIcon } from '../display';
 import {
+    merges,
     sectionCardClasses,
     SectionCardContent,
+    SectionCardDisplay,
+    SectionCardDisplayIcon,
     SectionCardRootProps,
     sectionCardRootStyled,
     SectionCardVariantProps
@@ -49,8 +51,8 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
         children,
         disabled,
         variant,
-        slots,
-        slotProps,
+        slots: { display, content } = {},
+        slotProps: { display: displayProps, content: contentProps } = {},
         ...props
     }: SectionButtonCardProps<C>
 ) => {
@@ -58,14 +60,26 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
     const {
         disabled: configRootDisabled,
         variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
+        slots: {
+            display: configRootDisplay = undefined,
+            content: configRootContent = undefined
+        } = {},
+        slotProps: {
+            display: configRootDisplayProps = {},
+            content: configRootContentProps = {}
+        } = {}
     } = components?.SectionCard ?? {};
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
+        slots: {
+            display: configDisplay = undefined,
+            content: configContent = undefined
+        } = {},
+        slotProps: {
+            display: configDisplayProps = {},
+            content: configContentProps = {}
+        } = {}
     } = components?.SectionButtonCard ?? {};
 
     return (
@@ -78,12 +92,12 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display ?? configSlots?.display ?? configRootSlots?.display}
-                slotProps={slotProps?.display ?? configSlotProps?.display ?? configRootSlotProps?.display}
+                slots={merges(configRootDisplay, configDisplay, display)}
+                slotProps={merges(configRootDisplayProps, configDisplayProps, displayProps)}
             />
             {children && <SectionCardContent
-                component={slots?.content ?? configSlots?.content ?? configRootSlots?.content}
-                {...(slotProps?.content ?? configSlotProps?.content ?? configRootSlotProps?.content)}
+                component={merges(configRootContent, configContent, content)}
+                {...merges(configRootContentProps, configContentProps, contentProps)}
             >
                 {children}
             </SectionCardContent>}
@@ -100,8 +114,8 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
         disabled: _disabled,
         variant,
         sx,
-        slots,
-        slotProps,
+        slots: { display, content } = {},
+        slotProps: { display: displayProps, content: contentProps } = {},
         ...props
     }: SectionButtonCardProps<C>
 ) => {
@@ -109,27 +123,33 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
     const {
         disabled: configRootDisabled,
         variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
+        slots: {
+            display: configRootDisplay = undefined,
+            content: configRootContent = undefined
+        } = {},
+        slotProps: {
+            display: configRootDisplayProps = {},
+            content: configRootContentProps = {}
+        } = {}
     } = components?.SectionCard ?? {};
-    const {
-        disabled: configButtonDisabled,
-        variant: configButtonVariant,
-        slots: configButtonSlots,
-        slotProps: configButtonSlotProps
-    } = components?.SectionButtonCard ?? {};
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
+        slots: {
+            display: configDisplay = undefined,
+            content: configContent = undefined
+        } = {},
+        slotProps: {
+            display: configDisplayProps = {},
+            content: configContentProps = {}
+        } = {}
     } = components?.SectionButtonCard ?? {};
 
-    const disabled = _disabled ?? configDisabled ?? configButtonDisabled ?? configRootDisabled;
+    const disabled = _disabled ?? configDisabled ?? configRootDisabled;
     return (
         <SectionButtonCardRoot
             disabled={disabled}
-            variant={variant ?? configVariant ?? configButtonVariant ?? configRootVariant}
+            variant={variant ?? configVariant ?? configRootVariant}
             sx={{ flexWrap: 'nowrap', ...sx }}
             {...props}
         >
@@ -137,12 +157,12 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display ?? configSlots?.display ?? configButtonSlots?.display ?? configRootSlots?.display}
-                slotProps={slotProps?.display ?? configSlotProps?.display ?? configButtonSlotProps?.display ?? configRootSlotProps?.display}
+                slots={merges(configRootDisplay, configDisplay, display)}
+                slotProps={merges(configRootDisplayProps, configDisplayProps, displayProps)}
             />
             <SectionCardContent
-                component={slots?.content ?? configSlots?.content ?? configButtonSlots?.content ?? configRootSlots?.content}
-                {...(slotProps?.content ?? configSlotProps?.content ?? configButtonSlotProps?.content ?? configRootSlotProps?.content)}
+                component={merges(configRootContent, configContent, content)}
+                {...merges(configRootContentProps, configContentProps, contentProps)}
             >
                 {children}
                 <SectionCardDisplayIcon>

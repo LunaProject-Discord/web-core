@@ -13,7 +13,7 @@ import {
     SectionCardDisplayRootProps,
     SectionCardDisplaySlotsAndSlotProps
 } from './display';
-import { SlotRootProps } from './utils';
+import { merges, SlotRootProps } from './utils';
 
 export const sectionCardClasses = generateComponentClasses(
     'SectionCard',
@@ -128,8 +128,8 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
         children,
         disabled,
         variant,
-        slots,
-        slotProps,
+        slots: { display, content } = {},
+        slotProps: { display: displayProps, content: contentProps } = {},
         ...props
     }: SectionCardProps<C>
 ) => {
@@ -137,8 +137,14 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
+        slots: {
+            display: configDisplay = undefined,
+            content: configContent = undefined
+        } = {},
+        slotProps: {
+            display: configDisplayProps = {},
+            content: configContentProps = {}
+        } = {}
     } = components?.SectionCard ?? {};
 
     return (
@@ -147,12 +153,12 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
                 icon={icon}
                 primary={primary}
                 secondary={secondary}
-                slots={slots?.display ?? configSlots?.display}
-                slotProps={slotProps?.display ?? configSlotProps?.display}
+                slots={merges(configDisplay, display)}
+                slotProps={merges(configDisplayProps, displayProps)}
             />
             {children && <SectionCardContent
-                component={slots?.content ?? configSlots?.content}
-                {...(slotProps?.content ?? configSlotProps?.content)}
+                component={merges(configContent, content)}
+                {...merges(configContentProps, contentProps)}
             >
                 {children}
             </SectionCardContent>}

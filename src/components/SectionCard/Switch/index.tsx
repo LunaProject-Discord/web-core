@@ -4,9 +4,16 @@ import { Switch, switchClasses } from '@mui/material';
 import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
-import { SectionButtonCard, SectionButtonCardProps } from '../Button';
-import { SectionCardDisplayRootProps, SectionCardRootProps, SectionCardVariableProps } from '../index';
-import { generateSectionControlCardClasses, SectionControlCardSlotsAndSlotProps } from '../utils';
+import {
+    generateSectionControlCardClasses,
+    merges,
+    SectionButtonCard,
+    SectionButtonCardProps,
+    SectionCardDisplayRootProps,
+    SectionCardRootProps,
+    SectionCardVariableProps,
+    SectionControlCardSlotProps
+} from '../index';
 
 export const sectionSwitchCardClasses = generateSectionControlCardClasses('Switch');
 
@@ -14,9 +21,9 @@ export interface SectionSwitchCardRootProps extends SectionCardVariableProps<{ c
     defaultChecked?: boolean;
 }
 
-export type SectionSwitchCardSlotsAndSlotProps = SectionControlCardSlotsAndSlotProps<typeof Switch>;
+export type SectionSwitchCardSlotProps = SectionControlCardSlotProps<typeof Switch>;
 
-export type SectionSwitchCardProps = Omit<SectionButtonCardProps & SectionSwitchCardRootProps & SectionSwitchCardSlotsAndSlotProps, 'component'>;
+export type SectionSwitchCardProps = Omit<SectionButtonCardProps & SectionSwitchCardRootProps & SectionSwitchCardSlotProps, 'component'>;
 
 export const SectionSwitchCard = (
     {
@@ -29,7 +36,7 @@ export const SectionSwitchCard = (
         className,
         sx,
         slots,
-        slotProps,
+        slotProps: { control: controlProps, ...slotProps } = {},
         ...props
     }: SectionSwitchCardProps
 ) => {
@@ -39,7 +46,10 @@ export const SectionSwitchCard = (
         disabled: configDisabled,
         variant: configVariant,
         slots: configSlots,
-        slotProps: configSlotProps
+        slotProps: {
+            control: configControlProps = {},
+            ...configSlotProps
+        } = {}
     } = components?.SectionSwitchCard ?? {};
 
     const handleChange = useCallback(() => setChecked(!checked), [setChecked, checked]);
@@ -52,13 +62,12 @@ export const SectionSwitchCard = (
             variant={variant ?? configVariant}
             className={clsx(sectionSwitchCardClasses.root, className)}
             sx={{ flexWrap: 'nowrap', ...sx }}
-            slots={slots ?? configSlots}
-            slotProps={slotProps ?? configSlotProps}
+            slots={merges(configSlots, slots)}
+            slotProps={merges(configSlotProps, slotProps)}
             {...props}
         >
             {children}
             <Switch
-                component={slots?.control ?? configSlots?.control ?? 'span'}
                 checked={checked}
                 onChange={handleChange}
                 defaultChecked={defaultChecked ?? configDefaultChecked}
@@ -72,10 +81,10 @@ export const SectionSwitchCard = (
                         backgroundColor: 'transparent !important'
                     }
                 }}
-                {...(slotProps?.control ?? configSlotProps?.control)}
+                {...merges(configControlProps, controlProps)}
             />
         </SectionButtonCard>
     );
 };
 
-export type SectionSwitchCardConfigProps = Partial<Omit<SectionCardRootProps & Pick<SectionSwitchCardRootProps, 'defaultChecked'> & SectionSwitchCardSlotsAndSlotProps, keyof SectionCardDisplayRootProps>>;
+export type SectionSwitchCardConfigProps = Partial<Omit<SectionCardRootProps & Pick<SectionSwitchCardRootProps, 'defaultChecked'> & SectionSwitchCardSlotProps, keyof SectionCardDisplayRootProps>>;
