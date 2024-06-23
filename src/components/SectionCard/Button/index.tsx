@@ -51,8 +51,11 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
         children,
         disabled,
         variant,
-        slots: { display, content } = {},
-        slotProps: { display: displayProps, content: contentProps } = {},
+        slots: { display = {}, content } = {},
+        slotProps: {
+            display: displayProps = {},
+            content: contentProps = {}
+        } = {},
         ...props
     }: SectionButtonCardProps<C>
 ) => {
@@ -114,8 +117,11 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
         disabled: _disabled,
         variant,
         sx,
-        slots: { display, content } = {},
-        slotProps: { display: displayProps, content: contentProps } = {},
+        slots: { display = {}, content } = {},
+        slotProps: {
+            display: displayProps = {},
+            content: contentProps = {}
+        } = {},
         ...props
     }: SectionButtonCardProps<C>
 ) => {

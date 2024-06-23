@@ -32,8 +32,8 @@ export const SectionOutlinedTextFieldCard = (
         variant,
         className,
         sx,
-        slots,
-        slotProps: { control: controlProps, ...slotProps } = {},
+        slots = {},
+        slotProps: { control: controlProps = {}, ...slotProps } = {},
         ...props
     }: SectionOutlinedTextFieldCardProps
 ) => {

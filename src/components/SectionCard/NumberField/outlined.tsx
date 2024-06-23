@@ -33,8 +33,8 @@ export const SectionOutlinedNumberFieldCard = (
         variant,
         className,
         sx,
-        slots,
-        slotProps: { control: controlProps, ...slotProps } = {},
+        slots = {},
+        slotProps: { control: controlProps = {}, ...slotProps } = {},
         ...props
     }: SectionOutlinedNumberFieldCardProps
 ) => {

@@ -17,8 +17,8 @@ export const SectionLinkCard = (
         variant,
         className,
         sx,
-        slots,
-        slotProps,
+        slots = {},
+        slotProps = {},
         ...props
     }: SectionLinkCardProps
 ) => {

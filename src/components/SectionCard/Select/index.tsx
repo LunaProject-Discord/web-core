@@ -39,8 +39,8 @@ export const SectionSelectCard = <T, >(
         variant,
         className,
         sx,
-        slots,
-        slotProps: { control: controlProps, ...slotProps } = {},
+        slots = {},
+        slotProps: { control: controlProps = {}, ...slotProps } = {},
         ...props
     }: SectionSelectCardProps<T>
 ) => {

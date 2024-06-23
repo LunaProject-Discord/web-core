@@ -267,9 +267,9 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
             ...slots
         } = {},
         slotProps: {
-            header: headerProps,
-            headerIcon: headerIconProps,
-            items: itemsProps,
+            header: headerProps = {},
+            headerIcon: headerIconProps = {},
+            items: itemsProps = {},
             ...slotProps
         } = {},
         ...props

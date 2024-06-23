@@ -18,8 +18,8 @@ export const SectionRouteLinkCard = (
         variant,
         className,
         sx,
-        slots,
-        slotProps,
+        slots = {},
+        slotProps = {},
         ...props
     }: SectionRouteLinkCardProps
 ) => {

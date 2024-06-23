@@ -34,8 +34,12 @@ export const SectionCheckboxCard = (
         variant,
         className,
         sx,
-        slots: { display, content } = {},
-        slotProps: { display: displayProps, content: contentProps, control: controlProps } = {},
+        slots: { display = {}, content } = {},
+        slotProps: {
+            display: displayProps = {},
+            content: contentProps = {},
+            control: controlProps = {}
+        } = {},
         ...props
     }: SectionCheckboxCardProps
 ) => {

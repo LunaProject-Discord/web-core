@@ -40,8 +40,12 @@ export const SectionRadioCard = <T, >(
         variant,
         className,
         sx,
-        slots: { display, content } = {},
-        slotProps: { display: displayProps, content: contentProps, control: controlProps } = {},
+        slots: { display = {}, content } = {},
+        slotProps: {
+            display: displayProps = {},
+            content: contentProps = {},
+            control: controlProps = {}
+        } = {},
         ...props
     }: SectionRadioCardProps<T>
 ) => {

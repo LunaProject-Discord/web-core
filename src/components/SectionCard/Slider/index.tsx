@@ -49,8 +49,8 @@ export const SectionSliderCard = (
         variant,
         className,
         sx,
-        slots,
-        slotProps: { control: controlProps, ...slotProps } = {},
+        slots = {},
+        slotProps: { control: controlProps = {}, ...slotProps } = {},
         ...props
     }: SectionSliderCardProps
 ) => {
