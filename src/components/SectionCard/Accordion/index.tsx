@@ -49,19 +49,19 @@ export const SectionAccordionCardHeader = styled(
     )
 )<BoxProps>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
+    [`.${sectionAccordionCardClasses.expanded}.${sectionCardClasses.variantOutlined} &`]: {
+        [`&, & .${sectionCardClasses.root}`]: {
+            borderRadius: 0,
+            borderTopLeftRadius: theme.shape.borderRadius - 1,
+            borderTopRightRadius: theme.shape.borderRadius - 1
+        }
+    },
     [`.${sectionCardClasses.variantOutlined} &`]: {
         [`&, & .${sectionCardClasses.root}`]: {
             borderRadius: theme.shape.borderRadius - 1
         },
         [`& .${sectionCardClasses.root}`]: {
             minHeight: theme.spacing(7.75)
-        },
-        [`&:is(.${sectionAccordionCardClasses.expanded} *)`]: {
-            [`&, & .${sectionCardClasses.root}`]: {
-                borderRadius: 0,
-                borderTopLeftRadius: theme.shape.borderRadius - 1,
-                borderTopRightRadius: theme.shape.borderRadius - 1
-            }
         }
     }
 }));
