@@ -128,8 +128,11 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
         children,
         disabled,
         variant,
-        slots: { display, content } = {},
-        slotProps: { display: displayProps, content: contentProps } = {},
+        slots: { display = {}, content } = {},
+        slotProps: {
+            display: displayProps = {},
+            content: contentProps = {}
+        } = {},
         ...props
     }: SectionCardProps<C>
 ) => {
