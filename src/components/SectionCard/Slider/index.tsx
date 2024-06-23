@@ -58,7 +58,7 @@ export const SectionSliderCard = (
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
+        slots: configSlots = {},
         slotProps: {
             control: configControlProps = {},
             ...configSlotProps

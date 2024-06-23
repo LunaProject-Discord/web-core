@@ -50,7 +50,7 @@ export const SectionRadioCard = <T, >(
         disabled: configRootDisabled,
         variant: configRootVariant,
         slots: {
-            display: configRootDisplay = undefined,
+            display: configRootDisplay = {},
             content: configRootContent = undefined
         } = {},
         slotProps: {
@@ -62,7 +62,7 @@ export const SectionRadioCard = <T, >(
         disabled: configButtonDisabled,
         variant: configButtonVariant,
         slots: {
-            display: configButtonDisplay = undefined,
+            display: configButtonDisplay = {},
             content: configButtonContent = undefined
         } = {},
         slotProps: {
@@ -74,7 +74,7 @@ export const SectionRadioCard = <T, >(
         disabled: configDisabled,
         variant: configVariant,
         slots: {
-            display: configDisplay = undefined,
+            display: configDisplay = {},
             content: configContent = undefined
         } = {},
         slotProps: {
@@ -126,7 +126,7 @@ export const SectionRadioCard = <T, >(
                 slotProps={merges(configRootDisplayProps, configButtonDisplayProps, configDisplayProps, displayProps)}
             />
             {children && <SectionCardContent
-                component={merges(configRootContent, configButtonContent, configContent, content)}
+                component={content ?? configContent ?? configButtonContent ?? configRootContent}
                 {...merges(configRootContentProps, configButtonContentProps, configContentProps, contentProps)}
             >
                 {children}

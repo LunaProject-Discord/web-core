@@ -138,7 +138,7 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
         disabled: configDisabled,
         variant: configVariant,
         slots: {
-            display: configDisplay = undefined,
+            display: configDisplay = {},
             content: configContent = undefined
         } = {},
         slotProps: {
@@ -157,7 +157,7 @@ export const SectionCard = <C extends ElementType = BoxTypeMap['defaultComponent
                 slotProps={merges(configDisplayProps, displayProps)}
             />
             {children && <SectionCardContent
-                component={merges(configContent, content)}
+                component={content ?? configContent}
                 {...merges(configContentProps, contentProps)}
             >
                 {children}

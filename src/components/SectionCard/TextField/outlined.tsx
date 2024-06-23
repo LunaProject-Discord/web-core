@@ -41,13 +41,13 @@ export const SectionOutlinedTextFieldCard = (
     const {
         disabled: configRootDisabled,
         variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
+        slots: configRootSlots = {},
+        slotProps: configRootSlotProps = {}
     } = components?.SectionTextFieldCard ?? {};
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
+        slots: configSlots = {},
         slotProps: {
             control: configControlProps = {},
             ...configSlotProps

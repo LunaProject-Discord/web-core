@@ -279,8 +279,8 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
     const {
         disabled: configRootDisabled,
         variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
+        slots: configRootSlots = {},
+        slotProps: configRootSlotProps = {}
     } = config.components?.SectionCard ?? {};
     const {
         defaultExpanded: configDefaultExpanded,
@@ -342,7 +342,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                 {...props}
             >
                 <SectionAccordionCardHeader
-                    component={merges(configHeader, header)}
+                    component={header ?? configHeader}
                     {...merges(configHeaderProps, headerProps)}
                 >
                     {headerElement ? headerElement : <SectionButtonCard
@@ -357,7 +357,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                     >
                         {headerChildren}
                         <SectionAccordionCardHeaderIcon
-                            component={merges(configHeaderIcon, headerIcon)}
+                            component={headerIcon ?? configHeaderIcon}
                             {...merges(configHeaderIconProps, headerIconProps)}
                         >
                             <ExpandMore color={!disabled ? 'action' : 'disabled'} />
@@ -367,7 +367,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
                 <ConfigProvider value={itemsConfig}>
                     <SectionAccordionCardItems
                         in={expanded}
-                        component={merges(configItems, items)}
+                        component={items ?? configItems}
                         {...merges(configItemsProps, itemsProps)}
                     >
                         {children}

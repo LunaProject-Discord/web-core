@@ -42,13 +42,13 @@ export const SectionFilledNumberFieldCard = (
     const {
         disabled: configRootDisabled,
         variant: configRootVariant,
-        slots: configRootSlots,
-        slotProps: configRootSlotProps
+        slots: configRootSlots = {},
+        slotProps: configRootSlotProps = {}
     } = components?.SectionNumberFieldCard ?? {};
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
+        slots: configSlots = {},
         slotProps: {
             control: configControlProps = {},
             ...configSlotProps

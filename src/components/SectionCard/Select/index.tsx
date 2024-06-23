@@ -48,7 +48,7 @@ export const SectionSelectCard = <T, >(
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
+        slots: configSlots = {},
         slotProps: {
             control: configControlProps = {},
             ...configSlotProps

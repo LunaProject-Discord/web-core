@@ -61,7 +61,7 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
         disabled: configRootDisabled,
         variant: configRootVariant,
         slots: {
-            display: configRootDisplay = undefined,
+            display: configRootDisplay = {},
             content: configRootContent = undefined
         } = {},
         slotProps: {
@@ -73,7 +73,7 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
         disabled: configDisabled,
         variant: configVariant,
         slots: {
-            display: configDisplay = undefined,
+            display: configDisplay = {},
             content: configContent = undefined
         } = {},
         slotProps: {
@@ -96,7 +96,7 @@ export const SectionButtonCard = <C extends ElementType = ButtonBaseTypeMap['def
                 slotProps={merges(configRootDisplayProps, configDisplayProps, displayProps)}
             />
             {children && <SectionCardContent
-                component={merges(configRootContent, configContent, content)}
+                component={content ?? configContent ?? configRootContent}
                 {...merges(configRootContentProps, configContentProps, contentProps)}
             >
                 {children}
@@ -124,7 +124,7 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
         disabled: configRootDisabled,
         variant: configRootVariant,
         slots: {
-            display: configRootDisplay = undefined,
+            display: configRootDisplay = {},
             content: configRootContent = undefined
         } = {},
         slotProps: {
@@ -136,7 +136,7 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
         disabled: configDisabled,
         variant: configVariant,
         slots: {
-            display: configDisplay = undefined,
+            display: configDisplay = {},
             content: configContent = undefined
         } = {},
         slotProps: {
@@ -161,7 +161,7 @@ export const SectionButtonActionCard = <C extends ElementType = ButtonBaseTypeMa
                 slotProps={merges(configRootDisplayProps, configDisplayProps, displayProps)}
             />
             <SectionCardContent
-                component={merges(configRootContent, configContent, content)}
+                component={content ?? configContent ?? configRootContent}
                 {...merges(configRootContentProps, configContentProps, contentProps)}
             >
                 {children}

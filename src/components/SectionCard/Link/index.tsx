@@ -26,8 +26,8 @@ export const SectionLinkCard = (
     const {
         disabled: configDisabled,
         variant: configVariant,
-        slots: configSlots,
-        slotProps: configSlotProps
+        slots: configSlots = {},
+        slotProps: configSlotProps = {}
     } = components?.SectionLinkCard ?? {};
 
     const disabled = _disabled ?? configDisabled;
