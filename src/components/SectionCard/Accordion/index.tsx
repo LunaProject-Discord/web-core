@@ -102,7 +102,7 @@ export const SectionAccordionCardItems = styled(
 )<CollapseProps>(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    [`& .${sectionCardClasses.root}`]: {
+    [`& .${sectionCardClasses.root}:not(#_)`]: {
         minHeight: theme.spacing(7),
         rowGap: theme.spacing(.5),
         [theme.breakpoints.up('md')]: {
@@ -117,7 +117,7 @@ export const SectionAccordionCardItems = styled(
             }
         }
     },
-    [`.${sectionAccordionCardClasses.readOnly} & .${sectionCardClasses.root}`]: {
+    [`.${sectionAccordionCardClasses.readOnly} & .${sectionCardClasses.root}:not(#_)`]: {
         pointerEvents: 'none',
         cursor: 'default',
         color: theme.palette.action.disabled,
@@ -131,7 +131,7 @@ export const SectionAccordionCardItems = styled(
             color: theme.palette.action.disabled
         }
     },
-    [`.${sectionCardClasses.variantStandard} & .${sectionCardClasses.root}`]: {
+    [`.${sectionCardClasses.variantStandard} & .${sectionCardClasses.root}:not(#_)`]: {
         /**
          * [上下] パディング: 8px
          * [左右] パディング: 12px
@@ -147,7 +147,7 @@ export const SectionAccordionCardItems = styled(
             padding: theme.spacing(.5, 5.5, .5, 7)
         }
     },
-    [`&:is(.${sectionCardClasses.variantOutlined} *) .${sectionCardClasses.root}`]: {
+    [`.${sectionCardClasses.variantOutlined} & .${sectionCardClasses.root}:not(#_)`]: {
         /**
          * [上] (ボーダー: 1px) + パディング: 7px
          * [下] パディング: 8px
