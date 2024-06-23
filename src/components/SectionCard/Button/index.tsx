@@ -6,7 +6,6 @@ import React, { ElementType, useContext } from 'react';
 import { ConfigContext, generateComponentClasses } from '../../../utils';
 import { buttonActionStyled } from '../../ButtonBase';
 import {
-    merges,
     sectionCardClasses,
     SectionCardContent,
     SectionCardDisplay,
@@ -15,6 +14,7 @@ import {
     sectionCardRootStyled,
     SectionCardVariantProps
 } from '../index';
+import { merges } from '../utils';
 
 export const sectionButtonCardClasses = generateComponentClasses('SectionButtonCard', ['root']);
 

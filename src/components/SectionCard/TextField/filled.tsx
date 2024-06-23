@@ -5,15 +5,13 @@ import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
-    generateSectionControlCardClasses,
-    merges,
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
     SectionCardProps,
-    SectionCardRootProps,
-    SectionControlCardSlotProps
+    SectionCardRootProps
 } from '../index';
+import { generateSectionControlCardClasses, merges, SectionControlCardSlotProps } from '../utils';
 import { SectionTextFieldCardRootProps } from './index';
 
 export const sectionFilledTextFieldCardClasses = generateSectionControlCardClasses('FilledTextField');

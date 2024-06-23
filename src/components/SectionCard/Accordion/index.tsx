@@ -10,7 +10,6 @@ import deepmerge from 'deepmerge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
 import { Config, ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
 import {
-    merges,
     SectionButtonCard,
     sectionCardClasses,
     sectionCardDisplayClasses,
@@ -21,9 +20,9 @@ import {
     sectionOutlinedNumberFieldCardClasses,
     sectionOutlinedTextFieldCardClasses,
     sectionRouteLinkCardClasses,
-    sectionSelectCardClasses,
-    SlotRootProps
+    sectionSelectCardClasses
 } from '../index';
+import { merges, SlotRootProps } from '../utils';
 
 export const sectionAccordionCardClasses = generateComponentClasses(
     'SectionAccordionCard',

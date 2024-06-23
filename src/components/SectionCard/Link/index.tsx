@@ -3,7 +3,8 @@
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext, generateComponentClasses } from '../../../utils';
-import { merges, SectionButtonCard, SectionButtonCardProps, SectionCardDisplayIcon } from '../index';
+import { SectionButtonCard, SectionButtonCardProps, SectionCardDisplayIcon } from '../index';
+import { merges } from '../utils';
 
 export const sectionLinkCardClasses = generateComponentClasses('SectionLinkCard', ['root']);
 

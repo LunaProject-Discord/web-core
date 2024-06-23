@@ -5,17 +5,15 @@ import clsx from 'clsx';
 import React, { useCallback, useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
-    generateSectionControlCardClasses,
-    merges,
     SectionButtonCardProps,
     SectionButtonCardRoot,
     SectionCardContent,
     SectionCardDisplay,
     SectionCardDisplayRootProps,
     SectionCardRootProps,
-    SectionControlCardSlotProps,
     SectionSwitchCardRootProps
 } from '../index';
+import { generateSectionControlCardClasses, merges, SectionControlCardSlotProps } from '../utils';
 
 export const sectionCheckboxCardClasses = generateSectionControlCardClasses('Checkbox');
 

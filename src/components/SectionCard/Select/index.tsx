@@ -6,17 +6,15 @@ import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import {
-    generateSectionControlCardClasses,
-    merges,
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
     SectionCardProps,
     SectionCardRootProps,
     SectionCardVariableProps,
-    SectionControlCardSlotProps,
     SlotRootProps
 } from '../index';
+import { generateSectionControlCardClasses, merges, SectionControlCardSlotProps } from '../utils';
 
 export const sectionSelectCardClasses = generateSectionControlCardClasses('Select');
 

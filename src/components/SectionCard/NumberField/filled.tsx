@@ -6,15 +6,13 @@ import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { FilledNumberField } from '../../NumberField';
 import {
-    generateSectionControlCardClasses,
-    merges,
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
     SectionCardProps,
-    SectionCardRootProps,
-    SectionControlCardSlotProps
+    SectionCardRootProps
 } from '../index';
+import { generateSectionControlCardClasses, merges, SectionControlCardSlotProps } from '../utils';
 import { SectionNumberFieldCardRootProps } from './index';
 
 export const sectionFilledNumberFieldCardClasses = generateSectionControlCardClasses('FilledTextField');
