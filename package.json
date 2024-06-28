@@ -72,5 +72,9 @@
         "@types/react-dom": {
             "optional": true
         }
+    },
+    "publishConfig": {
+        "access": "public",
+        "directory": "dist"
     }
 }
