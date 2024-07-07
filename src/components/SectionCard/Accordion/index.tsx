@@ -136,8 +136,7 @@ export const SectionAccordionCardItems = styled(
         padding: theme.spacing(1, 1.5),
         [theme.breakpoints.up('md')]: {
             /**
-             * [上] (ボーダー: 1px) + パディング: 3px
-             * [下] パディング: 4px
+             * [上下] パディング: 4px
              * [左] パディング: 12px + アイコン: 24px + アイコンパディング (左右): 8px + ギャップ: 12px
              * [右] パディング: 12px + アイコン: 24px + ギャップ: 8px
              */
@@ -148,7 +147,7 @@ export const SectionAccordionCardItems = styled(
         /**
          * [上] (ボーダー: 1px) + パディング: 7px
          * [下] パディング: 8px
-         * [左右] パディング: 11px
+         * [左右] (ボーダー: 1px) + パディング: 11px
          */
         padding: theme.spacing(.875, 1.375, 1),
         borderTop: `solid 1px ${theme.palette.divider}`,
