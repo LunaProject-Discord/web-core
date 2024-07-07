@@ -78,6 +78,7 @@
         "directory": "dist"
     },
     "files": [
-        "dist"
+        "dist",
+        "src/@types"
     ]
 }
