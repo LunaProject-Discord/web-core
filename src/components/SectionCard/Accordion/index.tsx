@@ -71,6 +71,7 @@ export const SectionAccordionCardHeaderIcon = styled(
         />
     )
 )<BoxProps>(({ theme }) => ({
+    marginTop: theme.spacing(.25),
     display: 'flex',
     placeItems: 'center',
     placeContent: 'center',
