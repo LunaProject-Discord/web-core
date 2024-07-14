@@ -1,4 +1,8 @@
-import { format as formatDateFns, getDate, getMonth, getYear, isValid } from 'date-fns';
+import { format as formatDateFns } from 'date-fns/format';
+import { getDate } from 'date-fns/getDate';
+import { getMonth } from 'date-fns/getMonth';
+import { getYear } from 'date-fns/getYear';
+import { isValid } from 'date-fns/isValid';
 
 export const PATTERN_DATE = 'yyyy/MM/dd';
 export const PATTERN_TIME = 'HH:mm';
