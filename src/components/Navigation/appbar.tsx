@@ -85,7 +85,7 @@ export const NavigationToolbarItem = (
                 },
                 '&:hover': {
                     backgroundColor: theme.vars
-                        ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.hoverOpacity})`
+                        ? `rgba(${theme.vars.palette.action.selected} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))`
                         : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
                     '@media (hover: none)': {
                         backgroundColor: theme.vars

@@ -127,13 +127,13 @@ export const navigationDrawerItemRootStyled = (theme: Theme): SystemStyleObject<
         backgroundColor: (theme.vars || theme).palette.action.selected,
         [`&.${listItemButtonClasses.focusVisible}`]: {
             backgroundColor: theme.vars
-                ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.focusOpacity})`
+                ? `rgba(${theme.vars.palette.action.selected} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))`
                 : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
         }
     },
     [`&.${listItemButtonClasses.selected}:hover`]: {
         backgroundColor: theme.vars
-            ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.hoverOpacity})`
+            ? `rgba(${theme.vars.palette.action.selected} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))`
             : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
         '@media (hover: none)': {
             backgroundColor: theme.vars
