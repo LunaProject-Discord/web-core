@@ -46,7 +46,7 @@ export const RootStyles = () => (
                     border: 'solid 3px transparent',
                     borderRadius: theme.spacing(1),
                     '&:hover, &:active': {
-                        backgroundColor: `light-dark(${lighten(theme.palette.text.secondary, .2)}, ${darken(theme.palette.text.secondary, .2)})`
+                        backgroundColor: `light-dark(rgb(51 51 51 / .6), rgb(204 204 204 / .6))`
                     }
                 },
 
