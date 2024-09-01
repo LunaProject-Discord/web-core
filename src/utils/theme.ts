@@ -19,6 +19,7 @@ import {
 import { blue, green, indigo, orange, pink, red } from '@mui/material/colors';
 import { Components } from '@mui/material/styles/components';
 import { dark, light } from '@mui/material/styles/createPalette';
+import { CssVarsThemeOptions } from '@mui/material/styles/createThemeWithVars';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 import { rgba } from 'polished';
 
@@ -347,39 +348,44 @@ export const MuiDarkTheme = createTheme({
     typography: MuiTypography
 });
 
-export const MuiDefaultTheme = createTheme({
-    cssVariables: {
-        colorSchemeSelector: 'class'
-    },
-    colorSchemes: {
-        light: {
-            palette: {
-                ...MuiPalette,
-                monotone: {
-                    light: light.text.primary,
-                    main: light.text.primary,
-                    dark: dark.text.primary,
-                    contrastText: dark.text.primary
-                }
-            }
-        },
-        dark: {
-            palette: {
-                ...MuiPalette,
-                primary: {
-                    light: indigo.A200,
-                    main: indigo.A400,
-                    dark: indigo.A700
-                },
-                monotone: {
-                    light: light.text.primary,
-                    main: dark.text.primary,
-                    dark: dark.text.primary,
-                    contrastText: light.text.primary
-                }
+export const MuiCssVariables: boolean | Pick<CssVarsThemeOptions, 'colorSchemeSelector' | 'disableCssColorScheme' | 'cssVarPrefix' | 'shouldSkipGeneratingVar'> = {
+    colorSchemeSelector: 'class'
+};
+
+export const MuiColorSchemes: CssVarsThemeOptions['colorSchemes'] = {
+    light: {
+        palette: {
+            ...MuiPalette,
+            monotone: {
+                light: light.text.primary,
+                main: light.text.primary,
+                dark: dark.text.primary,
+                contrastText: dark.text.primary
             }
         }
     },
+    dark: {
+        palette: {
+            ...MuiPalette,
+            primary: {
+                light: indigo.A200,
+                main: indigo.A400,
+                dark: indigo.A700
+            },
+            monotone: {
+                light: light.text.primary,
+                main: dark.text.primary,
+                dark: dark.text.primary,
+                contrastText: light.text.primary
+            }
+        }
+    }
+};
+
+
+export const MuiDefaultTheme = createTheme({
+    cssVariables: MuiCssVariables,
+    colorSchemes: MuiColorSchemes,
     components: MuiComponents,
     typography: MuiTypography
 });
