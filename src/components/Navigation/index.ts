@@ -3,6 +3,7 @@ import { NavigationItemPredicate } from './utils';
 
 export interface NavigationItemProps {
     href: string;
+    prefetch?: boolean;
     predicate?: NavigationItemPredicate;
     icon?: ReactNode;
 }

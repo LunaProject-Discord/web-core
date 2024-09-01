@@ -167,6 +167,7 @@ export interface NavigationDrawerItemProps extends NavigationDrawerProps, Naviga
 export const NavigationDrawerItem = (
     {
         href,
+        prefetch,
         predicate,
         icon,
         primary,
@@ -191,6 +192,7 @@ export const NavigationDrawerItem = (
         <ListItemButton
             component={NextLink}
             href={href}
+            prefetch={prefetch}
             selected={isMatch}
             onClick={handleClick}
             sx={(theme) => navigationDrawerItemRootStyled(theme)}
@@ -208,6 +210,7 @@ export interface NavigationDrawerItemWithEnabledStatusProps extends NavigationDr
 export const NavigationDrawerItemWithEnabledStatus = (
     {
         href,
+        prefetch,
         predicate,
         icon,
         primary,
@@ -235,6 +238,7 @@ export const NavigationDrawerItemWithEnabledStatus = (
         <ListItemButton
             component={NextLink}
             href={href}
+            prefetch={prefetch}
             selected={isMatch}
             onClick={handleClick}
             sx={(theme) => navigationDrawerItemRootStyled(theme)}

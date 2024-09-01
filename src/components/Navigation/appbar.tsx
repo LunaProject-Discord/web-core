@@ -59,6 +59,7 @@ export interface NavigationToolbarItemProps extends Omit<NavigationItemProps, 'i
 export const NavigationToolbarItem = (
     {
         href,
+        prefetch,
         predicate,
         children
     }: NavigationToolbarItemProps
@@ -74,6 +75,7 @@ export const NavigationToolbarItem = (
         <Button
             component={NextLink}
             href={href}
+            prefetch={prefetch}
             color={color}
             sx={(theme) => (isMatch ? {
                 color: (theme.vars || theme).palette.text.primary,
