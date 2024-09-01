@@ -347,6 +347,43 @@ export const MuiDarkTheme = createTheme({
     typography: MuiTypography
 });
 
+export const MuiDefaultTheme = createTheme({
+    cssVariables: {
+        colorSchemeSelector: 'class'
+    },
+    colorSchemes: {
+        light: {
+            palette: {
+                ...MuiPalette,
+                monotone: {
+                    light: light.text.primary,
+                    main: light.text.primary,
+                    dark: dark.text.primary,
+                    contrastText: dark.text.primary
+                }
+            }
+        },
+        dark: {
+            palette: {
+                ...MuiPalette,
+                primary: {
+                    light: indigo.A200,
+                    main: indigo.A400,
+                    dark: indigo.A700
+                },
+                monotone: {
+                    light: light.text.primary,
+                    main: dark.text.primary,
+                    dark: dark.text.primary,
+                    contrastText: light.text.primary
+                }
+            }
+        }
+    },
+    components: MuiComponents,
+    typography: MuiTypography
+});
+
 export const borderAndBoxShadow = (theme: Theme) => ({
     border: `solid 1px ${(theme.vars || theme).palette.divider}`,
     boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`
