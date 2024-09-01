@@ -46,10 +46,7 @@ export const RootStyles = () => (
                     border: 'solid 3px transparent',
                     borderRadius: theme.spacing(1),
                     '&:hover, &:active': {
-                        backgroundColor: lighten(theme.palette.text.secondary, .2),
-                        ...theme.applyStyles('dark', {
-                            backgroundColor: darken(theme.palette.text.secondary, .2)
-                        })
+                        backgroundColor: `light-dark(${lighten(theme.palette.text.secondary, .2)}, ${darken(theme.palette.text.secondary, .2)})`
                     }
                 },
 
