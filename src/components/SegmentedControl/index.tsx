@@ -26,8 +26,11 @@ export const SegmentedControlRoot = styled(
     padding: theme.spacing(.5),
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[200] : '#282828',
-    borderRadius: theme.spacing(1)
+    backgroundColor: theme.palette.grey[200],
+    borderRadius: theme.spacing(1),
+    ...theme.applyStyles('dark', {
+        backgroundColor: '#282828'
+    })
 }));
 
 export interface SegmentedControlButtonProps extends ButtonBaseProps {

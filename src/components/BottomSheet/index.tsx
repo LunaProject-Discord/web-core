@@ -14,13 +14,16 @@ export const BottomSheet = styled(BottomSheetRoot)(({ theme }) => ({
         '--rsbs-mr': theme.spacing(3)
     },
     '& [data-rsbs-overlay], &::after': {
-        backgroundImage: theme.palette.mode === 'dark' ? `linear-gradient(${alpha(
-            '#fff',
-            Number(getOverlayAlpha(8))
-        )}, ${alpha(
-            '#fff',
-            Number(getOverlayAlpha(8))
-        )})` : 'none'
+        backgroundImage: 'none',
+        ...theme.applyStyles('dark', {
+            backgroundImage: `linear-gradient(${alpha(
+                '#fff',
+                Number(getOverlayAlpha(8))
+            )}, ${alpha(
+                '#fff',
+                Number(getOverlayAlpha(8))
+            )})`
+        })
     },
     '&[data-rsbs-has-header="true"] [data-rsbs-header]': {
         height: theme.spacing(9),

@@ -31,9 +31,12 @@ export const NavigationAppBar = styled(
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(1),
-    color: theme.palette.mode === 'dark' ? theme.palette.grey[500] : theme.palette.grey[800],
+    color: theme.palette.grey[800],
     backgroundColor: theme.palette.background.default,
-    zIndex: theme.zIndex.drawer + 1
+    zIndex: theme.zIndex.drawer + 1,
+    ...theme.applyStyles('dark', {
+        backgroundColor: theme.palette.grey[500]
+    })
 }));
 
 export const NavigationToolbar = styled(MuiToolbar)(({ theme }) => ({

@@ -44,14 +44,17 @@ export const PinFieldInput = styled(
     backgroundColor: theme.palette.background.default,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)',
+    borderColor: 'rgba(0, 0, 0, 0.23)',
     borderRadius: theme.shape.borderRadius,
     outline: 'none',
+    ...theme.applyStyles('dark', {
+        borderColor: 'rgba(255, 255, 255, 0.23)',
+    }),
     '&:hover': {
         borderColor: theme.palette.text.primary
     },
     '&:focus': {
-        padding: theme.spacing(7 / 8),
+        padding: theme.spacing(.875),
         borderWidth: 2,
         borderColor: theme.palette.primary.main
     }

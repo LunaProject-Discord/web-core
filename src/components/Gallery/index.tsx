@@ -45,8 +45,11 @@ export const GalleryItemIcon = styled(
     display: 'flex',
     placeItems: 'center',
     placeContent: 'center',
-    backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
-    borderRadius: theme.spacing(.5, .5, 0, 0)
+    backgroundColor: theme.palette.grey[100],
+    borderRadius: theme.spacing(.5, .5, 0, 0),
+    ...theme.applyStyles('dark', {
+        backgroundColor: theme.palette.grey[900]
+    })
 }));
 
 export const GalleryItemText = styled(
