@@ -44,7 +44,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                 const color: AlertProps['color'] = ownerState.color || ownerState.severity || 'success';
 
                 return {
-                    [`& .${alertClasses.message} .${buttonClasses.root}.${buttonClasses.containedInherit}`]: {
+                    [`& .${alertClasses.message} .${buttonClasses.root}.${buttonClasses.contained}.${buttonClasses.colorInherit}`]: {
                         color: getColor(theme.palette[color].light, .9),
                         backgroundColor: getBackgroundColor(theme.palette[color].light, .6)
                     }
@@ -58,83 +58,87 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
         },
         styleOverrides: {
             root: {
-                textTransform: 'none'
-            }
-        },
-        variants: [
-            {
-                props: {
-                    variant: 'contained',
-                    color: 'monotone'
-                },
-                style: ({ theme }) => ({
-                    [`&:disabled, &.${buttonClasses.disabled}`]: {
-                        color: theme.palette.mode === 'light' ? rgba(0, 0, 0, .26) : rgba(255, 255, 255, .3),
-                        backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .12) : rgba(255, 255, 255, .12)
+                textTransform: 'none',
+                variants: [
+                    {
+                        props: {
+                            variant: 'contained',
+                            color: 'monotone'
+                        },
+                        style: ({ theme }) => ({
+                            [`&:disabled, &.${buttonClasses.disabled}`]: {
+                                color: theme.palette.mode === 'light' ? rgba(0, 0, 0, .26) : rgba(255, 255, 255, .3),
+                                backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .12) : rgba(255, 255, 255, .12)
+                            },
+                            '&:hover': {
+                                backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .7) : rgba(255, 255, 255, .85)
+                            },
+                            [`&:active, &.${buttonClasses.focusVisible}`]: {
+                                backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .65) : rgba(255, 255, 255, .8)
+                            }
+                        })
                     },
-                    '&:hover': {
-                        backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .7) : rgba(255, 255, 255, .85)
-                    },
-                    [`&:active, &.${buttonClasses.focusVisible}`]: {
-                        backgroundColor: theme.palette.mode === 'light' ? rgba(0, 0, 0, .65) : rgba(255, 255, 255, .8)
+                    {
+                        props: {
+                            variant: 'outlined',
+                            color: 'monotone'
+                        },
+                        style: ({ theme }) => ({
+                            borderColor: theme.palette.divider,
+                            '&:hover': {
+                                backgroundColor: theme.palette.divider,
+                                borderColor: 'transparent'
+                            }
+                        })
                     }
-                })
-            },
-            {
-                props: {
-                    variant: 'outlined',
-                    color: 'monotone'
-                },
-                style: ({ theme }) => ({
-                    borderColor: theme.palette.divider,
-                    '&:hover': {
-                        backgroundColor: theme.palette.divider,
-                        borderColor: 'transparent'
-                    }
-                })
+                ]
             }
-        ]
+        }
     },
     MuiChip: {
-        variants: [
-            {
-                props: {
-                    variant: 'rounded'
-                },
-                style: ({ theme }) => ({
-                    fontWeight: 500,
-                    borderRadius: theme.shape.borderRadius
-                })
-            },
-            {
-                props: {
-                    variant: 'rounded',
-                    color: 'info'
-                },
-                style: chipStyled('info')
-            },
-            {
-                props: {
-                    variant: 'rounded',
-                    color: 'error'
-                },
-                style: chipStyled('error')
-            },
-            {
-                props: {
-                    variant: 'rounded',
-                    color: 'warning'
-                },
-                style: chipStyled('warning')
-            },
-            {
-                props: {
-                    variant: 'rounded',
-                    color: 'success'
-                },
-                style: chipStyled('success')
+        styleOverrides: {
+            root: {
+                variants: [
+                    {
+                        props: {
+                            variant: 'rounded'
+                        },
+                        style: ({ theme }) => ({
+                            fontWeight: 500,
+                            borderRadius: theme.shape.borderRadius
+                        })
+                    },
+                    {
+                        props: {
+                            variant: 'rounded',
+                            color: 'info'
+                        },
+                        style: chipStyled('info')
+                    },
+                    {
+                        props: {
+                            variant: 'rounded',
+                            color: 'error'
+                        },
+                        style: chipStyled('error')
+                    },
+                    {
+                        props: {
+                            variant: 'rounded',
+                            color: 'warning'
+                        },
+                        style: chipStyled('warning')
+                    },
+                    {
+                        props: {
+                            variant: 'rounded',
+                            color: 'success'
+                        },
+                        style: chipStyled('success')
+                    }
+                ]
             }
-        ]
+        }
     },
     MuiCircularProgress: {
         defaultProps: {
@@ -167,7 +171,8 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             MenuProps: {
                 slotProps: {
                     paper: {
-                        sx: (theme) => ({
+                        // TODO SlotCommonProps の問題が解決され次第、型指定を削除
+                        sx: (theme: Theme) => ({
                             ...borderAndBoxShadow(theme),
                             [`& .${menuClasses.list}`]: {
                                 p: 1
@@ -192,7 +197,8 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                     MenuProps: {
                         slotProps: {
                             paper: {
-                                sx: (theme) => borderAndBoxShadow(theme)
+                                // TODO SlotCommonProps の問題が解決され次第、型指定を削除
+                                sx: (theme: Theme) => borderAndBoxShadow(theme)
                             }
                         }
                     }
@@ -295,6 +301,7 @@ export const MuiTypography: TypographyOptions = {
 };
 
 export const MuiLightTheme = createTheme({
+    cssVariables: true,
     components: MuiComponents,
     palette: {
         ...MuiPalette,
@@ -310,6 +317,7 @@ export const MuiLightTheme = createTheme({
 });
 
 export const MuiDarkTheme = createTheme({
+    cssVariables: true,
     components: MuiComponents,
     palette: {
         ...MuiPalette,

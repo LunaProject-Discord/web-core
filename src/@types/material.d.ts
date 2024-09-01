@@ -1,6 +1,12 @@
 import '@mui/material';
 import { PaletteColor, PaletteColorOptions } from '@mui/material';
 
+declare module '@mui/system' {
+    interface BoxOwnProps {
+        component?: React.ElementType;
+    }
+}
+
 declare module '@mui/material/styles' {
     interface Palette {
         monotone: PaletteColor;
