@@ -24,15 +24,16 @@ import { TypographyOptions } from '@mui/material/styles/createTypography';
 import { rgba } from 'polished';
 
 const chipStyled = (color: ChipProps['color']): Interpolation<{ theme: Omit<Theme, 'components'> }> => ({ theme }) => {
-    const getColor = theme.palette.mode === 'light' ? darken : lighten;
-    const getBackgroundColor = theme.palette.mode === 'light' ? lighten : darken;
-
     if (!color || color === 'default')
         return {};
 
     return {
-        color: getColor(theme.palette[color].light, .9),
-        backgroundColor: getBackgroundColor(theme.palette[color].light, .6)
+        color: darken(theme.palette[color].light, .9),
+        backgroundColor: lighten(theme.palette[color].light, .6),
+        ...theme.applyStyles('dark', {
+            color: lighten(theme.palette[color].light, .9),
+            backgroundColor: darken(theme.palette[color].light, .6),
+        })
     };
 };
 
@@ -40,14 +41,16 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
     MuiAlert: {
         styleOverrides: {
             standard: ({ theme, ownerState }) => {
-                const getColor = theme.palette.mode === 'light' ? lighten : darken;
-                const getBackgroundColor = theme.palette.mode === 'light' ? darken : lighten;
                 const color: AlertProps['color'] = ownerState.color || ownerState.severity || 'success';
 
                 return {
                     [`& .${alertClasses.message} .${buttonClasses.root}.${buttonClasses.contained}.${buttonClasses.colorInherit}`]: {
-                        color: getColor(theme.palette[color].light, .9),
-                        backgroundColor: getBackgroundColor(theme.palette[color].light, .6)
+                        color: lighten(theme.palette[color].light, .9),
+                        backgroundColor: darken(theme.palette[color].light, .6),
+                        ...theme.applyStyles('dark', {
+                            color: darken(theme.palette[color].light, .9),
+                            backgroundColor: lighten(theme.palette[color].light, .6)
+                        })
                     }
                 };
             }
