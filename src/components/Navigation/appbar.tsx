@@ -35,7 +35,7 @@ export const NavigationAppBar = styled(
     backgroundColor: theme.palette.background.default,
     zIndex: theme.zIndex.drawer + 1,
     ...theme.applyStyles('dark', {
-        backgroundColor: theme.palette.grey[500]
+        color: theme.palette.grey[500]
     })
 }));
 
