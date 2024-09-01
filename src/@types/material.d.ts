@@ -1,4 +1,5 @@
 import '@mui/material';
+import '@mui/material/themeCssVarsAugmentation';
 import { PaletteColor, PaletteColorOptions } from '@mui/material';
 
 declare module '@mui/system' {

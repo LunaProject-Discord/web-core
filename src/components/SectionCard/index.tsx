@@ -42,7 +42,7 @@ export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
     }),
     [`&.${sectionCardClasses.variantOutlined}`]: {
         padding: theme.spacing(.875, 1.375),
-        border: `solid 1px ${theme.palette.divider}`
+        border: `solid 1px ${(theme.vars || theme).palette.divider}`
     },
     [[
         `&:disabled .${sectionCardDisplayClasses.root} *`,
@@ -56,7 +56,7 @@ export const sectionCardRootStyled = (theme: Theme): CSSObject => ({
         `&.${sectionCardClasses.disabled} .${sectionCardDisplayClasses.secondary} *`,
         `&.${sectionCardClasses.disabled} .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`
     ].join(',')]: {
-        color: theme.palette.action.disabled
+        color: (theme.vars || theme).palette.action.disabled
     }
 });
 

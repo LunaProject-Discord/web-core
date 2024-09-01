@@ -33,7 +33,7 @@ export const RootStyles = () => (
                     '@-moz-document url-prefix()': {
                         '*': {
                             scrollbarWidth: 'thin',
-                            scrollbarColor: `${theme.palette.text.secondary} transparent`
+                            scrollbarColor: `${(theme.vars || theme).palette.text.secondary} transparent`
                         }
                     },
                     '::-webkit-scrollbar': {
@@ -45,7 +45,7 @@ export const RootStyles = () => (
                     },
                     '::-webkit-scrollbar-thumb': {
                         backgroundClip: 'padding-box',
-                        backgroundColor: theme.palette.text.secondary,
+                        backgroundColor: (theme.vars || theme).palette.text.secondary,
                         border: 'solid 3px transparent',
                         borderRadius: theme.spacing(1),
                         '&:hover, &:active': {

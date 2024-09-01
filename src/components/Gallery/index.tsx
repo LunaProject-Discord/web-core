@@ -22,10 +22,10 @@ export const GalleryItem = styled(
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    color: theme.palette.text.primary,
+    color: (theme.vars || theme).palette.text.primary,
     textAlign: 'center',
     textDecoration: 'none',
-    border: `solid 1px ${theme.palette.divider}`,
+    border: `solid 1px ${(theme.vars || theme).palette.divider}`,
     borderRadius: theme.spacing(.5),
     boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`,
     [`& .${buttonBaseClasses.root}`]: {
@@ -45,10 +45,10 @@ export const GalleryItemIcon = styled(
     display: 'flex',
     placeItems: 'center',
     placeContent: 'center',
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: (theme.vars || theme).palette.grey[100],
     borderRadius: theme.spacing(.5, .5, 0, 0),
     ...theme.applyStyles('dark', {
-        backgroundColor: theme.palette.grey[900]
+        backgroundColor: (theme.vars || theme).palette.grey[900]
     })
 }));
 

@@ -31,11 +31,11 @@ export const NavigationAppBar = styled(
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(1),
-    color: theme.palette.grey[800],
-    backgroundColor: theme.palette.background.default,
+    color: (theme.vars || theme).palette.grey[800],
+    backgroundColor: (theme.vars || theme).palette.background.default,
     zIndex: theme.zIndex.drawer + 1,
     ...theme.applyStyles('dark', {
-        color: theme.palette.grey[500]
+        color: (theme.vars || theme).palette.grey[500]
     })
 }));
 
@@ -76,19 +76,25 @@ export const NavigationToolbarItem = (
             href={href}
             color={color}
             sx={(theme) => (isMatch ? {
-                color: theme.palette.text.primary,
-                backgroundColor: theme.palette.action.selected,
+                color: (theme.vars || theme).palette.text.primary,
+                backgroundColor: (theme.vars || theme).palette.action.selected,
                 [`&.${buttonClasses.focusVisible}`]: {
-                    backgroundColor: alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+                    backgroundColor: theme.vars
+                        ? `rgba(${theme.vars.palette.action.selected} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))`
+                        : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
                 },
                 '&:hover': {
-                    backgroundColor: alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+                    backgroundColor: theme.vars
+                        ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.hoverOpacity})`
+                        : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
                     '@media (hover: none)': {
-                        backgroundColor: alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity)
+                        backgroundColor: theme.vars
+                            ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity})`
+                            : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity)
                     }
                 }
             } : {
-                color: theme.palette.text.secondary
+                color: (theme.vars || theme).palette.text.secondary
             })}
         >
             {children}

@@ -4,13 +4,13 @@ import { ButtonBase as MuiButtonBase, buttonBaseClasses, CSSObject, styled, Them
 
 export const buttonActionStyled = (theme: Theme): CSSObject => ({
     [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
-        color: theme.palette.action.disabled
+        color: (theme.vars || theme).palette.action.disabled
     },
     '&:hover': {
-        backgroundColor: theme.palette.action.hover
+        backgroundColor: (theme.vars || theme).palette.action.hover
     },
     [`&:active, &.${buttonBaseClasses.focusVisible}`]: {
-        backgroundColor: theme.palette.action.focus
+        backgroundColor: (theme.vars || theme).palette.action.focus
     }
 });
 

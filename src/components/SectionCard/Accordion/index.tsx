@@ -118,7 +118,7 @@ export const SectionAccordionCardItems = styled(
     [`.${sectionAccordionCardClasses.readOnly} & .${sectionCardClasses.root}:not(#_)`]: {
         pointerEvents: 'none',
         cursor: 'default',
-        color: theme.palette.action.disabled,
+        color: (theme.vars || theme).palette.action.disabled,
         [[
             `& .${sectionCardDisplayClasses.root} *`,
             `& .${sectionCardDisplayClasses.icon} *`,
@@ -126,7 +126,7 @@ export const SectionAccordionCardItems = styled(
             `& .${sectionCardDisplayClasses.secondary} *`,
             `& .${sectionCardClasses.content} *:not(.${switchClasses.root} *)`
         ].join(',')]: {
-            color: theme.palette.action.disabled
+            color: (theme.vars || theme).palette.action.disabled
         }
     },
     [`.${sectionCardClasses.variantStandard} & .${sectionCardClasses.root}:not(#_)`]: {
@@ -151,7 +151,7 @@ export const SectionAccordionCardItems = styled(
          * [左右] (ボーダー: 1px) + パディング: 11px
          */
         padding: theme.spacing(.875, 1.375, 1),
-        borderTop: `solid 1px ${theme.palette.divider}`,
+        borderTop: `solid 1px ${(theme.vars || theme).palette.divider}`,
         borderRadius: 0,
         ['&:last-child']: {
             borderBottomLeftRadius: theme.shape.borderRadius - 1,
@@ -211,7 +211,7 @@ export const SectionAccordionCardRoot = styled(
     flexDirection: 'column',
     borderRadius: theme.shape.borderRadius,
     [`&.${sectionCardClasses.variantOutlined}`]: {
-        border: `solid 1px ${theme.palette.divider}`,
+        border: `solid 1px ${(theme.vars || theme).palette.divider}`,
         [`& .${sectionCardClasses.root}`]: {
             border: 'none'
         }

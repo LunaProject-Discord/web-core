@@ -40,8 +40,8 @@ export const PinFieldInput = styled(
     fontFamily: 'Renner, sans-serif',
     fontSize: theme.typography.h5.fontSize,
     textAlign: 'center',
-    color: theme.palette.text.primary,
-    backgroundColor: theme.palette.background.default,
+    color: (theme.vars || theme).palette.text.primary,
+    backgroundColor: (theme.vars || theme).palette.background.default,
     borderStyle: 'solid',
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.23)',
@@ -51,12 +51,12 @@ export const PinFieldInput = styled(
         borderColor: 'rgba(255, 255, 255, 0.23)',
     }),
     '&:hover': {
-        borderColor: theme.palette.text.primary
+        borderColor: (theme.vars || theme).palette.text.primary
     },
     '&:focus': {
         padding: theme.spacing(.875),
         borderWidth: 2,
-        borderColor: theme.palette.primary.main
+        borderColor: (theme.vars || theme).palette.primary.main
     }
 }));
 

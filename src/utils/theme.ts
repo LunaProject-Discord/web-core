@@ -71,7 +71,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                                 backgroundColor: rgba(0, 0, 0, .12),
                                 ...theme.applyStyles('dark', {
                                     color: rgba(255, 255, 255, .3),
-                                    backgroundColor: rgba(255, 255, 255, .12),
+                                    backgroundColor: rgba(255, 255, 255, .12)
                                 })
                             },
                             '&:hover': {
@@ -94,9 +94,9 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                             color: 'monotone'
                         },
                         style: ({ theme }) => ({
-                            borderColor: theme.palette.divider,
+                            borderColor: (theme.vars || theme).palette.divider,
                             '&:hover': {
-                                backgroundColor: theme.palette.divider,
+                                backgroundColor: (theme.vars || theme).palette.divider,
                                 borderColor: 'transparent'
                             }
                         })
@@ -241,7 +241,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                 fontWeight: 500,
                 textTransform: 'none',
                 [`&.${tabClasses.selected}`]: {
-                    color: theme.palette.text.primary
+                    color: (theme.vars || theme).palette.text.primary
                 }
             })
         }
@@ -249,13 +249,13 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
     MuiTabs: {
         styleOverrides: {
             root: ({ theme }) => ({
-                borderBottom: `solid 1px ${theme.palette.divider}`
+                borderBottom: `solid 1px ${(theme.vars || theme).palette.divider}`
             }),
             flexContainer: ({ theme }) => ({
                 gap: theme.spacing(2)
             }),
             indicator: ({ theme }) => ({
-                backgroundColor: theme.palette.text.primary,
+                backgroundColor: (theme.vars || theme).palette.text.primary,
                 borderRadius: theme.shape.borderRadius
             })
         }
@@ -348,7 +348,7 @@ export const MuiDarkTheme = createTheme({
 });
 
 export const borderAndBoxShadow = (theme: Theme) => ({
-    border: `solid 1px ${theme.palette.divider}`,
+    border: `solid 1px ${(theme.vars || theme).palette.divider}`,
     boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`
 });
 

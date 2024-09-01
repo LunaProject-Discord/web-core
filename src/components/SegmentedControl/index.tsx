@@ -26,7 +26,7 @@ export const SegmentedControlRoot = styled(
     padding: theme.spacing(.5),
     display: 'flex',
     alignItems: 'center',
-    backgroundColor: theme.palette.grey[200],
+    backgroundColor: (theme.vars || theme).palette.grey[200],
     borderRadius: theme.spacing(1),
     ...theme.applyStyles('dark', {
         backgroundColor: '#282828'
@@ -59,18 +59,18 @@ export const SegmentedControlButton = styled(
         duration: theme.transitions.duration.shortest
     }),
     fontWeight: 500,
-    color: selected ? theme.palette.text.primary : theme.palette.grey[600],
-    backgroundColor: selected ? theme.palette.background.default : 'transparent',
+    color: selected ? (theme.vars || theme).palette.text.primary : (theme.vars || theme).palette.grey[600],
+    backgroundColor: selected ? (theme.vars || theme).palette.background.default : 'transparent',
     borderRadius: theme.spacing(.5),
     boxShadow: selected ? `0 ${theme.spacing(.25)} ${theme.spacing(.5)} rgba(0, 0, 0, .15)` : 'none',
     [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
-        color: theme.palette.action.disabled
+        color: (theme.vars || theme).palette.action.disabled
     },
     '&:hover': {
-        backgroundColor: !selected && theme.palette.action.hover
+        backgroundColor: !selected && (theme.vars || theme).palette.action.hover
     },
     [`&.${buttonBaseClasses.focusVisible}`]: {
-        backgroundColor: theme.palette.action.focus
+        backgroundColor: (theme.vars || theme).palette.action.focus
     }
 }));
 

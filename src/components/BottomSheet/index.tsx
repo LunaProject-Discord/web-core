@@ -5,8 +5,8 @@ import { SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
 import { ConfigContext } from '../../utils';
 
 export const BottomSheet = styled(BottomSheetRoot)(({ theme }) => ({
-    '--rsbs-bg': theme.palette.background.paper,
-    '--rsbs-handle-bg': theme.palette.divider,
+    '--rsbs-bg': (theme.vars || theme).palette.background.paper,
+    '--rsbs-handle-bg': (theme.vars || theme).palette.divider,
     '--rsbs-overlay-rounded': `${theme.spacing(1.5)} !important`,
     [theme.breakpoints.up('sm')]: {
         '--rsbs-max-w': '400px',
@@ -27,7 +27,7 @@ export const BottomSheet = styled(BottomSheetRoot)(({ theme }) => ({
     },
     '&[data-rsbs-has-header="true"] [data-rsbs-header]': {
         height: theme.spacing(9),
-        boxShadow: `0 1px 0 ${theme.palette.divider}`
+        boxShadow: `0 1px 0 ${(theme.vars || theme).palette.divider}`
     },
     '& [data-rsbs-scroll]': {
         overflow: 'hidden'

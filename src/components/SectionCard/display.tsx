@@ -61,7 +61,7 @@ export const SectionCardDisplayPrimary = styled(
 )<BoxProps>(({ theme }) => ({
     ...theme.typography.body1,
     textAlign: 'start',
-    color: theme.palette.text.primary
+    color: (theme.vars || theme).palette.text.primary
 }));
 
 export const SectionCardDisplaySecondary = styled(
@@ -76,7 +76,7 @@ export const SectionCardDisplaySecondary = styled(
     ...theme.typography.body2,
     margin: 0,
     textAlign: 'start',
-    color: theme.palette.text.secondary
+    color: (theme.vars || theme).palette.text.secondary
 }));
 
 export interface SectionCardDisplayRootProps {

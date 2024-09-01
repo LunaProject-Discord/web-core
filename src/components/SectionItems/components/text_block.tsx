@@ -46,7 +46,7 @@ export const ItemTextBlockTypography = styled(
 )<ItemTextBlockTypographyProps>(({ theme, variant, disabled }) => ({
     width: '100%',
     textAlign: 'start',
-    color: !disabled ? theme.palette.text[variant] : theme.palette.text.disabled
+    color: (theme.vars || theme).palette.text[!disabled ? variant : 'disabled']
 }));
 
 export interface ItemTextBlockProps {

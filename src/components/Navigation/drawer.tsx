@@ -98,7 +98,7 @@ export const NavigationDrawerGroupLabel = styled(ListSubheader)(({ theme }) => (
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    color: theme.palette.text.primary
+    color: (theme.vars || theme).palette.text.primary
 }));
 
 export interface NavigationDrawerGroupProps extends Omit<ListProps, 'subheader'> {
@@ -120,19 +120,25 @@ export const navigationDrawerItemRootStyled = (theme: Theme): SystemStyleObject<
     px: 1.5,
     py: .5,
     gap: 1,
-    color: theme.palette.text.secondary,
+    color: (theme.vars || theme).palette.text.secondary,
     borderRadius: 1,
     [`&.${listItemButtonClasses.selected}`]: {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.action.selected,
+        color: (theme.vars || theme).palette.text.primary,
+        backgroundColor: (theme.vars || theme).palette.action.selected,
         [`&.${listItemButtonClasses.focusVisible}`]: {
-            backgroundColor: alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+            backgroundColor: theme.vars
+                ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.focusOpacity})`
+                : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
         }
     },
     [`&.${listItemButtonClasses.selected}:hover`]: {
-        backgroundColor: alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+        backgroundColor: theme.vars
+            ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.hoverOpacity})`
+            : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
         '@media (hover: none)': {
-            backgroundColor: alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity)
+            backgroundColor: theme.vars
+                ? `rgba(${theme.vars.palette.action.selected} / ${theme.vars.palette.action.selectedOpacity})`
+                : alpha(theme.palette.action.selected, theme.palette.action.selectedOpacity)
         }
     }
 });
