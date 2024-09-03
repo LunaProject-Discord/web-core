@@ -23,7 +23,7 @@
         "date-fns": "^3.6.0",
         "deep-equal": "^2.2.3",
         "deepmerge": "^4.3.1",
-        "jotai": "^2.9.0",
+        "jotai": "^2.9.3",
         "nookies": "^2.5.2",
         "polished": "^4.3.1",
         "react-spring-bottom-sheet": "^3.4.1"
@@ -32,7 +32,7 @@
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
         "@mui/icons-material": "^6.0.2",
-        "@mui/lab": "^6.0.0-beta.9",
+        "@mui/lab": "^6.0.0-beta.8",
         "@mui/material": "^6.0.2",
         "@mui/x-date-pickers": "^7.15.0",
         "@types/node": "~20.11.30",
