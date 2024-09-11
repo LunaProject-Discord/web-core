@@ -38,7 +38,7 @@ export const PinFieldInput = styled(
     padding: theme.spacing(1),
     flexGrow: 0,
     fontFamily: 'Renner, sans-serif',
-    fontSize: theme.typography.h5.fontSize,
+    fontSize: theme.typography.h3.fontSize,
     textAlign: 'center',
     color: (theme.vars || theme).palette.text.primary,
     backgroundColor: (theme.vars || theme).palette.background.default,

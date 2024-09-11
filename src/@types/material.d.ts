@@ -42,3 +42,10 @@ declare module '@mui/material/LinearProgress' {
         monotone: true;
     }
 }
+
+declare module '@mui/material/Typography' {
+    interface TypographyPropsVariantOverrides {
+        h5: false;
+        h6: false;
+    }
+}

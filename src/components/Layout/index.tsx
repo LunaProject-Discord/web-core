@@ -134,7 +134,7 @@ export const PageHeader = (
 ) => (
     <PageHeaderRoot>
         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: .5 }}>
-            {primary && <Typography variant="h4" {...primaryTypographyProps}>{primary}</Typography>}
+            {primary && <Typography variant="h2" {...primaryTypographyProps}>{primary}</Typography>}
             {secondary && <Typography {...secondaryTypographyProps}>{secondary}</Typography>}
         </Box>
         {children && <Box sx={{ display: 'flex', alignItems: 'center', flexShrink: 0, gap: 2 }}>{children}</Box>}

@@ -67,7 +67,7 @@ export const SectionTitle = styled(
     ) => (
         <Typography
             ref={ref}
-            variant="h5"
+            variant="h3"
             className={clsx(sectionClasses.title, className)}
             {...props}
         />

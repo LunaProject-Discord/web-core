@@ -147,7 +147,7 @@ export const NavigationDrawerItemIcon = styled(ListItemIcon)(({ theme }) => ({
     minWidth: 20,
     color: 'inherit',
     [`& .${svgIconClasses.root}`]: {
-        fontSize: theme.typography.h6.fontSize
+        fontSize: theme.typography.h4.fontSize
     }
 }));
 
