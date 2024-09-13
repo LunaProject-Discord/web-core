@@ -316,7 +316,7 @@ export const MuiTypography: TypographyOptions = {
     h1: {
         fontSize: pxToRem(40),
         fontWeight: h3.fontWeight,
-        lineHeight: h3.lineHeight
+        lineHeight: 1.2
     },
     h2: {
         fontSize: h4.fontSize,
