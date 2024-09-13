@@ -34,7 +34,7 @@ const chipStyled = (color: ChipProps['color']): Interpolation<{ theme: Omit<Them
         backgroundColor: lighten(theme.palette[color].light, .6),
         ...theme.applyStyles('dark', {
             color: lighten(theme.palette[color].light, .9),
-            backgroundColor: darken(theme.palette[color].light, .6),
+            backgroundColor: darken(theme.palette[color].light, .6)
         })
     };
 };
@@ -310,12 +310,29 @@ export const MuiPalette: PaletteOptions = {
     }
 };
 
+const { pxToRem, h3, h4, h5, h6 } = defaultTheme.typography;
 export const MuiTypography: TypographyOptions = {
     fontFamily: '\'Roboto Symbol\', \'Noto Sans\', \'Noto Sans JP\', \'Yu Gothic UI\', \'Hiragino Sans\', \'Noto Color Emoji\', sans-serif',
-    h1: defaultTheme.typography.h3,
-    h2: defaultTheme.typography.h4,
-    h3: defaultTheme.typography.h5,
-    h4: defaultTheme.typography.h6,
+    h1: {
+        fontSize: pxToRem(40),
+        fontWeight: h3.fontWeight,
+        lineHeight: h3.lineHeight
+    },
+    h2: {
+        fontSize: h4.fontSize,
+        fontWeight: h4.fontWeight,
+        lineHeight: h4.lineHeight
+    },
+    h3: {
+        fontSize: h5.fontSize,
+        fontWeight: h5.fontWeight,
+        lineHeight: h5.lineHeight
+    },
+    h4: {
+        fontSize: h6.fontSize,
+        fontWeight: h6.fontWeight,
+        lineHeight: h6.lineHeight
+    },
     h5: undefined,
     h6: undefined
 };
