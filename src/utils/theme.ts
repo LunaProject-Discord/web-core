@@ -187,8 +187,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             MenuProps: {
                 slotProps: {
                     paper: {
-                        // TODO SlotCommonProps の問題が解決され次第、型指定を削除
-                        sx: (theme: Theme) => ({
+                        sx: (theme) => ({
                             ...borderAndBoxShadow(theme),
                             [`& .${menuClasses.list}`]: {
                                 p: 1
@@ -213,8 +212,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                     MenuProps: {
                         slotProps: {
                             paper: {
-                                // TODO SlotCommonProps の問題が解決され次第、型指定を削除
-                                sx: (theme: Theme) => borderAndBoxShadow(theme)
+                                sx: (theme) => borderAndBoxShadow(theme)
                             }
                         }
                     }
