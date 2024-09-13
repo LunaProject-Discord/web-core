@@ -23,6 +23,8 @@ import { CssVarsThemeOptions } from '@mui/material/styles/createThemeWithVars';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
 import { rgba } from 'polished';
 
+const defaultTheme = createTheme();
+
 const chipStyled = (color: ChipProps['color']): Interpolation<{ theme: Omit<Theme, 'components'> }> => ({ theme }) => {
     if (!color || color === 'default')
         return {};
@@ -312,26 +314,10 @@ export const MuiPalette: PaletteOptions = {
 
 export const MuiTypography: TypographyOptions = {
     fontFamily: '\'Roboto Symbol\', \'Noto Sans\', \'Noto Sans JP\', \'Yu Gothic UI\', \'Hiragino Sans\', \'Noto Color Emoji\', sans-serif',
-    h1: {
-        fontSize: '3rem',
-        fontWeight: 400,
-        lineHeight: 1.167
-    },
-    h2: {
-        fontSize: '2.125rem',
-        fontWeight: 400,
-        lineHeight: 1.235
-    },
-    h3: {
-        fontSize: '1.5rem',
-        fontWeight: 400,
-        lineHeight: 1.334
-    },
-    h4: {
-        fontSize: '1.25rem',
-        fontWeight: 500,
-        lineHeight: 1.6
-    },
+    h1: defaultTheme.typography.h3,
+    h2: defaultTheme.typography.h4,
+    h3: defaultTheme.typography.h5,
+    h4: defaultTheme.typography.h6,
     h5: undefined,
     h6: undefined
 };
