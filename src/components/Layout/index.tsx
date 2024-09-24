@@ -24,7 +24,7 @@ export const RootStyles = () => (
 
                 '::selection': {
                     textShadow: 'none',
-                    backgroundColor: '#b3d4fc'
+                    backgroundColor: (theme.vars || theme).palette.selection.main
                 },
 
                 '@-moz-document url-prefix()': {

@@ -12,10 +12,12 @@ declare module '@mui/system' {
 declare module '@mui/material/styles' {
     interface Palette {
         monotone: PaletteColor;
+        selection: PaletteColor;
     }
 
     interface PaletteOptions {
         monotone?: PaletteColorOptions;
+        selection?: PaletteColorOptions;
     }
 }
 

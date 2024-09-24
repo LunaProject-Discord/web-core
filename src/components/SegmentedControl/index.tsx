@@ -62,7 +62,7 @@ export const SegmentedControlButton = styled(
     color: selected ? (theme.vars || theme).palette.text.primary : (theme.vars || theme).palette.grey[600],
     backgroundColor: selected ? (theme.vars || theme).palette.background.default : 'transparent',
     borderRadius: theme.spacing(.5),
-    boxShadow: selected ? `0 ${theme.spacing(.25)} ${theme.spacing(.5)} rgba(0, 0, 0, .15)` : 'none',
+    boxShadow: selected ? `0 ${theme.spacing(.25)} ${theme.spacing(.5)} rgb(0 0 0 / .15)` : 'none',
     [`&:disabled, &.${buttonBaseClasses.disabled}`]: {
         color: (theme.vars || theme).palette.action.disabled
     },

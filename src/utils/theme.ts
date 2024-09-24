@@ -308,6 +308,13 @@ export const MuiPalette: PaletteOptions = {
         main: green[500],
         dark: green[700]
     }
+    /*
+    selection: {
+        light: '#b3d4fc',
+        main: '#88a5cc',
+        dark: '#5d769c'
+    }
+    */
 };
 
 const { pxToRem, h3, h4, h5, h6 } = defaultTheme.typography;
@@ -348,6 +355,9 @@ export const MuiLightTheme = createTheme({
             dark: dark.text.primary,
             contrastText: dark.text.primary
         },
+        selection: {
+            main: '#b3d4fc'
+        },
         mode: 'light'
     },
     typography: MuiTypography
@@ -369,10 +379,14 @@ export const MuiDarkTheme = createTheme({
             dark: dark.text.primary,
             contrastText: light.text.primary
         },
+        selection: {
+            main: '#5d769c'
+        },
         mode: 'dark'
     },
     typography: MuiTypography
 });
+
 
 export const MuiCssVariables: boolean | Pick<CssVarsThemeOptions, 'colorSchemeSelector' | 'disableCssColorScheme' | 'cssVarPrefix' | 'shouldSkipGeneratingVar'> = {
     colorSchemeSelector: 'class'
@@ -387,6 +401,9 @@ export const MuiColorSchemes: CssVarsThemeOptions['colorSchemes'] = {
                 main: light.text.primary,
                 dark: dark.text.primary,
                 contrastText: dark.text.primary
+            },
+            selection: {
+                main: '#b3d4fc'
             }
         }
     },
@@ -403,11 +420,13 @@ export const MuiColorSchemes: CssVarsThemeOptions['colorSchemes'] = {
                 main: dark.text.primary,
                 dark: dark.text.primary,
                 contrastText: light.text.primary
+            },
+            selection: {
+                main: '#5d769c'
             }
         }
     }
 };
-
 
 export const MuiDefaultTheme = createTheme({
     cssVariables: MuiCssVariables,
@@ -416,9 +435,10 @@ export const MuiDefaultTheme = createTheme({
     typography: MuiTypography
 });
 
+
 export const borderAndBoxShadow = (theme: Theme) => ({
     border: `solid 1px ${(theme.vars || theme).palette.divider}`,
-    boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`
+    boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgb(0 0 0 / .15)`
 });
 
 export const generateComponentClasses = <T extends string>(name: string, slots: T[]): Record<T, string> => {

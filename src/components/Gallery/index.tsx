@@ -2,6 +2,7 @@
 
 import { Box, buttonBaseClasses, styled } from '@mui/material';
 import React from 'react';
+import { borderAndBoxShadow } from '../../utils';
 
 export const Gallery = styled(
     ({ component: Component = 'ul', ...props }: any) => (<Component {...props} />)
@@ -25,9 +26,8 @@ export const GalleryItem = styled(
     color: (theme.vars || theme).palette.text.primary,
     textAlign: 'center',
     textDecoration: 'none',
-    border: `solid 1px ${(theme.vars || theme).palette.divider}`,
     borderRadius: theme.spacing(.5),
-    boxShadow: `0 ${theme.spacing(.5)} ${theme.spacing(1)} rgba(0, 0, 0, .15)`,
+    ...borderAndBoxShadow(theme),
     [`& .${buttonBaseClasses.root}`]: {
         display: 'inherit',
         flexDirection: 'inherit',
