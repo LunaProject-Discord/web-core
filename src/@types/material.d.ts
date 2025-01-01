@@ -3,11 +3,13 @@ import '@mui/material/themeCssVarsAugmentation';
 import { PaletteColor, PaletteColorOptions } from '@mui/material';
 import { ElementType } from 'react';
 
+/*
 declare module '@mui/system' {
     interface BoxOwnProps {
         component?: ElementType;
     }
 }
+*/
 
 declare module '@mui/material/styles' {
     interface Palette {

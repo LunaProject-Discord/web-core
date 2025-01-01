@@ -26,7 +26,7 @@ export interface NumberFieldHookProps<T extends InternalStandardProps<InputBaseP
     onIncrementButtonClick: MouseEventHandler<HTMLButtonElement>;
     onDecrementButtonClick: MouseEventHandler<HTMLButtonElement>;
 
-    props: T;
+    props: Omit<T, 'value'>;
 }
 
 export const useNumberField = <T extends InternalStandardProps<InputBaseProps>>(
