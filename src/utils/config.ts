@@ -1,11 +1,16 @@
 'use client';
 
 import {
+    ArrowBackOutlined,
     ArrowDownwardOutlined,
     ArrowRightOutlined,
     ArrowUpwardOutlined,
     ExpandLessOutlined,
     ExpandMoreOutlined,
+    KeyboardArrowDownOutlined,
+    KeyboardArrowLeftOutlined,
+    KeyboardArrowRightOutlined,
+    KeyboardArrowUpOutlined,
     OpenInNewOutlined,
     ToggleOffOutlined,
     ToggleOnOutlined
@@ -48,10 +53,18 @@ export interface ConfigComponents {
 }
 
 export type ConfigIconKeys =
-    'Decrement'
+    'ArrowBack'
+    | 'ArrowDownward'
+    | 'ArrowForward'
+    | 'ArrowUpward'
+    | 'Decrement'
     | 'ExpandLess'
     | 'ExpandMore'
     | 'Increment'
+    | 'KeyboardArrowDown'
+    | 'KeyboardArrowLeft'
+    | 'KeyboardArrowRight'
+    | 'KeyboardArrowUp'
     | 'More'
     | 'OpenInNew'
     | 'ToggleOff'
@@ -71,10 +84,18 @@ export interface Config {
 
 export const ConfigContext = createContext<Config>({
     icons: {
+        ArrowBack: ArrowBackOutlined,
+        ArrowDownward: ArrowDownwardOutlined,
+        ArrowForward: ArrowRightOutlined,
+        ArrowUpward: ArrowUpwardOutlined,
         Decrement: ArrowDownwardOutlined,
         ExpandLess: ExpandLessOutlined,
         ExpandMore: ExpandMoreOutlined,
         Increment: ArrowUpwardOutlined,
+        KeyboardArrowDown: KeyboardArrowDownOutlined,
+        KeyboardArrowLeft: KeyboardArrowLeftOutlined,
+        KeyboardArrowRight: KeyboardArrowRightOutlined,
+        KeyboardArrowUp: KeyboardArrowUpOutlined,
         More: ArrowRightOutlined,
         OpenInNew: OpenInNewOutlined,
         ToggleOff: ToggleOffOutlined,

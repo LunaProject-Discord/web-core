@@ -302,7 +302,6 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
     } = config.components?.SectionAccordionCard ?? {};
     const ExpandMore = config.icons.ExpandMore;
 
-    // tslint:disable-next-line:variable-name
     const [__expanded, __setExpanded] = useState(Boolean(defaultExpanded ?? configDefaultExpanded));
     const expanded = _expanded ?? __expanded;
     const setExpanded = _setExpanded ?? __setExpanded;
