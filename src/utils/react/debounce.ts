@@ -14,11 +14,13 @@ export const useDebounce = <T>(value: T, delay: number = 500) => {
 };
 
 export const useThrottle = <T>(callback: (args: T) => void, duration: number) => {
-    const scrollingTimer = useRef<undefined | NodeJS.Timeout>();
+    const scrollingTimer = useRef<NodeJS.Timeout | undefined>(undefined);
 
     return useCallback(
         (args: T) => {
-            if (scrollingTimer.current) return;
+            if (scrollingTimer.current)
+                return;
+
             scrollingTimer.current = setTimeout(() => {
                 callback(args);
                 scrollingTimer.current = undefined;

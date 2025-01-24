@@ -16,7 +16,8 @@ import {
     ToggleOnOutlined
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
-import { createContext, Provider, ReactNode } from 'react';
+import deepmerge from 'deepmerge';
+import { createContext, createElement, ProviderProps, ReactNode } from 'react';
 import {
     SectionAccordionCardConfigProps,
     SectionCardConfigProps,
@@ -82,7 +83,7 @@ export interface Config {
     translations: ConfigTranslations;
 }
 
-export const ConfigContext = createContext<Config>({
+const DefaultConfig: Config = {
     icons: {
         ArrowBack: ArrowBackOutlined,
         ArrowDownward: ArrowDownwardOutlined,
@@ -105,6 +106,17 @@ export const ConfigContext = createContext<Config>({
         close: 'Close',
         open: 'Open'
     }
-});
+};
 
-export const ConfigProvider = ConfigContext.Provider as Provider<DeepPartial<Config>>;
+export const ConfigContext = createContext<Config>(DefaultConfig);
+
+export const ConfigProvider = ({ value, children }: ProviderProps<{
+    components?: ConfigComponents;
+    icons?: Partial<ConfigIcons>;
+    translations?: Partial<ConfigTranslations>;
+}>) => createElement(
+    ConfigContext,
+    { value: deepmerge(DefaultConfig, value) as Config },
+    children
+);
+

@@ -5,8 +5,8 @@ export const COOKIE_NAME_APPEARANCE = 'appearance';
 
 export type Appearance = 'system' | 'light' | 'dark';
 
-export const getAppearance = (): Appearance => {
-    const nextCookies = cookies();
+export const getAppearance = async (): Promise<Appearance> => {
+    const nextCookies = await cookies();
     return nextCookies.get(COOKIE_NAME_APPEARANCE)?.value as Appearance | undefined ?? 'system';
 };
 
