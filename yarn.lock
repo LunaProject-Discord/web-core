@@ -576,10 +576,10 @@ __metadata:
     deep-equal: "npm:^2.2.3"
     deepmerge: "npm:^4.3.1"
     eslint: "npm:^8.57.1"
-    eslint-config-next: "npm:^15.1.6"
+    eslint-config-next: "npm:^15.1.7"
     jotai: "npm:^2.12.1"
     luxon: "npm:^3.5.0"
-    next: "npm:^15.1.6"
+    next: "npm:^15.1.7"
     nookies: "npm:^2.5.2"
     polished: "npm:^4.3.1"
     react: "npm:^19.0.0"
@@ -2059,7 +2059,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:^15.1.6":
+"eslint-config-next@npm:^15.1.7":
   version: 15.1.7
   resolution: "eslint-config-next@npm:15.1.7"
   dependencies:
@@ -3289,7 +3289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:^15.1.6":
+"next@npm:^15.1.7":
   version: 15.1.7
   resolution: "next@npm:15.1.7"
   dependencies:
