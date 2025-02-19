@@ -17,7 +17,6 @@
         "build": "tsc && mkdir dist/@types && cp src/@types/* dist/@types/"
     },
     "dependencies": {
-        "@types/color": "^4.2.0",
         "@types/deep-equal": "^1.0.4",
         "@types/luxon": "^3.4.2",
         "clsx": "^2.1.1",

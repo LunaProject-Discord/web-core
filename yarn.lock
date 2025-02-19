@@ -564,7 +564,6 @@ __metadata:
     "@mui/icons-material": "npm:^6.4.5"
     "@mui/material": "npm:^6.4.5"
     "@mui/x-date-pickers": "npm:^7.27.0"
-    "@types/color": "npm:^4.2.0"
     "@types/deep-equal": "npm:^1.0.4"
     "@types/luxon": "npm:^3.4.2"
     "@types/node": "npm:~20.11.30"
@@ -995,31 +994,6 @@ __metadata:
   dependencies:
     tslib: "npm:^2.8.0"
   checksum: 10c0/33002f74f6f885f04c132960835fdfc474186983ea567606db62e86acd0680ca82f34647e8e610f4e1e422d1c16fce729dde22cd3b797ab1fd9061a825dabca4
-  languageName: node
-  linkType: hard
-
-"@types/color-convert@npm:*":
-  version: 2.0.4
-  resolution: "@types/color-convert@npm:2.0.4"
-  dependencies:
-    "@types/color-name": "npm:^1.1.0"
-  checksum: 10c0/fdd2cea0ccf593055c8d952760286a4c114ed72a9940798d13f159823bf71d40a6b124009865e2e066f062d6d5611b677ddb61fd0ed05f6494170454cc6457c2
-  languageName: node
-  linkType: hard
-
-"@types/color-name@npm:^1.1.0":
-  version: 1.1.5
-  resolution: "@types/color-name@npm:1.1.5"
-  checksum: 10c0/ce566d98ab1c2622a2e9d9d1d5cbde403e731a4fc084e8b0f56e89901cd3c46981feafb797d4505918d5eb5a7fd897fce2332d489f450ddf1c58bc4986bd9d76
-  languageName: node
-  linkType: hard
-
-"@types/color@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "@types/color@npm:4.2.0"
-  dependencies:
-    "@types/color-convert": "npm:*"
-  checksum: 10c0/d09b68390bfd4ae6d57115e047be9dbd3ad4d30e9b7c20e6004c778057a94eec9f5c61689c1b6b09a743f8c2491536870dd0c9a2c79bfcaa37f594b54fc9c96d
   languageName: node
   linkType: hard
 
