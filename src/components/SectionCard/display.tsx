@@ -1,8 +1,8 @@
 'use client';
 
-import { SlotComponentProps } from '@mui/base';
 import { avatarClasses, Box, BoxProps, styled } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
+import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
 import React, { ElementType, ReactNode } from 'react';
 import { generateComponentClasses } from '../../utils';

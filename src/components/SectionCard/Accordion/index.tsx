@@ -1,10 +1,10 @@
 'use client';
 
-import { SlotComponentProps } from '@mui/base';
 import { Box, BoxProps, Collapse, CollapseProps, styled, switchClasses } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
+import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
 import deepmerge from 'deepmerge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';

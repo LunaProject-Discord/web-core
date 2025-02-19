@@ -31,7 +31,6 @@ import {
     SectionSliderCardConfigProps,
     SectionSwitchCardConfigProps
 } from '../components';
-import { DeepPartial } from './types';
 
 export interface ConfigComponents {
     SectionCard?: SectionCardConfigProps;

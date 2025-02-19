@@ -1,9 +1,9 @@
 'use client';
 
-import { SlotComponentProps } from '@mui/base';
 import { Box, BoxProps, CSSObject, styled, switchClasses, Theme } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
+import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
 import React, { Dispatch, ElementType, SetStateAction, useContext } from 'react';
 import { ConfigContext, generateComponentClasses } from '../../utils';

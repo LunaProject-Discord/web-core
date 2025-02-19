@@ -1,7 +1,7 @@
 'use client';
 
-import { SlotComponentProps } from '@mui/base';
 import { MenuItem, MenuItemProps, MenuItemTypeMap, Select, useTheme } from '@mui/material';
+import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';

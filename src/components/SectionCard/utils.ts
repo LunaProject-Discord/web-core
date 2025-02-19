@@ -1,7 +1,7 @@
-import { SlotComponentProps } from '@mui/base';
 import { Theme } from '@mui/material';
 import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { SxProps } from '@mui/system';
+import { SlotComponentProps } from '@mui/utils';
 import deepmerge from 'deepmerge';
 import { ElementType } from 'react';
 import { generateComponentClasses } from '../../utils';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, CssBaseline, darken, GlobalStyles, lighten, styled, Typography, TypographyProps } from '@mui/material';
+import { Box, CssBaseline, GlobalStyles, styled, Typography, TypographyProps } from '@mui/material';
 import React, { Fragment, ReactNode } from 'react';
 import { NAVIGATION_DRAWER_WIDTH } from '../Navigation';
 

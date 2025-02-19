@@ -1,4 +1,3 @@
-import { LoadingButton as MuiLoadingButton, LoadingButtonProps, LoadingButtonTypeMap } from '@mui/lab';
 import { Button as MuiButton, ButtonProps, ButtonTypeMap, Theme } from '@mui/material';
 import React, { ElementType } from 'react';
 
@@ -39,31 +38,6 @@ export const Button = <C extends ElementType = ButtonTypeMap['defaultComponent']
     }: ButtonRootProps & ButtonProps<C, { component?: C }>
 ) => (
     <MuiButton
-        {...props}
-        sx={(theme) => ({
-            ...(corners && {
-                ...(typeof corners === 'object' ? {
-                    borderTopLeftRadius: getCorner(corners.topLeft, theme),
-                    borderTopRightRadius: getCorner(corners.topRight, theme),
-                    borderBottomLeftRadius: getCorner(corners.bottomLeft, theme),
-                    borderBottomRightRadius: getCorner(corners.bottomRight, theme)
-                } : {
-                    borderRadius: getCorner(corners, theme)
-                })
-            }),
-            ...sx
-        })}
-    />
-);
-
-export const LoadingButton = <C extends ElementType = LoadingButtonTypeMap['defaultComponent'], >(
-    {
-        corners,
-        sx,
-        ...props
-    }: ButtonRootProps & LoadingButtonProps<C, { component?: C }>
-) => (
-    <MuiLoadingButton
         {...props}
         sx={(theme) => ({
             ...(corners && {
