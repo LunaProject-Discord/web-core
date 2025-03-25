@@ -38,6 +38,12 @@ declare module '@mui/material/CircularProgress' {
     }
 }
 
+declare module '@mui/material/Fab' {
+    interface FabPropsColorOverrides {
+        monotone: true;
+    }
+}
+
 declare module '@mui/material/LinearProgress' {
     interface LinearProgressPropsColorOverrides {
         monotone: true;

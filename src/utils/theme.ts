@@ -161,6 +161,45 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             color: 'monotone'
         }
     },
+    MuiFab: {
+        defaultProps: {
+            color: 'monotone'
+        },
+        styleOverrides: {
+            root: {
+                textTransform: 'none',
+                variants: [
+                    {
+                        props: {
+                            color: 'monotone'
+                        },
+                        style: ({ theme }) => ({
+                            [`&:disabled, &.${buttonClasses.disabled}`]: {
+                                color: rgba(0, 0, 0, .26),
+                                backgroundColor: rgba(0, 0, 0, .12),
+                                ...theme.applyStyles('dark', {
+                                    color: rgba(255, 255, 255, .3),
+                                    backgroundColor: rgba(255, 255, 255, .12)
+                                })
+                            },
+                            '&:hover': {
+                                backgroundColor: rgba(0, 0, 0, .7),
+                                ...theme.applyStyles('dark', {
+                                    backgroundColor: rgba(255, 255, 255, .85)
+                                })
+                            },
+                            [`&:active, &.${buttonClasses.focusVisible}`]: {
+                                backgroundColor: rgba(0, 0, 0, .65),
+                                ...theme.applyStyles('dark', {
+                                    backgroundColor: rgba(255, 255, 255, .8)
+                                })
+                            }
+                        })
+                    }
+                ]
+            }
+        }
+    },
     MuiInputBase: {
         styleOverrides: {
             input: {
