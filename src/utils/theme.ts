@@ -6,7 +6,7 @@ import {
     buttonClasses,
     ChipProps,
     createTheme,
-    darken,
+    darken, fabClasses,
     Interpolation,
     lighten,
     linearProgressClasses,
@@ -174,7 +174,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                             color: 'monotone'
                         },
                         style: ({ theme }) => ({
-                            [`&:disabled, &.${buttonClasses.disabled}`]: {
+                            [`&:disabled, &.${fabClasses.disabled}`]: {
                                 color: rgba(0, 0, 0, .26),
                                 backgroundColor: rgba(0, 0, 0, .12),
                                 ...theme.applyStyles('dark', {
@@ -188,7 +188,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
                                     backgroundColor: rgba(255, 255, 255, .85)
                                 })
                             },
-                            [`&:active, &.${buttonClasses.focusVisible}`]: {
+                            [`&:active, &.${fabClasses.focusVisible}`]: {
                                 backgroundColor: rgba(0, 0, 0, .65),
                                 ...theme.applyStyles('dark', {
                                     backgroundColor: rgba(255, 255, 255, .8)
