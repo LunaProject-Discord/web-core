@@ -79,6 +79,7 @@ export const Select = <T, >(
         <Fragment>
             <MuiSelect
                 value={value}
+                multiple={multiple}
                 onOpen={handleSelectOpen}
                 onClose={handleSelectClose}
                 {...props}
