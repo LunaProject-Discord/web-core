@@ -11,8 +11,6 @@ import {
     Interpolation,
     lighten,
     linearProgressClasses,
-    menuClasses,
-    menuItemClasses,
     PaletteOptions,
     tabClasses,
     Theme
@@ -233,11 +231,8 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
     MuiMenuItem: {
         styleOverrides: {
             root: ({ theme }) => ({
-                padding: theme.spacing(0, 1.5),
-                borderRadius: theme.shape.borderRadius,
-                [theme.breakpoints.up('sm')]: {
-                    padding: theme.spacing(0, 1)
-                }
+                padding: theme.spacing(1),
+                borderRadius: theme.shape.borderRadius
             })
         }
     },
