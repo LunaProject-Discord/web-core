@@ -2,7 +2,8 @@
 
 import {
     ArrowBackOutlined,
-    ArrowDownwardOutlined,
+    ArrowDownwardOutlined, ArrowDropDownOutlined,
+    ArrowDropUpOutlined,
     ArrowRightOutlined,
     ArrowUpwardOutlined, CloudOffOutlined, CloudOutlined,
     ExpandLessOutlined,
@@ -55,6 +56,8 @@ export interface ConfigComponents {
 export type ConfigIconKeys =
     'ArrowBack'
     | 'ArrowDownward'
+    | 'ArrowDropDown'
+    | 'ArrowDropUp'
     | 'ArrowForward'
     | 'ArrowUpward'
     | 'Cloud'
@@ -93,6 +96,8 @@ const DefaultConfig: Config = {
     icons: {
         ArrowBack: ArrowBackOutlined,
         ArrowDownward: ArrowDownwardOutlined,
+        ArrowDropDown: ArrowDropDownOutlined,
+        ArrowDropUp: ArrowDropUpOutlined,
         ArrowForward: ArrowRightOutlined,
         ArrowUpward: ArrowUpwardOutlined,
         Cloud: CloudOutlined,

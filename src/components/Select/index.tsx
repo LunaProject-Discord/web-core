@@ -1,6 +1,8 @@
 'use client';
 
 import {
+    Box,
+    BoxProps,
     ListItemButton,
     ListItemIcon,
     ListItemText,
@@ -10,7 +12,7 @@ import {
     useMediaQuery
 } from '@mui/material';
 import xor from 'lodash/xor';
-import React, { Fragment, MouseEvent, ReactNode, useCallback, useState } from 'react';
+import React, { Fragment, MouseEvent, ReactNode, SyntheticEvent, useCallback, useState } from 'react';
 import { Virtualizer } from 'virtua';
 import {
     getMobilePickerDefaultSnap,
@@ -45,6 +47,13 @@ export type SelectProps<T> =
     SelectRootProps<T>
     & (SingleSelectProps<T> | MultipleSelectProps<T>);
 
+export interface SelectInputRootProps {
+    open: boolean;
+    disabled: boolean;
+}
+
+export type SelectInputProps = BoxProps & Partial<SelectInputRootProps>;
+
 export const Select = <T, >(
     {
         value,
@@ -54,15 +63,50 @@ export const Select = <T, >(
         ...props
     }: SelectProps<T>
 ) => {
-    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.up('sm'));
 
     const { sheetScrollRef, setSheetContentRef } = useMobilePickerRef();
 
     const [open, setOpen] = useState(false);
 
-    const handleSelectOpen = useCallback(() => setOpen(true), []);
+    const renderValue = useCallback((selected: T | T[]) => {
+        const render = (choice: SelectItem<T>) => {
+            if ('children' in choice)
+                return choice.children;
 
-    const handleSelectClose = useCallback(() => setOpen(false), []);
+            return (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    {choice.icon}
+                    {choice.primary}
+                </Box>
+            );
+        };
+
+        if (Array.isArray(selected))
+            return choices.filter((choice) => selected.includes(choice.value)).map(render).join(', ');
+
+        const choice = choices.find((choice) => choice.value === selected);
+        if (!choice)
+            return undefined;
+
+        return render(choice);
+    }, [choices]);
+
+    const handleSelectOpen = useCallback((e: SyntheticEvent) => {
+        if (isSmall)
+            return;
+
+        e.preventDefault();
+        setOpen(true);
+    }, []);
+
+    const handleSelectClose = useCallback((e: SyntheticEvent) => {
+        if (isSmall)
+            return;
+
+        e.preventDefault();
+        setOpen(true);
+    }, []);
 
     const handleChoiceClick = useCallback((choice: SelectItem<T>, index: number) => (e: MouseEvent<HTMLElement>) => {
         if (multiple) {
@@ -80,6 +124,7 @@ export const Select = <T, >(
             <MuiSelect
                 value={value}
                 multiple={multiple}
+                renderValue={renderValue}
                 onOpen={handleSelectOpen}
                 onClose={handleSelectClose}
                 {...props}
@@ -88,7 +133,7 @@ export const Select = <T, >(
                     <MenuItem
                         key={index}
                         onClick={handleChoiceClick(choice, index)}
-                        selected={value === choice.value}
+                        selected={multiple ? value.includes(choice.value) : value === choice.value}
                         disabled={choice.disabled}
                     >
                         {'children' in choice ? choice.children : <Fragment>
@@ -103,7 +148,7 @@ export const Select = <T, >(
             </MuiSelect>
 
             <MobilePickerRoot
-                open={isSmall && open}
+                open={open}
                 onDismiss={() => setOpen(false)}
                 expandOnContentDrag
                 defaultSnap={getMobilePickerDefaultSnap}
@@ -115,7 +160,7 @@ export const Select = <T, >(
                         {choices.map((choice, index) => (
                             <ListItemButton
                                 onClick={handleChoiceClick(choice, index)}
-                                selected={value === choice.value}
+                                selected={multiple ? value.includes(choice.value) : value === choice.value}
                                 disabled={choice.disabled}
                             >
                                 {'children' in choice ? choice.children : <Fragment>
@@ -133,3 +178,5 @@ export const Select = <T, >(
         </Fragment>
     );
 };
+
+export * from './outlined';
