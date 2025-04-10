@@ -12,7 +12,7 @@ import {
     useMediaQuery
 } from '@mui/material';
 import xor from 'lodash/xor';
-import React, { Fragment, MouseEvent, ReactNode, SyntheticEvent, useCallback, useState } from 'react';
+import React, { Fragment, MouseEvent, ReactNode, useCallback, useState } from 'react';
 import { SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
 import { Virtualizer } from 'virtua';
 import { MobilePickerContent, MobilePickerRoot, PickerItemIcon, PickerItemText, useMobilePickerRef } from '../Picker';
@@ -110,15 +110,15 @@ export const Select = <T, >(
                 onOpen={handleSelectOpen}
                 onClose={handleSelectClose}
                 MenuProps={{
-                    open: !isSmall && open,
+                    open: !isSmall && open
                 }}
                 {...props}
             >
                 {choices.map((choice, index) => (
                     <MenuItem
                         key={choice.value as string}
+                        value={choice.value as string}
                         onClick={handleChoiceClick(choice, index)}
-                        // selected={multiple ? value.includes(choice.value) : value === choice.value}
                         disabled={choice.disabled}
                     >
                         {'children' in choice ? choice.children : <Fragment>

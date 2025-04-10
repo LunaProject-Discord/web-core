@@ -6,7 +6,8 @@ import {
     buttonClasses,
     ChipProps,
     createTheme,
-    darken, fabClasses,
+    darken,
+    fabClasses,
     Interpolation,
     lighten,
     linearProgressClasses,
@@ -221,6 +222,24 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             })
         }
     },
+    MuiMenu: {
+        styleOverrides: {
+            paper: ({ theme }) => ({
+                ...borderAndBoxShadow(theme),
+                [`& .${menuClasses.list}`]: {
+                    p: 1
+                },
+                [`& .${menuItemClasses.root}`]: {
+                    px: 1.5,
+                    borderRadius: 1,
+                    [theme.breakpoints.up('sm')]: {
+                        px: 1
+                    }
+                }
+            })
+        }
+    },
+    /*
     MuiSelect: {
         defaultProps: {
             MenuProps: {
@@ -244,6 +263,7 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
             }
         }
     },
+    */
     MuiTablePagination: {
         defaultProps: {
             slotProps: {
