@@ -565,6 +565,7 @@ __metadata:
     "@mui/material": "npm:^6.4.5"
     "@mui/x-date-pickers": "npm:^7.27.0"
     "@types/deep-equal": "npm:^1.0.4"
+    "@types/lodash": "npm:^4.17.16"
     "@types/luxon": "npm:^3.4.2"
     "@types/node": "npm:~20.11.30"
     "@types/react": "npm:^19.0.10"
@@ -577,7 +578,8 @@ __metadata:
     eslint: "npm:^8.57.1"
     eslint-config-next: "npm:^15.1.7"
     jotai: "npm:^2.12.1"
-    luxon: "npm:^3.5.0"
+    lodash: "npm:^4.17.21"
+    luxon: "npm:^3.6.1"
     next: "npm:^15.1.7"
     nookies: "npm:^2.5.2"
     polished: "npm:^4.3.1"
@@ -585,6 +587,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     react-spring-bottom-sheet: "npm:^3.4.1"
     typescript: "npm:^5.7.3"
+    virtua: "npm:^0.40.3"
   peerDependencies:
     "@emotion/react": ^11.14.0
     "@emotion/styled": ^11.14.0
@@ -1008,6 +1011,13 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: 10c0/6bf5337bc447b706bb5b4431d37686aa2ea6d07cfd6f79cc31de80170d6ff9b1c7384a9c0ccbc45b3f512bae9e9f75c2e12109806a15331dc94e8a8db6dbb4ac
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.17.16":
+  version: 4.17.16
+  resolution: "@types/lodash@npm:4.17.16"
+  checksum: 10c0/cf017901b8ab1d7aabc86d5189d9288f4f99f19a75caf020c0e2c77b8d4cead4db0d0b842d009b029339f92399f49f34377dd7c2721053388f251778b4c23534
   languageName: node
   linkType: hard
 
@@ -3173,6 +3183,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash@npm:4.17.21"
+  checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
+  languageName: node
+  linkType: hard
+
 "loose-envify@npm:^1.0.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
@@ -3184,10 +3201,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"luxon@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "luxon@npm:3.5.0"
-  checksum: 10c0/335789bba95077db831ef99894edadeb23023b3eb2137a1b56acd0d290082b691cf793143d69e30bc069ec95f0b49f36419f48e951c68014f19ffe12045e3494
+"luxon@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "luxon@npm:3.6.1"
+  checksum: 10c0/906d57a9dc4d1de9383f2e9223e378c298607c1b4d17b6657b836a3cd120feb1c1de3b5d06d846a3417e1ca764de8476e8c23b3cd4083b5cdb870adcb06a99d5
   languageName: node
   linkType: hard
 
@@ -4469,6 +4486,30 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10c0/ec011a5055962c0f6b509d6e78c0b143f8cd069890ae370528753053c55e3b360d3648e76cfaa854faa7a59eb08d6c5fb1015e60ffde9046d32f5b2a295acea5
+  languageName: node
+  linkType: hard
+
+"virtua@npm:^0.40.3":
+  version: 0.40.3
+  resolution: "virtua@npm:0.40.3"
+  peerDependencies:
+    react: ">=16.14.0"
+    react-dom: ">=16.14.0"
+    solid-js: ">=1.0"
+    svelte: ">=5.0"
+    vue: ">=3.2"
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+    solid-js:
+      optional: true
+    svelte:
+      optional: true
+    vue:
+      optional: true
+  checksum: 10c0/fc06e2039bef0999de09f090b43f57cf9fdad73ed8069757d21059920805600f98c6e3d5285093ad49ca60fa0c7eb7a8914eb840ce4d6b7baef386fab1991391
   languageName: node
   linkType: hard
 

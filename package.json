@@ -25,10 +25,12 @@
         "deep-equal": "^2.2.3",
         "deepmerge": "^4.3.1",
         "jotai": "^2.12.1",
-        "luxon": "^3.5.0",
+        "lodash": "^4.17.21",
+        "luxon": "^3.6.1",
         "nookies": "^2.5.2",
         "polished": "^4.3.1",
-        "react-spring-bottom-sheet": "^3.4.1"
+        "react-spring-bottom-sheet": "^3.4.1",
+        "virtua": "^0.40.3"
     },
     "devDependencies": {
         "@emotion/react": "^11.14.0",
@@ -36,6 +38,7 @@
         "@mui/icons-material": "^6.4.5",
         "@mui/material": "^6.4.5",
         "@mui/x-date-pickers": "^7.27.0",
+        "@types/lodash": "^4.17.16",
         "@types/node": "~20.11.30",
         "@types/react": "^19.0.10",
         "@types/react-dom": "^19.0.4",

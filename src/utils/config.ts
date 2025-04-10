@@ -4,20 +4,20 @@ import {
     ArrowBackOutlined,
     ArrowDownwardOutlined,
     ArrowRightOutlined,
-    ArrowUpwardOutlined,
+    ArrowUpwardOutlined, CloudOffOutlined, CloudOutlined,
     ExpandLessOutlined,
     ExpandMoreOutlined,
     KeyboardArrowDownOutlined,
     KeyboardArrowLeftOutlined,
     KeyboardArrowRightOutlined,
     KeyboardArrowUpOutlined,
-    OpenInNewOutlined,
+    OpenInNewOutlined, SearchOutlined,
     ToggleOffOutlined,
     ToggleOnOutlined
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import deepmerge from 'deepmerge';
-import { createContext, createElement, ProviderProps, ReactNode } from 'react';
+import { createContext, createElement, Fragment, ProviderProps, ReactNode } from 'react';
 import {
     SectionAccordionCardConfigProps,
     SectionCardConfigProps,
@@ -57,6 +57,8 @@ export type ConfigIconKeys =
     | 'ArrowDownward'
     | 'ArrowForward'
     | 'ArrowUpward'
+    | 'Cloud'
+    | 'CloudOff'
     | 'Decrement'
     | 'ExpandLess'
     | 'ExpandMore'
@@ -67,12 +69,17 @@ export type ConfigIconKeys =
     | 'KeyboardArrowUp'
     | 'More'
     | 'OpenInNew'
+    | 'Search'
     | 'ToggleOff'
     | 'ToggleOn';
 
 export type ConfigIcons = { [key in ConfigIconKeys]: typeof SvgIcon };
 
-export type ConfigTranslateKeys = 'close' | 'open';
+export type ConfigTranslateKeys =
+    'close'
+    | 'error_data_not_found_title'
+    | 'error_data_not_found_description'
+    | 'open';
 
 export type ConfigTranslations = { [key in ConfigTranslateKeys]: ReactNode };
 
@@ -88,6 +95,8 @@ const DefaultConfig: Config = {
         ArrowDownward: ArrowDownwardOutlined,
         ArrowForward: ArrowRightOutlined,
         ArrowUpward: ArrowUpwardOutlined,
+        Cloud: CloudOutlined,
+        CloudOff: CloudOffOutlined,
         Decrement: ArrowDownwardOutlined,
         ExpandLess: ExpandLessOutlined,
         ExpandMore: ExpandMoreOutlined,
@@ -98,11 +107,20 @@ const DefaultConfig: Config = {
         KeyboardArrowUp: KeyboardArrowUpOutlined,
         More: ArrowRightOutlined,
         OpenInNew: OpenInNewOutlined,
+        Search: SearchOutlined,
         ToggleOff: ToggleOffOutlined,
         ToggleOn: ToggleOnOutlined
     },
     translations: {
         close: 'Close',
+        error_data_not_found_title: 'Data not found!',
+        error_data_not_found_description: createElement(
+            Fragment,
+            {},
+            'There is no data available for display at this time.',
+            createElement('br'),
+            'Please wait a while and try again.'
+        ),
         open: 'Open'
     }
 };
