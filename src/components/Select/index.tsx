@@ -13,16 +13,9 @@ import {
 } from '@mui/material';
 import xor from 'lodash/xor';
 import React, { Fragment, MouseEvent, ReactNode, SyntheticEvent, useCallback, useState } from 'react';
+import { SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
 import { Virtualizer } from 'virtua';
-import {
-    getMobilePickerDefaultSnap,
-    getMobilePickerSnapPoints,
-    MobilePickerContent,
-    MobilePickerRoot,
-    PickerItemIcon,
-    PickerItemText,
-    useMobilePickerRef
-} from '../Picker';
+import { MobilePickerContent, MobilePickerRoot, PickerItemIcon, PickerItemText, useMobilePickerRef } from '../Picker';
 import { SectionCardDisabledProps, SectionCardDisplayRootProps, SectionCardVariableProps } from '../SectionCard';
 
 export interface SelectItemRoot<T> extends SectionCardDisabledProps {
@@ -63,7 +56,7 @@ export const Select = <T, >(
         ...props
     }: SelectProps<T>
 ) => {
-    const isSmall = useMediaQuery((theme) => theme.breakpoints.up('sm'));
+    const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     const { sheetScrollRef, setSheetContentRef } = useMobilePickerRef();
 
@@ -92,21 +85,9 @@ export const Select = <T, >(
         return render(choice);
     }, [choices]);
 
-    const handleSelectOpen = useCallback((e: SyntheticEvent) => {
-        if (isSmall)
-            return;
+    const handleSelectOpen = useCallback((e: SyntheticEvent) => setOpen(true), []);
 
-        e.preventDefault();
-        setOpen(true);
-    }, []);
-
-    const handleSelectClose = useCallback((e: SyntheticEvent) => {
-        if (isSmall)
-            return;
-
-        e.preventDefault();
-        setOpen(true);
-    }, []);
+    const handleSelectClose = useCallback((e: SyntheticEvent) => setOpen(false), []);
 
     const handleChoiceClick = useCallback((choice: SelectItem<T>, index: number) => (e: MouseEvent<HTMLElement>) => {
         if (multiple) {
@@ -125,15 +106,16 @@ export const Select = <T, >(
                 value={value}
                 multiple={multiple}
                 renderValue={renderValue}
+                open={!isSmall && open}
                 onOpen={handleSelectOpen}
                 onClose={handleSelectClose}
                 {...props}
             >
                 {choices.map((choice, index) => (
                     <MenuItem
-                        key={index}
+                        key={choice.value as string}
                         onClick={handleChoiceClick(choice, index)}
-                        selected={multiple ? value.includes(choice.value) : value === choice.value}
+                        // selected={multiple ? value.includes(choice.value) : value === choice.value}
                         disabled={choice.disabled}
                     >
                         {'children' in choice ? choice.children : <Fragment>
@@ -148,17 +130,18 @@ export const Select = <T, >(
             </MuiSelect>
 
             <MobilePickerRoot
-                open={open}
+                open={isSmall && open}
                 onDismiss={() => setOpen(false)}
                 expandOnContentDrag
-                defaultSnap={getMobilePickerDefaultSnap}
-                snapPoints={getMobilePickerSnapPoints}
+                defaultSnap={({ height }: SnapPointProps) => height}
+                snapPoints={({ height, maxHeight }: SnapPointProps) => [maxHeight - 8 * 9, height]}
                 initialFocusRef={false}
             >
                 <MobilePickerContent ref={setSheetContentRef}>
                     <Virtualizer scrollRef={sheetScrollRef} overscan={2}>
                         {choices.map((choice, index) => (
                             <ListItemButton
+                                key={choice.value as string}
                                 onClick={handleChoiceClick(choice, index)}
                                 selected={multiple ? value.includes(choice.value) : value === choice.value}
                                 disabled={choice.disabled}
