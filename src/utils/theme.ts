@@ -224,17 +224,19 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
     },
     MuiMenu: {
         styleOverrides: {
-            paper: ({ theme }) => ({
-                ...borderAndBoxShadow(theme),
-                [`& .${menuClasses.list}`]: {
-                    p: 1
-                },
-                [`& .${menuItemClasses.root}`]: {
-                    px: 1.5,
-                    borderRadius: 1,
-                    [theme.breakpoints.up('sm')]: {
-                        px: 1
-                    }
+            paper: ({ theme }) => borderAndBoxShadow(theme),
+            list: ({ theme }) => ({
+                padding: theme.spacing(1)
+            })
+        }
+    },
+    MuiMenuItem: {
+        styleOverrides: {
+            root: ({ theme }) => ({
+                padding: theme.spacing(0, 1.5),
+                borderRadius: theme.shape.borderRadius,
+                [theme.breakpoints.up('sm')]: {
+                    padding: theme.spacing(0, 1)
                 }
             })
         }
