@@ -1,8 +1,9 @@
-import { Box, BoxProps, ButtonBase, buttonBaseClasses, ButtonBaseProps, styled } from '@mui/material';
+import { Box, BoxProps, ButtonBase, buttonBaseClasses, ButtonBaseProps, styled, Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 import clsx from 'clsx';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { generateComponentClasses } from '../../utils';
-import { ItemDisabledProps, ItemRootProps, ItemVariableChoicesProps } from '../SectionItems';
+import { SectionCardDisabledProps, SectionCardVariableProps } from '../SectionCard';
 
 export const segmentedControlClasses = generateComponentClasses(
     'SegmentedControl',
@@ -74,7 +75,19 @@ export const SegmentedControlButton = styled(
     }
 }));
 
-export type SegmentedControlProps<T> = ItemRootProps & ItemDisabledProps & ItemVariableChoicesProps<T>;
+
+export interface SegmentedControlItem<T> extends SectionCardDisabledProps {
+    value: T;
+    children?: ReactNode;
+    className?: string;
+    sx?: SxProps<Theme>;
+}
+
+export interface SegmentedControlProps<T> extends SectionCardDisabledProps, SectionCardVariableProps<{ value: T; }> {
+    choices: SegmentedControlItem<T>[];
+    className?: string;
+    sx?: SxProps<Theme>;
+}
 
 export const SegmentedControl = <T, >(
     {

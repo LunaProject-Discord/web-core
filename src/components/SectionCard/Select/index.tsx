@@ -1,32 +1,28 @@
 'use client';
 
-import { MenuItem, MenuItemProps, MenuItemTypeMap, Select, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
+import { Select, SelectProps } from '../../Select';
 import {
     SectionCard,
     sectionCardClasses,
     SectionCardDisplayRootProps,
     SectionCardProps,
     SectionCardRootProps,
-    SectionCardVariableProps,
     SlotRootProps
 } from '../index';
 import { generateSectionControlCardClasses, merges, SectionControlCardSlotProps } from '../utils';
 
 export const sectionSelectCardClasses = generateSectionControlCardClasses('Select');
 
-export interface SectionSelectCardRootProps<T> extends SectionCardVariableProps<{ value: T; }> {
-    choices: MenuItemProps<MenuItemTypeMap['defaultComponent'], { value: T; }>[];
-}
-
 export type SectionSelectCardSlotProps<T> = SectionControlCardSlotProps<typeof Select<T>>;
 
 export type SectionSelectCardProps<T> =
     SectionCardProps
-    & SectionSelectCardRootProps<T>
+    & SelectProps<T>
     & SectionSelectCardSlotProps<T>;
 
 export const SectionSelectCard = <T, >(
@@ -35,6 +31,7 @@ export const SectionSelectCard = <T, >(
         value,
         setValue,
         choices,
+        multiple,
         disabled: _disabled,
         variant,
         className,
@@ -78,24 +75,19 @@ export const SectionSelectCard = <T, >(
             {...props}
         >
             {children}
+            {/* @ts-ignore */}
             <Select<T>
                 value={value}
-                onChange={(e) => setValue(e.target.value as T)}
+                setValue={setValue}
+                choices={choices}
+                multiple={multiple}
                 disabled={disabled}
                 fullWidth
                 size="small"
                 className={sectionSelectCardClasses.control}
                 sx={{ minWidth: 300 }}
                 {...merges(configControlProps as SlotComponentProps<typeof Select<T>, SlotRootProps, {}>, controlProps)}
-            >
-                {choices.map(({ value: choiceValue, ...choiceProps }) => (
-                    <MenuItem
-                        key={choiceValue as string}
-                        value={choiceValue as string}
-                        {...choiceProps}
-                    />
-                ))}
-            </Select>
+            />
         </SectionCard>
     );
 };

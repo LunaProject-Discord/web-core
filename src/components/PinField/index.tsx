@@ -4,7 +4,7 @@ import { Box, styled } from '@mui/material';
 import clsx from 'clsx';
 import React, { ClipboardEvent, InputHTMLAttributes, KeyboardEvent, useState } from 'react';
 import { generateComponentClasses } from '../../utils';
-import { ItemDisabledProps, ItemVariableProps } from '../SectionItems';
+import { SectionCardDisabledProps, SectionCardVariableProps } from '../SectionCard';
 
 export const pinFieldClasses = generateComponentClasses(
     'PinField',
@@ -48,7 +48,7 @@ export const PinFieldInput = styled(
     borderRadius: theme.shape.borderRadius,
     outline: 'none',
     ...theme.applyStyles('dark', {
-        borderColor: 'rgb(255 255 255 / .23)',
+        borderColor: 'rgb(255 255 255 / .23)'
     }),
     '&:hover': {
         borderColor: (theme.vars || theme).palette.text.primary
@@ -60,7 +60,7 @@ export const PinFieldInput = styled(
     }
 }));
 
-export interface PinFieldProps extends ItemDisabledProps, ItemVariableProps<string> {
+export interface PinFieldProps extends SectionCardDisabledProps, SectionCardVariableProps<{ value: string; }> {
     length: number;
     pattern?: RegExp;
     capitalize?: 'upper' | 'lower' | 'none';
