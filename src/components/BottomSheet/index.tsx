@@ -72,7 +72,4 @@ export const BottomSheetContent = styled(Box)(({ theme }) => ({
     gap: theme.spacing(2)
 }));
 
-export const defaultSnapPoints = ({ maxHeight, minHeight, headerHeight }: SnapPointProps) => {
-    const max = maxHeight - 8 * 9;
-    return [minHeight >= max ? max : minHeight, headerHeight];
-};
+export const defaultSnapPoints = ({ maxHeight, minHeight, headerHeight }: SnapPointProps) => [Math.min(maxHeight - 8 * 9, minHeight), headerHeight];

@@ -85,9 +85,9 @@ export const Select = <T, >(
         return render(choice);
     }, [choices]);
 
-    const handleSelectOpen = useCallback((e: SyntheticEvent) => setOpen(true), []);
+    const handleSelectOpen = useCallback(() => setOpen(true), []);
 
-    const handleSelectClose = useCallback((e: SyntheticEvent) => setOpen(false), []);
+    const handleSelectClose = useCallback(() => setOpen(false), []);
 
     const handleChoiceClick = useCallback((choice: SelectItem<T>, index: number) => (e: MouseEvent<HTMLElement>) => {
         if (multiple) {
@@ -106,9 +106,12 @@ export const Select = <T, >(
                 value={value}
                 multiple={multiple}
                 renderValue={renderValue}
-                open={!isSmall && open}
+                open={open}
                 onOpen={handleSelectOpen}
                 onClose={handleSelectClose}
+                MenuProps={{
+                    open: !isSmall && open,
+                }}
                 {...props}
             >
                 {choices.map((choice, index) => (
@@ -133,8 +136,8 @@ export const Select = <T, >(
                 open={isSmall && open}
                 onDismiss={() => setOpen(false)}
                 expandOnContentDrag
-                defaultSnap={({ height }: SnapPointProps) => height}
-                snapPoints={({ height, maxHeight }: SnapPointProps) => [maxHeight - 8 * 9, height]}
+                defaultSnap={({ minHeight, maxHeight }: SnapPointProps) => Math.min(maxHeight - 8 * 9, minHeight)}
+                snapPoints={({ minHeight, maxHeight }: SnapPointProps) => Math.min(maxHeight - 8 * 9, minHeight)}
                 initialFocusRef={false}
             >
                 <MobilePickerContent ref={setSheetContentRef}>
