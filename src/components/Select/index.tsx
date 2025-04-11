@@ -55,9 +55,7 @@ export interface MultipleSelectProps<T> extends SelectRootProps<T>, SectionCardV
     multiple: true;
 }
 
-export type SelectProps<T> =
-    SelectRootProps<T>
-    & (SingleSelectProps<T> | MultipleSelectProps<T>);
+export type SelectProps<T> = SingleSelectProps<T> | MultipleSelectProps<T>;
 
 export interface SelectInputRootProps {
     open: boolean;
@@ -224,6 +222,7 @@ export const Select = <T, >(
                                             <DesktopSelectChoiceButton
                                                 key={item.value as string}
                                                 choice={item}
+                                                selected={multiple ? value.includes(item.value) : value === item.value}
                                                 onClick={handleChoiceClick(item, index)}
                                             />
                                         );
@@ -236,6 +235,7 @@ export const Select = <T, >(
                                 <DesktopSelectChoiceButton
                                     key={choice.value as string}
                                     choice={choice}
+                                    selected={multiple ? value.includes(choice.value) : value === choice.value}
                                     onClick={handleChoiceClick(choice, index)}
                                 />
                             );
@@ -256,7 +256,7 @@ export const Select = <T, >(
                         {choices.map((choice, index) => {
                             switch (choice.type) {
                                 case 'divider':
-                                    return (<Divider />);
+                                    return (<Divider sx={{ my: 1 }} />);
 
                                 case 'group':
                                     return (
@@ -264,12 +264,13 @@ export const Select = <T, >(
                                             <SelectChoiceGroupSubheader>{choice.label}</SelectChoiceGroupSubheader>
                                             {choice.items.map((item) => {
                                                 if (item.type === 'divider')
-                                                    return (<Divider />);
+                                                    return (<Divider sx={{ my: 1 }} />);
 
                                                 return (
                                                     <MobileSelectChoiceButton
                                                         key={item.value as string}
                                                         choice={item}
+                                                        selected={multiple ? value.includes(item.value) : value === item.value}
                                                         onClick={handleChoiceClick(item, index)}
                                                     />
                                                 );
@@ -282,6 +283,7 @@ export const Select = <T, >(
                                         <MobileSelectChoiceButton
                                             key={choice.value as string}
                                             choice={choice}
+                                            selected={multiple ? value.includes(choice.value) : value === choice.value}
                                             onClick={handleChoiceClick(choice, index)}
                                         />
                                     );
