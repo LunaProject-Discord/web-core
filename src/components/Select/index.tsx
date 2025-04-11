@@ -1,14 +1,20 @@
 'use client';
 
 import {
+    alpha,
     Box,
     BoxProps,
+    Divider,
+    getOverlayAlpha,
+    List,
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    ListSubheader,
     MenuItem,
     Select as MuiSelect,
     SelectProps as MuiSelectProps,
+    styled,
     useMediaQuery
 } from '@mui/material';
 import xor from 'lodash/xor';
@@ -18,14 +24,27 @@ import { Virtualizer } from 'virtua';
 import { MobilePickerContent, MobilePickerRoot, PickerItemIcon, PickerItemText, useMobilePickerRef } from '../Picker';
 import { SectionCardDisabledProps, SectionCardDisplayRootProps, SectionCardVariableProps } from '../SectionCard';
 
-export interface SelectItemRoot<T> extends SectionCardDisabledProps {
+export interface SelectChoiceButtonRoot<T> extends SectionCardDisabledProps {
+    type?: 'button';
     value: T;
 }
 
-export type SelectItem<T> = SelectItemRoot<T> & ({ children: ReactNode } | SectionCardDisplayRootProps);
+export type SelectChoiceButton<T> = SelectChoiceButtonRoot<T> & ({ children: ReactNode } | SectionCardDisplayRootProps);
+
+export interface SelectChoiceGroup<T> {
+    type: 'group';
+    label: ReactNode;
+    items: (SelectChoiceButton<T> | SelectChoiceButtonDivider)[];
+}
+
+export interface SelectChoiceButtonDivider {
+    type: 'divider';
+}
+
+export type SelectChoiceItem<T> = SelectChoiceButton<T> | SelectChoiceGroup<T> | SelectChoiceButtonDivider;
 
 export interface SelectRootProps<T> extends Pick<MuiSelectProps, 'multiple' | 'disabled' | 'variant' | 'size' | 'fullWidth' | 'className' | 'sx'> {
-    choices: SelectItem<T>[];
+    choices: SelectChoiceItem<T>[];
 }
 
 export interface SingleSelectProps<T> extends SelectRootProps<T>, SectionCardVariableProps<{ value: T; }> {
@@ -47,6 +66,74 @@ export interface SelectInputRootProps {
 
 export type SelectInputProps = BoxProps & Partial<SelectInputRootProps>;
 
+export interface SelectChoiceButtonProps<T> {
+    choice: SelectChoiceButton<T>;
+    selected?: boolean;
+    onClick: (e: MouseEvent<HTMLElement>) => void;
+}
+
+export const DesktopSelectChoiceButton = <T, >(
+    {
+        choice,
+        selected,
+        onClick: handleClick
+    }: SelectChoiceButtonProps<T>
+) => (
+    <MenuItem
+        key={choice.value as string}
+        value={choice.value as string}
+        onClick={handleClick}
+        selected={selected}
+        disabled={choice.disabled}
+    >
+        {'children' in choice ? choice.children : <Fragment>
+            {choice.icon && <ListItemIcon>{choice.icon}</ListItemIcon>}
+            {(choice.primary || choice.secondary) && <ListItemText
+                primary={choice.primary}
+                secondary={choice.secondary}
+            />}
+        </Fragment>}
+    </MenuItem>
+);
+
+export const MobileSelectChoiceButton = <T, >(
+    {
+        choice,
+        selected,
+        onClick: handleClick
+    }: SelectChoiceButtonProps<T>
+) => (
+    <ListItemButton
+        key={choice.value as string}
+        onClick={handleClick}
+        selected={selected}
+        disabled={choice.disabled}
+    >
+        {'children' in choice ? choice.children : <Fragment>
+            {choice.icon && <PickerItemIcon>{choice.icon}</PickerItemIcon>}
+            {(choice.primary || choice.secondary) && <PickerItemText
+                primary={choice.primary}
+                secondary={choice.secondary}
+            />}
+        </Fragment>}
+    </ListItemButton>
+);
+
+export const SelectChoiceGroupSubheader = styled(ListSubheader)(({ theme }) => ({
+    padding: theme.spacing(1, 1, .5),
+    lineHeight: 'unset',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    backgroundImage: 'none',
+    ...theme.applyStyles('dark', {
+        backgroundImage: theme.vars ? theme.vars.overlays[8] : `linear-gradient(${alpha('#fff', getOverlayAlpha(8))}, ${alpha('#fff', getOverlayAlpha(8))})`
+    }),
+    [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(1, 1.5, .5)
+    }
+}));
+
 export const Select = <T, >(
     {
         value,
@@ -63,7 +150,7 @@ export const Select = <T, >(
     const [open, setOpen] = useState(false);
 
     const renderValue = useCallback((selected: T | T[]) => {
-        const render = (choice: SelectItem<T>) => {
+        const render = (choice: SelectChoiceButton<T>) => {
             if ('children' in choice)
                 return choice.children;
 
@@ -76,9 +163,15 @@ export const Select = <T, >(
         };
 
         if (Array.isArray(selected))
-            return choices.filter((choice) => selected.includes(choice.value)).map(render).join(', ');
+            return choices
+                .filter((choice): choice is SelectChoiceButton<T> => !choice.type || choice.type === 'button')
+                .filter((choice): choice is SelectChoiceButton<T> => selected.includes(choice.value))
+                .map(render)
+                .join(', ');
 
-        const choice = choices.find((choice) => choice.value === selected);
+        const choice = choices
+            .filter((choice): choice is SelectChoiceButton<T> => !choice.type || choice.type === 'button')
+            .find((choice) => choice.value === selected);
         if (!choice)
             return undefined;
 
@@ -89,7 +182,7 @@ export const Select = <T, >(
 
     const handleSelectClose = useCallback(() => setOpen(false), []);
 
-    const handleChoiceClick = useCallback((choice: SelectItem<T>, index: number) => (e: MouseEvent<HTMLElement>) => {
+    const handleChoiceClick = useCallback((choice: SelectChoiceButton<T>, index: number) => (e: MouseEvent<HTMLElement>) => {
         if (multiple) {
             setValue((prevValue) => xor(prevValue, [choice.value]));
         } else {
@@ -114,22 +207,40 @@ export const Select = <T, >(
                 }}
                 {...props}
             >
-                {choices.map((choice, index) => (
-                    <MenuItem
-                        key={choice.value as string}
-                        value={choice.value as string}
-                        onClick={handleChoiceClick(choice, index)}
-                        disabled={choice.disabled}
-                    >
-                        {'children' in choice ? choice.children : <Fragment>
-                            {choice.icon && <ListItemIcon>{choice.icon}</ListItemIcon>}
-                            {(choice.primary || choice.secondary) && <ListItemText
-                                primary={choice.primary}
-                                secondary={choice.secondary}
-                            />}
-                        </Fragment>}
-                    </MenuItem>
-                ))}
+                {choices.map((choice, index) => {
+                    switch (choice.type) {
+                        case 'divider':
+                            return (<Divider />);
+
+                        case 'group':
+                            return (
+                                <Fragment>
+                                    <SelectChoiceGroupSubheader>{choice.label}</SelectChoiceGroupSubheader>
+                                    {choice.items.map((item) => {
+                                        if (item.type === 'divider')
+                                            return (<Divider />);
+
+                                        return (
+                                            <DesktopSelectChoiceButton
+                                                key={item.value as string}
+                                                choice={item}
+                                                onClick={handleChoiceClick(item, index)}
+                                            />
+                                        );
+                                    })}
+                                </Fragment>
+                            );
+
+                        default:
+                            return (
+                                <DesktopSelectChoiceButton
+                                    key={choice.value as string}
+                                    choice={choice}
+                                    onClick={handleChoiceClick(choice, index)}
+                                />
+                            );
+                    }
+                })}
             </MuiSelect>
 
             <MobilePickerRoot
@@ -142,22 +253,40 @@ export const Select = <T, >(
             >
                 <MobilePickerContent ref={setSheetContentRef}>
                     <Virtualizer scrollRef={sheetScrollRef} overscan={2}>
-                        {choices.map((choice, index) => (
-                            <ListItemButton
-                                key={choice.value as string}
-                                onClick={handleChoiceClick(choice, index)}
-                                selected={multiple ? value.includes(choice.value) : value === choice.value}
-                                disabled={choice.disabled}
-                            >
-                                {'children' in choice ? choice.children : <Fragment>
-                                    {choice.icon && <PickerItemIcon>{choice.icon}</PickerItemIcon>}
-                                    {(choice.primary || choice.secondary) && <PickerItemText
-                                        primary={choice.primary}
-                                        secondary={choice.secondary}
-                                    />}
-                                </Fragment>}
-                            </ListItemButton>
-                        ))}
+                        {choices.map((choice, index) => {
+                            switch (choice.type) {
+                                case 'divider':
+                                    return (<Divider />);
+
+                                case 'group':
+                                    return (
+                                        <List>
+                                            <SelectChoiceGroupSubheader>{choice.label}</SelectChoiceGroupSubheader>
+                                            {choice.items.map((item) => {
+                                                if (item.type === 'divider')
+                                                    return (<Divider />);
+
+                                                return (
+                                                    <MobileSelectChoiceButton
+                                                        key={item.value as string}
+                                                        choice={item}
+                                                        onClick={handleChoiceClick(item, index)}
+                                                    />
+                                                );
+                                            })}
+                                        </List>
+                                    );
+
+                                default:
+                                    return (
+                                        <MobileSelectChoiceButton
+                                            key={choice.value as string}
+                                            choice={choice}
+                                            onClick={handleChoiceClick(choice, index)}
+                                        />
+                                    );
+                            }
+                        })}
                     </Virtualizer>
                 </MobilePickerContent>
             </MobilePickerRoot>

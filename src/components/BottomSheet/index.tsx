@@ -38,13 +38,7 @@ export const BottomSheet = styled(
     '& [data-rsbs-overlay], &::after': {
         backgroundImage: 'none',
         ...theme.applyStyles('dark', {
-            backgroundImage: `linear-gradient(${alpha(
-                '#fff',
-                Number(getOverlayAlpha(8))
-            )}, ${alpha(
-                '#fff',
-                Number(getOverlayAlpha(8))
-            )})`
+            backgroundImage: theme.vars ? theme.vars.overlays[8] : `linear-gradient(${alpha('#fff', getOverlayAlpha(8))}, ${alpha('#fff', getOverlayAlpha(8))})`
         })
     },
     '&[data-rsbs-has-header="true"] [data-rsbs-header]': {
