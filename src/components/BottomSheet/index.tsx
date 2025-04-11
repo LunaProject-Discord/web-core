@@ -1,3 +1,5 @@
+'use client';
+
 import { alpha, Box, getOverlayAlpha, IconButton, styled, Tooltip } from '@mui/material';
 import clsx from 'clsx';
 import React, { ComponentPropsWithoutRef, forwardRef, useContext } from 'react';
