@@ -1,10 +1,25 @@
 import { alpha, Box, getOverlayAlpha, IconButton, styled, Tooltip } from '@mui/material';
+import clsx from 'clsx';
 import React, { useContext } from 'react';
-import { BottomSheet as BottomSheetRoot } from 'react-spring-bottom-sheet';
+import { BottomSheet as BottomSheetRoot, BottomSheetProps } from 'react-spring-bottom-sheet';
 import { SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
-import { ConfigContext } from '../../utils';
+import { ConfigContext, generateComponentClasses } from '../../utils';
 
-export const BottomSheet = styled(BottomSheetRoot)(({ theme }) => ({
+export const bottomSheetClasses = generateComponentClasses(
+    'BottomSheet',
+    [
+        'root'
+    ]
+);
+
+export const BottomSheet = styled(
+    ({ className, ...props }: BottomSheetProps) => (
+        <BottomSheetRoot
+            className={clsx(bottomSheetClasses.root, className)}
+            {...props}
+        />
+    )
+)(({ theme }) => ({
     '--rsbs-bg': (theme.vars || theme).palette.background.paper,
     '--rsbs-handle-bg': (theme.vars || theme).palette.divider,
     '--rsbs-overlay-rounded': `${theme.spacing(1.5)} !important`,
@@ -72,4 +87,8 @@ export const BottomSheetContent = styled(Box)(({ theme }) => ({
     gap: theme.spacing(2)
 }));
 
-export const defaultSnapPoints = ({ maxHeight, minHeight, headerHeight }: SnapPointProps) => [Math.min(maxHeight - 8 * 9, minHeight), headerHeight];
+export const defaultSnapPoints = ({
+                                      maxHeight,
+                                      minHeight,
+                                      headerHeight
+                                  }: SnapPointProps) => [Math.min(maxHeight - 8 * 9, minHeight), headerHeight];
