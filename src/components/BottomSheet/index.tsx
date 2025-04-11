@@ -1,7 +1,7 @@
 import { alpha, Box, getOverlayAlpha, IconButton, styled, Tooltip } from '@mui/material';
 import clsx from 'clsx';
-import React, { useContext } from 'react';
-import { BottomSheet as BottomSheetRoot, BottomSheetProps } from 'react-spring-bottom-sheet';
+import React, { ComponentPropsWithoutRef, forwardRef, useContext } from 'react';
+import { BottomSheet as BottomSheetRoot, BottomSheetRef } from 'react-spring-bottom-sheet';
 import { SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
 import { ConfigContext, generateComponentClasses } from '../../utils';
 
@@ -13,12 +13,19 @@ export const bottomSheetClasses = generateComponentClasses(
 );
 
 export const BottomSheet = styled(
-    ({ className, ...props }: BottomSheetProps) => (
+    forwardRef<BottomSheetRef, ComponentPropsWithoutRef<typeof BottomSheetRoot>>((
+        {
+            className,
+            ...props
+        },
+        ref
+    ) => (
         <BottomSheetRoot
+            ref={ref}
             className={clsx(bottomSheetClasses.root, className)}
             {...props}
         />
-    )
+    ))
 )(({ theme }) => ({
     '--rsbs-bg': (theme.vars || theme).palette.background.paper,
     '--rsbs-handle-bg': (theme.vars || theme).palette.divider,
