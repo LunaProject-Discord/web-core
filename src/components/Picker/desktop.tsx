@@ -1,14 +1,6 @@
 'use client';
 
-import {
-    Box,
-    listClasses,
-    listItemButtonClasses,
-    Popover,
-    popoverClasses,
-    SlotComponentProps,
-    styled
-} from '@mui/material';
+import { Box, listClasses, Popover, popoverClasses, SlotComponentProps, styled } from '@mui/material';
 import React, { cloneElement, useCallback, useContext } from 'react';
 import { VList } from 'virtua';
 import { borderAndBoxShadow, ConfigContext } from '../../utils';
@@ -28,11 +20,6 @@ export const DesktopPickerContent = styled(Box)(({ theme }) => ({
     height: 300,
     [`& .${listClasses.root}`]: {
         padding: 0
-    },
-    [`& .${listItemButtonClasses.root}`]: {
-        padding: theme.spacing(.5, 1),
-        gap: theme.spacing(1),
-        borderRadius: theme.shape.borderRadius
     }
 }));
 
@@ -84,7 +71,7 @@ export const DesktopPicker = <T, >(
                 {...slotProps?.searchBox}
             />}
             <DesktopPickerContent {...slotProps?.content}>
-                {choices.length > 0 ? <VList style={{ padding: 8 }}>
+                {choices.length > 0 ? <VList style={{ padding: '8px 0' }}>
                     {choices.map((choice, index) => {
                         const id = getChoiceId(choice, index);
 

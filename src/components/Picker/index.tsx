@@ -1,12 +1,24 @@
 'use client';
 
-import { ListItemIcon, ListItemText, listItemTextClasses, SlotComponentProps, styled, useMediaQuery } from '@mui/material';
+import {
+    ListItemButton,
+    ListItemButtonProps,
+    ListItemIcon,
+    ListItemIconProps,
+    ListItemText,
+    listItemTextClasses,
+    ListItemTextProps,
+    SlotComponentProps,
+    styled,
+    useMediaQuery
+} from '@mui/material';
+import clsx from 'clsx';
 import deepmerge from 'lodash/merge';
 import React, { Dispatch, MouseEvent, ReactElement, SetStateAction } from 'react';
+import { generateComponentClasses, SomeRequired } from '../../utils';
 import { SlotRootProps } from '../SectionCard';
-import { SomeRequired } from '../../utils';
-import { MobilePicker, MobilePickerSlotProps } from './mobile';
 import { DesktopPicker, DesktopPickerSlotProps } from './desktop';
+import { MobilePicker, MobilePickerSlotProps } from './mobile';
 import { PickerSearchBox } from './search_box';
 import { getPickerChoices, usePickerSearch } from './utils';
 
@@ -50,13 +62,54 @@ export interface PickerItemProps<T> {
     onClick?: PickerChoiceClickHandler<T>;
 }
 
-export const PickerItemIcon = styled(ListItemIcon)(({ theme }) => ({
+export const pickerItemClasses = generateComponentClasses(
+    'PickerItem',
+    [
+        'root',
+        'icon',
+        'text'
+    ]
+);
+
+export const PickerItem = styled(
+    ({ className, ...props }: ListItemButtonProps) => (
+        <ListItemButton
+            className={clsx(pickerItemClasses.root, className)}
+            {...props}
+        />
+    )
+)(({ theme }) => ({
+    minHeight: theme.spacing(6),
+    padding: theme.spacing(1, 2),
+    gap: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+        minHeight: theme.spacing(5),
+        padding: theme.spacing(.5, 1.5),
+        gap: theme.spacing(1.5)
+    }
+}));
+
+export const PickerItemIcon = styled(
+    ({ className, ...props }: ListItemIconProps) => (
+        <ListItemIcon
+            className={clsx(pickerItemClasses.icon, className)}
+            {...props}
+        />
+    )
+)(({ theme }) => ({
     minWidth: theme.spacing(3),
     placeItems: 'center',
     placeContent: 'center'
 }));
 
-export const PickerItemText = styled(ListItemText)({
+export const PickerItemText = styled(
+    ({ className, ...props }: ListItemTextProps) => (
+        <ListItemText
+            className={clsx(pickerItemClasses.text, className)}
+            {...props}
+        />
+    )
+)({
     [`& .${listItemTextClasses.primary}`]: {
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
