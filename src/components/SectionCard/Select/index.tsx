@@ -54,6 +54,28 @@ export const SectionSelectCard = <T, >(
         } = {}
     } = components?.SectionSelectCard ?? {};
 
+    console.log(
+        ...merges<any>(
+            {
+                slotProps: {
+                    input: {
+                        root: {
+                            className: sectionSelectCardClasses.control,
+                            sx: {
+                                width: {
+                                    xs: '100%',
+                                    md: 300
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            configSlotProps,
+            slotProps
+        )
+    );
+
     const theme = useTheme();
 
     const disabled = _disabled ?? configDisabled;

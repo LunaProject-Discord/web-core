@@ -41,20 +41,14 @@ export const SelectPicker = <T, >({ slotProps, ...props }: SelectPickerProps<T>)
     if (isSmall) {
         return (
             <DesktopSelectPicker<T>
-                slotProps={{
-                    root: slotProps?.desktop?.root,
-                    content: slotProps?.desktop?.content
-                }}
+                slotProps={slotProps?.desktop}
                 {...props}
             />
         );
     } else {
         return (
             <MobileSelectPicker<T>
-                slotProps={{
-                    root: slotProps?.mobile?.root,
-                    content: slotProps?.mobile?.content
-                }}
+                slotProps={slotProps?.mobile}
                 {...props}
             />
         );
