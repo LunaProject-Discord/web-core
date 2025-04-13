@@ -1,8 +1,9 @@
 'use client';
 
 import { Box, Typography } from '@mui/material';
+import deepmerge from 'lodash/merge';
 import xor from 'lodash/xor';
-import React, { Fragment, MouseEvent, ReactNode, useCallback, useState } from 'react';
+import React, { Fragment, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { SectionCardDisabledProps, SectionCardDisplayRootProps, SectionCardVariableProps } from '../SectionCard';
 import { SelectOutlinedInput, SelectOutlinedInputProps } from './input';
 import { SelectPicker, SelectPickerSlotProps } from './picker';
@@ -58,7 +59,12 @@ export const Select = <T, >(
         slotProps
     }: SelectProps<T>
 ) => {
+    const inputRef = useRef<HTMLDivElement | null>(null);
+    const desktopPickerRef = useRef<HTMLDivElement | null>(null);
+
     const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
+    const [inputWidth, setInputWidth] = useState<number>(0);
+    const [desktopPickerWidth, setDesktopPickerWidth] = useState<number>(0);
 
     const renderValue = useCallback(() => {
         const render = (choice: SelectChoiceButton<T>) => {
@@ -105,9 +111,26 @@ export const Select = <T, >(
             setAnchorEl(undefined);
     }, [setValue, multiple]);
 
+    useEffect(() => {
+        const inputElement = inputRef.current;
+        if (!inputElement)
+            return;
+
+        setInputWidth(inputElement.offsetWidth);
+    }, [inputRef, value]);
+
+    useEffect(() => {
+        const desktopPickerElement = desktopPickerRef.current;
+        if (!desktopPickerElement)
+            return;
+
+        setDesktopPickerWidth(desktopPickerElement.offsetWidth);
+    }, [desktopPickerRef, choices]);
+
     return (
         <Fragment>
             <SelectOutlinedInput
+                ref={inputRef}
                 open={Boolean(anchorEl)}
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 disabled={disabled}
@@ -122,7 +145,20 @@ export const Select = <T, >(
                 choices={choices}
                 selected={multiple ? value : [value]}
                 onClick={handleChoiceClick}
-                slotProps={slotProps?.picker}
+                slotProps={{
+                    desktop: {
+                        root: deepmerge(
+                            {
+                                ref: desktopPickerRef,
+                                sx: {
+                                    minWidth: inputWidth > desktopPickerWidth ? inputWidth : undefined
+                                }
+                            },
+                            slotProps?.picker?.desktop?.root
+                        )
+                    },
+                    mobile: slotProps?.picker?.mobile
+                }}
             />
         </Fragment>
     );

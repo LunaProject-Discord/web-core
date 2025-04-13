@@ -106,24 +106,22 @@ export const SectionSelectCard = <T, >(
                 choices={choices}
                 multiple={multiple}
                 disabled={disabled}
-                {...merges<any>(
-                    {
-                        slotProps: {
-                            input: {
-                                root: {
-                                    className: sectionSelectCardClasses.control,
-                                    sx: {
-                                        width: {
-                                            xs: '100%',
-                                            md: 300
-                                        }
-                                    }
+                slotProps={{
+                    input: {
+                        root: {
+                            className: sectionSelectCardClasses.control,
+                            sx: {
+                                width: {
+                                    xs: '100%',
+                                    md: 300
                                 }
                             }
                         }
-                    },
-                    configSlotProps,
-                    slotProps
+                    }
+                }}
+                {...merges(
+                    configControlProps as Partial<SelectProps<any>>,
+                    controlProps as Partial<SelectProps<any>>
                 )}
             />
         </SectionCard>
