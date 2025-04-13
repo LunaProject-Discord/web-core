@@ -231,9 +231,11 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
     MuiMenuItem: {
         styleOverrides: {
             root: ({ theme }) => ({
+                minHeight: theme.spacing(6),
                 padding: theme.spacing(1, 2),
                 gap: theme.spacing(2),
                 [theme.breakpoints.up('sm')]: {
+                    minHeight: theme.spacing(5),
                     padding: theme.spacing(.5, 1.5),
                     gap: theme.spacing(1.5)
                 }
