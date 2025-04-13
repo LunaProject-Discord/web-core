@@ -34,7 +34,10 @@ export const SectionOutlinedNumberFieldCard = (
         className,
         sx,
         slots = {},
-        slotProps: { control: controlProps = {}, ...slotProps } = {},
+        slotProps: {
+            control: controlProps = {},
+            ...slotProps
+        } = {},
         ...props
     }: SectionOutlinedNumberFieldCardProps
 ) => {
@@ -83,7 +86,12 @@ export const SectionOutlinedNumberFieldCard = (
                 setValue={setValue}
                 disabled={disabled}
                 className={sectionOutlinedNumberFieldCardClasses.control}
-                sx={{ width: { xs: '100%', md: 300 } }}
+                sx={{
+                    width: {
+                        xs: '100%',
+                        md: 300
+                    }
+                }}
                 {...merges(configControlProps, controlProps)}
             />
         </SectionCard>

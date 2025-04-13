@@ -34,7 +34,10 @@ export const SectionSwitchCard = (
         className,
         sx,
         slots = {},
-        slotProps: { control: controlProps = {}, ...slotProps } = {},
+        slotProps: {
+            control: controlProps = {},
+            ...slotProps
+        } = {},
         ...props
     }: SectionSwitchCardProps
 ) => {

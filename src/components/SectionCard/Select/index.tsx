@@ -1,7 +1,6 @@
 'use client';
 
 import { useTheme } from '@mui/material';
-import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
@@ -12,9 +11,9 @@ import {
     SectionCardDisplayRootProps,
     SectionCardProps,
     SectionCardRootProps,
-    SlotRootProps
+    SectionControlCardSlotProps
 } from '../index';
-import { generateSectionControlCardClasses, merges, SectionControlCardSlotProps } from '../utils';
+import { generateSectionControlCardClasses, merges } from '../utils';
 
 export const sectionSelectCardClasses = generateSectionControlCardClasses('Select');
 
@@ -37,7 +36,10 @@ export const SectionSelectCard = <T, >(
         className,
         sx,
         slots = {},
-        slotProps: { control: controlProps = {}, ...slotProps } = {},
+        slotProps: {
+            control: controlProps = {},
+            ...slotProps
+        } = {},
         ...props
     }: SectionSelectCardProps<T>
 ) => {
@@ -82,11 +84,25 @@ export const SectionSelectCard = <T, >(
                 choices={choices}
                 multiple={multiple}
                 disabled={disabled}
-                fullWidth
-                size="small"
-                className={sectionSelectCardClasses.control}
-                sx={{ minWidth: 300 }}
-                {...merges(configControlProps as SlotComponentProps<typeof Select<T>, SlotRootProps, {}>, controlProps)}
+                {...merges<any>(
+                    {
+                        slotProps: {
+                            input: {
+                                root: {
+                                    className: sectionSelectCardClasses.control,
+                                    sx: {
+                                        width: {
+                                            xs: '100%',
+                                            md: 300
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    configSlotProps,
+                    slotProps
+                )}
             />
         </SectionCard>
     );

@@ -6,9 +6,9 @@ import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
-import deepmerge from 'deepmerge';
+import deepmerge from 'lodash/merge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
-import { Config, ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
+import { ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
 import {
     SectionButtonCard,
     sectionCardClasses,
@@ -310,7 +310,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
     const readOnly = _readOnly ?? configReadOnly;
     const variant = _variant ?? configVariant ?? configRootVariant;
 
-    const rootConfig = deepmerge<Config>(
+    const rootConfig = deepmerge(
         config,
         {
             components: {
@@ -320,7 +320,7 @@ export const SectionAccordionCard = <C extends ElementType = BoxTypeMap['default
             }
         }
     );
-    const itemsConfig = deepmerge<Config>(
+    const itemsConfig = deepmerge(
         rootConfig,
         {
             components: {

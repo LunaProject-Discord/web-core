@@ -28,7 +28,7 @@ export interface PickerBaseProps {
 }
 
 export type PickerGetChoiceId<T> = (choice: T, index: number) => string;
-export type PickerChoiceClickHandler<T> = (event: MouseEvent<HTMLDivElement>, choice: T, index: number) => void;
+export type PickerChoiceClickHandler<T> = (event: MouseEvent<HTMLElement>, choice: T, index: number) => void;
 export type PickerChoiceFilter<T> = (choice: T, search: string) => boolean;
 
 export interface PickerRootProps<T> extends PickerBaseProps {

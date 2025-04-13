@@ -2,22 +2,26 @@
 
 import {
     ArrowBackOutlined,
-    ArrowDownwardOutlined, ArrowDropDownOutlined,
+    ArrowDownwardOutlined,
+    ArrowDropDownOutlined,
     ArrowDropUpOutlined,
     ArrowRightOutlined,
-    ArrowUpwardOutlined, CloudOffOutlined, CloudOutlined,
+    ArrowUpwardOutlined,
+    CloudOffOutlined,
+    CloudOutlined,
     ExpandLessOutlined,
     ExpandMoreOutlined,
     KeyboardArrowDownOutlined,
     KeyboardArrowLeftOutlined,
     KeyboardArrowRightOutlined,
     KeyboardArrowUpOutlined,
-    OpenInNewOutlined, SearchOutlined,
+    OpenInNewOutlined,
+    SearchOutlined,
     ToggleOffOutlined,
     ToggleOnOutlined
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
-import deepmerge from 'deepmerge';
+import deepmerge from 'lodash/merge';
 import { createContext, createElement, Fragment, ProviderProps, ReactNode } from 'react';
 import {
     SectionAccordionCardConfigProps,

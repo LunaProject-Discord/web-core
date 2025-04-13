@@ -33,7 +33,10 @@ export const SectionFilledTextFieldCard = (
         className,
         sx,
         slots = {},
-        slotProps: { control: controlProps = {}, ...slotProps } = {},
+        slotProps: {
+            control: controlProps = {},
+            ...slotProps
+        } = {},
         ...props
     }: SectionFilledTextFieldCardProps
 ) => {
@@ -84,7 +87,12 @@ export const SectionFilledTextFieldCard = (
                 size="small"
                 margin="none"
                 className={sectionFilledTextFieldCardClasses.control}
-                sx={{ width: { xs: '100%', md: 300 } }}
+                sx={{
+                    width: {
+                        xs: '100%',
+                        md: 300
+                    }
+                }}
                 {...merges(configControlProps, controlProps)}
             />
         </SectionCard>

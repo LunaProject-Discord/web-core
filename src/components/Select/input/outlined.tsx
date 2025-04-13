@@ -3,8 +3,8 @@
 import { Box, BoxProps, SlotComponentProps, styled, typographyClasses } from '@mui/material';
 import clsx from 'clsx';
 import React, { forwardRef, useContext } from 'react';
-import { ConfigContext, generateComponentClasses } from '../../utils';
-import { SlotRootProps } from '../SectionCard';
+import { ConfigContext, generateComponentClasses } from '../../../utils';
+import { SlotRootProps } from '../../SectionCard';
 import { SelectInputProps, SelectInputRootProps } from './index';
 
 export const selectOutlinedInputClasses = generateComponentClasses(
@@ -53,7 +53,7 @@ export const SelectOutlinedInputRoot = styled(
             borderColor: (theme.vars || theme).palette.primary.main
         }
     },
-    [`&:not(.${selectOutlinedInputClasses.open}.${selectOutlinedInputClasses.disabled}):hover .${selectOutlinedInputClasses.outline}`]: {
+    [`&:not(.${selectOutlinedInputClasses.open}):not(.${selectOutlinedInputClasses.disabled}):hover .${selectOutlinedInputClasses.outline}`]: {
         borderColor: (theme.vars || theme).palette.text.primary
     },
     [`&.${selectOutlinedInputClasses.disabled}`]: {
