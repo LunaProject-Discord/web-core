@@ -26,9 +26,9 @@ export const PickerSearchBoxRoot = styled(
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing(1.5),
-    backgroundColor: theme.vars.palette.grey[100],
+    backgroundColor: (theme.vars || theme).palette.grey[100],
     ...theme.applyStyles('dark', {
-        backgroundColor: theme.vars.palette.grey[900]
+        backgroundColor: (theme.vars || theme).palette.grey[900]
     })
 }));
 

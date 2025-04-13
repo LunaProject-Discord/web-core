@@ -43,26 +43,24 @@ export const SelectOutlinedInputRoot = styled(
     gap: theme.spacing(1),
     userSelect: 'none',
     cursor: 'pointer',
-    color: theme.vars.palette.text.primary,
+    color: (theme.vars || theme).palette.text.primary,
     [`&.${selectOutlinedInputClasses.open}`]: {
         [`& .${selectOutlinedInputClasses.icon}`]: {
             transform: 'rotate(180deg)'
         },
-        [`&:not(.${selectOutlinedInputClasses.disabled})`]: {
-            [`&:hover .${selectOutlinedInputClasses.outline}`]: {
-                borderColor: theme.vars.palette.text.primary
-            },
-            [`& .${selectOutlinedInputClasses.outline}`]: {
-                borderWidth: 2,
-                borderColor: theme.vars.palette.primary.main
-            }
+        [`&:not(.${selectOutlinedInputClasses.disabled}) .${selectOutlinedInputClasses.outline}`]: {
+            borderWidth: 2,
+            borderColor: (theme.vars || theme).palette.primary.main
         }
+    },
+    [`&:not(.${selectOutlinedInputClasses.open}.${selectOutlinedInputClasses.disabled}):hover .${selectOutlinedInputClasses.outline}`]: {
+        borderColor: (theme.vars || theme).palette.text.primary
     },
     [`&.${selectOutlinedInputClasses.disabled}`]: {
         cursor: 'default',
-        color: theme.vars.palette.text.disabled,
+        color: (theme.vars || theme).palette.text.disabled,
         [`& .${selectOutlinedInputClasses.icon}`]: {
-            color: theme.vars.palette.text.disabled
+            color: (theme.vars || theme).palette.text.disabled
         }
     }
 }));
@@ -80,7 +78,7 @@ export const SelectOutlinedInputIcon = styled(
     display: 'flex',
     placeItems: 'center',
     placeContent: 'center',
-    color: theme.vars.palette.action.active
+    color: (theme.vars || theme).palette.action.active
 }));
 
 export const SelectOutlinedInputContent = styled(

@@ -224,15 +224,19 @@ export const MuiComponents: Components<Omit<Theme, 'components'>> = {
         styleOverrides: {
             paper: ({ theme }) => borderAndBoxShadow(theme),
             list: ({ theme }) => ({
-                padding: theme.spacing(1)
+                padding: theme.spacing(1, 0)
             })
         }
     },
     MuiMenuItem: {
         styleOverrides: {
             root: ({ theme }) => ({
-                padding: theme.spacing(1),
-                borderRadius: theme.shape.borderRadius
+                padding: theme.spacing(1, 2),
+                gap: theme.spacing(2),
+                [theme.breakpoints.up('sm')]: {
+                    padding: theme.spacing(.5, 1.5),
+                    gap: theme.spacing(1.5)
+                }
             })
         }
     },
