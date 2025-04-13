@@ -25,8 +25,12 @@ export const PickerSearchBoxRoot = styled(
     padding: theme.spacing(1.5, 2),
     display: 'flex',
     alignItems: 'center',
-    gap: theme.spacing(1.5),
+    gap: theme.spacing(2),
     backgroundColor: (theme.vars || theme).palette.grey[100],
+    [theme.breakpoints.up('sm')]: {
+        padding: theme.spacing(1.25, 1.5),
+        gap: theme.spacing(1.5),
+    },
     ...theme.applyStyles('dark', {
         backgroundColor: (theme.vars || theme).palette.grey[900]
     })

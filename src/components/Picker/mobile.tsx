@@ -1,22 +1,22 @@
 'use client';
 
-import { Box, BoxProps, listClasses, listItemButtonClasses, listSubheaderClasses, SlotComponentProps, styled } from '@mui/material';
+import { Box, BoxProps, listClasses, listSubheaderClasses, SlotComponentProps, styled } from '@mui/material';
 import React, { cloneElement, useContext } from 'react';
 import { Virtualizer } from 'virtua';
 import { ConfigContext } from '../../utils';
+import { BottomSheet, BottomSheetContent } from '../BottomSheet';
 import { errorClasses, ErrorDescription, ErrorRoot, ErrorTitle } from '../Error';
+import { SlotRootProps } from '../SectionCard';
 import { PickerInternalProps } from './index';
 import { PickerSearchBox, pickerSearchBoxClasses } from './search_box';
 import { getMobilePickerDefaultSnap, getMobilePickerSnapPoints, useMobilePickerRef } from './utils';
-import { BottomSheet, BottomSheetContent } from '../BottomSheet';
-import { SlotRootProps } from '../SectionCard';
 
 export const MobilePickerRoot = styled(BottomSheet)(({ theme }) => ({
-    '& [data-rsbs-header]': {
+    '&[data-rsbs-has-header="true"] [data-rsbs-header]': {
+        height: theme.spacing(9.5),
         zIndex: 2,
         [`& .${pickerSearchBoxClasses.root}`]: {
-            margin: theme.spacing(0, -2),
-            padding: theme.spacing(1.25, 2)
+            margin: theme.spacing(0, -2)
         }
     },
     '& [data-rsbs-scroll]': {
@@ -67,7 +67,7 @@ export const MobilePicker = <T, >(
         search,
         setSearch,
         disableSearch,
-        slotProps,
+        slotProps
     }: MobilePickerProps<T>
 ) => {
     const { icons: { CloudOff }, translations } = useContext(ConfigContext);
