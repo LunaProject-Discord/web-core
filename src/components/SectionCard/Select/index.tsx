@@ -2,6 +2,7 @@
 
 import { useTheme } from '@mui/material';
 import clsx from 'clsx';
+import deepmerge from 'deepmerge';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { Select, SelectProps } from '../../Select';
@@ -55,24 +56,26 @@ export const SectionSelectCard = <T, >(
     } = components?.SectionSelectCard ?? {};
 
     console.log(
-        ...merges<any>(
-            {
-                slotProps: {
-                    input: {
-                        root: {
-                            className: sectionSelectCardClasses.control,
-                            sx: {
-                                width: {
-                                    xs: '100%',
-                                    md: 300
+        deepmerge.all(
+            [
+                {
+                    slotProps: {
+                        input: {
+                            root: {
+                                className: sectionSelectCardClasses.control,
+                                sx: {
+                                    width: {
+                                        xs: '100%',
+                                        md: 300
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            },
-            configSlotProps,
-            slotProps
+                },
+                configSlotProps,
+                slotProps
+            ]
         )
     );
 
