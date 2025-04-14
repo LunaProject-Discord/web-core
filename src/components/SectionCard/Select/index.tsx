@@ -111,8 +111,8 @@ export const SectionSelectCard = <T, >(
                         root: {
                             className: sectionSelectCardClasses.control,
                             sx: {
-                                width: {
-                                    xs: '100%',
+                                minWidth: {
+                                    xs: undefined,
                                     md: 300
                                 }
                             }

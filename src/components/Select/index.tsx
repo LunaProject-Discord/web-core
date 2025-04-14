@@ -1,10 +1,16 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Menu, SlotComponentProps, Typography } from '@mui/material';
 import deepmerge from 'lodash/merge';
 import xor from 'lodash/xor';
 import React, { Fragment, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-import { SectionCardDisabledProps, SectionCardDisplayRootProps, SectionCardVariableProps } from '../SectionCard';
+import {
+    merges,
+    SectionCardDisabledProps,
+    SectionCardDisplayRootProps,
+    SectionCardVariableProps,
+    SlotRootProps
+} from '../SectionCard';
 import { SelectOutlinedInput, SelectOutlinedInputProps } from './input';
 import { SelectPicker, SelectPickerSlotProps } from './picker';
 
@@ -116,6 +122,7 @@ export const Select = <T, >(
         if (!inputElement)
             return;
 
+        console.log('useEffect#inputRef', inputElement);
         setInputWidth(inputElement.offsetWidth);
     }, [inputRef, value]);
 
@@ -124,13 +131,21 @@ export const Select = <T, >(
         if (!desktopPickerElement)
             return;
 
+        console.log('useEffect#desktopPickerRef', desktopPickerElement);
         setDesktopPickerWidth(desktopPickerElement.offsetWidth);
     }, [desktopPickerRef, choices]);
 
     return (
         <Fragment>
             <SelectOutlinedInput
-                ref={inputRef}
+                ref={(element) => {
+                    if (!element)
+                        return;
+
+                    console.log('inputRef', element);
+                    inputRef.current = element;
+                    setInputWidth(element.clientWidth);
+                }}
                 open={Boolean(anchorEl)}
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 disabled={disabled}
@@ -147,14 +162,21 @@ export const Select = <T, >(
                 onClick={handleChoiceClick}
                 slotProps={{
                     desktop: {
-                        root: deepmerge(
+                        root: merges<SlotComponentProps<typeof Menu, SlotRootProps, {}>>(
                             {
-                                ref: desktopPickerRef,
+                                ref: (element) => {
+                                    if (!element)
+                                        return;
+
+                                    console.log('desktopPickerRef', element);
+                                    desktopPickerRef.current = element;
+                                    setDesktopPickerWidth(element.clientWidth);
+                                },
                                 sx: {
                                     minWidth: inputWidth > desktopPickerWidth ? inputWidth : undefined
                                 }
                             },
-                            slotProps?.picker?.desktop?.root
+                            slotProps?.picker?.desktop?.root ?? {}
                         )
                     },
                     mobile: slotProps?.picker?.mobile
