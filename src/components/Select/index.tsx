@@ -172,7 +172,8 @@ export const Select = <T, >(
                                     setDesktopPickerWidth(element.offsetWidth);
                                 },
                                 sx: {
-                                    minWidth: inputWidth > desktopPickerWidth ? inputWidth : undefined
+                                    minWidth: inputWidth,
+                                    bgcolor: '#959ac0',
                                 }
                             },
                             slotProps?.picker?.desktop?.root ?? {}
