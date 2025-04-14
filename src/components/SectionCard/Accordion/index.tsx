@@ -6,7 +6,7 @@ import { CreateSlotsAndSlotProps } from '@mui/material/utils/types';
 import { BoxTypeMap } from '@mui/system';
 import { SlotComponentProps } from '@mui/utils';
 import clsx from 'clsx';
-import deepmerge from 'lodash/merge';
+import deepmerge from 'deepmerge';
 import React, { Dispatch, ElementType, ReactNode, SetStateAction, useContext, useState } from 'react';
 import { ConfigContext, ConfigProvider, generateComponentClasses } from '../../../utils';
 import {

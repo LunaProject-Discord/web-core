@@ -13,7 +13,7 @@ import {
     useMediaQuery
 } from '@mui/material';
 import clsx from 'clsx';
-import deepmerge from 'lodash/merge';
+import deepmerge from 'deepmerge';
 import React, { Dispatch, MouseEvent, ReactElement, SetStateAction } from 'react';
 import { generateComponentClasses, SomeRequired } from '../../utils';
 import { SlotRootProps } from '../SectionCard';
@@ -139,7 +139,7 @@ export const Picker = <T, >(
                 slotProps={{
                     root: slotProps?.desktop?.root,
                     content: slotProps?.desktop?.content,
-                    searchBox: deepmerge(
+                    searchBox: deepmerge<SlotComponentProps<typeof PickerSearchBox, SlotRootProps, {}>>(
                         slotProps?.searchBox ?? {},
                         slotProps?.desktop?.searchBox ?? {}
                     )
@@ -153,7 +153,7 @@ export const Picker = <T, >(
                 slotProps={{
                     root: slotProps?.mobile?.root,
                     content: slotProps?.mobile?.content,
-                    searchBox: deepmerge(
+                    searchBox: deepmerge<SlotComponentProps<typeof PickerSearchBox, SlotRootProps, {}>>(
                         slotProps?.searchBox ?? {},
                         slotProps?.mobile?.searchBox ?? {}
                     )

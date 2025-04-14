@@ -1,10 +1,10 @@
 'use client';
 
 import { Box, Menu, SlotComponentProps, Typography } from '@mui/material';
+import { deepmerge } from '@mui/utils';
 import xor from 'lodash/xor';
 import React, { Fragment, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import {
-    merges,
     SectionCardDisabledProps,
     SectionCardDisplayRootProps,
     SectionCardVariableProps,
@@ -161,7 +161,7 @@ export const Select = <T, >(
                 onClick={handleChoiceClick}
                 slotProps={{
                     desktop: {
-                        root: merges<SlotComponentProps<typeof Menu, SlotRootProps, {}>>(
+                        root: deepmerge<SlotComponentProps<typeof Menu, SlotRootProps, {}>>(
                             {
                                 ref: (element) => {
                                     if (!element)
@@ -173,7 +173,7 @@ export const Select = <T, >(
                                 },
                                 sx: {
                                     minWidth: inputWidth,
-                                    bgcolor: '#959ac0',
+                                    backgroundColor: '#959ac0'
                                 }
                             },
                             slotProps?.picker?.desktop?.root ?? {}

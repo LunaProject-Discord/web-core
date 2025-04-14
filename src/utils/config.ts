@@ -21,7 +21,7 @@ import {
     ToggleOnOutlined
 } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
-import deepmerge from 'lodash/merge';
+import deepmerge from 'deepmerge';
 import { createContext, createElement, Fragment, ProviderProps, ReactNode } from 'react';
 import {
     SectionAccordionCardConfigProps,
