@@ -3,7 +3,7 @@
 import { Box, Menu, SlotComponentProps, Typography } from '@mui/material';
 import { deepmerge } from '@mui/utils';
 import xor from 'lodash/xor';
-import React, { Fragment, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import React, { Fragment, MouseEvent, ReactNode, useCallback, useState } from 'react';
 import {
     SectionCardDisabledProps,
     SectionCardDisplayRootProps,
@@ -65,6 +65,7 @@ export const Select = <T, >(
     }: SelectProps<T>
 ) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
+    const [inputWidth, setInputWidth] = useState<number>(0);
 
     const renderValue = useCallback(() => {
         const render = (choice: SelectChoiceButton<T>) => {
@@ -114,8 +115,18 @@ export const Select = <T, >(
     return (
         <Fragment>
             <SelectOutlinedInput
+                ref={(element) => {
+                    if (!element)
+                        return;
+
+                    setInputWidth(element.clientWidth);
+                }}
                 open={Boolean(anchorEl)}
-                onClick={(e) => setAnchorEl(e.currentTarget)}
+                onClick={(e) => {
+                    const element = e.currentTarget;
+                    setInputWidth(element.clientWidth);
+                    setAnchorEl(element);
+                }}
                 disabled={disabled}
                 slotProps={slotProps?.input}
             >
@@ -135,7 +146,7 @@ export const Select = <T, >(
                                 slotProps: {
                                     paper: {
                                         style: {
-                                            minWidth: anchorEl?.clientWidth
+                                            minWidth: inputWidth
                                         }
                                     }
                                 }
