@@ -1,9 +1,9 @@
 'use client';
 
-import { generateComponentClasses } from '../../utils';
 import { Box, BoxProps, CSSObject, styled, Theme, Typography, TypographyProps } from '@mui/material';
 import clsx from 'clsx';
 import React from 'react';
+import { generateComponentClasses } from '../../utils';
 
 export const errorClasses = generateComponentClasses(
     'Error',

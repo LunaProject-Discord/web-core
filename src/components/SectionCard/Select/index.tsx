@@ -2,7 +2,6 @@
 
 import { useTheme } from '@mui/material';
 import clsx from 'clsx';
-import deepmerge from 'deepmerge';
 import React, { useContext } from 'react';
 import { ConfigContext } from '../../../utils';
 import { Select, SelectProps } from '../../Select';
