@@ -60,8 +60,14 @@ export const DesktopPicker = <T, >(
             open={anchorEl !== undefined}
             anchorEl={anchorEl}
             onClose={() => setAnchorEl(undefined)}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center'
+        }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+        }}
             {...slotProps?.root}
         >
             {!disableSearch && <PickerSearchBox

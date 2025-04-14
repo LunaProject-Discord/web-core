@@ -65,11 +65,9 @@ export const Select = <T, >(
     }: SelectProps<T>
 ) => {
     const inputRef = useRef<HTMLDivElement | null>(null);
-    const desktopPickerRef = useRef<HTMLDivElement | null>(null);
 
     const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
     const [inputWidth, setInputWidth] = useState<number>(0);
-    const [desktopPickerWidth, setDesktopPickerWidth] = useState<number>(0);
 
     const renderValue = useCallback(() => {
         const render = (choice: SelectChoiceButton<T>) => {
@@ -121,18 +119,9 @@ export const Select = <T, >(
         if (!inputElement)
             return;
 
-        console.log('useEffect#inputRef', inputElement, inputElement.offsetWidth);
-        setInputWidth(inputElement.offsetWidth);
+        console.log('useEffect#inputRef', inputElement, inputElement.offsetWidth, inputElement.clientWidth);
+        setInputWidth(inputElement.clientWidth);
     }, [inputRef, value]);
-
-    useEffect(() => {
-        const desktopPickerElement = desktopPickerRef.current;
-        if (!desktopPickerElement)
-            return;
-
-        console.log('useEffect#desktopPickerRef', desktopPickerElement, desktopPickerElement.offsetWidth);
-        setDesktopPickerWidth(desktopPickerElement.offsetWidth);
-    }, [desktopPickerRef, choices]);
 
     return (
         <Fragment>
@@ -141,9 +130,9 @@ export const Select = <T, >(
                     if (!element)
                         return;
 
-                    console.log('inputRef', element, element.offsetWidth);
+                    console.log('inputRef', element, element.offsetWidth, element.clientWidth);
                     inputRef.current = element;
-                    setInputWidth(element.offsetWidth);
+                    setInputWidth(element.clientWidth);
                 }}
                 open={Boolean(anchorEl)}
                 onClick={(e) => setAnchorEl(e.currentTarget)}
@@ -163,17 +152,12 @@ export const Select = <T, >(
                     desktop: {
                         root: deepmerge<SlotComponentProps<typeof Menu, SlotRootProps, {}>>(
                             {
-                                ref: (element) => {
-                                    if (!element)
-                                        return;
-
-                                    console.log('desktopPickerRef', element, element.offsetWidth);
-                                    desktopPickerRef.current = element;
-                                    setDesktopPickerWidth(element.offsetWidth);
-                                },
-                                sx: {
-                                    minWidth: inputWidth,
-                                    backgroundColor: '#959ac0'
+                                slotProps: {
+                                    paper: {
+                                        sx: {
+                                            minWidth: inputWidth
+                                        }
+                                    }
                                 }
                             },
                             slotProps?.picker?.desktop?.root ?? {}
