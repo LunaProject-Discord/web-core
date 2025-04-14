@@ -64,10 +64,7 @@ export const Select = <T, >(
         slotProps
     }: SelectProps<T>
 ) => {
-    const inputRef = useRef<HTMLDivElement | null>(null);
-
     const [anchorEl, setAnchorEl] = useState<HTMLElement | undefined>(undefined);
-    const [inputWidth, setInputWidth] = useState<number>(0);
 
     const renderValue = useCallback(() => {
         const render = (choice: SelectChoiceButton<T>) => {
@@ -114,26 +111,9 @@ export const Select = <T, >(
             setAnchorEl(undefined);
     }, [setValue, multiple]);
 
-    useEffect(() => {
-        const inputElement = inputRef.current;
-        if (!inputElement)
-            return;
-
-        console.log('useEffect#inputRef', inputElement, inputElement.offsetWidth, inputElement.clientWidth);
-        setInputWidth(inputElement.clientWidth);
-    }, [inputRef, value]);
-
     return (
         <Fragment>
             <SelectOutlinedInput
-                ref={(element) => {
-                    if (!element)
-                        return;
-
-                    console.log('inputRef', element, element.offsetWidth, element.clientWidth);
-                    inputRef.current = element;
-                    setInputWidth(element.clientWidth);
-                }}
                 open={Boolean(anchorEl)}
                 onClick={(e) => setAnchorEl(e.currentTarget)}
                 disabled={disabled}
@@ -154,8 +134,8 @@ export const Select = <T, >(
                             {
                                 slotProps: {
                                     paper: {
-                                        sx: {
-                                            minWidth: inputWidth
+                                        style: {
+                                            minWidth: anchorEl?.clientWidth
                                         }
                                     }
                                 }
