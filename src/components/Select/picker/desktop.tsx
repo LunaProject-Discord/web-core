@@ -23,66 +23,70 @@ export const DesktopSelectPicker = <T, >(
         onClick,
         slotProps
     }: DesktopSelectPickerProps<T>
-) => (
-    <Menu
-        open={anchorEl !== undefined}
-        anchorEl={anchorEl}
-        onClose={() => setAnchorEl(undefined)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-        {...slotProps?.root}
-    >
-        {choices.map((choice, i) => {
-            switch (choice.type) {
-                case 'divider':
-                    return (<Divider key={i} sx={{ my: 1 }} />);
+) => {
+    console.log('DesktopSelectPicker#slotProps', slotProps);
 
-                case 'group':
-                    return (
-                        <List key={i}>
-                            <SelectPickerChoiceGroupSubheader>{choice.label}</SelectPickerChoiceGroupSubheader>
-                            {choice.items.map((item, v) => {
-                                if (item.type === 'divider')
-                                    return (<Divider key={v} sx={{ my: 1 }} />);
+    return (
+        <Menu
+            open={anchorEl !== undefined}
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(undefined)}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+            {...slotProps?.root}
+        >
+            {choices.map((choice, i) => {
+                switch (choice.type) {
+                    case 'divider':
+                        return (<Divider key={i} sx={{ my: 1 }} />);
 
-                                return (
-                                    <MenuItem
-                                        key={item.value as string}
-                                        onClick={onClick(item)}
-                                        selected={selected.includes(item.value)}
-                                        disabled={item.disabled}
-                                    >
-                                        {'children' in item ? item.children : <Fragment>
-                                            {item.icon && <PickerItemIcon>{item.icon}</PickerItemIcon>}
-                                            {(item.primary || item.secondary) && <PickerItemText
-                                                primary={item.primary}
-                                                secondary={item.secondary}
-                                            />}
-                                        </Fragment>}
-                                    </MenuItem>
-                                );
-                            })}
-                        </List>
-                    );
+                    case 'group':
+                        return (
+                            <List key={i}>
+                                <SelectPickerChoiceGroupSubheader>{choice.label}</SelectPickerChoiceGroupSubheader>
+                                {choice.items.map((item, v) => {
+                                    if (item.type === 'divider')
+                                        return (<Divider key={v} sx={{ my: 1 }} />);
 
-                default:
-                    return (
-                        <MenuItem
-                            key={choice.value as string}
-                            onClick={onClick(choice)}
-                            selected={selected.includes(choice.value)}
-                            disabled={choice.disabled}
-                        >
-                            {'children' in choice ? choice.children : <Fragment>
-                                {choice.icon && <PickerItemIcon>{choice.icon}</PickerItemIcon>}
-                                {(choice.primary || choice.secondary) && <PickerItemText
-                                    primary={choice.primary}
-                                    secondary={choice.secondary}
-                                />}
-                            </Fragment>}
-                        </MenuItem>
-                    );
-            }
-        })}
-    </Menu>
-);
+                                    return (
+                                        <MenuItem
+                                            key={item.value as string}
+                                            onClick={onClick(item)}
+                                            selected={selected.includes(item.value)}
+                                            disabled={item.disabled}
+                                        >
+                                            {'children' in item ? item.children : <Fragment>
+                                                {item.icon && <PickerItemIcon>{item.icon}</PickerItemIcon>}
+                                                {(item.primary || item.secondary) && <PickerItemText
+                                                    primary={item.primary}
+                                                    secondary={item.secondary}
+                                                />}
+                                            </Fragment>}
+                                        </MenuItem>
+                                    );
+                                })}
+                            </List>
+                        );
+
+                    default:
+                        return (
+                            <MenuItem
+                                key={choice.value as string}
+                                onClick={onClick(choice)}
+                                selected={selected.includes(choice.value)}
+                                disabled={choice.disabled}
+                            >
+                                {'children' in choice ? choice.children : <Fragment>
+                                    {choice.icon && <PickerItemIcon>{choice.icon}</PickerItemIcon>}
+                                    {(choice.primary || choice.secondary) && <PickerItemText
+                                        primary={choice.primary}
+                                        secondary={choice.secondary}
+                                    />}
+                                </Fragment>}
+                            </MenuItem>
+                        );
+                }
+            })}
+        </Menu>
+    );
+};

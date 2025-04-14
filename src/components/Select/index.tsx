@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, Menu, SlotComponentProps, Typography } from '@mui/material';
-import deepmerge from 'lodash/merge';
 import xor from 'lodash/xor';
 import React, { Fragment, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import {
@@ -122,7 +121,7 @@ export const Select = <T, >(
         if (!inputElement)
             return;
 
-        console.log('useEffect#inputRef', inputElement);
+        console.log('useEffect#inputRef', inputElement, inputElement.offsetWidth);
         setInputWidth(inputElement.offsetWidth);
     }, [inputRef, value]);
 
@@ -131,7 +130,7 @@ export const Select = <T, >(
         if (!desktopPickerElement)
             return;
 
-        console.log('useEffect#desktopPickerRef', desktopPickerElement);
+        console.log('useEffect#desktopPickerRef', desktopPickerElement, desktopPickerElement.offsetWidth);
         setDesktopPickerWidth(desktopPickerElement.offsetWidth);
     }, [desktopPickerRef, choices]);
 
@@ -142,9 +141,9 @@ export const Select = <T, >(
                     if (!element)
                         return;
 
-                    console.log('inputRef', element);
+                    console.log('inputRef', element, element.offsetWidth);
                     inputRef.current = element;
-                    setInputWidth(element.clientWidth);
+                    setInputWidth(element.offsetWidth);
                 }}
                 open={Boolean(anchorEl)}
                 onClick={(e) => setAnchorEl(e.currentTarget)}
@@ -168,9 +167,9 @@ export const Select = <T, >(
                                     if (!element)
                                         return;
 
-                                    console.log('desktopPickerRef', element);
+                                    console.log('desktopPickerRef', element, element.offsetWidth);
                                     desktopPickerRef.current = element;
-                                    setDesktopPickerWidth(element.clientWidth);
+                                    setDesktopPickerWidth(element.offsetWidth);
                                 },
                                 sx: {
                                     minWidth: inputWidth > desktopPickerWidth ? inputWidth : undefined
