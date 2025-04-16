@@ -2,7 +2,7 @@
 
 import { alpha, Box, getOverlayAlpha, IconButton, styled, Tooltip } from '@mui/material';
 import clsx from 'clsx';
-import React, { ComponentPropsWithoutRef, forwardRef, useContext } from 'react';
+import React, { ComponentPropsWithoutRef, ComponentPropsWithRef, forwardRef, useContext } from 'react';
 import { BottomSheet as BottomSheetRoot, BottomSheetRef } from 'react-spring-bottom-sheet';
 import { SnapPointProps } from 'react-spring-bottom-sheet/dist/types';
 import { ConfigContext, generateComponentClasses } from '../../utils';
@@ -10,11 +10,13 @@ import { ConfigContext, generateComponentClasses } from '../../utils';
 export const bottomSheetClasses = generateComponentClasses(
     'BottomSheet',
     [
-        'root'
+        'root',
+        'content'
     ]
 );
 
 export const BottomSheet = styled(
+    // eslint-disable-next-line react/display-name
     forwardRef<BottomSheetRef, ComponentPropsWithoutRef<typeof BottomSheetRoot>>((
         {
             className,
@@ -83,7 +85,14 @@ export const BottomSheetHeaderToggleButton = (
     );
 };
 
-export const BottomSheetContent = styled(Box)(({ theme }) => ({
+export const BottomSheetContent = styled(
+    ({ className, ...props }: ComponentPropsWithRef<typeof Box>) => (
+        <Box
+            className={clsx(bottomSheetClasses.content, className)}
+            {...props}
+        />
+    )
+)(({ theme }) => ({
     padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
@@ -92,8 +101,8 @@ export const BottomSheetContent = styled(Box)(({ theme }) => ({
 
 export const defaultSnapPoints = (
     {
-        maxHeight,
         minHeight,
+        maxHeight,
         headerHeight
     }: SnapPointProps
 ) => [Math.min(maxHeight - 8 * 9, minHeight), headerHeight];
