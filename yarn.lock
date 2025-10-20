@@ -627,7 +627,7 @@ __metadata:
     react-dom: "npm:^19.2.0"
     react-spring-bottom-sheet: "npm:^3.4.1"
     typescript: "npm:^5.9.3"
-    virtua: "npm:^0.46.1"
+    virtua: "npm:^0.45.3"
   peerDependencies:
     "@emotion/react": ^11.14.0
     "@emotion/styled": ^11.14.0
@@ -4512,9 +4512,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"virtua@npm:^0.46.1":
-  version: 0.46.1
-  resolution: "virtua@npm:0.46.1"
+"virtua@npm:^0.45.3":
+  version: 0.45.3
+  resolution: "virtua@npm:0.45.3"
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
@@ -4532,7 +4532,7 @@ __metadata:
       optional: true
     vue:
       optional: true
-  checksum: 10c0/b825e8a8d0f3e145521da299bcd464a015238fe01c01a01b6566a6f33e01d645d97b1da832e4a9f1a35bed240456eaf3e9db4a7c378d968e6655155a0b0bf0e8
+  checksum: 10c0/4fdc4209da836711c917530561cc705794af2005d2a4050440b09695aebce1b616e05fa0490ed507a18c60500e8307a78f05d15500cef9e1ccbb8532bc85ef0f
   languageName: node
   linkType: hard
 
