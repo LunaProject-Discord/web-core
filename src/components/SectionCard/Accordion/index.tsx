@@ -49,13 +49,13 @@ export const SectionAccordionCardHeader = styled(
     [`.${sectionAccordionCardClasses.expanded}.${sectionCardClasses.variantOutlined} &`]: {
         [`&, & .${sectionCardClasses.root}`]: {
             borderRadius: 0,
-            borderTopLeftRadius: theme.shape.borderRadius - 1,
-            borderTopRightRadius: theme.shape.borderRadius - 1
+            borderTopLeftRadius: (typeof theme.shape.borderRadius === 'number' ? theme.shape.borderRadius : parseInt(theme.shape.borderRadius)) - 1,
+            borderTopRightRadius: (typeof theme.shape.borderRadius === 'number' ? theme.shape.borderRadius : parseInt(theme.shape.borderRadius)) - 1
         }
     },
     [`.${sectionCardClasses.variantOutlined} &`]: {
         [`&, & .${sectionCardClasses.root}`]: {
-            borderRadius: theme.shape.borderRadius - 1
+            borderRadius: (typeof theme.shape.borderRadius === 'number' ? theme.shape.borderRadius : parseInt(theme.shape.borderRadius)) - 1
         },
         [`& .${sectionCardClasses.root}`]: {
             minHeight: theme.spacing(7.75)
@@ -154,8 +154,8 @@ export const SectionAccordionCardItems = styled(
         borderTop: `solid 1px ${(theme.vars || theme).palette.divider}`,
         borderRadius: 0,
         ['&:last-child']: {
-            borderBottomLeftRadius: theme.shape.borderRadius - 1,
-            borderBottomRightRadius: theme.shape.borderRadius - 1
+            borderBottomLeftRadius: (typeof theme.shape.borderRadius === 'number' ? theme.shape.borderRadius : parseInt(theme.shape.borderRadius)) - 1,
+            borderBottomRightRadius: (typeof theme.shape.borderRadius === 'number' ? theme.shape.borderRadius : parseInt(theme.shape.borderRadius)) - 1
         },
         [theme.breakpoints.up('md')]: {
             /**

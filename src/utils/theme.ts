@@ -5,10 +5,9 @@ import {
     AlertProps,
     buttonClasses,
     ChipProps,
-    createTheme,
+    createTheme, CSSObject,
     darken,
     fabClasses,
-    Interpolation,
     lighten,
     linearProgressClasses,
     PaletteOptions,
@@ -19,12 +18,12 @@ import { blue, green, indigo, orange, pink, red } from '@mui/material/colors';
 import { Components } from '@mui/material/styles/components';
 import { dark, light } from '@mui/material/styles/createPalette';
 import { CssVarsThemeOptions } from '@mui/material/styles/createThemeWithVars';
-import { TypographyOptions } from '@mui/material/styles/createTypography';
+import { TypographyVariantsOptions } from '@mui/material/styles/createTypography';
 import { rgba } from 'polished';
 
 const defaultTheme = createTheme();
 
-const chipStyled = (color: ChipProps['color']): Interpolation<{ theme: Omit<Theme, 'components'> }> => ({ theme }) => {
+const chipStyled = (color: ChipProps['color']) => ({ theme }: { theme: Theme }): CSSObject => {
     if (!color || color === 'default')
         return {};
 
@@ -380,7 +379,7 @@ export const MuiPalette: PaletteOptions = {
 };
 
 const { pxToRem, h3, h4, h5, h6 } = defaultTheme.typography;
-export const MuiTypography: TypographyOptions = {
+export const MuiTypography: TypographyVariantsOptions = {
     fontFamily: '\'Roboto Symbol\', \'Noto Sans\', \'Noto Sans JP\', \'Yu Gothic UI\', \'Hiragino Sans\', \'Noto Color Emoji\', sans-serif',
     h1: {
         fontSize: pxToRem(40),

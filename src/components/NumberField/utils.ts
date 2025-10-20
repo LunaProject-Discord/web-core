@@ -1,4 +1,5 @@
-import { InputBaseProps, InternalStandardProps } from '@mui/material';
+import { InputBaseProps } from '@mui/material';
+import { InternalStandardProps } from '@mui/material/internal';
 import {
     ChangeEventHandler,
     FocusEventHandler,
